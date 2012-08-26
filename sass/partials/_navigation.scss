@@ -19,7 +19,7 @@ body > nav {
       @include border-radius(.5em);
       @include background-clip(padding-box);
       @include box-shadow(lighten($nav-bg, 2) 0 1px);
-      background-color: lighten($nav-bg, 15);
+      background-color: lighten($nav-bg, 35);
       border: 1px solid $nav-border;
       color: #888;
       &:focus {
