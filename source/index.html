@@ -1,29 +1,203 @@
----
-layout: default
----
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
 
-<div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article>
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-    {% endif %}
+  <title>Aidan Ryan</title>
+  <meta name="description" content="Aidan Ryan">
+  <meta name="author" content="Aidan Ryan">
+  <meta name="DC.language" content="en">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="shortcut icon" href="favicon.ico?v=2">
+  <script src="javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body id="ajryan-github-com">
+
+<div id="site">
+  <div class="inner">
+
+    <div class="header">
+      <p><img src="images/ajryan.jpg" alt="Aidan Ryan" /></p>
+      <h1>Aidan Ryan</h1>
+    </div>
+
+    <div class="about">
+      <div>
+        <p><b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications. I enjoy recording and preforming music, comics, LEGO, and comedy. I work at <a href="http://magenic.com">Magenic</a> as a Senior Consultant.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Blog</h2>
+      Read <a href="blog/index.html">here</a>
+    </div>
+
+    <div class="content section">
+      <div class="section">
+        <h2>Projects</h2>
+
+        <ul class="projects">
+          <li class="project">
+            <dl>
+              <dt>WinHaste</dt>
+              <dd>
+                Native Windows commandline client for <a href="http://hastebin.com">hastebin.com</a>.<br/>
+                <a href="http://github.com/ajryan/WinHaste">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>TFS Test Steps Editor</dt>
+              <dd>
+                Lightweight editor for Team Foundation Server 2010 test cases.<br/>
+                <a href="/TFSTestStepsEditor/">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>RptToXml</dt>
+              <dd>
+                Crystal Reports RPT to XML converter. Allows diff between report versions.<br/>
+                <a href="/RptToXml/">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>Masters of the Universe</dt>
+              <dd>Funk/folk band<br/><a href="http://mastersband.com">Band site</a></dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>Music From Big Pink Tribute: "Size Color"</dt>
+              <dd>A work in progress<br/><a href="http://ajryan.tumblr.com/tagged/music">Tumblr</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>GitHub feed</h2>
+        <ul class="projects">
+          <li class="project" id="github">
+            <dl>
+              <dt>My activity on GitHub</dt>
+              <dd>
+                <ul id="github-feed">
+                </ul>
+              </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section contact">
+        <h2>Contact</h2>
+
+        <div class="vcard">
+          <p><a href="http://github.com/ajryan">Github</a></p>
+          <p><a href="http://www.linkedin.com/in/ajryan">Linkedin</a></p>
+          <p><a href="http://twitter.com/ajryan">Twitter</a></p>
+          <p><a href="https://plus.google.com/113170493762619012646">Google+</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="nowplaying"><strong>Now playing (via <a href="http://last.fm/user/ajryan">last.fm</a>):</strong><br /></div>
+
+    <div class="footer">
+      <p>&#9829;</p>
+    </div>
+
   </div>
 </div>
-<aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
+<script src="javascripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+  function log() {
+    if (window.console && window.console.log) {
+      for (var i = 0; i < arguments.length; i++) {
+        window.console.log(arguments[i]);
+      }
+    }
+  }
+  
+  function htmlencode(value) {
+    return $('<div/>').text(value).html();
+  }
+  
+  function getcommitlink(event) {
+    return 'http://github.com/' +
+      htmlencode(event.repo.name) +
+      '/commit/' +
+      event.payload.commits[0].sha;
+  }
+  
+  function githubcallback(json) {
+    log('got jsonp from github api');
+    var html = '';
+    $.each(json.data, function(i, event) {
+      if (i > 9) {
+        return;
+      }
+      if (event.payload.commits) {
+        html += 
+          '<li>' + 
+          htmlencode(event.repo.name) + ': ' +
+          '<a href="' + getcommitlink(event) + '">' +
+          htmlencode(event.payload.commits[0].message) +
+          '</a></li>';
+      }
+    });
+    $('#github-feed').append(html);
+}
+
+  $.ajax({
+    url: 'https://api.github.com/users/ajryan/events',
+    dataType: 'jsonp',
+    jsonp: 'callback',
+    jsonpCallback: 'githubcallback',
+    error: function(xhr, msg, e) {
+      $('#github').remove();
+      log(xhr, msg, e);
+    }
+  });
+
+function lastfmcallback(json) {
+    log('got jsonp from lastfm api');
+    var html = '';
+    $.each(json.recenttracks.track, function (i, track) {
+        if (i > 9) {
+            return;
+        }
+
+        if (i > 0) html += ', ';
+        html +=
+            htmlencode(track.artist['#text']) + ' - ' +
+            '<a href="' + track.url + '">' +
+            track.name +
+            '</a> ';
+    });
+    $('#nowplaying').append(html);
+}
+  $.ajax({
+      url: 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ajryan&api_key=71cdba3dffa2c5a2b7dd3b5c57a8f0fc&format=json',
+      dataType: 'jsonp',
+      jsonpCallback: 'lastfmcallback',
+      error: function (xhr, msg, e) {
+          $('#nowplaying').remove();
+          log(xhr, msg, e);
+      }
+  });
+</script>
+</body>
+</html>
