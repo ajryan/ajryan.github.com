@@ -6,17 +6,17 @@ comments: true
 categories: [development, sql, linq-to-sql, bugs]
 ---
 
-The Issue
+The Issue:
 ----
 
-When a stored procedure has multiple result sets with the same type signature, only the first rowset with the given signature is included in the generated DBML.
+When a stored procedure has multiple result sets with the same type signature, only the first rowset with the given signature is included in the generated DBML.<!--more-->
 
-Resolution
+Resolution:
 ----
 
 A simple fix is to swap the position of columns in one of the rowsets.
 
-Connect
+Connect:
 ----
 
 I have posted this issue to Microsoft Connect. If it affects you, please visit and vote.

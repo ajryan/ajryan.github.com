@@ -1,3 +1,7 @@
+---
+layout: landing
+---
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -30,13 +34,23 @@
 
     <div class="about">
       <div>
-        <p><b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications. I enjoy recording and preforming music, comics, LEGO, and comedy. I work at <a href="http://magenic.com">Magenic</a> as a Senior Consultant.</p>
+        <p><b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications. I enjoy recording and preforming music, comics, LEGO, and comedy. I work at <a href="http://magenic.com">Magenic</a> as an Associate Lead Consultant.</p>
+        <p>Magenic is hiring <a href="http://magenic.com/Careers.aspx">Software Superheroes!</a></p>
       </div>
     </div>
 
-    <div class="content">
+    <div class="content blog">
       <h2>Blog</h2>
-      Read <a href="blog/index.html">here</a>
+      <dl>
+      {% for post in site.posts limit:5 %}
+        <dt>
+          <em>{{ post.date | date: "%d %B %Y" }}</em> - <a href="{{ post.url }}">{{ post.title }}</a>
+        </dt>
+        <dd>
+          {{ post.content | excerpt | strip_html }} <a href="{{ post.url }}" class="readon">→</a>
+        </dd>
+      {% endfor %}
+      </dl>
     </div>
 
     <div class="content section">

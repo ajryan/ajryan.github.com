@@ -1,0 +1,2 @@
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{{ content | expand_urls: root_url }}

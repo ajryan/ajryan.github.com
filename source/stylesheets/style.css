@@ -159,6 +159,10 @@ hr,
   width: 0;
 }
 
+dd {
+  margin: 10px 0 0 5px;
+}
+
 /* Layout */
 
 .inner {
@@ -211,6 +215,9 @@ h1 {
   line-height: 1.23809523809523809523;
   font-weight: normal;
 }
+.about a {
+  color: #F1F7E2;
+}
 
 /* Content */
 
@@ -240,6 +247,15 @@ h2 {
   margin-bottom: 10px;
 }
 
+/* Blog */
+.blog a {
+  font-weight: bold;
+}
+
+.blog .readon {
+  text-decoration: none;
+  font-size: small;
+}
 /* Projects */
 
 ul.projects {
