@@ -48,7 +48,7 @@ layout: landing
           <em>{{ post.date | date: "%d %B %Y" }}</em> - <a href="{{ post.url }}">{{ post.title }}</a>
         </dt>
         <dd>
-          {{ post.content | excerpt | strip_html }} <a href="{{ post.url }}" class="readon">→</a>
+          {{ post.content | excerpt | strip_html }} <a href="{{ post.url }}" class="readon">Read on →</a>
         </dd>
       {% endfor %}
       </dl>
@@ -61,19 +61,37 @@ layout: landing
         <ul class="projects">
           <li class="project">
             <dl>
-              <dt>WinHaste</dt>
+              <dt>TFS Test Steps Editor</dt>
               <dd>
-                Native Windows commandline client for <a href="http://hastebin.com">hastebin.com</a>.<br/>
-                <a href="http://github.com/ajryan/WinHaste">Github</a>
+                Lightweight editor for Team Foundation Server 2010 test cases.<br/>
+                <a href="/TFSTestStepsEditor/">Github</a>
               </dd>
             </dl>
           </li>
           <li class="project">
             <dl>
-              <dt>TFS Test Steps Editor</dt>
+              <dt>CSharpreter Sublime Text plugin</dt>
               <dd>
-                Lightweight editor for Team Foundation Server 2010 test cases.<br/>
-                <a href="/TFSTestStepsEditor/">Github</a>
+                C# code snippet runner for Sublime Text.<br/>
+                <a href="http://github.com/ajryan/CSharpreter">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>ReCaptchaFake</dt>
+              <dd>
+                Quick-and dirty ASP.NET MVC site to fake the Google reCAPTCHA verify API.<br/>
+                <a href="http://github.com/ajryan/CSharpreter">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>WinHaste</dt>
+              <dd>
+                Native Windows commandline client for <a href="http://hastebin.com">hastebin.com</a>.<br/>
+                <a href="http://github.com/ajryan/WinHaste">Github</a>
               </dd>
             </dl>
           </li>
@@ -161,7 +179,7 @@ layout: landing
     log('got jsonp from github api');
     var html = '';
     $.each(json.data, function(i, event) {
-      if (i > 9) {
+      if (i > 12) {
         return;
       }
       if (event.payload.commits) {

@@ -226,14 +226,20 @@ h2 {
 }
 
 /* Blog */
-
+div.blog {
+  margin-bottom: 0;
+}
 .blog a {
   font-weight: bold;
   text-decoration: none;
 }
-.blog .readon {
-  text-decoration: none;
-  font-size: small;
+  .blog a.readon {
+    text-decoration: none;
+    font-size: small;
+    font-weight: normal;
+  }
+.blog dd{
+  padding-bottom: 1.5em;
 }
 
 /* Projects */

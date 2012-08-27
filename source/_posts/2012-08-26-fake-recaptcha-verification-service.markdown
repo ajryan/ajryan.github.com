@@ -6,7 +6,7 @@ comments: true
 categories: [asp.net-mvc, testing, recaptcha]
 ---
 
-When testing a website that uses the reCAPTCHA service, it can be a mighty pain to repeatedly enter the verification code. I created a quick-and-dirty ASP.NET MVC site that "fakes" the Google api-verify.recaptcha.net service to allow quick testing.
+When testing a website that uses the reCAPTCHA service, it can be a mighty pain to repeatedly enter the verification code. I created a quick-and-dirty ASP.NET MVC site that "fakes" the Google api-verify.recaptcha.net service to allow quick testing.<!--more-->
 
 ## Installation
 

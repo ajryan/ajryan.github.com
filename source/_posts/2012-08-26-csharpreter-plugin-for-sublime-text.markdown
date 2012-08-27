@@ -6,7 +6,7 @@ comments: true
 categories: [tools, sublime-text, c-sharp]
 ---
 
-I have been really loving the [Sublime Text](http://www.sublimetext.com/) editor lately. It's quick, featureful, and extensible.
+I have been really loving the [Sublime Text](http://www.sublimetext.com/) editor lately. It's quick, featureful, and extensible. I created a plugin that will build and run C# snippets from inside the editor.<!--more-->
 
 I write a lot of C#, and I often find myself wanting to check the behavior of a certain method or operator. My go-to tool for this has been [SnippetCompiler](http://www.sliver.com/dotnet/SnippetCompiler/), but now I'm trying to eliminate as many reasons for leaving my editor as possible. So, I created a plugin for Sublime Text that is inspired by SnippetCompiler - it takes the selected text and shoves it inside the main routine of a simple C# console app, builds it, and runs it. You can customize the "usings" and the boilerplate code auto-inserted at the end of the `Main` routine (currently prints a short message and reads a key).
 
