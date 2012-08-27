@@ -3,10 +3,63 @@
 	{
 		"selected_items":
 		[
+			[
+				"CSH",
+				"CSHARP_END"
+			],
+			[
+				"CSHAR",
+				"CSHARP_START"
+			],
+			[
+				"subl",
+				"sublime_plugin"
+			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "source/_posts/2012-08-26-fake-recaptcha-verification-service.markdown",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/README.md",
+			"settings":
+			{
+				"buffer_size": 1243,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Console.WriteLine(\"HI\");",
+			"settings":
+			{
+				"buffer_size": 24,
+				"line_ending": "Windows",
+				"name": "Console.WriteLine(\"HI\");"
+			}
+		},
+		{
+			"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/Default.sublime-commands",
+			"settings":
+			{
+				"buffer_size": 189,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/c_sharpreter.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 285,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/User/msbuild.sublime-build",
 	"command_palette":
@@ -17,6 +70,34 @@
 			[
 				"mark",
 				"Markdown Preview: current file in browser"
+			],
+			[
+				"cs",
+				"CSharpreter: Interpret"
+			],
+			[
+				"s",
+				"Sort Lines"
+			],
+			[
+				"Cs",
+				"CSharpreter: Interpret"
+			],
+			[
+				"csh",
+				"CSharpreter: Interpret"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
+			[
+				"git",
+				"Git: Status"
 			],
 			[
 				"markdown",
@@ -37,10 +118,6 @@
 			[
 				"git push",
 				"Git: Push Current Branch"
-			],
-			[
-				"git st",
-				"Git: Status"
 			],
 			[
 				"gitpush",
@@ -83,10 +160,6 @@
 				"Package Control: Remove Package"
 			],
 			[
-				"git",
-				"Package Control: Install Package"
-			],
-			[
 				"twee",
 				"Twitter timeline"
 			],
@@ -116,13 +189,46 @@
 	},
 	"file_history":
 	[
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/Git/git.py",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/CSharpreter.py",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/.git/config",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/.gitignore",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/Build.xml",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/c_sharpreter.sublime-settings",
+		"/C/Users/AidanR/AppData/Local/Temp/20120826135215780000/csharpreter.cs",
+		"/C/Users/AidanR/AppData/Local/Temp/csharpreter_20120826133552521000.cs",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/Default/exec.py",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/Default.sublime-commands",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/User/hello_world.py",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/Git/Default.sublime-commands",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/CSarpreter.py",
+		"/C/_github/octopress/Rakefile",
+		"/C/_github/octopress/source/_posts/2012-08-25-sqlmetal-bug-with-multi-rowset-stored-procedures.markdown",
+		"/C/_github/octopress/_config.yml",
+		"/C/_github/octopress/.themes/classic/source/_includes/disqus.html",
+		"/C/_github/octopress/sass/partials/_navigation.scss",
+		"/C/_github/octopress/sass/base/_layout.scss",
+		"/C/_github/octopress/source/stylesheets/style.css",
+		"/C/_github/octopress/sass/base/_theme.scss",
+		"/C/_github/octopress/sass/custom/_colors.scss",
+		"/C/_github/octopress/source/_includes/head.html",
+		"/C/_github/octopress/sass/custom/_fonts.scss",
+		"/C/_github/octopress/source/_includes/custom/navigation.html",
+		"/C/_github/octopress/source/index.html",
+		"/C/Users/AidanR/Desktop/atom (5).xml",
+		"/C/_github/octopress/source/blog/index.html",
+		"/C/_github/octopress/source/_includes/navigation.html",
+		"/C/_github/octopress/config.rb",
+		"/C/_github/octopress/sass/custom/_styles.scss",
+		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/User/Soda Dark.sublime-theme",
+		"/C/_github/octopress/.rbenv-version",
+		"/C/_github/octopress/plugins/pygments_code.rb",
+		"/C/Users/AidanR/AppData/Localbad.dbml",
+		"/C/_github/octopress/plugins/backtick_code_block.rb",
 		"/C/_github/octopress/source/_layouts/post.html",
 		"/C/_github/octopress/source/_layouts/default.html",
-		"/C/_github/octopress/Rakefile",
-		"/C/_github/octopress/_config.yml",
 		"/C/_github/octopress/source/_layouts/landing.html",
 		"/C/_github/octopress/.themes/classic/source/_includes/head.html",
-		"/C/_github/octopress/source/index.html",
 		"/C/_github/octopress/source/job_questions/questionnaire.html",
 		"/C/_github/octopress/source/job_questions/question1.html",
 		"/C/_github/octopress/source/job_questions/question2.html",
@@ -157,15 +263,12 @@
 		"/C/_github/ajryan.github.com/job_questions/question5.html",
 		"/C/_github/ajryan.github.com/job_questions/question6.html",
 		"/C/_github/ajryan.github.com/job_questions/question7.html",
-		"/C/_github/octopress/source/_posts/2012-08-25-sqlmetal-bug-with-multi-rowset-stored-procedures.markdown",
 		"/C/_github/yari/ruby-1.9.2-p290-i386-mingw32/lib/ruby/gems/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb",
 		"/C/_github/octopress/.themes/classic/source/atom.xml",
 		"/C/_github/octopress/source/atom.xml",
-		"/C/_github/octopress/config.rb",
 		"/C/Users/AidanR/Documents/_config.yml",
 		"/C/_github/TfsManualTester/.gitignore",
 		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/User/Soda Dark.sublime-theme",
 		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/Theme - Soda/Soda Dark.sublime-theme",
 		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/User/msbuild.sublime-build",
 		"/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/User/OpenInExplorer.py",
@@ -197,6 +300,9 @@
 		"where_history":
 		[
 			"C:\\_github\\octopress",
+			"C:\\_github\\octopress\\sass",
+			"<open folders>",
+			"C:\\_github\\octopress",
 			"C:\\_github\\octopress\\source",
 			"C:\\_github\\octopress",
 			"C:\\_github\\ajryan.github.com\\job_questions",
@@ -210,6 +316,27 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"class",
+			"print",
+			"GitCommand",
+			"GitTextCommand",
+			"disqus",
+			"new_post",
+			"nav",
+			"rel=\"alter",
+			"atom",
+			"images",
+			"rss.png",
+			"subscribe-rss",
+			"link-colors",
+			"nav",
+			"pygment",
+			"python",
+			"lang",
+			"backtick",
+			"backtick_codeblock",
+			"dt",
+			"dd",
 			"<!--more",
 			"blog",
 			"../css",
@@ -259,8 +386,140 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "source/_posts/2012-08-26-fake-recaptcha-verification-service.markdown",
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/README.md",
+					"settings":
+					{
+						"buffer_size": 1243,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 24,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Console.WriteLine(\"HI\");",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/Default.sublime-commands",
+					"settings":
+					{
+						"buffer_size": 189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/AidanR/AppData/Roaming/Sublime Text 2/Packages/CSharpreter/c_sharpreter.sublime-settings",
+					"settings":
+					{
+						"buffer_size": 285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								285
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -313,6 +572,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"_c",
+				"_config.yml"
+			],
 			[
 				"sendenrollmenttoorchhan",
 				"RealTimeInteraction/Enrollment/Visa.Ice.RealTime.Enrollment/Handlers/Enrollment/SendEnrollmentToOrchestrationHandler.cs"
