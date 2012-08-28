@@ -16,8 +16,8 @@ description: Software development blog of Aidan Ryan
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
-subscribe_email:
+subscribe_rss: http://feeds.feedburner.com/AidanRyan
+subscribe_email: http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US
 # RSS feeds can list your email address if you like
 email:
 
