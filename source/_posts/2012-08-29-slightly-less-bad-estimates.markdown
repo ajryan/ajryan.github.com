@@ -3,13 +3,10 @@ layout: post
 title: "Slightly Less Bad Estimates"
 date: 2012-08-27 14:09
 comments: true
-published: false
 categories: [development, estimation]
 ---
 
-## Estimating is hard
-
-Estimation in software development is notoriously difficult, and very frequently incorrect. As estimates are reported up the chain, they are routinely "rounded up," and are still regularly exceeded. I have even tried to develop standard ratios to apply to each developer's estimates that wore sometimes accurate, but still were not always reliable (e.g. Bob usually estimates 50% of reality, Tom usually estimates 110% of reality). There is very often some unexpected factor that causes an estimate to be off.
+Estimation in software development is notoriously difficult, and very frequently incorrect. As estimates are reported up the chain, they are routinely "rounded up," and are still regularly exceeded. I have even tried to develop standard ratios to apply to each developer's estimates that wore sometimes accurate, but still were not always reliable (e.g. Bob usually estimates 50% of reality, Tom usually estimates 110% of reality). There is very often some unexpected factor that causes an estimate to be off.<!--more-->
 
 ## Effort != schedule
 
