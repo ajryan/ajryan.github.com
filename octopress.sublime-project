@@ -1,8 +1,11 @@
 {
-	"folders":
-	[
-		{
-			"path": "/C/_github/octopress"
-		}
-	]
+ "folders": [
+  {
+   "folder_exclude_patterns": [
+    "public", 
+    "_deploy"
+   ], 
+   "path": "/C/_github/octopress"
+  }
+ ]
 }

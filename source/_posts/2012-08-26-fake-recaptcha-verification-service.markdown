@@ -14,9 +14,9 @@ When testing a website that uses the reCAPTCHA service, it can be a mighty pain 
 
 2. Edit your hosts file (`c:\windows\system32\drivers\etc\hosts` - run Notepad as Administrator for permission to save the file). Add the following entry:
 
-```
+<pre>
 127.0.0.1    api-verify.recaptcha.net
-```
+</pre>
 
 ## Use
 
