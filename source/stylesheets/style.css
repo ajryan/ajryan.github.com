@@ -93,6 +93,7 @@ table { border-collapse: collapse; border-spacing: 0; }
   padding: 0;
 }
 .section:after,
+.blog:after,
 .about:after {
   content: ".";
   display: block;
@@ -110,7 +111,8 @@ body {
 }
 a, a:visited {
   color: #438B99;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: bold;
 }
 a:hover,
 a:focus {
@@ -226,8 +228,12 @@ h2 {
 }
 
 /* Blog */
+
 div.blog {
   margin-bottom: 0;
+  margin-right: 1.14942529%;
+  float: left;
+  width: 65.0758%;
 }
 .blog a {
   font-weight: bold;
@@ -242,9 +248,50 @@ div.blog {
   padding-bottom: 1.5em;
 }
 
+/* JobVite */
+
+#jobvite {
+  position: relative;
+}
+#jobvite h2 {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+#jobvite-box {
+  overflow:auto;
+  overflow-x:hidden;
+  padding-bottom: 1.5em;
+  margin-top: 75px;
+}
+div.jobvite-job {
+    border-bottom: 1px solid #cdcdcd;
+    padding: 0.5em 0 0.5em 0;
+    margin-bottom: 0.5em;
+}
+span.jobvite-jobtitle {
+    display: block;
+}
+span.jobvite-joblocation {
+    display: block;
+    font-style: italic;
+    margin-bottom: 0.25em;
+}
+span.jobvite-jobdescription {
+    font-size: 1em;
+}
+span.jobvite-jobapply {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
 /* Projects */
 
 ul.projects {
+  padding: 0;
+}
+.content li.projects {
+  margin: 0;
   padding: 0;
 }
 .projects dt {
@@ -355,7 +402,8 @@ ul.projects {
     padding: 15px 10px 1px;
     padding-left: 2.33333%;
   }
-  .content .section {
+  .content .section,
+  .content .blog {
     float: none;
     width: auto;
     margin: 0 0 2em;

@@ -46,25 +46,36 @@ layout: landing
 
     <div class="about">
       <div>
-        <p><b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications. I enjoy recording and performing music, comics, LEGO, and comedy. I work at <a href="http://magenic.com">Magenic</a> as an Associate Lead Consultant.</p>
-        <p>Magenic is hiring <a href="http://magenic.com/Careers.aspx">Software Superheroes!</a></p>
+        <p>
+          <b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications.
+          I enjoy recording and performing music, comics, LEGO, and comedy.
+        </p>
+        <p>
+          I am a consultant at <a href="http://magenic.com">Magenic</a>. We're hiring <a href="http://magenic.com/Careers.aspx">Software Superheroes!</a>
+        </p>
       </div>
     </div>
 
-    <div class="content blog">
-      <a href="/blog/index.html"><h2>Blog</h2></a>
-      <dl>
-      {% for post in site.posts limit:5 %}
-        <dt>
-          <em>{{ post.date | date: "%d %B %Y" }}</em> - <a href="{{ post.url }}">{{ post.title }}</a>
-        </dt>
-        <dd>
-          {{ post.content | excerpt | strip_html }} <a href="{{ post.url }}" class="readon">Read on →</a>
-        </dd>
-      {% endfor %}
-      </dl>
+    <div class="content section">
+      <div class="blog" id="blog">
+        <a href="/blog/index.html"><h2>Blog</h2></a>
+        <dl>
+        {% for post in site.posts limit:5 %}
+          <dt>
+            <em>{{ post.date | date: "%d %B %Y" }}</em> - <a href="{{ post.url }}">{{ post.title }}</a>
+          </dt>
+          <dd>
+            {{ post.content | excerpt | strip_html }} <a href="{{ post.url }}" class="readon">Read on →</a>
+          </dd>
+        {% endfor %}
+        </dl>
+      </div>
+      <div class="section" id="jobvite">
+        <h2>Magenic Jobs</h2>
+        <div id="jobvite-box"></div>
+      </div>
     </div>
-
+    
     <div class="content section">
       <div class="section">
         <h2>Projects</h2>
@@ -166,6 +177,7 @@ layout: landing
   </div>
 </div>
 <script src="javascripts/jquery-1.7.1.min.js"></script>
+<script src="javascripts/jobvitebox.js"></script>
 <script type="text/javascript">
   function log() {
     if (window.console && window.console.log) {
@@ -203,7 +215,7 @@ layout: landing
       }
     });
     $('#github-feed').append(html);
-}
+  }
 
   $.ajax({
     url: 'https://api.github.com/users/ajryan/events',
@@ -216,7 +228,7 @@ layout: landing
     }
   });
 
-function lastfmcallback(json) {
+  function lastfmcallback(json) {
     log('got jsonp from lastfm api');
     var html = '';
     $.each(json.recenttracks.track, function (i, track) {
@@ -232,15 +244,21 @@ function lastfmcallback(json) {
             '</a> ';
     });
     $('#nowplaying').append(html);
-}
+  }
+  
   $.ajax({
-      url: 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ajryan&api_key=71cdba3dffa2c5a2b7dd3b5c57a8f0fc&format=json',
-      dataType: 'jsonp',
-      jsonpCallback: 'lastfmcallback',
-      error: function (xhr, msg, e) {
-          $('#nowplaying').remove();
-          log(xhr, msg, e);
-      }
+    url: 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ajryan&api_key=71cdba3dffa2c5a2b7dd3b5c57a8f0fc&format=json',
+    dataType: 'jsonp',
+    jsonpCallback: 'lastfmcallback',
+    error: function (xhr, msg, e) {
+        $('#nowplaying').remove();
+        log(xhr, msg, e);
+    }
+  });
+
+  $('#jobvite-box').jobViteBox('qx99Vfwu', function() {
+    var blogHeight = $('#blog').height();
+    $('#jobvite-box').height(blogHeight - 75);
   });
 </script>
 </body>
