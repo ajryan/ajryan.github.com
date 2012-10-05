@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Red-Gate SQL In The City SF 2012"
+date: 2012-10-03 10:10
+comments: true
+categories: [sql, training, tools, community]
+---
+
+I attended the Red-Gate [SQL In the City](http://sqlinthecity.red-gate.com/) training event yesterday. It was a great opportunity to set the daily grind aside and focus on learning. It's always inspiring to watch a demo that shows a less painful way to accomplish something I'm struggling with. The challenge is to turn that inspiration into something productive and valuable. My notes follow.<!--more-->
+
+## Keynote
+
+John Theron (Red-Gate's chief marketing officer) set the stage for the day with some audience participation. We were asked to pass untied balloons back through the audience, with our eyes closed, without losing any air. It was an analogy to the difficulty of pushing database and application changes from dev into production, without losing any important changes. The keynote transitioned into highlighting all of the ways Red-Gate has been helping users manage and deploy database (and now application) changes for the past several years. One of the primary themes of the day was employing automation for more reliable and controlled releases, including the use of continuous integration, automated testing, and automated deployments.
+
+One point that hit home for me was about the value of frequent releases: the sooner your new stuff gets in front of actual customers, the more quickly you get their feedback; and customer feedback is the most valuable of all. There is also less time for a mess to accumulate: the larger the delta of a release, the longer it will take to deploy, and the greater the chance of an issue.
+
+## Monitoring
+
+Robin Anderson delivered a session demoing the SQL Monitor tool. The tool provides the ability to remotely gain insight into the state of your SQL server. Many of us employ a bag of monitor queries to check on the health of our SQL servers. The Red-Gate tool bundles up many best-practice health checks (not only DMV queries, but PerfMon, WMI, and file watching) into a convenient and attractive package, and adds alerting on top of it. 
+
+A very nice feature is the ability to create custom metrics driven by an arbitrary SQL query. The demo showed monitoring of a particular DMV query. I can imagine this being very useful for creating application behavior-specific metrics. For example, we have a consolidated logging system that pushes all of our server text logs to a central database. One could create a custom metric that triggers an alert when the rate of exceptions per hour exceeds a threshold.
+
+Red-Gate is planning [a cloud-hosted monitoring service](http://sqlmonitor.red-gate.com) that is fed by a relay service installed inside the customer's firewall. This is a nice compromise that should make it easier for DBAs to convince their IT departments to deploy the tool. 
+
+## Source Control for SQL Databases
+
+I attended two sessions that covered similar ground: source-controlling your database (schema and reference data). Ernest Hwang and [Grant Fritchey](http://www.scarydba.com/) presented about the use of SQL Source Control to automatically push changes made to the database in SSMS into corresponding source-controlled SQL files.
+
+In "Case Study: Why You Should Source Control Your Database," Ernest focused more on the deployment side, demoing the use of Jenkins to automatically build and deploy database changes when they are checked in. I was surprised that the build configuration required a good bit of hand-crafted MSBuild XML that used the Exec task to shell out to SQL Compare to deploy the database and run tests. I have found Exec to be pretty brittle for this kind of thing, because it introduces install and path dependencies on the build server. I found some [MSBuild Tasks](http://weblogs.asp.net/plip/archive/2006/10/04/Red-Gate-MSBuild-Tasks.aspx), posted by Phil Winstanley, that use the SQL Compare API - this could be a more reliable solution.
+
+Grant Frichey's talk was titled "A Sandbox Development Process." He focused on the change-management side of database source control, presenting the use of SQL Virtual Restore to start from a (possibly scrubbed) production database, mapping it to a source-controlled schema, and then making "sandboxed" changes in a local development environment. SQL Virtual Restore looks like an awesome solution for working with real data while avoiding copying massive data files. A single full backup can exist in a shared location and be restored into a local database backed by small "virtual" vmdf and vldf files. Grant was my favorite speaker of the day - his style is humorous and engaging, and he's obviously got a ton of experience to back up his advice.
+
+## Business Intelligence
+
+The duo of Noemi Moreno and Tom Austin presented "Social Media, Business Intelligence, and Bridging the SSMS-VS Divide." The talk used an interesting BI example to demonstrate the use of SQL Source Control (in Management Studio) and SQL Connect (in Visual Studio) by different developers to both evolve the same database schema. The integration looked pretty smooth, although the Visual Studio scenario seemed to involve a fair bit of magic behind the scenes that could be difficult to troubleshoot if things go south.
+
+The application itself was cool, it involved an SSIS package that integrated data from an OLTP database and the Twitter API into a single SSAS cube which was then exported to Google Fusion Tables for a map visualization. I really like composing together several small implementations into a single solution, using the right tool for each part of the job. SSIS makes me queasy though.
+
+## T-SQL Unit Testing
+
+The final session that I attended was "Thwarting Database Defects" (notice the play on "TDD?"). [Sebastian Meine](http://www.sqlity.net/) and [Dennis Lloyd Jr](http://www.curiouslycorrect.com/) presented about [tSQLt](http://tsqlt.org), a T-SQL unit testing framework. Unit testing of the database is not something that I have ever done directly - usually the closest we get is testing against our repositories.
+
+The capabilities of the framework are very impressive. Every unit test runs in a transaction that is rolled back after the test executes, forcing you to completely isolate your tests (no "this one has to run before that one"), and guaranteeing a consistent state before each test run. It's driven by a set of stored procedures in a "tSQLt" schema that you create in your database itself, and provides the ability to mock out stored procs and even tables, and to assert about the expected results. Your tests themselves are a set of stored procedures under test-unit-specific schemas. The only drawback, in my opinion, is that the framework and unit tests must be created in the database that is being tested. Given the day's theme of source-controlling your database, this creates the need to ensure the unit tests don't make their way into production.
+
+## Conclusion
+
+This was a worthwhile event, the pacing and organization were perfectly executed, the food was good, and plenty of Red-Gaters were available to talk between the sessions. I've got lots of inspiration to take back to work and turn into better-quality databases!
