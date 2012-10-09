@@ -1,14 +1,15 @@
-function getNav() {
-  var mobileNav = $('nav[role=navigation] fieldset[role=search]').after('<fieldset class="mobile-nav"></fieldset>').next().append('<select></select>');
-  mobileNav.children('select').append('<option value="">Navigate&hellip;</option>');
-  $('ul[role=main-navigation]').addClass('main-navigation');
-  $('ul.main-navigation a').each(function(link) {
-    mobileNav.children('select').append('<option value="'+link.href+'">&raquo; '+link.text+'</option>');
-  });
-  $('ul.subscription a').each(function(link) {
-    mobileNav.children('select').append('<option value="'+link.href+'">&raquo; '+link.text+'</option>');
-  });
-  mobileNav.children('select').bind('change', function(event) {
+function addMobileNav() {
+  var mainNav = $('ul.main-navigation, ul[role=main-navigation]').before('<fieldset class="mobile-nav">');
+  var selectList = '<select>';
+  selectList += '<option value="">Navigate&hellip;</option>';
+  var addOption = function() {
+    selectList += '<option value="' + this.href + '">&raquo; ' + $(this).text() + '</option>';
+  };
+  mainNav.find('a').each(addOption);
+  $('ul.subscription a').each(addOption);
+  selectList += '</select>';
+  var mobileNav = $('fieldset.mobile-nav').append(selectList);
+  mobileNav.find('select').bind('change', function(event) {
     if (event.target.value) { window.location.href = event.target.value; }
   });
 }
@@ -121,7 +122,7 @@ $.domReady(function() {
   wrapFlashVideos();
   flashVideoFallback();
   addCodeLineNumbers();
-  getNav();
+  addMobileNav();
   addSidebarToggler();
 });
 
