@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Microsoft Exam 70-480: study guide continued"
+title: "Microsoft Exam 70-480 study guide continued: DOM manipulation"
 date: 2013-01-22 15:39
 comments: true
 categories: [study, web]
