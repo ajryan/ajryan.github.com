@@ -19,6 +19,8 @@ There is an interesting wrinkle here: the TFS API client assemblies are not usab
 
 You can find the source for the [TfsWorkItems](http://github.com/ajryan/TfsWorkItems) work item browser and [TfsProxy](http://github.com/ajryan/TfsProxy) API proxy at my [Github profile](http://github.com/ajryan).
 
+The app itself is available for testing in this [ZIP archive](/assets/TfsWorkItems_1.0.0.0_AnyCPU_Test.zip). Extract, and then run the `Add-AppDevPackage.ps1` PowerShell script to install the app.
+
 ## Web API Proxy
 
 As described above, in order to get to the TFS data from WinRT, I will stand up a simple Web API service with methods for retrieving Team Projects and Work Items. I created a Web API project and added controllers named `ProjectsController` and `WorkItemsController`. Along the way, I am using the handy [Postman](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm) REST Client extension for Chrome to hit my service methods as I build them out. Fiddler or curl would be just as effective.
