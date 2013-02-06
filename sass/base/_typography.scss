@@ -109,17 +109,21 @@ blockquote {
   $bq-margin: 1.2em;
   font-style: italic;
   position: relative;
-  font-size: 1.2em;
-  line-height: 1.5em;
-  padding-left: 1em;
+  font-size: 80%;
+  line-height: 1.3em;
+
+  padding-left: 0.8em;
   border-left: 4px solid rgba($text-color-light, .5);
+  float: right;
+  width: 32%;
+  margin-left: 0.5em;
   cite {
     font-style: italic;
     a { color: $text-color-light !important; word-wrap: break-word; }
     &:before { content: '\2014'; padding:{right: .3em; left: .3em;} color: $text-color-light; }
   }
   @media only screen and (min-width: 992px) {
-    padding-left: 1.5em;
+    padding-left: 1em;
     border-left-width: 4px;
   }
 }
