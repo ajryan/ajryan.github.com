@@ -4,7 +4,6 @@ title: "Responsive Web Design - Introduction for ASP.NET MVC Developers"
 date: 2013-05-29 12:53
 comments: true
 categories: [development, html, CSS, javascript, IIS, ASP.NET, Visual Studio]
-published: false
 ---
 
 The term "Responsive Web Design" was coined in 2010 by Ethan Marcotte in his [canonical article](http://alistapart.com/article/responsive-web-design) defining the technique. Recently, I spent some time researching the history and modern state of the art of Response Web Design (RWD). This article presents a survey of my findings, and provides examples of specific techniques. We'll focus on Visual Studio / ASP.NET MVC tools and techniques for getting the job done.<!--more-->
@@ -190,6 +189,8 @@ Additional considerations for media query breakpoints:
 
 * Knowledge of common device widths is useful (along with testing the site on biggest-marketshare devices), but creating a layout appropriate to the content is most important of all.
 
+* iOS reports *portrait* `device-width` and `device-height` regardless of orientation (use `orientation` in query to differentiate)
+
 ### Size, Move, Hide, Replace, or Transform? ###
 
 There are many options available for style specializations inside a media query. This list defines the most common techniques:
@@ -218,7 +219,59 @@ In order to effectively leverage media queries for mobile devices, it is necessa
 
     <meta name="viewport" content="width=device-width" />
 
-This instructs the mobile browser to treat device pixels as CSS pixels, that is, for the physical and virtual dimensions of the screen to be the same. (This is a bit of an oversimplification, since multiple high-density display pixels are sometimes treated as a single virtual device pixel. See [A Tale of Two Viewports](http://www.quirksmode.org/mobile/viewports.html) for an excellent explanation.) When the `viewport` tag is not present, most mobile browsers will effectively "zoom" a larger virtual viewport into the smaller physical device viewport, by treating a device pixel as multiple CSS pixels. When mobile devices first became capable of browsing the web, this behavior was necessary to provide enough space to lay out pages designed exclusively for the desktop. Users employ the "double-tap zoom" gesture to focus on portions of the page.
+This instructs the mobile browser to treat device pixels as CSS pixels, that is, for the physical and virtual dimensions of the screen to be the same. (This is a bit of an oversimplification, since multiple high-density display pixels are sometimes treated as a single virtual device pixel. See [A Tale of Two Viewports](http://www.quirksmode.org/mobile/viewports.html) for an excellent explanation.) When the `viewport` tag is not present, most mobile browsers will effectively "zoom" a larger virtual viewport into the smaller physical device viewport, by treating a device pixel as multiple CSS pixels. When mobile devices first became capable of browsing the web, this behavior was necessary to provide enough space to lay out pages designed exclusively for the desktop. Users employ the "double-tap zoom" gesture to focus on portions of the page. 
+
+The `viewport` meta tag allows us to instruct the browser how to treat the Layout Viewport relative to the Visual Viewport. Let's examine the differences between the Layout Viewport and the Visual Viewport.
+
+**Layout Viewport**
+
+* CSS pixels available to layout
+
+* Resize of a Desktop browser window resizes the Layout Viewport and causes a reflow
+
+  * The Mobile Layout Viewport is set at the initial load and does not change
+
+  * Mobile devices play some extra tricks with text wrapping - divs will lay out correctly, but the wrap point may be adjusted based on double-tap zoom size; text may re-wrap on zoom as well.
+
+**Visual Viewport**
+
+* The Visual Viewport is the CSS pixel dimension of the visible area of the page
+
+* Resize of a Desktop browser window resizes the Visual Viewport
+
+* Mobile zoom resizes the Visual Viewport
+
+Additional notes on the `viewport` meta-tag:
+
+* Controls the layout viewport
+
+* Determines the number of device pixels per CSS pixel at zoom = 1
+
+* 99% of the time, use the <meta name=“viewport” content=“width=device-width”> tag 
+
+* For most modern devices, the default iOS and Android layout viewport width is 980 CSS pixels, with initial scale set to match the visual viewport
+
+* The content attribute is comma-separated
+
+  * Width = [px|device-width]. Device width is “screen width in CSS pixels at 100% zoom”
+
+  * Height – little-used
+
+  * Initial-scale = device pixel multiplier
+
+  * Maximum-scale = device pixel multiplier
+
+  * User-scalable = [true|false]. Whether to allow the user to scale. Think very carefully before limiting this.
+
+  * CSS 2.1 recommends that CSS pixels correlate to one 96dpi pixel at arms’ length; initial-scale=1 requests this
+
+* IE10 on Windows 8 ignores the viewport meta tag in snapped view. You need the following CSS declaration:
+
+{% codeblock lang:css %}
+@-ms-viewport {
+    width: device-width;
+}
+{% endcodeblock %}
 
 ### Tangent: ASP.NET MVC Technique - Server-side mobile refinement ###
 
@@ -263,24 +316,128 @@ public override string GetVaryByCustomString(System.Web.HttpContext context, str
 
 You can see this technique in action here: [DEMO](http://codecampresponsive.apphb.com/Home/OutputCacheMobileHiding). View the source of the page from a mobile device (or with a mobile user agent string) to verify that the sidebar is not transmitted. On desktop devices, the sidebar is included and hidden/shown as the page width changes.
 
-## Mobile First? ##
+## Adaptive Media ##
 
-Choosing mobile or Desktop first:
+In Marcotte's original article, the only medium considered for adaptability was the image. Modern sites deliver images, video, and audio to devices of varying capabilities. The following sections describe responsive techniques for dealing with all three.
 
+A page demonstrating many of the following techniques is available here: [DEMO](http://codecampresponsive.apphb.com/Home/ResponsiveMedia).
 
-* Mobile First: progressive enhancement
+### Responsive Images ###
 
+We must consider layout and bandwidth when planning a responsive approach for images. Here are some notes on responsive image techniques:
 
-* Desktop First: graceful degradation
+* **Scaling**: Basic image scaling can be accomplished with `width: 100%` and `max-width` CSS properties. IE7 may require a polyfill depending on other CSS properties in use. 
 
-The mobile/desktop first question is influenced by:
--	Is there an existing site? What is its target?
--	Audience breakdown – device and size (server logs can be misleading – if your mobile experience stinks, people aren’t returning. Unique IP better measure than views):
--	Mindset / preference
+* **Cropping**: At media query breakpoints, set negative margins with overflow: hidden to avoid shrinking the image and 
 
+* **Swap/Omit**: On the server side, alternative image href may be set in markup, or images may be omitted when a mobile browser is detected. An HTTP handler may be employed to dynamically scale images according to user agent. Client-side techniques for selecting images according to page size exist, but there is no silver bullet - most of these techniques will result in multiple image downloads or suffer from very un-semantic (and potentially non-accessible) markup.
 
+* **SVG**: Scalable Vector Graphics images have the benefit of full-fidelity scaling with a single file. Internet Explorer introduced SVG support in IE9, so a fallback is required for earlier IE versions. As with most "swap" techniques, it's important to monitor network traffic and avoid transmission of both files, when possible, or to employ a server-side approach.
 
+Be sure to choose the correct image format. PNG works best for logos and vectors, JPEG for photos and other realistic images. GIF should rarely be used, though can be effective for <= IE6 as a work around for PNG transparency. Losslessly optimize your PNG images - this can reduce size by a surprising amount (see [PngGauntlet](http://http://pnggauntlet.com/) for example).
 
+### Responsive Video ###
 
+HTML5 introduced full video support, which modern browsers all handle. HTML5 video is generally more performant and less buggy than relying on plugin-based approaches. It is necessary, though, to provide a fallback for older browsers - the goal with video is a balance of performance and compatibility.
 
---- typography web fonts --- don't forget mime-map OTF etc
+* Supply VP8- and H.264-encoded files and you will cover nearly all user agents
+
+* Omitting the type from the final source will cause most browsers to check the metadata to determine if it can be played. Bandwidth / accessibility tradeoff.
+
+* One *could* use the little-known `media` attribute to serve smaller files to smaller devices, although at the time of this writing it appears this attribute may be dropped.
+
+* IIS NOTE: need to add mime types for video, or IIS will return a 404.3. See `Web.config` section `system.webserver\staticContent\mimeMap`.
+
+* Within the video tag, below the sources, include a flash fallback and video download link (for users without flash).
+
+* Use JavaScript and/or HTTP module and user agent detection to serve appropriate codec and filesize
+
+* Good resources:
+
+  * Mark Pilgrim’s excellent, very in-depth (though getting out-of-date) guide: http://diveintohtml5.info/video.html
+  
+  * Concise, easy to read guide from JWPlayer: http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/22644/using-the-html5-video-tag/
+
+  * [FlowPlayer](http://flowplayer.org/) is a pre-packaged, responsive, broadly compatible option.
+
+  * Nice tool for generating markup: [Video for Everybody](http://camendesign.co.uk/code/video_for_everybody)
+
+Don't discount the option of hosting the video externally (Vimeo, Youtube) and IFRAMEing in a player – they’ve solved the cross-browser issues and will take bandwidth & connection pressure off your server.
+
+**Flexible video sizing:**
+
+* For the `<video>` tag, you can rely on `width: 100%` and `max-width` with `height: auto` to flexibly resize video while maintaining aspect ratio.
+
+* Flash and IFRAMEs have issues – can’t automatically set height to preserve the aspect ratio. Thierry Koblentz “Creating Intrinsic Ratios for Video” to the rescue - [post](http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/).
+
+  * Set a wrapper DIV with relative position, zero height, and bottom-padding representing the aspect radio (e.g. 56.25% == 16:9)
+
+  * Set an inner div absolutely positioned with 100% width and height
+
+  * This technique has issues in IE7 and below – use a conditional style sheet
+
+### Responsive Audio ###
+
+Techniques for audio largely follow those for video, except that layout adjustment is not really a concern. Rely on the HTML5 `audio` tag with fallbacks, and provide download links for users without plugin support. On the server side, consider serving files encoded to lower bit rates when mobile devices are detected.
+
+## Other Considerations ##
+
+Now that we have covered the the three primary categories of responsive web design techniques, let's briefly visit some related considerations.
+
+### Forms ###
+
+Forms must provide a usable mobile layout and be touch-friendly. The following are important points to consider for responsive forms:
+
+* Note the “field zoom” feature of many mobile browsers. When an input field is focused, the browser will zoom the viewport to the width of the field.
+
+  * This makes top-aligned labels better, otherwise the label or field may be cut off.
+
+  * Set `input, textarea { font-size: 1em }` to avoid extra zoom on iDevices – lower font sizes will introduce additional zoom
+
+* Touch-friendly
+
+  * Sizing (finger targets): extra padding on inputs, and larger label targets for radio and checkbox controls.
+
+  * Click versus Touch events: there is a delay between the initial touch event and final click event, during which the browser is waiting for a potential gesture. If you know that a given control has no gesture interaction, you can trigger interactions from the touch event, resulting in faster response. This can be difficult to implement reliably - see [FT Fastclick]( http://labs.ft.com/articles/ft-fastclick/) for a solid implementation.
+
+* Input Types
+
+  * HTML5 introduces new values for the `input` element's `type` attribute. Mobile browsers key off this attribute to provide the most appropriate keyboard layout for the type (e.g. email type results in keyboard with @ symbol).
+
+  * Some desktop browsers implement some native validation and specialized input controls for certain input types. This may not be desired - the `form` element's `novalidate` attribute can prevent native validation, and CSS can be used to prevent browser-substituted controls. 
+
+### Typography ###
+
+The trend is toward more minimal interfaces that place typography in the forefront. The increased prevalence of high-density displays makes the display of beautiful type accessible to a greater number of users. Consider the following points related to typography:
+
+* The user (or at least platform developer) has already specified his / her preferred default font size. Rather than overriding this, we should respect it as a base and scale from there.
+
+* New “retina”-class devices and high density displays can make pixel sizing unreliable. The future of the “pixel” is uncertain - `em` should be the default sizing unit, unless you have a really good reason to use pixels.
+
+* On higher-density displays, you may wish to increase font weight to achieve a uniform result across displays. Antialiasing on lower-density displays results in greater perceived weight given the same font on a higher-density display.
+
+* On standard-density displays, serif fonts below 12px are not sharp enough. But you should be over 12px anyway.
+
+* Good Metrics
+ 
+  * Font size: bigger than you think. Hold a book or magazine at a comfortable distance and compare.
+ 
+  * Contrast: ratio font color to background brightness. Steer clear of full black (looks like a “hole”) and full white.
+  
+  * Line Height: for text, 140% of font size is a good general rule, but depends on face (ascender/descender ratio to x-height and “blackness”). In CSS, use proportional line-height notation (e.g. `font: Arial 1em/1.44`) with no units.
+
+  * Line Length (measure): From 45 to 75 characters is good balance of ease in tracking to next line versus not having to do it too often. When browsers support it, you can use CSS3 column count when the view gets very wide. You can leave width “on the table” and set a `max-width`. Ensure text blocks have good height in proportion to width.
+
+  * Spacing: Headings can often use more vertical padding to breathe
+
+* Gotchas
+
+  * Note that when using fluid (proportional) layout techniques, you give up some control over line length
+
+  * Web Font browser quirks and format support (use [Font Squirrel](http://www.fontsquirrel.com/))
+
+  * When serving locally, apply correct mimetype to web fonts
+
+## Conclusion ##
+
+Responsive Web Design has been around for several years, and has been gathering steam since its introduction. There is no "one size fits all" approach for cross-device sites - careful evaluation and application of the available techniques is required. Good luck on your projects!
