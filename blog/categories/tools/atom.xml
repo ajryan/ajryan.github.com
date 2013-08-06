@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Updated WinHaste hastebin client]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/02/08/updated-winhaste-hastebin-client/"/>
+    <updated>2013-02-08T13:17:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/02/08/updated-winhaste-hastebin-client</id>
+    <content type="html"><![CDATA[<p>I just pushed a small update to my <a href="https://github.com/ajryan/WinHaste">WinHaste</a> hastebin client (<a href="http://ajryan-github-downloads.s3.amazonaws.com/WinHaste.exe">binary</a>). <a href="http://hastebin.com/">Hastebin</a> is a cool, minimal, login-free alternative to Pastebin. Now, when a command's output is being piped to WinHaste, the output will be echoed to the console. This is especially handy if you are running an interactive command, so you aren't entering values "blind."<!--more--></p>
+
+<p>WinHaste supports piped or interactive entry - if you enter <code>WinHaste.exe</code> with no arguments, it will read user input from the console until an end-of-file <code>^Z</code> character is entered. In this mode, Windows already writes user input to the console, so echoing within WinHaste would result in doubling every character typed. I ran across a nice technique in <a href="http://stackoverflow.com/a/9712392/1042">this StackOverflow answer</a> for checking whether the current input stream is piped or interactive:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>I navigated into the disassembly of the <code>Console.KeyAvailable</code> (thanks, ReSharper!) found found the following:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>So, I could P/Invoke PeekConsoleInput myself, but this works fine for me!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Get peer reviews for your website with Criticue]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/01/07/get-peer-reviews-for-your-website-with-criticue/"/>
+    <updated>2013-01-07T11:27:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/01/07/get-peer-reviews-for-your-website-with-criticue</id>
+    <content type="html"><![CDATA[<p>I encountered a very useful new website called <a href="http://criticue.com"><strong>Criticue</strong></a>. It's a way to get quick, unbiased feedback of your website. It is dead simple to get started, just enter your URL - no signup required.<!--more--> After that, provide at least one review of another site, and you'll shortly get a review of your own. I've submitted two sites and have gotten feedback within 12 hours each time. At any point, you can create a username and password and return later to re-read reviews you've received. You can also submit additional reviews of others' sites and get more feedback on your own site.</p>
+
+<p>It's much easier to turn a critical eye on someone else's work. Looking at your own stuff, you'll always have the reasoning that led you to the current state in the back of your mind. You're seeing what you have imagined and envisioned, not only what actually exists. Web design is about communication - with your own stuff, you already know the information that the site attempts to communicate. Reviewing someone else's work is a great way to exercise critical muscles that you can then use on your own material.</p>
+
+<p>So check out <a href="http://criticue.com">Criticue</a> -- it's win-win: get timely, unbiased feedback on your stuff and practice your own critical eye.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Red-Gate SQL In The City SF 2012]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/"/>
+    <updated>2012-10-03T10:10:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012</id>
+    <content type="html"><![CDATA[<p>I attended the Red-Gate <a href="http://sqlinthecity.red-gate.com/">SQL In the City</a> training event yesterday. It was a great opportunity to set the daily grind aside and focus on learning. It's always inspiring to watch a demo that shows a less painful way to accomplish something I'm struggling with. The challenge is to turn that inspiration into something productive and valuable. My notes follow.<!--more--></p>
+
+<h2>Keynote</h2>
+
+<p>John Theron (Red-Gate's chief marketing officer) set the stage for the day with some audience participation. We were asked to pass untied balloons back through the audience, with our eyes closed, without losing any air. It was an analogy to the difficulty of pushing database and application changes from dev into production, without losing any important changes. The keynote transitioned into highlighting all of the ways Red-Gate has been helping users manage and deploy database (and now application) changes for the past several years. One of the primary themes of the day was employing automation for more reliable and controlled releases, including the use of continuous integration, automated testing, and automated deployments.</p>
+
+<p>One point that hit home for me was about the value of frequent releases: the sooner your new stuff gets in front of actual customers, the more quickly you get their feedback; and customer feedback is the most valuable of all. There is also less time for a mess to accumulate: the larger the delta of a release, the longer it will take to deploy, and the greater the chance of an issue.</p>
+
+<h2>Monitoring</h2>
+
+<p>Robin Anderson delivered a session demoing the SQL Monitor tool. The tool provides the ability to remotely gain insight into the state of your SQL server. Many of us employ a bag of monitor queries to check on the health of our SQL servers. The Red-Gate tool bundles up many best-practice health checks (not only DMV queries, but PerfMon, WMI, and file watching) into a convenient and attractive package, and adds alerting on top of it.</p>
+
+<p>A very nice feature is the ability to create custom metrics driven by an arbitrary SQL query. The demo showed monitoring of a particular DMV query. I can imagine this being very useful for creating application behavior-specific metrics. For example, we have a consolidated logging system that pushes all of our server text logs to a central database. One could create a custom metric that triggers an alert when the rate of exceptions per hour exceeds a threshold.</p>
+
+<p>Red-Gate is planning <a href="http://sqlmonitor.red-gate.com">a cloud-hosted monitoring service</a> that is fed by a relay service installed inside the customer's firewall. This is a nice compromise that should make it easier for DBAs to convince their IT departments to deploy the tool.</p>
+
+<h2>Source Control for SQL Databases</h2>
+
+<p>I attended two sessions that covered similar ground: source-controlling your database (schema and reference data). Ernest Hwang and <a href="http://www.scarydba.com/">Grant Fritchey</a> presented about the use of SQL Source Control to automatically push changes made to the database in SSMS into corresponding source-controlled SQL files.</p>
+
+<p>In "Case Study: Why You Should Source Control Your Database," Ernest focused more on the deployment side, demoing the use of Jenkins to automatically build and deploy database changes when they are checked in. I was surprised that the build configuration required a good bit of hand-crafted MSBuild XML that used the Exec task to shell out to SQL Compare to deploy the database and run tests. I have found Exec to be pretty brittle for this kind of thing, because it introduces install and path dependencies on the build server. I found some <a href="http://weblogs.asp.net/plip/archive/2006/10/04/Red-Gate-MSBuild-Tasks.aspx">MSBuild Tasks</a>, posted by Phil Winstanley, that use the SQL Compare API - this could be a more reliable solution.</p>
+
+<p>Grant Frichey's talk was titled "A Sandbox Development Process." He focused on the change-management side of database source control, presenting the use of SQL Virtual Restore to start from a (possibly scrubbed) production database, mapping it to a source-controlled schema, and then making "sandboxed" changes in a local development environment. SQL Virtual Restore looks like an awesome solution for working with real data while avoiding copying massive data files. A single full backup can exist in a shared location and be restored into a local database backed by small "virtual" vmdf and vldf files. Grant was my favorite speaker of the day - his style is humorous and engaging, and he's obviously got a ton of experience to back up his advice.</p>
+
+<h2>Business Intelligence</h2>
+
+<p>The duo of Noemi Moreno and Tom Austin presented "Social Media, Business Intelligence, and Bridging the SSMS-VS Divide." The talk used an interesting BI example to demonstrate the use of SQL Source Control (in Management Studio) and SQL Connect (in Visual Studio) by different developers to both evolve the same database schema. The integration looked pretty smooth, although the Visual Studio scenario seemed to involve a fair bit of magic behind the scenes that could be difficult to troubleshoot if things go south.</p>
+
+<p>The application itself was cool, it involved an SSIS package that integrated data from an OLTP database and the Twitter API into a single SSAS cube which was then exported to Google Fusion Tables for a map visualization. I really like composing together several small implementations into a single solution, using the right tool for each part of the job. SSIS makes me queasy though.</p>
+
+<h2>T-SQL Unit Testing</h2>
+
+<p>The final session that I attended was "Thwarting Database Defects" (notice the play on "TDD?"). <a href="http://www.sqlity.net/">Sebastian Meine</a> and <a href="http://www.curiouslycorrect.com/">Dennis Lloyd Jr</a> presented about <a href="http://tsqlt.org">tSQLt</a>, a T-SQL unit testing framework. Unit testing of the database is not something that I have ever done directly - usually the closest we get is testing against our repositories.</p>
+
+<p>The capabilities of the framework are very impressive. Every unit test runs in a transaction that is rolled back after the test executes, forcing you to completely isolate your tests (no "this one has to run before that one"), and guaranteeing a consistent state before each test run. It's driven by a set of stored procedures in a "tSQLt" schema that you create in your database itself, and provides the ability to mock out stored procs and even tables, and to assert about the expected results. Your tests themselves are a set of stored procedures under test-unit-specific schemas. The only drawback, in my opinion, is that the framework and unit tests must be created in the database that is being tested. Given the day's theme of source-controlling your database, this creates the need to ensure the unit tests don't make their way into production.</p>
+
+<h2>Conclusion</h2>
+
+<p>This was a worthwhile event, the pacing and organization were perfectly executed, the food was good, and plenty of Red-Gaters were available to talk between the sessions. I've got lots of inspiration to take back to work and turn into better-quality databases!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sublime TFS plugin]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin/"/>
+    <updated>2012-09-24T09:38:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin</id>
+    <content type="html"><![CDATA[<p>Here's a nice plugin for Sublime Text: <a href="https://bitbucket.org/CDuke/sublime-tfs/wiki/Home">Sublime TFS</a>, by Denis Kulikov. It provides TFS integration right in the editor.<!--more--></p>
+
+<p>Sublime TFS will auto-check-out modified files (a must since files in TFS are readonly until checked out), and provides commands for Add, Delete, History, Check in, Check out, Undo, Get latest, and Compare with latest, available when the current file is under version control (except Add, obviously).</p>
+
+<p>I made a small contribution to the project, adding support for the TFS Power Tools "Annotate" feature (commonly known as "blame"). I have one major complaint about the Annotate output from TFPT, though: you can't open a changeset view by clicking a changeset number. I'm considering using the <code>/noprompt</code> option and dumping the Annotate output into a Sublime Text buffer, then providing the ability to open a changeset view from the buffer. Sounds like fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSharpreter plugin for Sublime Text]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/08/26/csharpreter-plugin-for-sublime-text/"/>
+    <updated>2012-08-26T22:20:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/08/26/csharpreter-plugin-for-sublime-text</id>
+    <content type="html"><![CDATA[<p>I have been really loving the <a href="http://www.sublimetext.com/">Sublime Text</a> editor lately. It's quick, featureful, and extensible. I created a plugin that will build and run C# snippets from inside the editor.<!--more--></p>
+
+<p>I write a lot of C#, and I often find myself wanting to check the behavior of a certain method or operator. My go-to tool for this has been <a href="http://www.sliver.com/dotnet/SnippetCompiler/">SnippetCompiler</a>, but now I'm trying to eliminate as many reasons for leaving my editor as possible. So, I created a plugin for Sublime Text that is inspired by SnippetCompiler - it takes the selected text and shoves it inside the main routine of a simple C# console app, builds it, and runs it. You can customize the "usings" and the boilerplate code auto-inserted at the end of the <code>Main</code> routine (currently prints a short message and reads a key).</p>
+
+<p>You can find the plugin on <a href="https://github.com/ajryan/CSharpreter">GitHub</a>. Details follow.</p>
+
+<h2>Enter the CSharpreter Sublime Text plugin</h2>
+
+<p>CSharpreter compiles and executes fragments of C# code. The currently-selected text (or entire contents of the view, if no text is selected) is injected into the body of the Main routine of a C# console application. MSBuild is invoked and the executable is run in a shell window. This plugin has only been tested on Windows, but <em>may</em> be compatible with Mono's XBuild.</p>
+
+<p>With the default settings, your code will be injected into a program defined as follows:</p>
+
+<p>```
+using System;
+using System.Collections.Generic;
+using System.Linq;</p>
+
+<p>class Program
+{
+  static void Main(string[] args)
+  {</p>
+
+<pre><code>// YOUR TEXT HERE
+
+Console.WriteLine();
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h2>Commands</h2>
+
+<ul>
+<li>CSharpreter: Interpret - Execute the currently-selected text, or with no selected text, the entire contents of the view.</li>
+<li>CSharpreter: Cleanup - Delete the %temp%\CSharpreter folder, where temporary source and binaries are written.</li>
+</ul>
+
+
+<h2>Settings</h2>
+
+<p>In the CSharpreter package folder, edit c_sharpreter.sublime-settings file to modify the defaults.</p>
+
+<ul>
+<li>msbuild_path - Path to the MSBuild executable</li>
+<li>default_usings - List of namespaces to inject at the top of the source file.</li>
+<li>main_end - List of statements to inject at the end of the Main method.</li>
+</ul>
+
+
+<p>```
+{</p>
+
+<pre><code>"msbuild_path": "C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
+"default_usings":
+[
+    "System", "System.Collections.Generic", "System.Linq"
+],
+"main_end":
+[
+    "Console.WriteLine();",
+    "Console.WriteLine(\"Press any key to exit...\");",
+    "Console.ReadKey();"
+]
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Installation</h2>
+
+<p>Clone this repository into your Sublime Text packages folder.</p>
+
+<p><strong>Windows 7 / Vista and above</strong></p>
+
+<pre><code>C:\Users\&lt;username&gt;\AppData\Roaming\Sublime Text 2\Packages
+</code></pre>
+
+<p><strong>Windows XP</strong></p>
+
+<pre><code>C:\Documents and Settings\&lt;username&gt;\Application Data\Sublime Text 2\Packages
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

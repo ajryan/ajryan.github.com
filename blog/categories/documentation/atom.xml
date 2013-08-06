@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: documentation | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/documentation/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Code Samples In Microsoft Word]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/10/29/quick-tip-code-samples-in-microsoft-word/"/>
+    <updated>2012-10-29T10:54:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/10/29/quick-tip-code-samples-in-microsoft-word</id>
+    <content type="html"><![CDATA[<p>Code samples in Microsoft Word tend to get inflamed with the "red squiggle" disease. To keep your sanity while editing code samples, and to present them a bit more nicely to your users, create a style and apply it to all code samples.<!--more--></p>
+
+<ul>
+<li>Choose a monospace font.</li>
+<li>In the style editor Format dropdown, choose Language, and then check the box labeled "Do not check spelling or grammar."</li>
+<li>Ensure no specific color is selected so that colors pasted from your code editor appear correctly (if they look good on a white background).</li>
+</ul>
+
+
+<p>If you use a Character style (as opposed to a Paragraph style), you can even apply the style to text inline within a paragraph. This can be a good way to set apart "input" text from explanatory text.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft Exam 70-480 Study Guide: Implement Program Flow - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="Let&#8217;s pick up the 70-480 study guide with the second objective: Implement Program Flow. Implement program flow Iterate across collections and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Microsoft Exam 70-480 Study Guide: Implement Program Flow</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-24T15:43:00-08:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Let&#8217;s pick up the 70-480 study guide with the second objective: Implement Program Flow.<!--more--></p>
+
+<h2>Implement program flow</h2>
+
+<blockquote><p>Iterate across collections and array items; manage program decisions by using switch statements, if/then, and operators; evaluate expressions.</p></blockquote>
+
+
+<ul>
+<li>Iterating a collection or array:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for (item in collection) {
+</span><span class='line'>  console.log(item);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>for (var i = 0; i &lt; collection.length; i++) {
+</span><span class='line'>  var item = collection[i];
+</span><span class='line'>  console.log(item);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>// NOT SUPPOTED IN IE
+</span><span class='line'>collection.forEach(item, index) {
+</span><span class='line'>  console.log(item + " at " + index);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>$.each(collection, function(index, item) {
+</span><span class='line'>  console.log(item + " at " + index);
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Switch statement</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function(stringVar) {
+</span><span class='line'>  switch (stringVar) {
+</span><span class='line'>      case "one":
+</span><span class='line'>          console.log(1);
+</span><span class='line'>          break;
+</span><span class='line'>      case "two":
+</span><span class='line'>          console.log(2);
+</span><span class='line'>          break;
+</span><span class='line'>      default:
+</span><span class='line'>          console.log(999);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>If/then/else</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if (condition) {
+</span><span class='line'>  // do a thing
+</span><span class='line'>}
+</span><span class='line'>else if (differentCondition) {
+</span><span class='line'>  // do another thing
+</span><span class='line'>}
+</span><span class='line'>else {
+</span><span class='line'>  // nothing at all
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>JavaScript supports a similar set of comparison and assignment operators as other modern languages. Some special ones to watch for:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var x = condition? "yes" : no;
+</span><span class='line'>
+</span><span class='line'>function returnsUndefined {
+</span><span class='line'>  return void(5+5);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>var y = (5, 6); // y = 6;
+</span><span class='line'>
+</span><span class='line'>delete collection[4]; // collection[4] returns undefined
+</span><span class='line'>
+</span><span class='line'>var x = new Date();
+</span><span class='line'>x instanceof Date; // true
+</span><span class='line'>
+</span><span class='line'>typeof variable; // returns function, string, number, boolean, object, or undefined</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Evaluate expressions</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>eval("console.log('evaluated');");</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li></li>
+</ul>
+
+
+<h2>Raise and handle an event</h2>
+
+<blockquote><p>Handle common events exposed by DOM (OnBlur, OnFocus, OnClick); declare and handle bubbled events; handle an event by using an anonymous function</p></blockquote>
+
+
+<ul>
+<li>Handling events</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>window.onload = (function(){
+</span><span class='line'>  alert('window load');
+</span><span class='line'>});
+</span><span class='line'>
+</span><span class='line'>window.addEventListener('load', function(event) {
+</span><span class='line'>  alert('window load');
+</span><span class='line'>}, false);
+</span><span class='line'>
+</span><span class='line'>var myButton = document.getElementById('button1');
+</span><span class='line'>myButton.addEventListener('click', function (event) {
+</span><span class='line'>  alert('clicked');
+</span><span class='line'>}, false);
+</span><span class='line'>
+</span><span class='line'>$(window).on('click', 'div', function(event) {
+</span><span class='line'>  $(this).text = "changed text at " + new Date();
+</span><span class='line'>})
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The third argument to addEventListener indicates whether you want to get the event in the <em>capture</em> stage. The capture stage begins at the HTML element and progresses through to the target, then the bubble stage flows from the target back to the HTML element. Using a combination of capture and <code>Event.stopPropagation</code> will allow you to grab an event before it reaches its actual target.</p>
+
+<p>Event.preventDefault can be used to stop the default action from being invoked.</p>
+
+<h2>Implement exception handling</h2>
+
+<blockquote><p>Set and respond to error codes; throw an exception; request for null checks; implement try-catch-finally blocks</p></blockquote>
+
+
+<p>To set an error:</p>
+
+<p><code>throw new Error(100, "Yes sir");</code></p>
+
+<p>Internet Explorer will treat the first argument as error number and second as description. Other browsers may support only a message.</p>
+
+<p>You can get global errors</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>window.addEventListener('error', function(e) {
+</span><span class='line'>  console.log(e);
+</span><span class='line'>}, false);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try/catch:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>try {
+</span><span class='line'>  // do stuff
+</span><span class='line'>}
+</span><span class='line'>catch (e) {
+</span><span class='line'>  console.log(e.name);
+</span><span class='line'>  console.log(e.number);
+</span><span class='line'>  console.log(e.message);
+</span><span class='line'>  console.log(e.description);
+</span><span class='line'>
+</span><span class='line'>  // can check (e instanceof TypeError) etc
+</span><span class='line'>}
+</span><span class='line'>finally {
+</span><span class='line'>  // all done
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Implement a callback</h2>
+
+<blockquote><p>Receive messages from the HTML5 WebSocket API; use jQuery to make an AJAX call; wire up an event; implement a callback by using anonymous functions; handle the “this” pointer</p></blockquote>
+
+
+<p>To receive messages from the WebSocket API, first create a new WebSocket object using the ws protocol. Attach event handlers</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var socket = new WebSocket("ws://my-host.com"); // optional protocols param 2
+</span><span class='line'>socket.onopen = function (openEvent) {
+</span><span class='line'>  console.log('opened');
+</span><span class='line'>};
+</span><span class='line'>socket.onmessage = function (messageEvent) {
+</span><span class='line'>  console.log(messageEvent.data); // this can be Blob, String (included serialized JSON), or ArrayBuffer
+</span><span class='line'>};
+</span><span class='line'>// similar callbacks for onerror and onclose
+</span><span class='line'>
+</span><span class='line'>// events will fire after something is sent
+</span><span class='line'>socket.send("let's get started");
+</span><span class='line'>
+</span><span class='line'>// in some event handler:
+</span><span class='line'>socket.close();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Making an AJAX call with jQuery is done as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$.ajax(
+</span><span class='line'>  'http://my-host.com/rest-endpoint',
+</span><span class='line'>  {
+</span><span class='line'>      type: 'POST',
+</span><span class='line'>      data: {
+</span><span class='line'>          val1: 2,    // this will become a query string
+</span><span class='line'>          val2: 3     // for POST, should probably JSON.stringify
+</span><span class='line'>      },
+</span><span class='line'>      success: function (data) {
+</span><span class='line'>          // do something with it
+</span><span class='line'>      },
+</span><span class='line'>      error: function (e) { 
+</span><span class='line'>          // error
+</span><span class='line'>      }
+</span><span class='line'>  });</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The ajax method returns a Promise interface (jqXhr in this case), so the event handlers can also be hooked up as:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$.ajax(...)
+</span><span class='line'>  .done(function(data){})
+</span><span class='line'>  .fail(function(error){});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>this</code> pointer was addressed in other study guide posts.</p>
+
+<h2>Create a web worker process</h2>
+
+<blockquote><p>Start and stop a web worker; pass data to a web worker; configure timeouts and intervals on the web worker; register an event listener for the web worker; limitations of a web worker</p></blockquote>
+
+
+<p>Here is a web worker sample:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// in the page HTML
+</span><span class='line'>
+</span><span class='line'>var worker = new Worker('worker.js');
+</span><span class='line'>worker.onmessage = function(event) {
+</span><span class='line'>  console.log(event.data);
+</span><span class='line'>}
+</span><span class='line'>worker.postMessage('Hello.');
+</span><span class='line'>
+</span><span class='line'>// and in the worker.js file
+</span><span class='line'>
+</span><span class='line'>self.addEventListener('message', function(event) {
+</span><span class='line'>  self.postMessage('post back to the window's listener);
+</span><span class='line'>}, false);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other web worker notes:</p>
+
+<ul>
+<li>Event data can be an object and is sent a serialized copy - modifying the object in one context will not change it in the other</li>
+<li>The <code>self</code> keyword is the global context in the worker js file</li>
+<li>There is no DOM, window, or document in the worker script</li>
+<li>The nav, location, XMLHttpRequest, and cache APIs can be accessed</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-24T15:43:00-08:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/study/'>study</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/" title="Previous Post: Microsoft Exam 70-480 study guide continued: Objective 1 remainder">&laquo; Microsoft Exam 70-480 study guide continued: Objective 1 remainder</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/" title="Next Post: A Windows Store (WinRT) TFS Work Item Browser">A Windows Store (WinRT) TFS Work Item Browser &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

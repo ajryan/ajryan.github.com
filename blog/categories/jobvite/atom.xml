@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jobvite | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/jobvite/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery Plugin: JobViteBox]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/09/06/jquery-plugin-jobvitebox/"/>
+    <updated>2012-09-06T00:54:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/09/06/jquery-plugin-jobvitebox</id>
+    <content type="html"><![CDATA[<p>I've published my first jQuery plugin! JobViteBox fetches a feed of job listings from JobVite and displays it on your page.<!--more--></p>
+
+<p>It's been a fun learning experience exploring the jQuery API. I've used this as an opportunity to brush up on my JavaScript best practice
+knowledge, and to dig deeper into jQuery internals.</p>
+
+<p>Having spent most of my development career writing C#, it's very rewarding to work in a language that allows such fast iteration. I've
+been using <code>rack</code> to whip up a local HTTP server for testing the demo. Another fun tool that I pulled in is <a href="http://developer.yahoo.com/YQL/">YQL</a>
+for converting an XML feed into JSON.</p>
+
+<p>You can see the plugin in action on my <a href="http://ajryan.github.com">home page</a>.</p>
+
+<p>Check out the <a href="http://ajryan.github.com/JobviteBox">GitHub repo</a></p>
+]]></content>
+  </entry>
+  
+</feed>

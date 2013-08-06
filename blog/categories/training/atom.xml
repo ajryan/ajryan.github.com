@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: training | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/training/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Red-Gate SQL In The City SF 2012]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/"/>
+    <updated>2012-10-03T10:10:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012</id>
+    <content type="html"><![CDATA[<p>I attended the Red-Gate <a href="http://sqlinthecity.red-gate.com/">SQL In the City</a> training event yesterday. It was a great opportunity to set the daily grind aside and focus on learning. It's always inspiring to watch a demo that shows a less painful way to accomplish something I'm struggling with. The challenge is to turn that inspiration into something productive and valuable. My notes follow.<!--more--></p>
+
+<h2>Keynote</h2>
+
+<p>John Theron (Red-Gate's chief marketing officer) set the stage for the day with some audience participation. We were asked to pass untied balloons back through the audience, with our eyes closed, without losing any air. It was an analogy to the difficulty of pushing database and application changes from dev into production, without losing any important changes. The keynote transitioned into highlighting all of the ways Red-Gate has been helping users manage and deploy database (and now application) changes for the past several years. One of the primary themes of the day was employing automation for more reliable and controlled releases, including the use of continuous integration, automated testing, and automated deployments.</p>
+
+<p>One point that hit home for me was about the value of frequent releases: the sooner your new stuff gets in front of actual customers, the more quickly you get their feedback; and customer feedback is the most valuable of all. There is also less time for a mess to accumulate: the larger the delta of a release, the longer it will take to deploy, and the greater the chance of an issue.</p>
+
+<h2>Monitoring</h2>
+
+<p>Robin Anderson delivered a session demoing the SQL Monitor tool. The tool provides the ability to remotely gain insight into the state of your SQL server. Many of us employ a bag of monitor queries to check on the health of our SQL servers. The Red-Gate tool bundles up many best-practice health checks (not only DMV queries, but PerfMon, WMI, and file watching) into a convenient and attractive package, and adds alerting on top of it.</p>
+
+<p>A very nice feature is the ability to create custom metrics driven by an arbitrary SQL query. The demo showed monitoring of a particular DMV query. I can imagine this being very useful for creating application behavior-specific metrics. For example, we have a consolidated logging system that pushes all of our server text logs to a central database. One could create a custom metric that triggers an alert when the rate of exceptions per hour exceeds a threshold.</p>
+
+<p>Red-Gate is planning <a href="http://sqlmonitor.red-gate.com">a cloud-hosted monitoring service</a> that is fed by a relay service installed inside the customer's firewall. This is a nice compromise that should make it easier for DBAs to convince their IT departments to deploy the tool.</p>
+
+<h2>Source Control for SQL Databases</h2>
+
+<p>I attended two sessions that covered similar ground: source-controlling your database (schema and reference data). Ernest Hwang and <a href="http://www.scarydba.com/">Grant Fritchey</a> presented about the use of SQL Source Control to automatically push changes made to the database in SSMS into corresponding source-controlled SQL files.</p>
+
+<p>In "Case Study: Why You Should Source Control Your Database," Ernest focused more on the deployment side, demoing the use of Jenkins to automatically build and deploy database changes when they are checked in. I was surprised that the build configuration required a good bit of hand-crafted MSBuild XML that used the Exec task to shell out to SQL Compare to deploy the database and run tests. I have found Exec to be pretty brittle for this kind of thing, because it introduces install and path dependencies on the build server. I found some <a href="http://weblogs.asp.net/plip/archive/2006/10/04/Red-Gate-MSBuild-Tasks.aspx">MSBuild Tasks</a>, posted by Phil Winstanley, that use the SQL Compare API - this could be a more reliable solution.</p>
+
+<p>Grant Frichey's talk was titled "A Sandbox Development Process." He focused on the change-management side of database source control, presenting the use of SQL Virtual Restore to start from a (possibly scrubbed) production database, mapping it to a source-controlled schema, and then making "sandboxed" changes in a local development environment. SQL Virtual Restore looks like an awesome solution for working with real data while avoiding copying massive data files. A single full backup can exist in a shared location and be restored into a local database backed by small "virtual" vmdf and vldf files. Grant was my favorite speaker of the day - his style is humorous and engaging, and he's obviously got a ton of experience to back up his advice.</p>
+
+<h2>Business Intelligence</h2>
+
+<p>The duo of Noemi Moreno and Tom Austin presented "Social Media, Business Intelligence, and Bridging the SSMS-VS Divide." The talk used an interesting BI example to demonstrate the use of SQL Source Control (in Management Studio) and SQL Connect (in Visual Studio) by different developers to both evolve the same database schema. The integration looked pretty smooth, although the Visual Studio scenario seemed to involve a fair bit of magic behind the scenes that could be difficult to troubleshoot if things go south.</p>
+
+<p>The application itself was cool, it involved an SSIS package that integrated data from an OLTP database and the Twitter API into a single SSAS cube which was then exported to Google Fusion Tables for a map visualization. I really like composing together several small implementations into a single solution, using the right tool for each part of the job. SSIS makes me queasy though.</p>
+
+<h2>T-SQL Unit Testing</h2>
+
+<p>The final session that I attended was "Thwarting Database Defects" (notice the play on "TDD?"). <a href="http://www.sqlity.net/">Sebastian Meine</a> and <a href="http://www.curiouslycorrect.com/">Dennis Lloyd Jr</a> presented about <a href="http://tsqlt.org">tSQLt</a>, a T-SQL unit testing framework. Unit testing of the database is not something that I have ever done directly - usually the closest we get is testing against our repositories.</p>
+
+<p>The capabilities of the framework are very impressive. Every unit test runs in a transaction that is rolled back after the test executes, forcing you to completely isolate your tests (no "this one has to run before that one"), and guaranteeing a consistent state before each test run. It's driven by a set of stored procedures in a "tSQLt" schema that you create in your database itself, and provides the ability to mock out stored procs and even tables, and to assert about the expected results. Your tests themselves are a set of stored procedures under test-unit-specific schemas. The only drawback, in my opinion, is that the framework and unit tests must be created in the database that is being tested. Given the day's theme of source-controlling your database, this creates the need to ensure the unit tests don't make their way into production.</p>
+
+<h2>Conclusion</h2>
+
+<p>This was a worthwhile event, the pacing and organization were perfectly executed, the food was good, and plenty of Red-Gaters were available to talk between the sessions. I've got lots of inspiration to take back to work and turn into better-quality databases!</p>
+]]></content>
+  </entry>
+  
+</feed>

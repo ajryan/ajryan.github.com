@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: testing | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/testing/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fake reCAPTCHA Verification Service]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/08/26/fake-recaptcha-verification-service/"/>
+    <updated>2012-08-26T03:05:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/08/26/fake-recaptcha-verification-service</id>
+    <content type="html"><![CDATA[<p>When testing a website that uses the reCAPTCHA service, it can be a mighty pain to repeatedly enter the verification code. I created a quick-and-dirty ASP.NET MVC site that "fakes" the Google api-verify.recaptcha.net service to allow quick testing.<!--more--></p>
+
+<h2>Installation</h2>
+
+<ol>
+<li><p>Clone my RecaptchaFake repository from <code>http://github.com/ajryan/RecaptchaFake</code>, build it, and serve it at <strong><code>http://localhost:80/verify</code></strong> using IIS or IIS Express.</p></li>
+<li><p>Edit your hosts file (<code>c:\windows\system32\drivers\etc\hosts</code> - run Notepad as Administrator for permission to save the file). Add the following entry:</p></li>
+</ol>
+
+
+<pre>
+127.0.0.1    api-verify.recaptcha.net
+</pre>
+
+
+<h2>Use</h2>
+
+<p>With the site served as described above, simply enter <code>true</code> or <code>false</code> in the reCAPTCHA challenge textbox and the fake service will reply with the same. Enter something different and the service will fall back on the CaptchaResult appSettings value in Web.config.</p>
+]]></content>
+  </entry>
+  
+</feed>

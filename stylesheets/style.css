@@ -1,0 +1,447 @@
+/*
+ * HTML5 Boilerplate
+ */
+/* =============================================================================
+   HTML5 element display
+   ========================================================================== */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio[controls], canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+html { font-size: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body { margin: 0; font-size: 13px; line-height: 1.231; }
+body, button, input, select, textarea { font-family: sans-serif; color: #222; }
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0; }
+
+/* =============================================================================
+   Typography
+   ========================================================================== */
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+blockquote { margin: 1em 40px; }
+dfn { font-style: italic; }
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+ins { background: #ff9; color: #000; text-decoration: none; }
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+pre, code, kbd, samp { font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+small { font-size: 85%; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+dd { margin: 0 0 0 40px; }
+nav ul, nav ol { list-style: none; margin: 0; padding: 0; }
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+img { border: 0; -ms-interpolation-mode: bicubic; }
+svg:not(:root) { overflow: hidden; }
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+figure { margin: 0; }
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+form { margin: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+legend { border: 0; *margin-left: -7px; padding: 0; }
+label { cursor: pointer; }
+button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+button, input { line-height: normal; *overflow: visible; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+input[type="search"] { -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* =============================================================================
+   Primary styles
+   Author: Aidan Ryan
+   ========================================================================== */
+
+.section ol, ul {
+  list-style: none;
+  padding: 0;
+}
+.section:after,
+.blog:after,
+.about:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* Base */
+
+body {
+  background: #F1F7E2;
+  color: #202B30;
+  font: normal 100%/1.5 Calibri, Candara, Segoe, "Segoe UI", Optima, Verdana, Arial, sans-serif;
+}
+a, a:visited {
+  color: #438B99;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover,
+a:focus {
+  color: #346A75;
+  text-decoration: none;
+}
+abbr,
+acronym {
+  cursor: help;
+}
+input.text,
+textarea {
+  border: 1px solid #7C7C7C;
+  border-color: #7C7C7C #7C7C7C #C3C3C3 #C3C3C3;
+}
+img {
+  max-width: 100%;
+}
+hr,
+.skip {
+  left: -1000em;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+dd {
+  margin: 10px 0 0 5px;
+}
+
+/* Layout */
+
+.inner {
+  margin: 0 auto;
+  width: 90%;
+}
+
+/* Header */
+
+.header {
+  margin-top: -22px;
+}
+.header p {
+  float: left;
+  width: 16.6666667%;
+  margin: 40px 3.8888% 0px 2.3333%;
+}
+.header img {
+  display: block;
+  left: 5px;
+  position: relative;
+  top: -5px;
+}
+h1 {
+  color: #F1F7E2;
+  background-color: #202B30;
+  padding: 25px 0 14px 5px;
+  height: 60px;
+  margin-bottom: 0;
+  text-shadow: 1px 1px 0.2em #000;
+}
+
+/* About */
+
+.about {
+  background-color: #74C0CF;
+  color: #2E2726;
+  line-height: 1.625;
+  margin-bottom: 1.5em;
+}
+.about div {
+  padding-right: 1.77777778%;
+  padding-left: 18.3333333%;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  margin-bottom: 1em;
+}
+.about b {
+  font-size: 1.3125em;
+  line-height: 1.23809523809523809523;
+  font-weight: normal;
+}
+.about a {
+  color: #F1F7E2;
+}
+
+/* Content */
+
+.content {
+  margin: 0 auto;
+  width: 96.666666666666666666%;
+  font-size: 1.0em;
+  line-height: 1.24;
+  margin-bottom: 2em;
+}
+.content .section {
+  float: left;
+  margin-right: 1.14942529%;
+  width: 32.537931%;
+}
+h2 {
+  background: #74C0CF;
+  color: #202B30;
+  font: normal 1.3em/1.0 Calibri, Candara, Segoe, "Segoe UI", Optima, Verdana, Arial, sans-serif;
+  letter-spacing: 0.275em;
+  margin-bottom: 15px;
+  padding: 0.55em 10px;
+  text-shadow: 1px 1px 0.2em #44A0BF;
+}
+.content li {
+  padding: 0 10px 14px 0;
+  margin-bottom: 10px;
+}
+
+/* Blog */
+
+div.blog {
+  margin-bottom: 0;
+  margin-right: 1.14942529%;
+  float: left;
+  width: 65.0758%;
+}
+.blog a {
+  font-weight: bold;
+  text-decoration: none;
+}
+  .blog a.readon {
+    text-decoration: none;
+    font-size: small;
+    font-weight: normal;
+  }
+.blog dd{
+  padding-bottom: 1.5em;
+}
+
+/* JobVite */
+
+#jobvite {
+  position: relative;
+}
+#jobvite h2 {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+#jobvite-box {
+  overflow:auto;
+  overflow-x:hidden;
+  padding-bottom: 1.5em;
+  margin-top: 75px;
+}
+div.jobvite-job {
+    border-bottom: 1px solid #cdcdcd;
+    padding: 0.5em 0 0.5em 0;
+    margin-bottom: 0.5em;
+}
+span.jobvite-jobtitle {
+    display: block;
+}
+span.jobvite-joblocation {
+    display: block;
+    font-style: italic;
+    margin-bottom: 0.25em;
+}
+span.jobvite-jobdescription {
+    font-size: 1em;
+}
+span.jobvite-jobapply {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+/* Projects */
+
+ul.projects {
+  padding: 0;
+}
+.content li.projects {
+  margin: 0;
+  padding: 0;
+}
+.projects dt {
+  font-weight: bold;
+}
+.projects dt,
+.projects dd {
+  margin: 0;
+}
+
+/* Contact */
+
+.content div.contact {
+  margin-right: 0;
+}
+.contact p {
+  padding: 0 10px;
+  margin-bottom: 1em;
+}
+
+/* Now Playing */
+
+#nowplaying 
+{
+    font-size: 0.80em;
+    background-color: #404B50;
+    color: #D1D7C2;
+    padding: 10px;
+}
+
+#nowplaying a {
+    color: #A1B7C2;
+}
+
+/* Footer */
+
+.footer {
+  color: #F1F7E2;
+  background-color: #202B30;
+  padding: 20px 0 20px 0;
+  font-size: 0.75em;
+  text-align: right;
+}
+.footer p {
+  padding-right: 20px;
+}
+
+/* =============================================================================
+   Non-semantic helper classes
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */ 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/* =============================================================================
+   Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media (max-width: 700px) {
+  body {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+  #site {
+    background: none;
+  }
+  .header {
+    background-color: #202B30;
+    padding: 15px 0;
+  }
+  h1 {
+    background-position: 0 0;
+    padding: 15px 0 0 0;
+    margin: 0 auto;
+    width: 281px;
+  }
+  .inner {
+    width: 100%;
+  }
+  .header p {
+    position: absolute;
+    left: -1000em;
+  }
+  .about div {
+    padding: 15px 10px 1px;
+    padding-left: 2.33333%;
+  }
+  .content .section,
+  .content .blog {
+    float: none;
+    width: auto;
+    margin: 0 0 2em;
+  }
+  li.project {
+    clear: left;
+    width: auto;
+  }
+  li.project img {
+    float: left;
+  }
+  li.project dd {
+    background: none;
+    border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    position: static;
+    width: auto;
+  }
+}
+@media (max-width: 950px) {
+  .header p {
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 5px;
+  }
+}
+@media (min-width: 1150px) {
+  .about div {
+    font-size: 1.15em;
+    line-height: 1.8;
+    padding-top: 20px;
+  }
+}
+@media (min-width: 1300px) {
+  .about div {
+    font-size: 1.3em;
+    padding-top: 25px;
+  }
+}

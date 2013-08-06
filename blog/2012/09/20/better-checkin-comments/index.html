@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Better checkin comments - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="Good source control checkin (commit) comments can be a major time-saver. It&#8217;s important to remember that your checkin comments have a large &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Better Checkin Comments</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-20T09:39:00-07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Good source control checkin (commit) comments can be a major time-saver. It&#8217;s important to remember that your checkin comments have a large audience and a long lifetime.<!--more--></p>
+
+<p>I rely on email alerts to get a quick overview of the work accomplished by our offshore team overnight. I want to get a feel for the volume of work accomplished and to identify any risky changes that should be reviewed right away. Quality comments make the difference between a glance through subject lines versus opening diffs to understand the nature of the changes.</p>
+
+<p>The other activity greatly affected by comment quality is browsing source control history to locate the origin of a change. When I see a long list of &#8220;updated,&#8221; &#8220;fixed,&#8221; &#8220;changes,&#8221; I know I&#8217;m in for an arduous hunt.</p>
+
+<h2>Terrible comments:</h2>
+
+<ul>
+<li>Updated</li>
+<li>Changed</li>
+<li>Fixed</li>
+<li>Updates</li>
+<li>Checkin</li>
+</ul>
+
+
+<p>Terrible comments don&#8217;t explain anything at all. Obviously you updated, changed, or fixed something. And you <em>really</em> obviously checked in!</p>
+
+<h2>Bad comments:</h2>
+
+<ul>
+<li>Updated MyClass</li>
+<li>Fixed Bug 5598</li>
+<li>Changes to authentication</li>
+</ul>
+
+
+<p>Bad commenters tend to explain where or why they made changes, but not both. The &#8220;how&#8221; is usually completely missing.</p>
+
+<h2>Good comments:</h2>
+
+<ul>
+<li>Bug 5598 - locking to fix race condition on settings initialization in MyClass</li>
+<li>User Story 3355 - implement Save in Widget class</li>
+</ul>
+
+
+<p>Good comments have two to three components:</p>
+
+<ol>
+<li>Why - The reason the change was made, e.g. the Bug or Story number.</li>
+<li>Where - The location of the change, usually a class or module name.</li>
+<li>How - Required for Bug fixes. Explain the way the change solves the Bug.</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-20T09:39:00-07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/source-control/'>source control</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/06/jquery-plugin-jobvitebox/" title="Previous Post: jQuery Plugin: JobViteBox">&laquo; jQuery Plugin: JobViteBox</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/09/24/sublime-tfs-plugin/" title="Next Post: Sublime TFS plugin">Sublime TFS plugin &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

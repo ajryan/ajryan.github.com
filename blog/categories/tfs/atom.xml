@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tfs | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/tfs/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Windows Store (WinRT) TFS Work Item Browser]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/"/>
+    <updated>2013-02-04T13:55:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser</id>
+    <content type="html"><![CDATA[<p>It's time to dive into Windows Store application development. I've developed several tools for the Team Foundation Server (TFS) ecosystem, so I think an appropriate first project that will intersect my existing skill set would be a TFS Work Item browser.<!--more--></p>
+
+<h2>The Plan</h2>
+
+<p><img class="right" src="/images/tfsworkitems_start_icon.png" title="TFS Work Items start screen icon" alt="TFS Work Items start screen icon"></p>
+
+<p>The app will be a simple work item browser. After entering your TFS server connection information, you'll be presented with a list of Team Projects. Select a Team Project and browse through Work Items. This will allow me to explore navigation, paging, presentation, and other new idioms in the WinRT platform.</p>
+
+<p>There is an interesting wrinkle here: the TFS API client assemblies are not usable from WinRT. A brief attempt at hitting the TFS ASMX services directly proved too frustrating to waste time on - after all, the goal is to push my Windows Store app skills. This led me to the decision to host a TFS proxy on <a href="http://appharbor.com">AppHarbor</a> that would provide a simple ASP.NET Web API endpoint for retrieving Work Items, which should be simple to access from WinRT. Another option for proxying to TFS could have been the <a href="http://blogs.msdn.com/b/briankel/archive/2013/01/07/odata-service-for-team-foundation-server-v2.aspx">OData Service for Team Foundation Server</a>, except that it is configured to connect only to a single server. I want my app's users to be able to connect an arbitrary TFS server, which would require them to set up the OData service themselves. I opted instead to stand up a small service that allows connection to any TFS server and provides just enough functions for my app.</p>
+
+<p>You can find the source for the <a href="http://github.com/ajryan/TfsWorkItems">TfsWorkItems</a> work item browser and <a href="http://github.com/ajryan/TfsProxy">TfsProxy</a> API proxy at my <a href="http://github.com/ajryan">Github profile</a>.</p>
+
+<p>The app itself is available for testing in this <a href="/assets/TfsWorkItems_1.0.0.0_AnyCPU_Test.zip">ZIP archive</a>. Extract, and then run the <code>Add-AppDevPackage.ps1</code> PowerShell script to install the app.</p>
+
+<h2>Web API Proxy</h2>
+
+<p>As described above, in order to get to the TFS data from WinRT, I will stand up a simple Web API service with methods for retrieving Team Projects and Work Items. I created a Web API project and added controllers named <code>ProjectsController</code> and <code>WorkItemsController</code>. Along the way, I am using the handy <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm">Postman</a> REST Client extension for Chrome to hit my service methods as I build them out. Fiddler or curl would be just as effective.</p>
+
+<h3>TFS Connection</h3>
+
+<p>The first thing I need is a connection to TFS - this requires a TFS URI, username, and password. Both of my controllers will require a connection, so I will compose this dependency to avoid cluttering all of the API calls with the TFS connection information. This will be implemented via an action filter that provides a TFS Connection in the current HttpContext.</p>
+
+<p>My <code>TfsBasicAuthenticationAttribute</code> action filter passes the request headers to a <code>UserDataPrincipal</code> (<code>IPrincipal</code>) that provides a factory method named <code>InitFromHeaders</code>. This method handles the parsing of the connection information from the request headers. If no principal is returned, or if connecting to TFS with the given connection information fails, an HTTP 401 Unauthorized response is returned. When a connection issue occurs, the specific reason for failure is provided in the response content.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p><blockquote><p></p></p><p><p>Note that in the SetUnauthorizedResponse method, I am adding the WWW-Authenticate header with the realm set to the TFS URL. Responding with a combination of HTTP 401 and this header is the standard for negotiating Basic Authentication. The WinJS.xhr wrapper for XMLHttpRequest handles this negotiation by automatically prompting for username and password in a modal popup, and then re-issuing the request with the Authorization header correctly encoded for Basic Authentication.</p></p><p><p></p></blockquote></p>
+
+<p>The <code>UserDataPrincipal</code> class used here implements <code>IPrincipal</code> and in its <code>InitFromHeaders</code> method, extracts the username, password, and TFS URL from the HTTP headers. The username and password are retrieved from the HTTP Authorization header using the Basic Authentication standard, and the TFS URL is expected in a separate HTTP header named TfsUrl. Upon authenticating with the TFS Configuration Server, its instance is stored in the current HTTP context. The <code>UserDataPrincipal</code> class also supplies an <code>ICredentialsProvider</code> to the <code>TfsConfigurationServer</code> constructor, which is the interface for providing the domain credentials.</p>
+
+<h3>Retrieving the Team Projects list</h3>
+
+<p>After applying the <code>TfsBasicAuthorization</code> attribute to the <code>ProjectsController</code>, I have access to the <code>TfsConfigurationServer</code> for retrieving information about Team Projects on the server. The highest level of organization within Team Foundation Server is a "Project Collection" that contains one or more Team Projects. Project Collections are accessed by by querying the configuration server's <code>CatalogNode</code> for children with resource type <code>ProjectCollection</code>. For each Team Project Collection node, I get its <code>WorkItemStore</code> service and iterate its <code>Projects</code> collection looking for Team Projects where the authorized user has Work Item read rights. This method returns a list of <code>TeamProjectInfo</code> data transfer objects. Note that for each Team Project, I am including a list of the available Work Item Types. This will be leveraged for filtering in the app.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<h3>Retrieving a Work Items list</h3>
+
+<p>When the app user selects a Team Project, we want to display a list of Work Items in the project. This is implemented in the <code>WorkItemsController</code> on the Web API proxy service. The <code>Get</code> method requires the <code>collectionId</code> and <code>projectName</code> parameters, and returns a page of 10 work items, in the form of a <code>WorkItemInfo</code> data transfer object. The optional <code>page</code> parameter allows retrieving a particular page of work items, and the optional <code>workItemType</code> parameter allows filtering by work item type (e.g. Bug, Requirement, Task, etc).</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>The <code>WorkItemStore.Query</code> method returns a late-bound <code>IEnumerable</code> that allows the use of <code>Skip</code> and <code>Take</code> for efficient paging. The <code>WorkItemInfoBuilder</code> helper class takes care of mapping the TFS <code>WorkItem</code> class to the <code>WorkItemInfo</code> data transfer object.</p>
+
+<h2>The Windows Store App</h2>
+
+<p><img class="left" src="/images/split_app.png" title="Split App template" alt="Split App template"></p>
+
+<p>Now that we have a proxy that makes the TFS API accessible from WinRT, it's time to get started on the Windows Store app. I began with the JavaScript Split App project template. This template provides a basic app frame and bootstrapper (default.html / default.js), navigation handler (navigator.js), data provider (data.js), and provides two screens for interaction: an "items" screen and a "split" screen. The data provider is set up to return static, hard-coded sample data.</p>
+
+<p>The home screen of the app is the "items" screen, which would be more appropriately named "groups." The items screen presents a list of top-level item groups as horizontally-scrolling tiles. Selecting an item group tile navigates to the "split" screen that presents a list-detail view of the individual items within the selected group. The overall shape of this data and navigation scheme (groups containing items) meshes well with Team Projects containing lists of Work Items. I plan to break one more level out of the hierarchy: Team Projects are found within Team Project Collections (as seen above), so rather than the simple grid view on the main screen, I will use a grouped grid view with the team projects grouped by collection.</p>
+
+<h3>Connection Preferences</h3>
+
+<p>Before I can replace the sample data with live TFS data, I need to be able to provide the proxy with the URL of the TFS server. This is going to be a per-user setting, so I will add a settings command for displaying a flyout where the user can set the TFS URL. The user will invoke the Charms sidebar, and then click Settings to see my app's settings, which will include this custom command. Adding a settings command is accomplished by handling the <code>WinJS.Application.onsettings</code> event as seen here:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>This adds a command to the settings flyout labeled "Connection" which will navigate to a flyout with the provided href. The markup for a flyout is simple - a top-level <code>div</code> inside the body for the flyout itself, with a back button and a label/input for the TFS URL.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>In the JavaScript code-behind for the flyout, I added event listeners for <code>blur</code> and <code>keyup</code> on the <code>tfsUrl</code> input. The standard for Windows Store apps is for settings to take effect immediately, so when the user focuses away from the input or presses the Enter key, I will immediately store and react to the change.</p>
+
+<h3>Getting the Team Projects list</h3>
+
+<p>Now that the user has a way to specify the TFS URL, I can finally go fetch some live data. Windows Store apps are expected to launch as instantly as possible, so blocking while loading data at startup is not an option &mdash; control needs to be returned to the UI thread right away. In the <code>data.js</code> data provider, I will set up the <code>Data</code> namespace with an empty Team Projects list, then make an asynchronous call to fetch the Team Projects list from the proxy. The UI will bind to the team projects list so that once the asynchronous call returns and the list is filled, the UI binding will trigger it to be updated with the populated list.</p>
+
+<p>Here you can see the definition of the Data namespace. Note that the <code>Windows.ApplicationModel.DesignMode.designModeEnabled</code> property is checked to determine if the code is being invoked in design mode. This is to allow the use of sample data when editing the views in Blend, but to fetch real data from the network when the app is actually running. When in design mode, <code>Data.dataService</code> is set to the static <code>SampleDataService</code> class; when not in design mode, <code>Data.dataService</code> is set to an instance of the <code>WebDataService</code> class. The call to <code>Data.loadProjects()</code> will return immediately to avoid blocking app startup, as you will see in the next code sample.</p>
+
+<p><a id="data"></a>
+Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>The <code>WebDataService</code> class provides access to the proxy for retrieving Team Projects and Work Items. It leverages the <code>WinJS.xhr</code> method to make asynchronous HTTP requests to the proxy. Note that if the <code>Settings.tfsUrl</code> property is not set, no call to the service is made and the list remains empty.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p><img class="right" src="/images/xhr_auth.png" title="WinJS.xhr authentication" alt="WinJS.xhr authentication"></p>
+
+<p>The following sequence occurs when making the request to the proxy:</p>
+
+<ul>
+<li>WinJS.xhr makes the initial GET request to /api/projects with no authentication information</li>
+<li>The custom Web API ActionFilter responds with HTTP 401 and the WWW-Authenticate header</li>
+<li>WinRT recognizes the Basic auth negotiation, prompts for credentials, and retries the request</li>
+<li>For the remainder of the app session, WinRT remembers the entered credentials and includes them in future requests to the same domain</li>
+</ul>
+
+
+<p>Once the request is successfully completed, the JSON response is parsed and the <code>TeamProjectInfo</code> records are pushed into the list, triggering a data-binding refresh.</p>
+
+<h3>Displaying the Team Projects list</h3>
+
+<p>Note in the <a href="#data">Data namespace</a> above, the <code>groupedProjects</code> property is provided. This is a grouped view of the Team Projects, with the Team Project Collection name used as the group key. In the items page, I made some modifications so that Team Projects would be displayed in groups by their collection. I also simplified the item template markup to simply display the Team Project name.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>There is not much code at all in the codebehind for this page, simply setting up the data binding and hooking the <code>oniteminvoked</code> event to trigger navigation to the Work Item list for the selected item. Because the ListView layout type has been set to <code>WinJS.UI.GridLayout</code> in the markup, the items in the list are automatically displayed in groups when the <code>groupDataSource</code> of the ListView is set.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>So, putting it all together, here's what the app's home screen looks like:</p>
+
+<p><img src="/images/items.png" title="Team Projects grouped display" alt="Team Projects grouped display"></p>
+
+<h3>Getting and Displaying Work Items</h3>
+
+<p>Selecting a Team Project on the items screen navigates to the split screen, with the <code>project</code> property of the options parameter set to the selected project. This is transformed by the framework into the arguments to the <code>ready</code> function of the split page. The split page has a lot more functionality than the items page -- it needs to support:</p>
+
+<ul>
+<li>Selection of a work item to display its details</li>
+<li>Browsing to the next page of work items (a page of 10 at a time is returned by the proxy)</li>
+<li>Browsing to the preview page of work items</li>
+<li>Filtering the list of work items by type (e.g. Bug, Requirement, Task, etc.)</li>
+</ul>
+
+
+<p>The <code>ready</code> function takes care of binding the App Bar commands, filling the filtering select control with work item types, and initiating the fetch of Work Items from the proxy.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>The <code>_getWorkItems</code> function is triggered when the view is first loaded, as well as when a different page or filter is requested. It passes the parameters for page number and work item type to the proxy, and then fills the data-bound work item list with the response. The work item list and detail sections are faded out while processing. Code in the <code>default.js</code> bootstrapper hooks to the <code>Data</code> namespace's processing event and shows an indeterminate progress bar and status message when the event is raised. By fading out the primary sections, we allow the progress bar to be easily seen.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>Note the use of the <code>_isSingleColumn</code> utility function - depending on the orientation or snapped state of the app, the view may be filled with the article details - in that case, we immediately load the current article details after the work items are retrieved; when in full landscape view, we set the selection in the list view knowing that our <code>_selectionChanged</code> handler will be triggered for loading the article.</p>
+
+<p><img src="/images/split.png" title="Work Items display" alt="Work Items display"></p>
+
+<p>The markup for the split page provides formatting for the work item list and detail view. It is not heavily modified from the Split App template, although the item images have been removed and additional binding fields have been added for the most important Work Item properties. At the bottom of the display area, a ListView is used to display a generic list of field name-value pairs - this is because work item templates can be heavily customized, and it is not possible to anticipate the names of the fields a user could define.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>The <code>split.html</code> markup also provides the App Bar for the page (defining the page and filter commands) as well as the flyout that is displayed when the filter command is invoked. The flyout simply contains a <code>label</code> and <code>select</code> list that is populated (as seen above) with the work item types available in the current project.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>So, there you have it - a (very simple) TFS Work Item browser. This was a great learning exercise: it pushed my JavaScript skills and was a nice tour of some of the common features of the platform. While I'm happy with the insights I've gained into WinRT and with this app as a sample, I think it could take a more dynamic approach to browsing and viewing work items. The work item detail display does not seem to me to conform to the Windows Store design guidelines. I would like to consult with some of my UX colleagues for ideas about how to present the work item details in a way that is natural to the platform.</p>
+
+<h3>Future Plans</h3>
+
+<p>Here are some other potential ways to extend the app in the future</p>
+
+<ul>
+<li>Work Item Queries: returning a list of work items sorted ascending by ID is not very useful - most TFS users access work items using pre-defined work item queries.</li>
+<li>Content URIs: handle the vsts content URI for loading an individual work item.</li>
+<li>Leverage the Work Item Type definition to determine (and possibly reflect the layout definition of) the important custom work item fields.</li>
+<li>Display the Work Item details in a format more appropriate to a Windows Store app.</li>
+<li>Search, Sharing, and Print contracts.</li>
+<li>Allow simple modification actions, like assignment and state change; or, allow full editing.</li>
+</ul>
+
+
+<h3>Miscellaneous Tips</h3>
+
+<p>I ran into some issues along the way that don't fit right in with the narrative above, but are worth sharing.</p>
+
+<h4>Tip 1: Secure XHR against IIS</h4>
+
+<p>Windows Store apps require all HTTPS server certificates to be trusted. I hit this message when attempting to use <code>WinJS.xhr</code> against my local IIS Express-hosted service:</p>
+
+<p><code>SCRIPT7002: XMLHttpRequest: Network Error 0x800c0019, Security certificate required to access this resource is invalid.</code></p>
+
+<p>I found a helpful <a href="http://robrich.org/archive/2012/06/04/Moving-to-IIS-Express-and-https.aspx">blog post</a> (see Step 7) that described how to install the IIS Express certificate in the local store so that it is trusted by the Windows Store app. In the deployed environment, this won't be an issue, since AppHarbor supplies an HTTPS certificate from an already-trusted authority.</p>
+
+<h4>Tip 2: Fiddler with WinRT apps</h4>
+
+<p>By default, WinRT security prevents Fiddler from intercepting network traffic from Windows Store apps. This <a href="http://blogs.msdn.com/b/fiddler/archive/2011/12/10/fiddler-windows-8-apps-enable-loopback-network-isolation-exemption.aspx">post</a> explained how to work around the issue.</p>
+
+<h4>Tip 3: Dynamic content in InnerHTML</h4>
+
+<p>The Description and History work item fields will often contain HTML content. WinRT will throw a security error if you attempt to set the <code>innerHTML</code> property of an element to a string with certain attributes set. This <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx">article</a> explains techniques for dealing with potentially dangerous content. The particular technique that I used was the <code>window.toStaticHTML</code> method for cleaning text before assigning it to an <code>innerHTML</code> property.</p>
+
+<h4>Tip 4: Deploying to and Debugging on Surface</h4>
+
+<p>To auto-deploy and test the app on my Microsoft Surface, directly from Visual Studio 2012, I followed the steps provided in this <a href="http://elybob.wordpress.com/2012/12/19/step-by-step-to-deploying-app-to-surface/">article</a>. My colleague Rocky Lhotka also has a good <a href="http://www.lhotka.net/weblog/TestingAWinRTAppOnASurfaceRT.aspx">article</a> about packaging an app with a PowerShell script to allow distributing an app package for short-term side-loaded testing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sublime TFS plugin]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin/"/>
+    <updated>2012-09-24T09:38:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin</id>
+    <content type="html"><![CDATA[<p>Here's a nice plugin for Sublime Text: <a href="https://bitbucket.org/CDuke/sublime-tfs/wiki/Home">Sublime TFS</a>, by Denis Kulikov. It provides TFS integration right in the editor.<!--more--></p>
+
+<p>Sublime TFS will auto-check-out modified files (a must since files in TFS are readonly until checked out), and provides commands for Add, Delete, History, Check in, Check out, Undo, Get latest, and Compare with latest, available when the current file is under version control (except Add, obviously).</p>
+
+<p>I made a small contribution to the project, adding support for the TFS Power Tools "Annotate" feature (commonly known as "blame"). I have one major complaint about the Annotate output from TFPT, though: you can't open a changeset view by clicking a changeset number. I'm considering using the <code>/noprompt</code> option and dumping the Annotate output into a Sublime Text buffer, then providing the ability to open a changeset view from the buffer. Sounds like fun!</p>
+]]></content>
+  </entry>
+  
+</feed>

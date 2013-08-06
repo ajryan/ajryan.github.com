@@ -1,0 +1,361 @@
+/*header, #main { background-color: white; }*/
+
+h1 { height: auto; }
+
+#leftcolumn {
+    float:left;
+    width: 300px;
+    margin-left: -100%;
+}
+
+nav {
+  margin: 10px 10px 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    background-color: #202B30;
+}
+
+nav li {
+    margin: 0;
+    color: #F5FAF2;
+    background-color: #202B30;
+}
+
+nav .selected { 
+  color: #2E2726;
+  background: #74C0CF;
+  text-shadow: 1px 1px 0.2em #44A0BF;
+}
+nav .selected a { color: #2E2726; }
+nav .selected a:hover { color: #2E2726; }
+nav .selected a:visited { color: #2E2726; }
+
+nav li a {
+    display: block;
+    padding: 4px 3px 4px 5px;
+    width: 282px;
+    text-decoration: none !important;
+    font-weight: 500;
+    font-size: 18px;
+    color: #F5FAF2;
+    margin-bottom: 2px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+nav li a:visited { color: #F5FAF2; }
+nav li a:hover { color: #74C0CF; }
+
+#content {
+    float: left;
+    width: 100%;
+}
+
+#main {
+  margin-left: 300px;
+  margin-top: 10px;
+}
+
+#main h2 { 
+    margin-top: 0;
+    letter-spacing: 0;
+    line-height: 34px;
+    padding: 0px 10px 0px 10px;
+}
+
+#main p { 
+    color: #2E2726; 
+    padding-left: 10px;
+    margin-bottom: 10px; 
+}
+
+#main strong { font-size: 18px; }
+
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.hidden { display: none; visibility: hidden; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+/*
+ * Media queries
+*/
+@media (max-width: 700px) {
+  h1 {
+    background-position: 0 0;
+    padding: 15px 0 0 10px;
+    margin: 0 auto;
+    width: 100% !important;
+  }
+}
+
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+.spin  {
+    -webkit-transform: rotate(360deg);
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count:  1;
+}
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+      to {-webkit-transform: rotate(360deg);}
+}
+
+/* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
+Built by David Kaneda and maintained by Jonathan Stark.
+*/
+.in, .out {
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 350ms;
+}
+
+.slide.in {
+    -webkit-transform: translateX(0);
+    -webkit-animation-name: slideinfromright;
+}
+
+.slide.out {
+    -webkit-transform: translateX(-100%);
+    -webkit-animation-name: slideouttoright;
+}
+
+.slide.in.reverse {
+    -webkit-transform: translateX(0);
+    -webkit-animation-name: slideinfromleft;
+}
+
+.slide.out.reverse {
+    -webkit-transform: translateX(100%);
+    -webkit-animation-name: slideouttoleft;
+}
+
+.slideup.in {
+    -webkit-transform: translateY(0);
+    -webkit-animation-name: slideinfrombottom;
+    z-index: 10;
+}
+
+.slideup.out {
+    -webkit-animation-name: dontmove;
+    z-index: 0;
+}
+
+.slideup.out.reverse {
+    -webkit-transform: translateY(100%);
+    z-index: 10;
+    -webkit-animation-name: slideouttobottom;
+}
+
+.slideup.in.reverse {
+    z-index: 0;
+    -webkit-animation-name: dontmove;
+}
+.slidedown.in {
+    -webkit-transform: translateY(0);
+    -webkit-animation-name: slideinfromtop;
+    z-index: 10;
+}
+
+.slidedown.out {
+    -webkit-animation-name: dontmove;
+    z-index: 0;
+}
+
+.slidedown.out.reverse {
+    -webkit-transform: translateY(-100%);
+    z-index: 10;
+    -webkit-animation-name: slideouttotop;
+}
+
+.slidedown.in.reverse {
+    z-index: 0;
+    -webkit-animation-name: dontmove;
+}
+
+@-webkit-keyframes slideinfromright {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@-webkit-keyframes slideinfromleft {
+    from { -webkit-transform: translateX(-100%); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@-webkit-keyframes slideouttoleft {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(-100%); }
+}
+
+@-webkit-keyframes slideouttoright {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(100%); }
+}
+
+
+@-webkit-keyframes slideinfromtop {
+    from { -webkit-transform: translateY(-100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideinfrombottom {
+    from { -webkit-transform: translateY(100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideouttobottom {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(100%); }
+}
+
+@-webkit-keyframes slideouttotop {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(-100%); }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade.in {
+    opacity: 1;
+    z-index: 10;
+    -webkit-animation-name: fadein;
+}
+.fade.out {
+    z-index: 0;
+    -webkit-animation-name: fadeout;
+}
+
+/* The properties in this rule are only necessary for the 'flip' transition.
+ * We need specify the perspective to create a projection matrix. This will add
+ * some depth as the element flips. The depth number represents the distance of
+ * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
+ * value.
+ */
+.viewport-flip {
+    -webkit-perspective: 1000;
+    position: absolute;
+}
+
+.ui-mobile-viewport-transitioning,
+.ui-mobile-viewport-transitioning .ui-page {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.flip {
+    -webkit-animation-duration: .65s;
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+}
+
+.flip.in {
+    -webkit-transform: rotateY(0) scale(1);
+    -webkit-animation-name: flipinfromleft;
+}
+
+.flip.out {
+    -webkit-transform: rotateY(-180deg) scale(.8);
+    -webkit-animation-name: flipouttoleft;
+}
+
+/* Shake it all about */
+
+.flip.in.reverse {
+    -webkit-transform: rotateY(0) scale(1);
+    -webkit-animation-name: flipinfromright;
+}
+
+.flip.out.reverse {
+    -webkit-transform: rotateY(180deg) scale(.8);
+    -webkit-animation-name: flipouttoright;
+}
+
+@-webkit-keyframes flipinfromright {
+    from { -webkit-transform: rotateY(-180deg) scale(.8); }
+    to { -webkit-transform: rotateY(0) scale(1); }
+}
+
+@-webkit-keyframes flipinfromleft {
+    from { -webkit-transform: rotateY(180deg) scale(.8); }
+    to { -webkit-transform: rotateY(0) scale(1); }
+}
+
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0) scale(1); }
+    to { -webkit-transform: rotateY(-180deg) scale(.8); }
+}
+
+@-webkit-keyframes flipouttoright {
+    from { -webkit-transform: rotateY(0) scale(1); }
+    to { -webkit-transform: rotateY(180deg) scale(.8); }
+}
+
+
+/* Hackish, but reliable. */
+
+@-webkit-keyframes dontmove {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+.pop {
+    -webkit-transform-origin: 50% 50%;
+}
+
+.pop.in {
+    -webkit-transform: scale(1);
+    opacity: 1;
+    -webkit-animation-name: popin;
+    z-index: 10;
+}
+
+.pop.out.reverse {
+    -webkit-transform: scale(.2);
+    opacity: 0;
+    -webkit-animation-name: popout;
+    z-index: 10;
+}
+
+.pop.in.reverse {
+    z-index: 0;
+    -webkit-animation-name: dontmove;
+}
+
+@-webkit-keyframes popin {
+    from {
+        -webkit-transform: scale(.2);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes popout {
+    from {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: scale(.2);
+        opacity: 0;
+    }
+}

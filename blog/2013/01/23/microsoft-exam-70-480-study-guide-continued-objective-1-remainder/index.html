@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft Exam 70-480 study guide continued: Objective 1 remainder - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="Continuing the study guide for Microsoft Exam 70-480. My test date is coming up fast so I need to pick up the pace. I spent a long time on the new &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Microsoft Exam 70-480 Study Guide Continued: Objective 1 Remainder</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T10:43:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Continuing the study guide for Microsoft Exam 70-480. My test date is coming up fast so I need to pick up the pace. I spent a long time on the new HTML5 features, because I have not delved into them in much detail on a project. Most of the remainder of this objective is familiar territory and will have cursory notes.<!--more--></p>
+
+<h2>Implement and Manipulate Document Structures and Objects (24%)</h2>
+
+<h3>Apply styling to HTML elements programmatically</h3>
+
+<p>Much of this material was covered in my <a href="http://ajryan.github.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/">earlier study guide post</a>.</p>
+
+<p>More specifically, after getting a node, you can <code>setAttribute('style', 'value')</code> or access the <code>.style</code> property directly and set specific CSS attributes on it. For example, <code>document.getElementById("container").style.color = "red"</code>. When applying hyphenated properties, drop hyphens as use lowerCamelCase (e.g. backgroundColor). Vendor-prefixed styles are accessed via <code>ms</code>, <code>Moz</code>, <code>O</code>, and <code>webkit</code> OR <code>Webkit</code> followed by the UpperCamelCase property.</p>
+
+<p>With jQuery, it&#8217;s a matter of using the <code>css</code> method to set a CSS property.</p>
+
+<h4>Change the location of an element</h4>
+
+<p>The same prior post gives information about moving an element within the DOM (insertBefore and *Child methods) or with jQuery (after/before/append/prepend).</p>
+
+<p>Position can also be changed by modifying the CSS <code>position</code> and <code>top/right/bottom/left</code> properties (node.style.*).</p>
+
+<h4>Apply a transform</h4>
+
+<p>CSS3 transformations allow translation (lateral movement), rotation, scaling, and skew, in both 2D (broad support) and 3D (much less support). Due to the immaturity of browser support, vendor-specific CSS attributes are required. The relevant 2D transform function values are:</p>
+
+<p><code>matrix, translate[|X|Y], scale[|X|Y], rotate, skew[|X|Y]</code></p>
+
+<p>Transforms are defined in CSS with the <code>transform</code>, <code>transform-origin',</code>transform-style<code>,</code>perspective<code>,</code>perspective-origin<code>, and</code>backface-visibility` attributes.</p>
+
+<p>Internet Explorer 10 supports 3D transforms:</p>
+
+<p><code>matrix3d, translate3d, translateZ, scale3d, scaleZ, rotate[3d|X|Y</code></p>
+
+<p>Other important considerations:</p>
+
+<ul>
+<li><p>Betas of IE10 required the <code>-ms-</code> prefix, but the current release does not.</p></li>
+<li><p>Multiple functions can be chained together in a single transform attribute and are cumulative.</p></li>
+<li><p>The box model and flow of a transformed element are calculated and applied <em>before</em> the transformation is applied - the element occupies its original position in the flow.</p></li>
+<li><p>Transforms can be combined with transitions for interesting animations. The <code>transition</code> attribute should be applied to the element&#8217;s original style. When a new style is applied, either programmatically or via JavaScript, the transition occurs. You can specify <code>all</code> or a particular CSS property to transition. The syntax is <code>transition: property duration timing-function delay, ...</code>. Browser prefixes should be used.</p></li>
+<li><p>Remember this overall objective is about applying styling programmatically: in this case, the vendor-specific properties must be accessed, e.g. <code>div.style.WebkitTransformOrigin = "2px 5px"</code>.</p></li>
+</ul>
+
+
+<h4>Show and hide elements</h4>
+
+<p>Elements can be shown and hidden via the <code>display: none</code> and <code>visibility: hidden</code> CSS properties. The primary difference is that <code>display</code> removes the element from the document flow while <code>visibility</code> makes the element invisible but keeps its space in the flow.</p>
+
+<p>Via native API, use <code>.style.display</code> or <code>.style.visibility</code>. Via jQuery, the <code>.hide()</code> API can be used, which allows the setting of a duration and/or a more complex easing function. Under the covers, jQuery affects the <code>display</code> CSS attribute. When animating, the size of the object is gradually reduced to zero before display is set to none.</p>
+
+<h3>Implement HTML5 APIs.</h3>
+
+<h4>Storage APIs</h4>
+
+<p>Cookies are traditionally used to associate values with a user and retrieve them at a later time, potentially across sessions. When the limitations of cookies are encountered, the storage API is useful.</p>
+
+<ul>
+<li>Cookies are limited by most browsers to 4KB and 300 max count within a domain.</li>
+<li>They must be included in all HTTP requests and responses to the domain; they are stored locally in plain text</li>
+<li>They are domain-wide and do not support multiple application sessions within a browser session.</li>
+</ul>
+
+
+<p>HTML5 Web Storage offers many improvements over cookies:</p>
+
+<ul>
+<li>Purely client side - the data does not need to round-trip, so there is no download time or bandwidth usage.</li>
+<li>No 4KB limitation - IE provides around 10 MB of local and 10 MB of session storage.</li>
+<li>Multi-session - if you use session storage, you can have two separate state storage areas within a single browser session.</li>
+</ul>
+
+
+<p>Working with the Storage API:</p>
+
+<ul>
+<li><p>Check for browser support by checking <code>'localStorage' in window &amp;&amp; window['localStorage'] !=== null</code> (similar for sessionStorage). In the following samples, sessionStorage can be substituted for localStorage.</p></li>
+<li><p>The lifetime of localStorage is persistent across browser sessions; sessionStorage persists only as long as a page/tab is open.</p></li>
+<li><p>The scope of localStorage is within the same linear domain hierarchy (e.g. domain.com, bob.domain.com, and alice.bob.domain.com can access one-another&#8217;s localStorage, but john.domain.com cannot access bob.domain.com localStorage). The scope of sessionStorage is within the current page/tab.</p></li>
+<li><p>There are three ways to store a key/value pair:</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>localStorage.myKey = 'myValue';
+</span><span class='line'>localStorage.setItem('myKey', 'myValue');
+</span><span class='line'>localStorage['myKey'] = 'myValue';</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To get the value of a key:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var value = localStorage.myKey;
+</span><span class='line'>value = localStorage['myKey'];
+</span><span class='line'>value = localStorage.getItem('myKey');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To remove an item from storage:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>localStorage.removeItem('myKey');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To clear all items from storage:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>localStorage.clear();</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Note that only string data may be stored as a value. Any non-string will be stored as a string using standard JavaScript conversion. If you want to preserve an object, <code>JSON.stringify</code> should be used to store and <code>JSON.parse</code> should be used to retrieve.</p></li>
+<li><p>Supported in IE 8, Firefox 3.5, Chrome 4, Safari 4, Opera 10.5, iOS Safari 3.2, Android 2.1.</p></li>
+</ul>
+
+
+<h4>AppCache API</h4>
+
+<p>The AppCache API allows the creation of offline web applications. Its primary functions are:</p>
+
+<ul>
+<li>Client-side cache of pages, images, scripts, style sheets, etc.</li>
+<li>Accessing cached content via standard URIs</li>
+</ul>
+
+
+<p>In order to cache something you need to create a manifest. Following is a sample manifest:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CACHE MANIFEST
+</span><span class='line'># 2013-24-01:v3
+</span><span class='line'>
+</span><span class='line'>CACHE:
+</span><span class='line'># Defines resources to be cached after they are downloaded for the first time
+</span><span class='line'>script/app.js
+</span><span class='line'>css/styles.css
+</span><span class='line'>images/pic1.png
+</span><span class='line'>
+</span><span class='line'>FALLBACK:
+</span><span class='line'># Resources to use when online resources not available, in the form onlineURL cacheURL
+</span><span class='line'># File-for-file
+</span><span class='line'>images/big_pic2.png images/pic2.png
+</span><span class='line'># File-for-path
+</span><span class='line'>images/ images/offline.png
+</span><span class='line'># File-for-wildcard
+</span><span class='line'>*.jpg offline.jpg
+</span><span class='line'>
+</span><span class='line'>NETWORK:
+</span><span class='line'># resources that will never be cached - user must be online
+</span><span class='line'>images/pic3.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Manifest files must be served with the MIME type <code>text/cache-manifest</code>, have CACHE MANIFEST as the very first line, and be UTF-8 encoded.</p>
+
+<p>The manifest is referenced in the <code>html</code> tag.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;html manifest="appcache.manifest"&gt;
+</span><span class='line'>...
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other AppCache notes:</p>
+
+<ul>
+<li><p>Any page that references a manifest is implicitly cached and does not need to be included in the manifest file itself.</p></li>
+<li><p>There are three ways to trigger a client-side cache update:</p>
+
+<ul>
+<li><p>The cache automatically updated when the manifest file changes, so a version comment can be used to trigger an update.</p></li>
+<li><p>The cache is updated programmatically with <code>applicationCache.update()</code> - this still requires that the manifest have changed from the last-downloaded version.</p></li>
+<li><p>The user can manually clear the browser&#8217;s cache of your site.</p></li>
+</ul>
+</li>
+<li><p>Pages served over HTTPS can work offline.</p></li>
+<li><p>The <code>window.applicationCache</code> object provides access to the cache. It has the following useful properties and events:</p>
+
+<ul>
+<li><code>status</code> field: Indicates the current cache status, returned as one of the following appCache members: <code>UNCACHED, IDLE, CHECKING, DOWNLOADING, UPDATEREADY, OBSOLETE</code>\</li>
+<li><code>update</code> function: Trigger an async check of the manifest. Will throw an exception of the page is not cached.</li>
+<li><code>swapCache</code> function: Swap currently ready cache update into the current storage. After swapping in the cache, the page must be reloaded to reflect the changes.</li>
+<li><code>updateReady</code> event: fires when a cache update has been downloaded. In the handler, you can swap the cache and prompt the user to reload if they choose.</li>
+<li><code>error</code> event: fires when the manifest cannot download, changes during its download, returns 404, manifest is OK but page itself fails to download.</li>
+<li><code>progress</code> event: fires as each resource listed in the manifest is fetched</li>
+<li>Several other events: <code>cached</code> (first cache of manifest), <code>checking</code> (manifest update check began), <code>downloading</code> (update was found and resources are being downloaded), <code>noupdate</code> (first manifest download done or checking done and manifest not changed), <code>obsolete</code> (manifest response is 404 or 410)</li>
+</ul>
+</li>
+<li><p>Supported in IE 10, Firefox 16, Chrome 23, Safari 5.1, Opera 12.1, iOS Safari 3.2, Android 2.1.</p></li>
+</ul>
+
+
+<h4>Geolocation API</h4>
+
+<p>The Geolocation API allows you to access geographical location information via JavaScript. It is exposed via the <code>window.navigator.geolocation</code> object.</p>
+
+<p>The following <code>geolocation</code> members are useful:</p>
+
+<ul>
+<li><code>getCurrentPosition(successCallback, errorCallback, options)</code>: Async call to get the current position. The successCallback is called with a <code>Geoposition</code> object, or the errorCallback is called with an <code>error</code> object providing a code like <code>error.PERMISSION_DENIED</code>, <code>error.POSITION_UNAVAILABLE</code>, or <code>error.TIMEOUT</code>. The position object&#8217;s <code>coords</code> member gives latitude, longitude, altitude, heading, speed, and accuracy (in meters) information.  Options can be provided for maximumAge (milliseconds) and enableHighAccuracy (can be affected by permissions).</li>
+<li><code>watchPosition(...)</code>: has the same signature as getCurrentPosition but returns an integer of the <code>watchId</code> which can be used to cancel the watch activity. The successCallback will be called whenever the position changes.</li>
+<li><code>clearWatch(watchId)</code>: stops watching position and will no longer call the callback for the watch set up with the <code>watchPosition</code> that returned <code>watchId</code>.</li>
+</ul>
+
+
+<h3>Establish the scope of objects and variables.</h3>
+
+<h4>Define the lifetime of variables</h4>
+
+<p>All JavaScript objects and variables have scope and lifetime. Some that are provided by the browser have global scope and infinite lifetime, like <code>document</code> and <code>window</code>; other variables have local scope and limited lifetimes.</p>
+
+<p>More lifetime notes:</p>
+
+<ul>
+<li><p>Locally-scoped objects are created and destroyed each time their functions execute.</p></li>
+<li><p>Globally-scoped objects live forever.</p></li>
+<li><p>A function executed in an asynchronous context still has access to the variables from its scope, even if the function that defines its scope has finished executing. This is called a closure.</p></li>
+</ul>
+
+
+<h4>Keep objects out of the global namespace</h4>
+
+<p>Techniques are available to keep variables and functions out of the global namespace:</p>
+
+<ul>
+<li>Always declare variables and functions (hereafter &#8220;objects&#8221;) with the <code>var</code> keyword.</li>
+<li>Always declare objects within the context of a function.</li>
+<li>The above principal is expanded in what is generally referred to as the &#8220;module pattern&#8221;. This refers to the use of an anonymous (key to avoid adding an identifier to the global namespace) Immediately-Invoked Function Expression (IIFE) to define a closure for the scope of the module. All of the following structures work to accomplish this goal.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var x = 5;
+</span><span class='line'>
+</span><span class='line'>(function(){
+</span><span class='line'>  var x = 10;
+</span><span class='line'>}());
+</span><span class='line'>
+</span><span class='line'>(function(){
+</span><span class='line'>  var x = 20;
+</span><span class='line'>})();
+</span><span class='line'>
+</span><span class='line'>(function($){
+</span><span class='line'>  $('#container').text('hi');
+</span><span class='line'>  var x = 30;
+</span><span class='line'>}(jQuery));   // assumes jQuery script already included.
+</span><span class='line'>
+</span><span class='line'>console.log(x); // "5"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Use the “this” keyword to reference an object that fired an event</h4>
+
+<p>The <code>this</code> keyword has some wrinkles in JavaScript. In the classic Object-Oriented model, <code>this</code> always refers to the current object instance. This is not so simple in JavaScript:</p>
+
+<ul>
+<li>In the global scope (outside any function) or when invoked within a globally-scoped function, <code>this</code> refers to the &#8220;global object&#8221;, usually the same as <code>window</code>.</li>
+<li>In the context of a method (function member of an object), <code>this</code> refers to the object.</li>
+<li>In the context of a constructor, <code>this</code> refers to the function object being created.</li>
+<li>In the context of an event handler attached via jQuery&#8217;s <code>on</code>, <code>this</code> refers to the DOM object that triggered the event.</li>
+<li><strong>Key for this objective</strong>: In the context of an event handler attached via <code>addEventListener</code>, <code>attachEvent</code> (IE) - <code>this</code> refers to the object that fired the event.</li>
+</ul>
+
+
+<h4>Scope variables locally and globally</h4>
+
+<p>More scope notes:</p>
+
+<ul>
+<li><p>There are two scopes, global and local. Variables and functions with local scope are declared within a function and are accessible only within the body of that function (this includes nested functions); globally-scoped objects are declared outside a function and are accessible everywhere. There is no such thing as block scope.</p></li>
+<li><p>JavaScript performs variable hoisting - this means that variables are treated as having been declared at the top of the function, regardless of the line where they are actually declared.</p></li>
+<li><p>Special case: a variable named inside a function without the <code>var</code> keyword has global scope, but does not exist until that function is invoked.</p></li>
+</ul>
+
+
+<h3>Create and implement objects and methods</h3>
+
+<h4>Implement native objects</h4>
+
+<p>A native JavaScript object is created as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var myObject = {
+</span><span class='line'>  stringMember: "xyz",
+</span><span class='line'>  intMember: 1,
+</span><span class='line'>  functionMember: function(thing) {
+</span><span class='line'>      console.log(thing);
+</span><span class='line'>  }
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also create a new Object instance and then add members to it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var myObject = new Object();
+</span><span class='line'>myObject.stringMember = "xyz";</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More complex objects can be implemented using function constructors. This allows more control over the accessibility of the members of the object.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var Person = function(firstName, lastName) {
+</span><span class='line'>  var _privateInt = 5;
+</span><span class='line'>  var exports = {
+</span><span class='line'>      firstName: firstName,
+</span><span class='line'>      lastName: lastName
+</span><span class='line'>  }
+</span><span class='line'>  return exports;
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>var alice = new Person("alice", "jones");</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Members of the object can then be accessed, e.g. <code>myObject.intMember = 2</code>.</p>
+
+<h4>Create custom objects and custom properties for native objects using prototypes and functions</h4>
+
+<p>There are several native objects, including:</p>
+
+<p><code>Number, Boolean, String, Array, Date, Math, RegExp</code></p>
+
+<p>A function can be added to an individual instance variable:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var d = new Date();
+</span><span class='line'>d.logIt = function() { console.log(this); };</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A function can be added to the <strong>prototype</strong> of all objects created from the base function. These functions will be accessible on all objects created from that function, even those created before the function was added to the prototype.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var d = new Date();
+</span><span class='line'>if (!Date.prototype.logId) {
+</span><span class='line'>  Date.prototype.logIt = function() { console.log(this); };
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Inherit from an object</h4>
+
+<p>Traditionally, inheritance has been accomplished as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var Building = function(stories) {
+</span><span class='line'>  this.stories = stories;
+</span><span class='line'>  return this;
+</span><span class='line'>};
+</span><span class='line'>Building.prototype.writeStories = function() {console.log(this.stories); };
+</span><span class='line'>
+</span><span class='line'>var House = function(stories, squareFeet) {
+</span><span class='line'>  Building.call(this, stories);
+</span><span class='line'>  this.squareFeet = squareFeet;
+</span><span class='line'>  return this;
+</span><span class='line'>}
+</span><span class='line'>House.prototype = new Building();
+</span><span class='line'>House.prototype.constructor = House;
+</span><span class='line'>House.prototype.dump = function() { console.log(this.stories + " " + this.squareFeet);};
+</span><span class='line'>
+</span><span class='line'>var h = new House(2, 2500);
+</span><span class='line'>h.dump();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inheriting from an object can be accomplished in modern browsers via <code>Object.create(proto)</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var Building = function(stories) {
+</span><span class='line'>  this.stories = stories;
+</span><span class='line'>  return this;
+</span><span class='line'>};
+</span><span class='line'>Building.prototype.writeStories = function() {console.log(this.stories); };
+</span><span class='line'>
+</span><span class='line'>var House = function(stories, squareFeet) {
+</span><span class='line'>  Building.call(this, stories);
+</span><span class='line'>  this.squareFeet = squareFeet;
+</span><span class='line'>  return this;
+</span><span class='line'>}
+</span><span class='line'>House.prototype = Object.create(Building.prototype);
+</span><span class='line'>House.prototype.dump = function() { console.log(this.stories + " " + this.squareFeet);};
+</span><span class='line'>
+</span><span class='line'>var h = new House(3, 3300);
+</span><span class='line'>h.dump();
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Fin.</h1>
+
+<p>This concludes the first of the four objectives - &#8220;Implement and Manipulate Document Structures and Objects&#8221;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T10:43:00-08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/study/'>study</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-media-and-graphics/" title="Previous Post: Microsoft Exam 70-480 study guide continued: Media and Graphics">&laquo; Microsoft Exam 70-480 study guide continued: Media and Graphics</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/01/24/microsoft-exam-70-480-study-guide-implement-program-flow/" title="Next Post: Microsoft Exam 70-480 Study Guide: Implement Program Flow">Microsoft Exam 70-480 Study Guide: Implement Program Flow &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-objective-1-remainder/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

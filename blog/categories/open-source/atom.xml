@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: open source | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/open-source/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Updated WinHaste hastebin client]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/02/08/updated-winhaste-hastebin-client/"/>
+    <updated>2013-02-08T13:17:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/02/08/updated-winhaste-hastebin-client</id>
+    <content type="html"><![CDATA[<p>I just pushed a small update to my <a href="https://github.com/ajryan/WinHaste">WinHaste</a> hastebin client (<a href="http://ajryan-github-downloads.s3.amazonaws.com/WinHaste.exe">binary</a>). <a href="http://hastebin.com/">Hastebin</a> is a cool, minimal, login-free alternative to Pastebin. Now, when a command's output is being piped to WinHaste, the output will be echoed to the console. This is especially handy if you are running an interactive command, so you aren't entering values "blind."<!--more--></p>
+
+<p>WinHaste supports piped or interactive entry - if you enter <code>WinHaste.exe</code> with no arguments, it will read user input from the console until an end-of-file <code>^Z</code> character is entered. In this mode, Windows already writes user input to the console, so echoing within WinHaste would result in doubling every character typed. I ran across a nice technique in <a href="http://stackoverflow.com/a/9712392/1042">this StackOverflow answer</a> for checking whether the current input stream is piped or interactive:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>I navigated into the disassembly of the <code>Console.KeyAvailable</code> (thanks, ReSharper!) found found the following:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>So, I could P/Invoke PeekConsoleInput myself, but this works fine for me!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft Exam 70-480: Programming in HTML5 with JavaScript and CSS3 - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="I am planning to earn the Microsoft Certified Solutions Developer (MCSD): Web Applications certification. The first exam on this track is 70-480: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Microsoft Exam 70-480: Programming in HTML5 With JavaScript and CSS3</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T09:11:00-08:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I am planning to earn the Microsoft Certified Solutions Developer (MCSD): Web Applications certification. The first exam on this track is 70-480: Programming in HTML5 with JavaScript and CSS3. My study notes follow.<!--more--></p>
+
+<h2>Implement and Manipulate Document Structures and Objects (24%)</h2>
+
+<h3>Create the document structure</h3>
+
+<h4>Structure the UI using semantic markup, including for search engines and screen readers</h4>
+
+<ul>
+<li><p>HTML5 introduces several new tags, and does not support some others that were deprecated in HTML 4.0.1.</p></li>
+<li><p>The new tags are:</p></li>
+</ul>
+
+
+<p><code>article, aside, audio,
+bdi,
+canvas, command,
+datalist, details,
+embed,
+figure, figcaption, footer, header, hgroup,
+keygen, mark, meter, nav, output, progress,
+rp, rt, ruby,
+section, source, summary,
+time, track,
+video,
+wbr</code></p>
+
+<ul>
+<li><p>In total there are 30 new tags.</p></li>
+<li><p>The following 12 tags are no longer supported in HTML5. Most of these were deprecated in HTML 4.0.1, with the exception of acronym, big, frame, frameset, noframes, and tt.</p></li>
+</ul>
+
+
+<p><code>acroynm, applet, basefont, big, center, dir, font, frame, frameset, noframes, strike, tt</code></p>
+
+<ul>
+<li><p>The objectives make special mention of the new semantic tags for structure.</p>
+
+<ul>
+<li><p><code>section</code> (block): Grouping of content. Typically will include a heading. W3C: &#8220;A generic section of a document. A thematic grouping of content, typically with a heading.&#8221; Sections usually will appear inside articles, but can be used independently.</p></li>
+<li><p><code>article</code> (block): Individual/independent block of content, such as a blog post or news article. Articles should be able to stand alone, whereas sections may be part of a larger whole. Usually contain sections. May be sub-articles (e.g. comments on blog entry). Should be independently re-distributable, e.g. in syndication.</p></li>
+<li><p><code>nav</code> (block): Navigational feature, usually site-level. Section of a page that links to other pages or parts within the page - a section with navigation links. W3C: &#8220;Not all groups of links need to be in a nav - intended for sections that consist of <em>major</em> navigation blocks. Common for footers to have list of links to policies etc, nav is not appropriate here.&#8221;</p></li>
+<li><p><code>header</code>: Will contain heading content, often will contain nav. Usually site/page-level header. Will include introductory and/or navigational aids. Usually will contain sections H? / HGROUP. Can wrap TOC, search form, logos, etc.</p></li>
+<li><p>footer (block): Will contain foot-note content, like attributions, copyright, etc. Typically site/page-level footer.</p></li>
+<li>aside (block): Content tangentially related to primary content.</li>
+</ul>
+</li>
+<li><p>Some of the new semantic structuring tags have the property of being &#8220;sectioning content,&#8221;&#8221; or being a &#8220;sectioning root.&#8221; This means that the HTML outlining engine will give these nodes special treatment. Sectioning content defines the scope of headings and footers - within an <code>article, aside, nav, section</code> tag, headers are nested within the outline of their parents, regardless of header level. So, <code>&lt;body&gt;&lt;h2&gt;Top&lt;/h2&gt;&lt;section&gt;&lt;h1&gt;Inner&lt;/h1&gt;&lt;/section&gt;&lt;/body&gt;</code> results in the H1 being outlined within the H2.</p></li>
+<li><p>Other new semantic tags not directly related to structure:</p>
+
+<ul>
+<li><p><code>figure</code> (block) / <code>figcaption</code> (text): The figure tag provides stand-alone, illustrative content, like a plot, image, or video; its first child figcaption tag provides a related caption.</p></li>
+<li><p><code>hgroup</code> (block): A group of headings. Should contain &lt;h[1-6]> tags only. Provides a hint to the HTML outlining engine that only the first header in the group should be included in the outline, and that the following headings within the group are not additional outline-able sections but are instead subheadings of the first.</p></li>
+<li><p><code>mark</code> (text): Highlighted text, or text referred to elsewhere.</p></li>
+<li><p><code>time</code> (text): A date and/or time representation.</p></li>
+</ul>
+</li>
+<li><p>The key to remember about the new &#8220;semantic&#8221; tags is that they allow one to express the meaning of a block in the tag itself, rather than via a CSS class or ID. This brings some standardization to naming (should I call it my class &#8220;article&#8221; or &#8220;feature&#8221;?), and promotes block roles to more prominence than other CSS attributes. They also aid in accessibility; for example, users of screen readers can indicate the order in which NAV sections should be read.</p></li>
+<li><p>It is important to frame the overall context for structuring a document as well. HTML documents always begin with a DOCTYPE declaration, and should include a HEAD and BODY, as well as charset declaration within the head.</p>
+
+<ul>
+<li>The HTML5 doctype is simply <code>&lt;!doctype html&gt;</code>, without a URL or version number.</li>
+<li>Inside the HEAD (and within the first 512 bytes of the document), a META tag indicating the charset should be included, e.g. <code>&lt;meta charset=utf-8&gt;</code>. Note META tags are not required to be closed, and the charset value does not need to be quoted. Specifying the charset is essential for avoiding potential security issues in which a URL could be crafted to inject arbitrary script into the page body.</li>
+</ul>
+</li>
+<li><p>The new HTML5 tags are supported in IE 9, Firefox 16, Chrome 23, Safari 5.1, iOS Safari 4.0, Android Browser 2.2, and Blackberry 7.0. To ensure support in older browsers, an HTML5 shim can be employed, or the JavaScript <code>document.createElement</code> API can be used to create elements that do not exist.</p></li>
+</ul>
+
+
+<h4>Create a layout container in HTML</h4>
+
+<ul>
+<li><p>Creating a layout container involves defining the elements that provide the overall structure to a page - positioning of the header/nav, footer, potential sidebar, and primary content.</p></li>
+<li><p>The primary CSS attribute that affects the layout of block display elements is <code>position</code>. It can have the following values:</p>
+
+<ul>
+<li><code>absolute</code>: An element positioned absolutely is offset (trbl) from its first parent with non-static position. Absolutely-positioned elements do <em>not</em> participate in normal layout flow.</li>
+<li><code>relative</code>: An element with relative position can be offset from its original/inherited position (trbl). Content moves, but originally reserved space is still preserved in flow.</li>
+<li><code>static</code>: Static position is the default, items are flowed normally and (trbl) has no effect.</li>
+<li><code>fixed</code>: Fixed position is (trbl) relative to the browser window and will not move when scrolled.</li>
+</ul>
+</li>
+<li><p>When elements overlap, <code>z-index</code> must be considered. Higher z-index results in an element being positioned on top. Equal z-index results in the last item in the document being positioned on top.</p></li>
+<li><p>Modern layouts are most commonly achieved by <code>float</code>ing various elements around each other. Floating allows sibling content to flow around an element, if there is room  next to it. If not, the floated element will wrap to the next line. Floated elements should be inserted <em>before</em> float:none elements.</p></li>
+</ul>
+
+
+<h2>To Be Continued&#8230;</h2>
+
+<p>I think that&#8217;s a good introductory post and plenty of basic material to chew on. In my next post we&#8217;ll pick up with the next objective: &#8220;Write code that interacts with UI controls.&#8221;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T09:11:00-08:00" pubdate data-updated="true">Jan 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/study/'>study</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/07/get-peer-reviews-for-your-website-with-criticue/" title="Previous Post: Get peer reviews for your website with Criticue">&laquo; Get peer reviews for your website with Criticue</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/" title="Next Post: Microsoft Exam 70-480 study guide continued: DOM manipulation">Microsoft Exam 70-480 study guide continued: DOM manipulation &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

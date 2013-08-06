@@ -1,0 +1,297 @@
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="utf-8">
+
+  <title>Aidan Ryan</title>
+  <meta name="description" content="Aidan Ryan">
+  <meta name="author" content="Aidan Ryan">
+  <meta name="DC.language" content="en">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="shortcut icon" href="favicon.ico?v=2">
+  <link href="/atom.xml" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <script src="javascripts/modernizr-2.0.js"></script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+
+<body id="ajryan-github-com">
+
+<div id="site">
+  <div class="inner">
+
+    <div class="header">
+      <p><img src="images/ajryan.jpg" alt="Aidan Ryan" /></p>
+      <h1>Aidan Ryan</h1>
+    </div>
+
+    <div class="about">
+      <div>
+        <p>
+          <b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications.
+          I enjoy recording and performing music, comics, LEGO, and comedy.
+        </p>
+        <p>
+          I am a consultant at <a href="http://magenic.com">Magenic</a>. We&#8217;re hiring <a href="http://magenic.com/Careers.aspx">Software Superheroes!</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="content section">
+      <div class="blog" id="blog">
+        <a href="/blog/index.html"><h2>Blog</h2></a>
+        <dl>
+        
+          <dt>
+            <em>01 July 2013</em> - <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+          </dt>
+          <dd>
+            Here&#8217;s a quick tip for those of you who&#8217;ve jumped into the Visual Studio 2013 Preview: hiding the &#8220;send feedback&#8221; smiley-face button in the upper-right of the window. I find it very distracting, and I know how to find the Connect site if I need to file a bug report. I searched the HKEY_CURRENT_USER Registry hive under Software\Microsoft\VisualStudio\12.0_Config for &#8220;feedback&#8221; and found a key named {F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07} under MainWindowFrameControls. Its default value was &#8220;Feedback Button,&#8221; which sounded like what I was looking for. After backing up the key to disk, I deleted the key and re-started Visual Studio. No more smiley!
+
+Delete HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0_Config\MainWindowFrameControls\{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}.
+
+
+ <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/" class="readon">Read on →</a>
+          </dd>
+        
+          <dt>
+            <em>29 May 2013</em> - <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+          </dt>
+          <dd>
+            The term &#8220;Responsive Web Design&#8221; was coined in 2010 by Ethan Marcotte in his canonical article defining the technique. Recently, I spent some time researching the history and modern state of the art of Response Web Design (RWD). This article presents a survey of my findings, and provides examples of specific techniques. We&#8217;ll focus on Visual Studio / ASP.NET MVC tools and techniques for getting the job done. <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/" class="readon">Read on →</a>
+          </dd>
+        
+          <dt>
+            <em>25 April 2013</em> - <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+          </dt>
+          <dd>
+            At a client I was recently tasked with implementing a site that presents tooltips with a custom appearance. I thought I&#8217;d share some lessons learned about consistently displaying the tooltips and working around positioning problems. <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/" class="readon">Read on →</a>
+          </dd>
+        
+          <dt>
+            <em>08 February 2013</em> - <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+          </dt>
+          <dd>
+            I just pushed a small update to my WinHaste hastebin client (binary). Hastebin is a cool, minimal, login-free alternative to Pastebin. Now, when a command&#8217;s output is being piped to WinHaste, the output will be echoed to the console. This is especially handy if you are running an interactive command, so you aren&#8217;t entering values &#8220;blind.&#8221; <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/" class="readon">Read on →</a>
+          </dd>
+        
+          <dt>
+            <em>04 February 2013</em> - <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+          </dt>
+          <dd>
+            It&#8217;s time to dive into Windows Store application development. I&#8217;ve developed several tools for the Team Foundation Server (TFS) ecosystem, so I think an appropriate first project that will intersect my existing skill set would be a TFS Work Item browser. <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/" class="readon">Read on →</a>
+          </dd>
+        
+        </dl>
+
+        <a href="/blog/index.html">Blog Archives</a>
+      </div>
+      <div class="section" id="jobvite">
+        <h2>Magenic Jobs</h2>
+        <div id="jobvite-box"></div>
+      </div>
+    </div>
+    
+    <div class="content section">
+      <div class="section">
+        <h2>Projects</h2>
+
+        <ul class="projects">
+          <li class="project">
+            <dl>
+              <dt>TFS Test Steps Editor</dt>
+              <dd>
+                Lightweight editor for Team Foundation Server 2010 test cases.<br/>
+                <a href="/TFSTestStepsEditor/">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>CSharpreter Sublime Text plugin</dt>
+              <dd>
+                C# code snippet runner for Sublime Text.<br/>
+                <a href="http://github.com/ajryan/CSharpreter">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>ReCaptchaFake</dt>
+              <dd>
+                Quick-and dirty ASP.NET MVC site to fake the Google reCAPTCHA verify API.<br/>
+                <a href="http://github.com/ajryan/CSharpreter">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>WinHaste</dt>
+              <dd>
+                Native Windows commandline client for <a href="http://hastebin.com">hastebin.com</a>.<br/>
+                <a href="http://github.com/ajryan/WinHaste">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>RptToXml</dt>
+              <dd>
+                Crystal Reports RPT to XML converter. Allows diff between report versions.<br/>
+                <a href="/RptToXml/">Github</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>Masters of the Universe</dt>
+              <dd>Funk/folk band<br/><a href="http://mastersband.com">Band site</a></dd>
+            </dl>
+          </li>
+          <li class="project">
+            <dl>
+              <dt>Music From Big Pink Tribute: &#8220;Size Color&#8221;</dt>
+              <dd>A work in progress<br/><a href="http://ajryan.tumblr.com/tagged/music">Tumblr</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>GitHub feed</h2>
+        <ul class="projects">
+          <li class="project" id="github">
+            <dl>
+              <dt>My activity on GitHub</dt>
+              <dd>
+                <ul id="github-feed">
+                </ul>
+              </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section contact">
+        <h2>Contact</h2>
+
+        <div class="vcard">
+          <p><a href="http://github.com/ajryan">Github</a></p>
+          <p><a href="http://www.linkedin.com/in/ajryan">Linkedin</a></p>
+          <p><a href="http://twitter.com/ajryan">Twitter</a></p>
+          <p><a href="https://plus.google.com/113170493762619012646">Google+</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="nowplaying"><strong>Now playing (via <a href="http://last.fm/user/ajryan">last.fm</a>):</strong><br /></div>
+
+    <div class="footer">
+      <p>&#9829;</p>
+    </div>
+
+  </div>
+</div>
+<script src="javascripts/jquery-1.7.1.min.js"></script>
+<script src="javascripts/jobvitebox.js"></script>
+<script type="text/javascript">
+  function log() {
+    if (window.console && window.console.log) {
+      for (var i = 0; i < arguments.length; i++) {
+        window.console.log(arguments[i]);
+      }
+    }
+  }
+  
+  function htmlencode(value) {
+    return $('<div/>').text(value).html();
+  }
+  
+  function getcommitlink(event) {
+    return 'http://github.com/' +
+      htmlencode(event.repo.name) +
+      '/commit/' +
+      event.payload.commits[0].sha;
+  }
+  
+  function githubcallback(json) {
+    log('got jsonp from github api');
+    var html = '';
+    $.each(json.data, function(i, event) {
+      if (i > 12) {
+        return;
+      }
+      if (event.payload.commits) {
+        html += 
+          '<li>' + 
+          htmlencode(event.repo.name) + ': ' +
+          '<a href="' + getcommitlink(event) + '">' +
+          htmlencode(event.payload.commits[0].message) +
+          '</a></li>';
+      }
+    });
+    $('#github-feed').append(html);
+  }
+
+  $.ajax({
+    url: 'https://api.github.com/users/ajryan/events',
+    dataType: 'jsonp',
+    jsonp: 'callback',
+    jsonpCallback: 'githubcallback',
+    error: function(xhr, msg, e) {
+      $('#github').remove();
+      log(xhr, msg, e);
+    }
+  });
+
+  function lastfmcallback(json) {
+    log('got jsonp from lastfm api');
+    var html = '';
+    $.each(json.recenttracks.track, function (i, track) {
+        if (i > 9) {
+            return;
+        }
+
+        if (i > 0) html += ', ';
+        html +=
+            htmlencode(track.artist['#text']) + ' - ' +
+            '<a href="' + track.url + '">' +
+            track.name +
+            '</a> ';
+    });
+    $('#nowplaying').append(html);
+  }
+  
+  $.ajax({
+    url: 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ajryan&api_key=71cdba3dffa2c5a2b7dd3b5c57a8f0fc&format=json',
+    dataType: 'jsonp',
+    jsonpCallback: 'lastfmcallback',
+    error: function (xhr, msg, e) {
+        $('#nowplaying').remove();
+        log(xhr, msg, e);
+    }
+  });
+
+  $('#jobvite-box').jobViteBox('qx99Vfwu', function() {
+    var blogHeight = $('#blog').height();
+    $('#jobvite-box').height(blogHeight - 75);
+  });
+</script>
+</body>
+</html>

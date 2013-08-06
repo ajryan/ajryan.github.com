@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft Exam 70-480 study guide continued: DOM manipulation - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="This is a continuation of my study guide for Microsoft Exam 70-480, working toward the Microsoft Certified Solutions Developer (MCSD): Web &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Microsoft Exam 70-480 Study Guide Continued: DOM Manipulation</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T15:39:00-08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is a continuation of my study guide for Microsoft Exam 70-480, working toward the Microsoft Certified Solutions Developer (MCSD): Web Applications certification. We are now tackling the <strong>Write code that interacts with UI controls</strong> objective, specifically DOM modification.<!--more--></p>
+
+<h2>Implement and Manipulate Document Structures and Objects (24%)</h2>
+
+<h3>Write code that interacts with UI controls</h3>
+
+<h4>Programmatically add and modify HTML elements</h4>
+
+<p>In general, the HTML DOM API or jQuery will be used to manipulate the page structure. It is important to understand the underlying native APIs - jQuery makes our code concise and cross-browser compatible, but a knowledge of what is happening under the covers will help you write more efficient jQuery. Moreover, there are times when you can accomplish something simple with the native API without the need to pull down jQuery.</p>
+
+<p>In the following samples, I will give the native implementation, followed by its jQuery equivalent.</p>
+
+<ul>
+<li><p>The <code>document</code> object is a node that represents the entire HTML document (including the head). Everything in the DOM is a node. It&#8217;s important to differentiate between nodes and elements: all elements are nodes, but not all nodes are elements. For example, a <code>div</code> element may have an <code>id</code> attribute - the attribute is a node, but not an element.</p></li>
+<li><p>To get a single element by its ID:</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementById('elementId') ==&gt; HTMLElement
+</span><span class='line'>$('#elementId') ==&gt; object ==&gt; jQuery object</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To get an array of elements by tag name:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementsByTagName('div') ==&gt; HTMLCollection / NodeList
+</span><span class='line'>$('div') ==&gt; jQuery[]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To get an array of elements by name (most useful for inputs):</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementsByName('myInput') ==&gt; HTMLCollection / NodeList
+</span><span class='line'>$('[name="myInput"]') ==&gt; jQuery[]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To get an array of elements by CSS class:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementsByClassName('cool-class') ==&gt; HTMLCollection / NodeList
+</span><span class='line'>$('.cool-class') ==&gt; jQuery[]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To traverse between nodes, once you have a node reference:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var domNode = document.getElementById('elementId');
+</span><span class='line'>// note parentElement can be used but not *all* nodes are elements
+</span><span class='line'>var domParent = domNode.parentNode;
+</span><span class='line'>// note that childNodes may include inter-tag text, children returns only elements
+</span><span class='line'>var domFirstChild = domNode.childNodes[0];
+</span><span class='line'>var domFirstElement = domNode.children[0];
+</span><span class='line'>
+</span><span class='line'>var jqNode = $('#elementId');
+</span><span class='line'>var jqParent = jqNode.parent();
+</span><span class='line'>var jqFirstChild = jqNode.children()[0];</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Important properties of a DOM node:</p>
+
+<ul>
+<li><code>nodeType</code>: Integer (enum) representing the type of node. 1 = Element, 2 = Attribute, 3 = Text, 8 = Comment, 9 = Document</li>
+<li><code>nodeName</code>: Name of the node. For tag elements, the tag name. For text content, #text.</li>
+<li><code>nodeValue</code>: Value of the node. For elements, null. For text, the text itself, and for attributes, the attribute value.</li>
+<li><code>childNodes</code>: Collection of children</li>
+<li><code>parentNode</code>: Parent</li>
+<li><code>firstChild</code>, <code>lastChild</code>, <code>nextSibling</code>, <code>previousSibling</code>: self-explanatory</li>
+<li>jQuery equivalents:</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var element = $('#container');
+</span><span class='line'>var firstChild = element.children(':first');
+</span><span class='line'>var lastChild = element.children(':last');
+</span><span class='line'>var nextSibling = element.next();
+</span><span class='line'>var previousSibling = element.prev();</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Element nodes may have one or more attributes. To access them, the <code>attributes</code> member is used. Attributes are not considered children of a node.</p></li>
+<li><p>Access all attributes of an element:</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var div = document.getElementById('container');
+</span><span class='line'>var attribs = div.attributes;
+</span><span class='line'>
+</span><span class='line'>// no jQuery equivalent</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Get and set the value of a particular attribute:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var div = document.getElementById('container');
+</span><span class='line'>var val = div.attributes['id'].value;
+</span><span class='line'>val = div.getAttribute('id');
+</span><span class='line'>var valNode = div.getAttributeNode('id');
+</span><span class='line'>div.attributes['id'].value = 'newValue';
+</span><span class='line'>div.setAttribute('id', 'newValue');
+</span><span class='line'>
+</span><span class='line'>var jqDiv = $('#container');
+</span><span class='line'>var jqVal = jqDiv.attr('id');
+</span><span class='line'>jqdiv.attr('id', 'newValue');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Check if an attribute exists:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var hasId = element.hasAttribute('id');
+</span><span class='line'>var jqHasId = (element.attr('id') !== undefined);</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Remove attribute:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>element.removeAttribute('id');
+</span><span class='line'>element.removeAttributeNode(element.getAttributeNode('id'));
+</span><span class='line'>
+</span><span class='line'>jqElement.removeAttr('id');</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have covered accessing and inspecting page elements via the DOM API and jQuery - it&#8217;s time to delve into modifying the structure of the page: adding, removing, and changing the contents of elements.</p>
+
+<ul>
+<li><p>Once you have a node reference, you can change its value. Tag nodes do not usually have values, but their first child will usually be a text node with value equal to the text content.</p></li>
+<li><p>To change a tag&#8217;s inner text:</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var par = document.getElementById('paragraph1');
+</span><span class='line'>par.firstChild.nodeValue = 'Changed text';
+</span><span class='line'>
+</span><span class='line'>var jqPar = $('#paragraph1');
+</span><span class='line'>jqPar.text('Changed text');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To add an element to the DOM tree, you need to create an element, set any required attributes, and then append it to as the last child of an existing node:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var newNode = document.createElement('img');
+</span><span class='line'>newNode.setAttribute('src', 'https://www.google.com/images/srpr/logo3w.png');
+</span><span class='line'>var body = document.getElementsByTagName('body')[0];
+</span><span class='line'>body.appendChild(newNode);
+</span><span class='line'>
+</span><span class='line'>$('body').append('&lt;img src="https://www.google.com/images/srpr/logo3w.png"/&gt;');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Adding additional inner text to a span, div, or p tag is accomplished as follows. Note that jQuery <code>append</code> is equally effective for HTML or text:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var par = document.getElementById('paragraph1');
+</span><span class='line'>par.appendChild(document.createTextNode('Additional paragraph text here'));
+</span><span class='line'>
+</span><span class='line'>$('#paragraph1').append('Additional paragraph text here')</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can also insert an element as a sibling before an existing node:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var newNode = document.createElement('img');
+</span><span class='line'>newNode.setAttribute('src', 'https://www.google.com/images/srpr/logo3w.png');
+</span><span class='line'>var body = document.getElementsByTagName('body')[0];
+</span><span class='line'>body.insertBefore(newNode, document.getElementById('container'));
+</span><span class='line'>
+</span><span class='line'>$('container').before('&lt;img src="https://www.google.com/images/srpr/logo3w.png"/&gt;');
+</span><span class='line'>$('body').prepend('img src="https://www.google.com/images/srpr/logo3w.png"/');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>Take care to note the differences between <code>appendChild</code> and <code>insertBefore</code>. A node added with <code>appendChild</code> will be the last node contained by the target. Calling <code>insertBefore</code> has the signature container.insertBefore(nodeToInsert, nodeThatWillBeAfter) - in this case as well, nodeToInsert will be a child of the target, but it will be the prior sibling to nodeThatWillBeAfter.</p></li>
+<li><p>To remove an element from the DOM:</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var body = document.getElementsByTagName('body')[0];
+</span><span class='line'>var removedElement = body.removeChild(document.getElementById('container'));
+</span><span class='line'>
+</span><span class='line'>$('#container').remove();</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>To replace an existing element:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var body = document.getElementsByTagName('body')[0];
+</span><span class='line'>var newNode = document.createElement('img');
+</span><span class='line'>newNode.setAttribute('src', 'https://www.google.com/images/srpr/logo3w.png');
+</span><span class='line'>var oldNode = document.getElementById('container');
+</span><span class='line'>body.replaceChild(oldNode, newNode);
+</span><span class='line'>
+</span><span class='line'>$('#container').replaceWith('&lt;img src="https://www.google.com/images/srpr/logo3w.png"/&gt;');</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>In both the DOM and jQuery, you can move an element by getting a reference to it and then calling one of the above insertion/replacement methods. A node cannot exist at two places in the DOM, so it will automatically be removed from its previous location.</p></li>
+<li><p>jQuery in total provides <code>after</code>, <code>before</code>, <code>append</code>, <code>prepend</code>, <code>replaceWith</code>, <code>wrap</code>, <code>wrapInner</code>, and <code>wrapAll</code> for DOM manipulation - these methods are called on the selector for the existing element(s) with the new content as an argument. Companion methods <code>insertAfter</code>, <code>insertBefore</code>, <code>appendTo</code>, <code>prependTo</code>, and <code>replaceAll</code> are targeted to the new content with the target selector as an argument. The odd man out is <code>remove</code>, which is targeted to a selector for content to be removed.</p></li>
+</ul>
+
+
+<h2>&#8216;Til Next Time</h2>
+
+<p>That will conclude DOM manipulation. We&#8217;ll pick up next time with media, canvas, and SVG.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T15:39:00-08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/study/'>study</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/18/microsoft-exam-70-480-programming-in-html5-with-javascript-and-css3/" title="Previous Post: Microsoft Exam 70-480: Programming in HTML5 with JavaScript and CSS3">&laquo; Microsoft Exam 70-480: Programming in HTML5 with JavaScript and CSS3</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/01/23/microsoft-exam-70-480-study-guide-continued-media-and-graphics/" title="Next Post: Microsoft Exam 70-480 study guide continued: Media and Graphics">Microsoft Exam 70-480 study guide continued: Media and Graphics &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2013/01/22/microsoft-exam-70-480-study-guide-continued/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HTML and jQuery: Displaying and Positioning Custom Tooltips - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="At a client I was recently tasked with implementing a site that presents tooltips with a custom appearance. I thought I&#8217;d share some lessons &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HTML and jQuery: Displaying and Positioning Custom Tooltips</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T11:15:00-07:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>At a client I was recently tasked with implementing a site that presents tooltips with a custom appearance. I thought I&#8217;d share some lessons learned about consistently displaying the tooltips and working around positioning problems.<!--more--></p>
+
+<h2>Removing existing tooltips</h2>
+
+<p>In the site I am working with, the custom tooltips must be displayed for an ASP.NET control that has its own tooltip implementation. This means that when the page is initially rendered, the <code>title</code> attribute is already set on the items where I need custom tooltips. This means I need to remove the title attribute but preserve its text for displaying later in my custom tooltip. There is an other wrinkle, in that the site is displayed in Internet Explorer&#8217;s quirks mode, which means the <code>alt</code> attribute will also display a browser tooltip on hover. I needed to remove the <code>alt</code> attribute as well, to avoid &#8220;double tooltips&#8221; with my custom tooltip and the browser tooltip being displayed simultaneously.</p>
+
+<p>Here&#8217;s a snippet illustrating the technique:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+
+<p>The control uses an image map to provide tooltip and interactive functions. I get a jQuery object for the <code>map</code>, then iterate is children. The <code>title</code> attribute is copied to a <code>data-customtooltip</code> attribute, and the <code>alt</code> and <code>title</code> attributes are removed to prevent display of the native browser tooltip.</p>
+
+<h2>Displaying and positioning the custom tooltip</h2>
+
+<p>The next piece of the puzzle is displaying a custom tooltip when the mouse is over an <code>area</code>. I include the following HTML in the master layout page:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+
+<p>This creates a <code>div</code> that is initially invisible and detached from the overall page layout. Of course, the <code>div</code> is also styled to fit with the site&#8217;s overall theme.</p>
+
+<p>Back in the JavaScript, I hooked the <code>mouseenter</code> event to set the tooltip text and then display the hidden <code>div</code>. Initially, I simply positioned the <code>div</code> below and to the left of the mouse pointer. Unfortunately, this naive positioning technique falls down when the mouse is near the lower-right corner of a page or frame: the tooltip is cut off at the page/frame edge. Native browser tooltips &#8220;float&#8221; above the page surface and can even extend beyond the edges of the browser window, but this is not possible with an HTML element. To work around this issue, I detect the &#8220;quadrant&#8221; of the page that the mouse cursor occupies, and position the tooltip away from the page corner. For example, if the mouse cursor is nearest the lower-right corner, I position the tooltip above and to the left of the cursor.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+
+<p>Note that I am always using the <code>left</code> and <code>top</code> CSS attributes to position the <code>div</code>. I ran into strange issues when I attempted to set the left/top to auto and position using right/bottom. I don&#8217;t think Internet Explorer supports positioning in this manner.</p>
+
+<p>Also note that I don&#8217;t attach the <code>mouseenter</code> handler to each <code>area</code> directly. There can be dozens of areas on the page that require a tooltip - hooking up that many event handlers would not perform as well. It&#8217;s better to attach a single handler for when the event bubbles to the <code>map</code>, then let jQuery filter for the child elements that we want to deal with.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T11:15:00-07:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/html/'>html</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/08/updated-winhaste-hastebin-client/" title="Previous Post: Updated WinHaste hastebin client">&laquo; Updated WinHaste hastebin client</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/" title="Next Post: Responsive Web Design - Introduction for ASP.NET MVC Developers">Responsive Web Design - Introduction for ASP.NET MVC Developers &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

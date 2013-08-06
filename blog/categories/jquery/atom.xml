@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jquery | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2013-08-06T00:15:26-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HTML and jQuery: Displaying and Positioning Custom Tooltips]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/"/>
+    <updated>2013-04-25T11:15:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip</id>
+    <content type="html"><![CDATA[<p>At a client I was recently tasked with implementing a site that presents tooltips with a custom appearance. I thought I'd share some lessons learned about consistently displaying the tooltips and working around positioning problems.<!--more--></p>
+
+<h2>Removing existing tooltips</h2>
+
+<p>In the site I am working with, the custom tooltips must be displayed for an ASP.NET control that has its own tooltip implementation. This means that when the page is initially rendered, the <code>title</code> attribute is already set on the items where I need custom tooltips. This means I need to remove the title attribute but preserve its text for displaying later in my custom tooltip. There is an other wrinkle, in that the site is displayed in Internet Explorer's quirks mode, which means the <code>alt</code> attribute will also display a browser tooltip on hover. I needed to remove the <code>alt</code> attribute as well, to avoid "double tooltips" with my custom tooltip and the browser tooltip being displayed simultaneously.</p>
+
+<p>Here's a snippet illustrating the technique:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>The control uses an image map to provide tooltip and interactive functions. I get a jQuery object for the <code>map</code>, then iterate is children. The <code>title</code> attribute is copied to a <code>data-customtooltip</code> attribute, and the <code>alt</code> and <code>title</code> attributes are removed to prevent display of the native browser tooltip.</p>
+
+<h2>Displaying and positioning the custom tooltip</h2>
+
+<p>The next piece of the puzzle is displaying a custom tooltip when the mouse is over an <code>area</code>. I include the following HTML in the master layout page:</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>This creates a <code>div</code> that is initially invisible and detached from the overall page layout. Of course, the <code>div</code> is also styled to fit with the site's overall theme.</p>
+
+<p>Back in the JavaScript, I hooked the <code>mouseenter</code> event to set the tooltip text and then display the hidden <code>div</code>. Initially, I simply positioned the <code>div</code> below and to the left of the mouse pointer. Unfortunately, this naive positioning technique falls down when the mouse is near the lower-right corner of a page or frame: the tooltip is cut off at the page/frame edge. Native browser tooltips "float" above the page surface and can even extend beyond the edges of the browser window, but this is not possible with an HTML element. To work around this issue, I detect the "quadrant" of the page that the mouse cursor occupies, and position the tooltip away from the page corner. For example, if the mouse cursor is nearest the lower-right corner, I position the tooltip above and to the left of the cursor.</p>
+
+<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+
+<p>Note that I am always using the <code>left</code> and <code>top</code> CSS attributes to position the <code>div</code>. I ran into strange issues when I attempted to set the left/top to auto and position using right/bottom. I don't think Internet Explorer supports positioning in this manner.</p>
+
+<p>Also note that I don't attach the <code>mouseenter</code> handler to each <code>area</code> directly. There can be dozens of areas on the page that require a tooltip - hooking up that many event handlers would not perform as well. It's better to attach a single handler for when the event bubbles to the <code>map</code>, then let jQuery filter for the child elements that we want to deal with.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery Plugin: JobViteBox]]></title>
+    <link href="http://www.aidanjryan.com/blog/2012/09/06/jquery-plugin-jobvitebox/"/>
+    <updated>2012-09-06T00:54:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2012/09/06/jquery-plugin-jobvitebox</id>
+    <content type="html"><![CDATA[<p>I've published my first jQuery plugin! JobViteBox fetches a feed of job listings from JobVite and displays it on your page.<!--more--></p>
+
+<p>It's been a fun learning experience exploring the jQuery API. I've used this as an opportunity to brush up on my JavaScript best practice
+knowledge, and to dig deeper into jQuery internals.</p>
+
+<p>Having spent most of my development career writing C#, it's very rewarding to work in a language that allows such fast iteration. I've
+been using <code>rack</code> to whip up a local HTTP server for testing the demo. Another fun tool that I pulled in is <a href="http://developer.yahoo.com/YQL/">YQL</a>
+for converting an XML feed into JSON.</p>
+
+<p>You can see the plugin in action on my <a href="http://ajryan.github.com">home page</a>.</p>
+
+<p>Check out the <a href="http://ajryan.github.com/JobviteBox">GitHub repo</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Red-Gate SQL In The City SF 2012 - Aidan Ryan</title>
+  <meta name="author" content="Aidan Ryan">
+
+  
+  <meta name="description" content="I attended the Red-Gate SQL In the City training event yesterday. It was a great opportunity to set the daily grind aside and focus on learning. It&# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AidanRyan" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34369016-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Aidan Ryan</a></h1>
+  
+    <h2>Software Developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AidanRyan" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AidanRyan&loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.aidanjryan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/index.html">Home</a></li>
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Red-Gate SQL in the City SF 2012</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-03T10:10:00-07:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I attended the Red-Gate <a href="http://sqlinthecity.red-gate.com/">SQL In the City</a> training event yesterday. It was a great opportunity to set the daily grind aside and focus on learning. It&#8217;s always inspiring to watch a demo that shows a less painful way to accomplish something I&#8217;m struggling with. The challenge is to turn that inspiration into something productive and valuable. My notes follow.<!--more--></p>
+
+<h2>Keynote</h2>
+
+<p>John Theron (Red-Gate&#8217;s chief marketing officer) set the stage for the day with some audience participation. We were asked to pass untied balloons back through the audience, with our eyes closed, without losing any air. It was an analogy to the difficulty of pushing database and application changes from dev into production, without losing any important changes. The keynote transitioned into highlighting all of the ways Red-Gate has been helping users manage and deploy database (and now application) changes for the past several years. One of the primary themes of the day was employing automation for more reliable and controlled releases, including the use of continuous integration, automated testing, and automated deployments.</p>
+
+<p>One point that hit home for me was about the value of frequent releases: the sooner your new stuff gets in front of actual customers, the more quickly you get their feedback; and customer feedback is the most valuable of all. There is also less time for a mess to accumulate: the larger the delta of a release, the longer it will take to deploy, and the greater the chance of an issue.</p>
+
+<h2>Monitoring</h2>
+
+<p>Robin Anderson delivered a session demoing the SQL Monitor tool. The tool provides the ability to remotely gain insight into the state of your SQL server. Many of us employ a bag of monitor queries to check on the health of our SQL servers. The Red-Gate tool bundles up many best-practice health checks (not only DMV queries, but PerfMon, WMI, and file watching) into a convenient and attractive package, and adds alerting on top of it.</p>
+
+<p>A very nice feature is the ability to create custom metrics driven by an arbitrary SQL query. The demo showed monitoring of a particular DMV query. I can imagine this being very useful for creating application behavior-specific metrics. For example, we have a consolidated logging system that pushes all of our server text logs to a central database. One could create a custom metric that triggers an alert when the rate of exceptions per hour exceeds a threshold.</p>
+
+<p>Red-Gate is planning <a href="http://sqlmonitor.red-gate.com">a cloud-hosted monitoring service</a> that is fed by a relay service installed inside the customer&#8217;s firewall. This is a nice compromise that should make it easier for DBAs to convince their IT departments to deploy the tool.</p>
+
+<h2>Source Control for SQL Databases</h2>
+
+<p>I attended two sessions that covered similar ground: source-controlling your database (schema and reference data). Ernest Hwang and <a href="http://www.scarydba.com/">Grant Fritchey</a> presented about the use of SQL Source Control to automatically push changes made to the database in SSMS into corresponding source-controlled SQL files.</p>
+
+<p>In &#8220;Case Study: Why You Should Source Control Your Database,&#8221; Ernest focused more on the deployment side, demoing the use of Jenkins to automatically build and deploy database changes when they are checked in. I was surprised that the build configuration required a good bit of hand-crafted MSBuild XML that used the Exec task to shell out to SQL Compare to deploy the database and run tests. I have found Exec to be pretty brittle for this kind of thing, because it introduces install and path dependencies on the build server. I found some <a href="http://weblogs.asp.net/plip/archive/2006/10/04/Red-Gate-MSBuild-Tasks.aspx">MSBuild Tasks</a>, posted by Phil Winstanley, that use the SQL Compare API - this could be a more reliable solution.</p>
+
+<p>Grant Frichey&#8217;s talk was titled &#8220;A Sandbox Development Process.&#8221; He focused on the change-management side of database source control, presenting the use of SQL Virtual Restore to start from a (possibly scrubbed) production database, mapping it to a source-controlled schema, and then making &#8220;sandboxed&#8221; changes in a local development environment. SQL Virtual Restore looks like an awesome solution for working with real data while avoiding copying massive data files. A single full backup can exist in a shared location and be restored into a local database backed by small &#8220;virtual&#8221; vmdf and vldf files. Grant was my favorite speaker of the day - his style is humorous and engaging, and he&#8217;s obviously got a ton of experience to back up his advice.</p>
+
+<h2>Business Intelligence</h2>
+
+<p>The duo of Noemi Moreno and Tom Austin presented &#8220;Social Media, Business Intelligence, and Bridging the SSMS-VS Divide.&#8221; The talk used an interesting BI example to demonstrate the use of SQL Source Control (in Management Studio) and SQL Connect (in Visual Studio) by different developers to both evolve the same database schema. The integration looked pretty smooth, although the Visual Studio scenario seemed to involve a fair bit of magic behind the scenes that could be difficult to troubleshoot if things go south.</p>
+
+<p>The application itself was cool, it involved an SSIS package that integrated data from an OLTP database and the Twitter API into a single SSAS cube which was then exported to Google Fusion Tables for a map visualization. I really like composing together several small implementations into a single solution, using the right tool for each part of the job. SSIS makes me queasy though.</p>
+
+<h2>T-SQL Unit Testing</h2>
+
+<p>The final session that I attended was &#8220;Thwarting Database Defects&#8221; (notice the play on &#8220;TDD?&#8221;). <a href="http://www.sqlity.net/">Sebastian Meine</a> and <a href="http://www.curiouslycorrect.com/">Dennis Lloyd Jr</a> presented about <a href="http://tsqlt.org">tSQLt</a>, a T-SQL unit testing framework. Unit testing of the database is not something that I have ever done directly - usually the closest we get is testing against our repositories.</p>
+
+<p>The capabilities of the framework are very impressive. Every unit test runs in a transaction that is rolled back after the test executes, forcing you to completely isolate your tests (no &#8220;this one has to run before that one&#8221;), and guaranteeing a consistent state before each test run. It&#8217;s driven by a set of stored procedures in a &#8220;tSQLt&#8221; schema that you create in your database itself, and provides the ability to mock out stored procs and even tables, and to assert about the expected results. Your tests themselves are a set of stored procedures under test-unit-specific schemas. The only drawback, in my opinion, is that the framework and unit tests must be created in the database that is being tested. Given the day&#8217;s theme of source-controlling your database, this creates the need to ensure the unit tests don&#8217;t make their way into production.</p>
+
+<h2>Conclusion</h2>
+
+<p>This was a worthwhile event, the pacing and organization were perfectly executed, the food was good, and plenty of Red-Gaters were available to talk between the sessions. I&#8217;ve got lots of inspiration to take back to work and turn into better-quality databases!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-03T10:10:00-07:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/community/'>community</a>, <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/tools/'>tools</a>, <a class='category' href='/blog/categories/training/'>training</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/24/sublime-tfs-plugin/" title="Previous Post: Sublime TFS plugin">&laquo; Sublime TFS plugin</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/10/29/quick-tip-code-samples-in-microsoft-word/" title="Next Post: Quick Tip: Code Samples In Microsoft Word">Quick Tip: Code Samples In Microsoft Word &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/">Hide the &quot;send feedback&quot; smile in VS2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/html-and-javascript-positioning-a-custom-tooltip/">HTML and jQuery: Displaying and Positioning Custom Tooltips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/08/updated-winhaste-hastebin-client/">Updated WinHaste hastebin client</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/04/a-windows-store-winrt-tfs-work-item-browser/">A Windows Store (WinRT) TFS Work Item Browser</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Aidan Ryan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'aidanjryan';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2012/10/03/red-gate-sql-in-the-city-sf-2012/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
