@@ -199,6 +199,16 @@ h1 {
   color: #F1F7E2;
 }
 
+.speakblock {
+  vertical-align: top;
+  padding: 5px 20px 5px 10px;
+  float: left;
+  max-width: 50%;
+}
+
+.speakblock img {
+  padding-top: 15px;
+}
 /* Content */
 
 .content {
@@ -388,7 +398,7 @@ ul.projects {
   h1 {
     background-position: 0 0;
     padding: 15px 0 0 0;
-    margin: 0 auto;
+    margin: 0 0 0 15px;
     width: 281px;
   }
   .inner {
@@ -424,6 +434,14 @@ ul.projects {
     position: static;
     width: auto;
   }
+  #jobvite-box {
+    margin-top: 0;
+  }
+  #jobvite h2 {
+    position: relative;
+    width: 100%;
+    top: auto;
+  }
 }
 @media (max-width: 950px) {
   .header p {
@@ -441,7 +459,7 @@ ul.projects {
 }
 @media (min-width: 1300px) {
   .about div {
-    font-size: 1.3em;
+    font-size: 1.2em;
     padding-top: 25px;
   }
 }
