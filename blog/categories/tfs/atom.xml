@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tfs | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/tfs/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-08-06T00:19:03-07:00</updated>
+  <updated>2013-09-08T12:10:34-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TFS Test Steps Editor 2.1.0]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0/"/>
+    <updated>2013-09-04T07:15:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0</id>
+    <content type="html"><![CDATA[<p>I just published a new release of my <a href="http://teststepseditor.codeplex.com">TFS Test Steps Editor</a>. I'm pretty excited about this one, as it includes the first community contribution to the project!<!--more--> GitHub user <a href="https://github.com/mikepoz59">mikepoz59</a> built an awesome work item query / test case picker UI.</p>
+
+<p>For this release, I have created two binary packages - one targeted at the TFS2010 API and another for the TFS2012 API. My error tracking system has been regularly emailing me reports from users who do not have the TFS2010 client assemblies installed, and a few discussions have cropped up in CodePlex reporting some TFS2012 formatting issues. I'm hoping this resolves both problems.</p>
+
+<p>Visit the <a href="http://teststepseditor.codeplex.com">project</a> at CodePlex and pick up either the <a href="https://teststepseditor.codeplex.com/downloads/get/724002">TFS2010</a> or <a href="https://teststepseditor.codeplex.com/releases/view/111691">TFS2012</a> release.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Windows Store (WinRT) TFS Work Item Browser]]></title>
