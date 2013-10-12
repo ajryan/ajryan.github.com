@@ -4,7 +4,7 @@
   <title><![CDATA[Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-10-11T18:54:49-07:00</updated>
+  <updated>2013-10-12T10:51:06-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Silicon Valley Code Camp 2013 - Responsive Re-Engineering]]></title>
+    <link href="http://www.aidanjryan.com/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering/"/>
+    <updated>2013-10-12T10:34:00-07:00</updated>
+    <id>http://www.aidanjryan.com/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering</id>
+    <content type="html"><![CDATA[<p>I spoke at <a href="http://www.siliconvalley-codecamp.com/">Silicon Valley Code Camp</a> on October 5th. The title of my talk was &#8220;Responsive Re-Engineering,&#8221; and it focused on adapting desktop-only web sites to be mobile friendly. I want to thank the organizers and all of the folks who attended the talk. If any of you are reading this and you&#8217;d like to talk more about Responsive Web Design, <a href="http://twitter.com/ajryan">get in touch</a>! It was a great experience: lots of great questions and an awesome venue. The <a href="https://github.com/ajryan/CodeCamp2013">code samples</a> and <a href="https://www.slideshare.net/AidanRyan2/responsive-reengineering">slides</a> are online.<!--more--></p>
+
+<p>If your company does ASP.NET development and you are interested in learning how to leverage Responsive Web Design, I would be happy to bring my show on the road. Email me: aidanr (at) magenic.com.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TFS Test Steps Editor 2.1.0]]></title>
@@ -3641,118 +3652,6 @@ for converting an XML feed into JSON.</p>
 <h2>Two-stage estimation</h2>
 
 <p>When possible, it can be reliable to split the a new user story across two sprints. Before the first sprint, estimate only the effort to research the scope of the change and do proof-of-concept work. The deliverables at the end of the first sprint are design documentation and an estimate of the actual development. This allows you to only estimate against known tasks, rather than try to predict potential surprises.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CSharpreter plugin for Sublime Text]]></title>
-    <link href="http://www.aidanjryan.com/blog/2012/08/26/csharpreter-plugin-for-sublime-text/"/>
-    <updated>2012-08-26T22:20:00-07:00</updated>
-    <id>http://www.aidanjryan.com/blog/2012/08/26/csharpreter-plugin-for-sublime-text</id>
-    <content type="html"><![CDATA[<p>I have been really loving the <a href="http://www.sublimetext.com/">Sublime Text</a> editor lately. It&#8217;s quick, featureful, and extensible. I created a plugin that will build and run C# snippets from inside the editor.<!--more--></p>
-
-<p>I write a lot of C#, and I often find myself wanting to check the behavior of a certain method or operator. My go-to tool for this has been <a href="http://www.sliver.com/dotnet/SnippetCompiler/">SnippetCompiler</a>, but now I&#8217;m trying to eliminate as many reasons for leaving my editor as possible. So, I created a plugin for Sublime Text that is inspired by SnippetCompiler - it takes the selected text and shoves it inside the main routine of a simple C# console app, builds it, and runs it. You can customize the &#8220;usings&#8221; and the boilerplate code auto-inserted at the end of the <code>Main</code> routine (currently prints a short message and reads a key).</p>
-
-<p>You can find the plugin on <a href="https://github.com/ajryan/CSharpreter">GitHub</a>. Details follow.</p>
-
-<h2>Enter the CSharpreter Sublime Text plugin</h2>
-
-<p>CSharpreter compiles and executes fragments of C# code. The currently-selected text (or entire contents of the view, if no text is selected) is injected into the body of the Main routine of a C# console application. MSBuild is invoked and the executable is run in a shell window. This plugin has only been tested on Windows, but <em>may</em> be compatible with Mono&#8217;s XBuild.</p>
-
-<p>With the default settings, your code will be injected into a program defined as follows:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>using System;
-</span><span class='line'>using System.Collections.Generic;
-</span><span class='line'>using System.Linq;
-</span><span class='line'>
-</span><span class='line'>class Program
-</span><span class='line'>{ 
-</span><span class='line'>  static void Main(string[] args)
-</span><span class='line'>  {
-</span><span class='line'>    // YOUR TEXT HERE
-</span><span class='line'>    
-</span><span class='line'>    Console.WriteLine();
-</span><span class='line'>    Console.WriteLine("Press any key to exit...");
-</span><span class='line'>    Console.ReadKey();
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Commands</h2>
-
-<ul>
-<li>CSharpreter: Interpret - Execute the currently-selected text, or with no selected text, the entire contents of the view.</li>
-<li>CSharpreter: Cleanup - Delete the %temp%\CSharpreter folder, where temporary source and binaries are written.</li>
-</ul>
-
-
-<h2>Settings</h2>
-
-<p>In the CSharpreter package folder, edit c_sharpreter.sublime-settings file to modify the defaults.</p>
-
-<ul>
-<li>msbuild_path - Path to the MSBuild executable</li>
-<li>default_usings - List of namespaces to inject at the top of the source file.</li>
-<li>main_end - List of statements to inject at the end of the Main method.</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{
-</span><span class='line'>  "msbuild_path": "C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe",
-</span><span class='line'>  "default_usings":
-</span><span class='line'>  [
-</span><span class='line'>      "System", "System.Collections.Generic", "System.Linq"
-</span><span class='line'>  ],
-</span><span class='line'>  "main_end":
-</span><span class='line'>  [
-</span><span class='line'>      "Console.WriteLine();",
-</span><span class='line'>      "Console.WriteLine(\"Press any key to exit...\");",
-</span><span class='line'>      "Console.ReadKey();"
-</span><span class='line'>  ]
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Installation</h2>
-
-<p>Clone this repository into your Sublime Text packages folder.</p>
-
-<p><strong>Windows 7 / Vista and above</strong></p>
-
-<pre><code>C:\Users\&lt;username&gt;\AppData\Roaming\Sublime Text 2\Packages
-</code></pre>
-
-<p><strong>Windows XP</strong></p>
-
-<pre><code>C:\Documents and Settings\&lt;username&gt;\Application Data\Sublime Text 2\Packages
-</code></pre>
 ]]></content>
   </entry>
   
