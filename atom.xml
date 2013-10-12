@@ -4,7 +4,7 @@
   <title><![CDATA[Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-10-12T10:54:57-07:00</updated>
+  <updated>2013-10-12T11:00:12-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -44,7 +44,7 @@
     <id>http://www.aidanjryan.com/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013</id>
     <content type="html"><![CDATA[<p>Here&#8217;s a quick tip for those of you who&#8217;ve jumped into the Visual Studio 2013 Preview: hiding the &#8220;send feedback&#8221; smiley-face button in the upper-right of the window. I find it very distracting, and I know how to find the Connect site if I need to file a bug report. I searched the <code>HKEY_CURRENT_USER</code> Registry hive under <code>Software\Microsoft\VisualStudio\12.0_Config</code> for &#8220;feedback&#8221; and found a key named <code>{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}</code> under <code>MainWindowFrameControls</code>. Its default value was &#8220;Feedback Button,&#8221; which sounded like what I was looking for. After backing up the key to disk, I deleted the key and re-started Visual Studio. No more smiley!</p>
 
-<p>Delete <code>HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0_Config\MainWindowFrameControls\{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}</code>.</p>
+<p>Delete <code>HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0_Config\MainWindowFrameControls\{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}</code>.<!--more--></p>
 
 <p><img src="http://www.aidanjryan.com/images/vs2013_smiley_reg.png" title="VS2013 Feedback registry location" alt="VS2013 Feedback registry location"></p>
 ]]></content>
