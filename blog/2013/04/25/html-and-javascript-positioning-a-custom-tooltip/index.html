@@ -116,7 +116,18 @@
 
 <p>Here&#8217;s a snippet illustrating the technique:</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$map</span><span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="s1">&#39;area&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">$area</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$area</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-customtooltip&#39;</span><span class="p">,</span> <span class="nx">$area</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="nx">$area</span><span class="p">.</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s1">&#39;alt title&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The control uses an image map to provide tooltip and interactive functions. I get a jQuery object for the <code>map</code>, then iterate is children. The <code>title</code> attribute is copied to a <code>data-customtooltip</code> attribute, and the <code>alt</code> and <code>title</code> attributes are removed to prevent display of the native browser tooltip.</p>
 
@@ -124,13 +135,89 @@
 
 <p>The next piece of the puzzle is displaying a custom tooltip when the mouse is over an <code>area</code>. I include the following HTML in the master layout page:</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span>
+</span><span class='line'>  <span class="na">id=</span><span class="s">&quot;tooltip&quot;</span>
+</span><span class='line'>  <span class="na">style=</span><span class="s">&quot;</span>
+</span><span class='line'><span class="s">    position: fixed;</span>
+</span><span class='line'><span class="s">    z-index: 999;</span>
+</span><span class='line'><span class="s">    display: none;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>This creates a <code>div</code> that is initially invisible and detached from the overall page layout. Of course, the <code>div</code> is also styled to fit with the site&#8217;s overall theme.</p>
 
 <p>Back in the JavaScript, I hooked the <code>mouseenter</code> event to set the tooltip text and then display the hidden <code>div</code>. Initially, I simply positioned the <code>div</code> below and to the left of the mouse pointer. Unfortunately, this naive positioning technique falls down when the mouse is near the lower-right corner of a page or frame: the tooltip is cut off at the page/frame edge. Native browser tooltips &#8220;float&#8221; above the page surface and can even extend beyond the edges of the browser window, but this is not possible with an HTML element. To work around this issue, I detect the &#8220;quadrant&#8221; of the page that the mouse cursor occupies, and position the tooltip away from the page corner. For example, if the mouse cursor is nearest the lower-right corner, I position the tooltip above and to the left of the cursor.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized&#8217; for RubyPython::Python:Module</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$tooltipDiv</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tooltip&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">$map</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mouseenter&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">$this</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="c1">// set the tooltip text from our custom attribute</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">customTitle</span> <span class="o">=</span> <span class="nx">$this</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-customtooltip&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">customTitle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// determine if the mouse is in the left / top &quot;halves&quot; of the document</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">mouseLeft</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">mouseTop</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// position the tooltip away from the mouse quadrant</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">css</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">mouseLeft</span><span class="p">)</span>
+</span><span class='line'>          <span class="nx">css</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="nx">css</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="p">(</span><span class="mi">7</span> <span class="o">+</span> <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">width</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">mouseTop</span><span class="p">)</span>
+</span><span class='line'>          <span class="nx">css</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="nx">css</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="p">(</span><span class="mi">7</span> <span class="o">+</span> <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">height</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="nx">css</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">mouseleave</span><span class="p">(</span>
+</span><span class='line'>      <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$tooltipDiv</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Note that I am always using the <code>left</code> and <code>top</code> CSS attributes to position the <code>div</code>. I ran into strange issues when I attempted to set the left/top to auto and position using right/bottom. I don&#8217;t think Internet Explorer supports positioning in this manner.</p>
 

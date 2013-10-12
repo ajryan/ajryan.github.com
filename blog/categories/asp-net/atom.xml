@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ASP.NET | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/asp-net/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-09-08T12:10:34-07:00</updated>
+  <updated>2013-10-11T18:44:38-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -166,7 +166,18 @@
 
 <p>The framework is proportionally fluid at widths above 768px, while all columns stack vertically at 100% width on smaller screens. It's very simple to lay out columns with responsive.gs: apply the <code>row</code> class to define a full-width row, then use the <code>col</code> and <code>span_*</code> classes to set proportional column widths within the row.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>responsive.gs  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;col span_6 bg4&quot;</span><span class="nt">&gt;&lt;h3&gt;</span>col span_6<span class="nt">&lt;/h3&gt;&lt;img</span> <span class="na">class=</span><span class="s">&quot;left-quarter&quot;</span> <span class="na">src=</span><span class="s">&quot;http://fillmurray.com/200/300&quot;</span><span class="nt">&gt;&lt;p&gt;</span>Column 1.<span class="nt">&lt;/p&gt;&lt;/article&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;col span_6 bg3&quot;</span><span class="nt">&gt;&lt;h3&gt;</span>col span_6<span class="nt">&lt;/h3&gt;&lt;p&gt;</span>Column 2.<span class="nt">&lt;/p&gt;&lt;/article&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;col span_4 bg2&quot;</span><span class="nt">&gt;&lt;h3&gt;</span>col span_4<span class="nt">&lt;/h3&gt;&lt;p&gt;</span>Column 3.<span class="nt">&lt;/p&gt;&lt;/article&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Compatibility notes: Because the <code>box-sizing</code> rule is not supported on IE7 or lower, a polyfill (for inclusion using conditional comments) is provided. The framework is "mobile first", in that all columns are laid out to 100% width in the base style, then set to proportional widths within a media query. This means that users of IE8 and below will receive the mobile experience.</p>
 
@@ -279,7 +290,19 @@
 </ul>
 
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@-ms-viewport</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">pre</span><span class="o">&gt;&lt;</span><span class="nt">code</span><span class="o">&gt;</span><span class="nt">width</span><span class="o">:</span> <span class="nt">device-width</span><span class="o">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nt">code</span><span class="o">&gt;&lt;/</span><span class="nt">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Tangent: ASP.NET MVC Technique - Server-side mobile refinement</h3>
 
@@ -294,7 +317,33 @@
 </ul>
 
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>@if (!Request.Browser.IsMobileDevice) {<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>section class=&quot;sidebar&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>Check out my twitter feed:<span class="ni">&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>ul<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>li<span class="ni">&amp;gt;</span>Post 1<span class="ni">&amp;lt;</span>/li<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>li<span class="ni">&amp;gt;</span>Post 2<span class="ni">&amp;lt;</span>/li<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>li<span class="ni">&amp;gt;</span>Post 3<span class="ni">&amp;lt;</span>/li<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/ul<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/section<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>}
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <ul>
 <li><p>Implement a media query to flow the remainder of the layout into the previously-occupied space.</p></li>
@@ -302,7 +351,27 @@
 </ul>
 
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">GetVaryByCustomString</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">HttpContext</span> <span class="n">context</span><span class="p">,</span> <span class="kt">string</span> <span class="n">custom</span><span class="p">)</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="n">custom</span> <span class="p">!=</span> <span class="s">&quot;Mobile&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="n">context</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Browser</span><span class="p">.</span><span class="n">IsMobileDevice</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <ul>
 <li>Depending on the nature of the content, you may wish to provide a way for the user to asynchronously request it after the initial page load.</li>

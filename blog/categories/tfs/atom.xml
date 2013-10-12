@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tfs | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/tfs/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-09-08T12:10:34-07:00</updated>
+  <updated>2013-10-11T18:44:38-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -55,7 +55,126 @@
 
 <p>My <code>TfsBasicAuthenticationAttribute</code> action filter passes the request headers to a <code>UserDataPrincipal</code> (<code>IPrincipal</code>) that provides a factory method named <code>InitFromHeaders</code>. This method handles the parsing of the connection information from the request headers. If no principal is returned, or if connecting to TFS with the given connection information fails, an HTTP 401 Unauthorized response is returned. When a connection issue occurs, the specific reason for failure is provided in the response content.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>TfsBasicAuthenticationAttribute  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="k">class</span> <span class="nc">TfsBasicAuthenticationAttribute</span> <span class="p">:</span> <span class="n">ActionFilterAttribute</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnActionExecuting</span><span class="p">(</span><span class="n">HttpActionContext</span> <span class="n">actionContext</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">userDataPrincipal</span> <span class="p">=</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">User</span> <span class="k">as</span> <span class="n">UserDataPrincipal</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">userDataPrincipal</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">userDataPrincipal</span> <span class="p">=</span> <span class="n">UserDataPrincipal</span><span class="p">.</span><span class="n">InitFromHeaders</span><span class="p">(</span><span class="n">actionContext</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Headers</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">userDataPrincipal</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">SetUnauthorizedResponse</span><span class="p">(</span><span class="n">actionContext</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">try</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">configUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">userDataPrincipal</span><span class="p">.</span><span class="n">TfsUrl</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">provider</span> <span class="p">=</span> <span class="n">userDataPrincipal</span><span class="p">.</span><span class="n">GetCredentialsProvider</span><span class="p">();</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">tfsConfigServer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TfsConfigurationServer</span><span class="p">(</span><span class="n">configUri</span><span class="p">,</span> <span class="n">provider</span><span class="p">.</span><span class="n">GetCredentials</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">),</span> <span class="n">provider</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">tfsConfigServer</span><span class="p">.</span><span class="n">EnsureAuthenticated</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Items</span><span class="p">[</span><span class="s">&quot;TFS_CONFIG_SERVER&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="n">tfsConfigServer</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">catch</span> <span class="p">(</span><span class="n">TeamFoundationServerUnauthorizedException</span> <span class="n">ex</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">SetUnauthorizedResponse</span><span class="p">(</span><span class="n">actionContext</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">User</span> <span class="p">=</span> <span class="n">userDataPrincipal</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">base</span><span class="p">.</span><span class="n">OnActionExecuting</span><span class="p">(</span><span class="n">actionContext</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">private</span> <span class="k">void</span> <span class="nf">SetUnauthorizedResponse</span><span class="p">(</span><span class="n">HttpActionContext</span> <span class="n">actionContext</span><span class="p">,</span> <span class="kt">string</span> <span class="n">message</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">messageValue</span> <span class="p">=</span> <span class="n">message</span> <span class="p">??</span> <span class="s">&quot;Authorization (Basic) and TfsUrl headers are required.&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">actionContext</span><span class="p">.</span><span class="n">Response</span> <span class="p">=</span> <span class="n">actionContext</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">CreateResponse</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Unauthorized</span><span class="p">,</span> <span class="k">new</span> <span class="p">{</span> <span class="n">Message</span> <span class="p">=</span> <span class="n">messageValue</span> <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">tfsUrl</span> <span class="p">=</span> <span class="n">actionContext</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">GetTfsUrl</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">tfsUrl</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">actionContext</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
+</span><span class='line'>            <span class="s">&quot;WWW-Authenticate&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Basic realm=\&quot;{0}\&quot;&quot;</span><span class="p">,</span> <span class="n">tfsUrl</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><blockquote><p></p></p><p><p>Note that in the SetUnauthorizedResponse method, I am adding the WWW-Authenticate header with the realm set to the TFS URL. Responding with a combination of HTTP 401 and this header is the standard for negotiating Basic Authentication. The WinJS.xhr wrapper for XMLHttpRequest handles this negotiation by automatically prompting for username and password in a modal popup, and then re-issuing the request with the Authorization header correctly encoded for Basic Authentication.</p></p><p><p></p></blockquote></p>
 
@@ -65,13 +184,175 @@
 
 <p>After applying the <code>TfsBasicAuthorization</code> attribute to the <code>ProjectsController</code>, I have access to the <code>TfsConfigurationServer</code> for retrieving information about Team Projects on the server. The highest level of organization within Team Foundation Server is a "Project Collection" that contains one or more Team Projects. Project Collections are accessed by by querying the configuration server's <code>CatalogNode</code> for children with resource type <code>ProjectCollection</code>. For each Team Project Collection node, I get its <code>WorkItemStore</code> service and iterate its <code>Projects</code> collection looking for Team Projects where the authorized user has Work Item read rights. This method returns a list of <code>TeamProjectInfo</code> data transfer objects. Note that for each Team Project, I am including a list of the available Work Item Types. This will be leveraged for filtering in the app.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ProjectsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;[</span><span class="n">TfsBasicAuthentication</span><span class="p">]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ProjectsController</span> <span class="p">:</span> <span class="n">ApiController</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="c1">// GET api/projects</span>
+</span><span class='line'><span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">TeamProjectInfo</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">Get</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">configServer</span> <span class="p">=</span> <span class="p">(</span><span class="n">TfsConfigurationServer</span><span class="p">)</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Items</span><span class="p">[</span><span class="s">&quot;TFS_CONFIG_SERVER&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">collections</span> <span class="p">=</span> <span class="n">configServer</span><span class="p">.</span><span class="n">CatalogNode</span><span class="p">.</span><span class="n">QueryChildren</span><span class="p">(</span>
+</span><span class='line'>        <span class="k">new</span> <span class="n">Guid</span><span class="p">[]</span> <span class="p">{</span> <span class="n">CatalogResourceTypes</span><span class="p">.</span><span class="n">ProjectCollection</span> <span class="p">},</span> <span class="k">false</span><span class="p">,</span> <span class="n">CatalogQueryOptions</span><span class="p">.</span><span class="n">None</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">projects</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">TeamProjectInfo</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;();</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">collectionNode</span> <span class="k">in</span> <span class="n">collections</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">collectionId</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Guid</span><span class="p">(</span><span class="n">collectionNode</span><span class="p">.</span><span class="n">Resource</span><span class="p">.</span><span class="n">Properties</span><span class="p">[</span><span class="s">&quot;InstanceId&quot;</span><span class="p">]);</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">collection</span> <span class="p">=</span> <span class="n">configServer</span><span class="p">.</span><span class="n">GetTeamProjectCollection</span><span class="p">(</span><span class="n">collectionId</span><span class="p">);</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">workItemStore</span> <span class="p">=</span> <span class="n">collection</span><span class="p">.</span><span class="n">GetService</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">WorkItemStore</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;();</span>
+</span><span class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="n">Project</span> <span class="n">project</span> <span class="k">in</span> <span class="n">workItemStore</span><span class="p">.</span><span class="n">Projects</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">project</span><span class="p">.</span><span class="n">HasWorkItemReadRights</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="kt">var</span> <span class="n">projectInfo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TeamProjectInfo</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="n">CollectionName</span> <span class="p">=</span> <span class="n">collectionName</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">CollectionId</span> <span class="p">=</span> <span class="n">collectionId</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span>
+</span><span class='line'>                    <span class="n">ProjectName</span> <span class="p">=</span> <span class="n">project</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+</span><span class='line'>                    <span class="n">ProjectUri</span> <span class="p">=</span> <span class="n">project</span><span class="p">.</span><span class="n">Uri</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span>
+</span><span class='line'>                    <span class="n">WorkItemTypes</span> <span class="p">=</span> <span class="n">project</span><span class="p">.</span><span class="n">WorkItemTypes</span>
+</span><span class='line'>                        <span class="p">.</span><span class="n">Cast</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">WorkItemType</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;()</span>
+</span><span class='line'>                        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">wit</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">wit</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+</span><span class='line'>                        <span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">name</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">name</span><span class="p">)</span>
+</span><span class='line'>                        <span class="p">.</span><span class="n">ToList</span><span class="p">()</span>
+</span><span class='line'>                <span class="p">};</span>
+</span><span class='line'>                <span class="n">projects</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">projectInfo</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">projects</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Retrieving a Work Items list</h3>
 
 <p>When the app user selects a Team Project, we want to display a list of Work Items in the project. This is implemented in the <code>WorkItemsController</code> on the Web API proxy service. The <code>Get</code> method requires the <code>collectionId</code> and <code>projectName</code> parameters, and returns a page of 10 work items, in the form of a <code>WorkItemInfo</code> data transfer object. The optional <code>page</code> parameter allows retrieving a particular page of work items, and the optional <code>workItemType</code> parameter allows filtering by work item type (e.g. Bug, Requirement, Task, etc).</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>WorkItemsController  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[TfsBasicAuthentication]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">WorkItemsController</span> <span class="p">:</span> <span class="n">ApiController</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="c1">// GET api/workitems</span>
+</span><span class='line'><span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">WorkItemInfo</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">Get</span><span class="p">(</span><span class="kt">string</span> <span class="n">collectionId</span><span class="p">,</span> <span class="kt">string</span> <span class="n">projectName</span><span class="p">,</span> <span class="kt">int</span> <span class="n">page</span> <span class="p">=</span> <span class="m">0</span><span class="p">,</span> <span class="kt">string</span> <span class="n">workItemType</span> <span class="p">=</span> <span class="s">&quot;All&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">collectionId</span><span class="p">)</span> <span class="p">||</span> <span class="n">String</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">projectName</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">throw</span> <span class="k">new</span> <span class="nf">HttpResponseException</span><span class="p">(</span>
+</span><span class='line'>            <span class="k">new</span> <span class="nf">HttpResponseMessage</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">NotFound</span><span class="p">)</span> <span class="p">{</span> <span class="n">Content</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="s">&quot;collectionUri and projectName are required&quot;</span><span class="p">)</span> <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">configServer</span> <span class="p">=</span> <span class="p">(</span><span class="n">TfsConfigurationServer</span><span class="p">)</span><span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Items</span><span class="p">[</span><span class="s">&quot;TFS_CONFIG_SERVER&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">collection</span> <span class="p">=</span> <span class="n">configServer</span><span class="p">.</span><span class="n">GetTeamProjectCollection</span><span class="p">(</span><span class="k">new</span> <span class="n">Guid</span><span class="p">(</span><span class="n">collectionId</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">workItemStore</span> <span class="p">=</span> <span class="n">collection</span><span class="p">.</span><span class="n">GetService</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">WorkItemStore</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;();</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">wiql</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Select * From WorkItems Where [System.TeamProject] = &#39;{0}&#39;&quot;</span><span class="p">,</span> <span class="n">projectName</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">workItemType</span><span class="p">)</span> <span class="p">&amp;</span><span class="n">amp</span><span class="p">;&amp;</span><span class="n">amp</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">!</span><span class="n">workItemType</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="s">&quot;All&quot;</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">wiql</span> <span class="p">+=</span> <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot; AND [System.WorkItemType] = &#39;{0}&#39;&quot;</span><span class="p">,</span> <span class="n">workItemType</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="n">workItemStore</span><span class="p">.</span><span class="n">Query</span><span class="p">(</span><span class="n">wiql</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">query</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Cast</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">WorkItem</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;()</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Skip</span><span class="p">(</span><span class="m">10</span> <span class="p">*</span> <span class="n">page</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">WorkItemInfoBuilder</span><span class="p">.</span><span class="n">Build</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>The <code>WorkItemStore.Query</code> method returns a late-bound <code>IEnumerable</code> that allows the use of <code>Skip</code> and <code>Take</code> for efficient paging. The <code>WorkItemInfoBuilder</code> helper class takes care of mapping the TFS <code>WorkItem</code> class to the <code>WorkItemInfo</code> data transfer object.</p>
 
@@ -87,11 +368,73 @@
 
 <p>Before I can replace the sample data with live TFS data, I need to be able to provide the proxy with the URL of the TFS server. This is going to be a per-user setting, so I will add a settings command for displaying a flyout where the user can set the TFS URL. The user will invoke the Charms sidebar, and then click Settings to see my app's settings, which will include this custom command. Adding a settings command is accomplished by handling the <code>WinJS.Application.onsettings</code> event as seen here:</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Settings command  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">WinJS</span><span class="p">.</span><span class="n">Application</span><span class="p">.</span><span class="n">onsettings</span> <span class="p">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">detail</span><span class="p">.</span><span class="n">applicationcommands</span> <span class="p">=</span> <span class="p">{</span> <span class="s">&quot;connection&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="n">title</span><span class="p">:</span> <span class="s">&quot;Connection&quot;</span><span class="p">,</span> <span class="n">href</span><span class="p">:</span> <span class="s">&quot;/pages/preferences/preferences.html&quot;</span> <span class="p">}</span> <span class="p">};</span>
+</span><span class='line'><span class="n">WinJS</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">SettingsFlyout</span><span class="p">.</span><span class="n">populateSettings</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>This adds a command to the settings flyout labeled "Connection" which will navigate to a flyout with the provided href. The markup for a flyout is simple - a top-level <code>div</code> inside the body for the flyout itself, with a back button and a label/input for the TFS URL.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Preferences.html  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.SettingsFlyout&quot;</span>
+</span><span class='line'>     <span class="na">id=</span><span class="s">&quot;programmaticInvocationSettingsFlyout&quot;</span>
+</span><span class='line'>     <span class="na">aria-label=</span><span class="s">&quot;App Settings Flyout&quot;</span>
+</span><span class='line'>     <span class="na">data-win-options=</span><span class="s">&quot;{settingsCommandId:&#39;connection&#39;,width:&#39;narrow&#39;}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;win-ui-dark win-header&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">onclick=</span><span class="s">&quot;WinJS.UI.SettingsFlyout.show()&quot;</span> <span class="na">class=</span><span class="s">&quot;win-backbutton&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;win-label&quot;</span><span class="nt">&gt;</span>Preferences<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;win-content&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;win-settings-section&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;h3&gt;</span>TFS Connection<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;p&gt;</span>Enter the address of your TFS Server. It must be publicly accessible on the internet for the TFS Work Items proxy service to access it. Usually this URL will end in /tfs.<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;label&gt;</span>TFS URL<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;url&quot;</span> <span class="na">id=</span><span class="s">&quot;tfsUrl&quot;</span> <span class="na">aria-label=</span><span class="s">&quot;Enter TFS URL&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;https://account.visualstudio.com/tfs&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>In the JavaScript code-behind for the flyout, I added event listeners for <code>blur</code> and <code>keyup</code> on the <code>tfsUrl</code> input. The standard for Windows Store apps is for settings to take effect immediately, so when the user focuses away from the input or presses the Enter key, I will immediately store and react to the change.</p>
 
@@ -102,11 +445,127 @@
 <p>Here you can see the definition of the Data namespace. Note that the <code>Windows.ApplicationModel.DesignMode.designModeEnabled</code> property is checked to determine if the code is being invoked in design mode. This is to allow the use of sample data when editing the views in Blend, but to fetch real data from the network when the app is actually running. When in design mode, <code>Data.dataService</code> is set to the static <code>SampleDataService</code> class; when not in design mode, <code>Data.dataService</code> is set to an instance of the <code>WebDataService</code> class. The call to <code>Data.loadProjects()</code> will return immediately to avoid blocking app startup, as you will see in the next code sample.</p>
 
 <p><a id="data"></a>
-Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Data.js initialization  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span>    <span class="nx">projectList</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WinJS</span><span class="p">.</span><span class="nx">Binding</span><span class="p">.</span><span class="nx">List</span><span class="p">(),</span>
+</span><span class='line'>    <span class="nx">designMode</span> <span class="o">=</span> <span class="nx">Windows</span><span class="p">.</span><span class="nx">ApplicationModel</span><span class="p">.</span><span class="nx">DesignMode</span><span class="p">.</span><span class="nx">designModeEnabled</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">webDataService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebDataService</span><span class="p">(</span><span class="s2">&quot;https://tfsproxy.apphb.com&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">WinJS</span><span class="p">.</span><span class="nx">Namespace</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&quot;Data&quot;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">projects</span><span class="o">:</span> <span class="nx">projectList</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">groupedProjects</span><span class="o">:</span> <span class="nx">projectList</span><span class="p">.</span><span class="nx">createGrouped</span><span class="p">(</span><span class="nx">WebDataService</span><span class="p">.</span><span class="nx">getProjectGroupKey</span><span class="p">,</span> <span class="nx">WebDataService</span><span class="p">.</span><span class="nx">getProjectGroupData</span><span class="p">,</span> <span class="nx">WebDataService</span><span class="p">.</span><span class="nx">compareProjectGroups</span><span class="p">),</span>
+</span><span class='line'>    <span class="nx">dataService</span><span class="o">:</span> <span class="nx">designMode</span><span class="o">?</span> <span class="nx">SampleDataService</span> <span class="o">:</span> <span class="nx">webDataService</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">processingEvent</span><span class="o">:</span> <span class="s2">&quot;processingEvent&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">processingStatus</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">processingMessage</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">loadProjects</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">dataService</span><span class="p">.</span><span class="nx">getTeamProjects</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">projects</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">raiseProcessing</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">processingStatus</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">processingMessage</span> <span class="o">=</span> <span class="nx">message</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="nx">WinJS</span><span class="p">.</span><span class="nx">Application</span><span class="p">.</span><span class="nx">queueEvent</span><span class="p">({</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Data</span><span class="p">.</span><span class="nx">processingEvent</span><span class="p">,</span> <span class="nx">processing</span><span class="o">:</span> <span class="nx">value</span> <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Data</span><span class="p">.</span><span class="nx">loadProjects</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>The <code>WebDataService</code> class provides access to the proxy for retrieving Team Projects and Work Items. It leverages the <code>WinJS.xhr</code> method to make asynchronous HTTP requests to the proxy. Note that if the <code>Settings.tfsUrl</code> property is not set, no call to the service is made and the list remains empty.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>WebDataService.getTeamProjects  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">getTeamProjects</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">list</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">beginEdits</span><span class="p">();</span>
+</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">list</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Settings</span><span class="p">.</span><span class="nx">tfsUrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">Data</span><span class="p">.</span><span class="nx">processingMessage</span> <span class="o">=</span> <span class="s2">&quot;Please open the Settings charm, select Connection, and enter your TFS server URL.&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Data</span><span class="p">.</span><span class="nx">raiseProcessing</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="s2">&quot;Retrieving Team Projects list...&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">WinJS</span><span class="p">.</span><span class="nx">xhr</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">url</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">apiBaseUrl</span> <span class="o">+</span> <span class="s2">&quot;/api/projects&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span> <span class="nx">TfsUrl</span><span class="o">:</span> <span class="nx">Settings</span><span class="p">.</span><span class="nx">tfsUrl</span> <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="p">.</span><span class="nx">done</span><span class="p">(</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">Data</span><span class="p">.</span><span class="nx">raiseProcessing</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">responseJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">responseJson</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">project</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">project</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>            <span class="nx">list</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">endEdits</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><img class="right" src="/images/xhr_auth.png" title="WinJS.xhr authentication" alt="WinJS.xhr authentication"></p>
 
@@ -126,11 +585,113 @@ Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module<
 
 <p>Note in the <a href="#data">Data namespace</a> above, the <code>groupedProjects</code> property is provided. This is a grouped view of the Team Projects, with the Team Project Collection name used as the group key. In the items page, I made some modifications so that Team Projects would be displayed in groups by their collection. I also simplified the item template markup to simply display the Team Project name.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>items.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;itemtemplate&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.Binding.Template&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;item&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">&quot;workitem-title&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: ProjectName&quot;</span><span class="nt">&gt;&lt;/h4&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;itemspage fragment&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;header</span> <span class="na">aria-label=</span><span class="s">&quot;Header content&quot;</span> <span class="na">role=</span><span class="s">&quot;banner&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;win-backbutton&quot;</span> <span class="na">aria-label=</span><span class="s">&quot;Back&quot;</span> <span class="na">disabled</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;titlearea win-type-ellipsis&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;pagetitle&quot;</span><span class="nt">&gt;</span>TFS Work Items<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/header&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;section</span> <span class="na">aria-label=</span><span class="s">&quot;Main content&quot;</span> <span class="na">role=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span>
+</span><span class='line'>            <span class="na">class=</span><span class="s">&quot;itemslist win-selectionstylefilled&quot;</span>
+</span><span class='line'>            <span class="na">aria-label=</span><span class="s">&quot;List of groups&quot;</span>
+</span><span class='line'>            <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.ListView&quot;</span>
+</span><span class='line'>            <span class="na">data-win-options=</span><span class="s">&quot;{ selectionMode: &#39;none&#39;, layout: {type: WinJS.UI.GridLayout} }&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/section&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>There is not much code at all in the codebehind for this page, simply setting up the data binding and hooking the <code>oniteminvoked</code> event to trigger navigation to the Work Item list for the selected item. Because the ListView layout type has been set to <code>WinJS.UI.GridLayout</code> in the markup, the items in the list are automatically displayed in groups when the <code>groupDataSource</code> of the ListView is set.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>items.js </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">ui</span><span class="p">.</span><span class="nx">Pages</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&quot;/pages/items/items.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">ready</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">listView</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.itemslist&quot;</span><span class="p">).</span><span class="nx">winControl</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">itemDataSource</span> <span class="o">=</span> <span class="nx">Data</span><span class="p">.</span><span class="nx">groupedProjects</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">groupDataSource</span> <span class="o">=</span> <span class="nx">Data</span><span class="p">.</span><span class="nx">groupedProjects</span><span class="p">.</span><span class="nx">groups</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">itemTemplate</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.itemtemplate&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">oniteminvoked</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">project</span> <span class="o">=</span> <span class="nx">Data</span><span class="p">.</span><span class="nx">projects</span><span class="p">.</span><span class="nx">getAt</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">itemIndex</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">WinJS</span><span class="p">.</span><span class="nx">Navigation</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="s2">&quot;/pages/split/split.html&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">project</span><span class="o">:</span> <span class="nx">project</span> <span class="p">});</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">_initializeLayout</span><span class="p">(</span><span class="nx">listView</span><span class="p">,</span> <span class="nx">Windows</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ViewManagement</span><span class="p">.</span><span class="nx">ApplicationView</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'><span class="c1">// ...</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>So, putting it all together, here's what the app's home screen looks like:</p>
 
@@ -150,11 +711,155 @@ Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module<
 
 <p>The <code>ready</code> function takes care of binding the App Bar commands, filling the filtering select control with work item types, and initiating the fetch of Work Items from the proxy.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ready in split.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">ready</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">self</span><span class="p">.</span><span class="nx">_project</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="nx">options</span><span class="p">.</span><span class="nx">project</span><span class="p">;</span>
+</span><span class='line'><span class="nx">self</span><span class="p">.</span><span class="nx">_itemSelectionIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">options</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="s2">&quot;selectedIndex&quot;</span> <span class="k">in</span> <span class="nx">options</span><span class="p">)</span> <span class="o">?</span> <span class="nx">options</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">element</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;header[role=banner] .pagetitle&quot;</span><span class="p">).</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_project</span><span class="p">.</span><span class="nx">ProjectName</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;cmdPrev&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_prevWorkItemPage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;cmdNext&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_nextWorkItemPage</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;cmdFilter&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">flyOut</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;filterFlyout&quot;</span><span class="p">).</span><span class="nx">winControl</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">flyOut</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// fill the work item type select with the available types and listen for selection</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">workItemTypeSelect</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;workItemTypeSelect&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">self</span><span class="p">.</span><span class="nx">_project</span><span class="p">.</span><span class="nx">WorkItemTypes</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">workItemType</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">option</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;option&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">option</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">workItemType</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">option</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">workItemType</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">workItemTypeSelect</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">option</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">workItemTypeSelect</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">currentValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">self</span><span class="p">.</span><span class="nx">_pageNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">_itemSelectionIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">self</span><span class="p">.</span><span class="nx">_workItemTypeFilter</span> <span class="o">=</span> <span class="nx">currentValue</span><span class="p">;</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;appbar&quot;</span><span class="p">).</span><span class="nx">winControl</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">self</span><span class="p">.</span><span class="nx">_getWorkItems</span><span class="p">();</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">self</span><span class="p">.</span><span class="nx">_getWorkItems</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>The <code>_getWorkItems</code> function is triggered when the view is first loaded, as well as when a different page or filter is requested. It passes the parameters for page number and work item type to the proxy, and then fills the data-bound work item list with the response. The work item list and detail sections are faded out while processing. Code in the <code>default.js</code> bootstrapper hooks to the <code>Data</code> namespace's processing event and shows an indeterminate progress bar and status message when the event is raised. By fading out the primary sections, we allow the progress bar to be easily seen.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span><em>getWorkItems in split.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="err">/em&gt;getWorkItems: function() {&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// fade list and workitem while loading</span>
+</span><span class='line'><span class="nx">WinJS</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Animation</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">([[</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-detail-section&quot;</span><span class="p">)],</span> <span class="p">[</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-list-section&quot;</span><span class="p">)]]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">listView</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-list&quot;</span><span class="p">).</span><span class="nx">winControl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Data</span><span class="p">.</span><span class="nx">dataService</span><span class="p">.</span><span class="nx">getWorkItems</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_project</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_pageNumber</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_workItemTypeFilter</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">workItems</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">self</span><span class="p">.</span><span class="nx">_workItems</span> <span class="o">=</span> <span class="nx">workItems</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Set up the work item ListView.</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">itemDataSource</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_workItems</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">itemTemplate</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-template&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">onselectionchanged</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_selectionChanged</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">listView</span><span class="p">.</span><span class="nx">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ui</span><span class="p">.</span><span class="nx">ListLayout</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">self</span><span class="p">.</span><span class="nx">_updateVisibility</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_isSingleColumn</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_itemSelectionIndex</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// for single-column detail view, load the article and change page title to Work Item title</span>
+</span><span class='line'>            <span class="nx">self</span><span class="p">.</span><span class="nx">_loadArticleDetails</span><span class="p">();</span>
+</span><span class='line'>            <span class="nx">WinJS</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Animation</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">([[</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-detail-section&quot;</span><span class="p">)],</span> <span class="p">[</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-list-section&quot;</span><span class="p">)]]);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">listView</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_itemSelectionIndex</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span><span class='line'>        <span class="nx">WinJS</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Animation</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.workitem-list-section&quot;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Note the use of the <code>_isSingleColumn</code> utility function - depending on the orientation or snapped state of the app, the view may be filled with the article details - in that case, we immediately load the current article details after the work items are retrieved; when in full landscape view, we set the selection in the list view knowing that our <code>_selectionChanged</code> handler will be triggered for loading the article.</p>
 
@@ -162,7 +867,182 @@ Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module<
 
 <p>The markup for the split page provides formatting for the work item list and detail view. It is not heavily modified from the Split App template, although the item images have been removed and additional binding fields have been added for the most important Work Item properties. At the bottom of the display area, a ListView is used to display a generic list of field name-value pairs - this is because work item templates can be heavily customized, and it is not possible to anticipate the names of the fields a user could define.</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>split.html </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- Template for Work Item nav list --&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-template&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.Binding.Template&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-id&quot;</span><span class="nt">&gt;&lt;h2</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Id&quot;</span><span class="nt">&gt;&lt;/h2&gt;&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-info&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">&quot;workitem-title win-type-ellipsis&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: WorkItemType&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>: <span class="nt">&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Title&quot;</span><span class="nt">&gt;&lt;/span&gt;&lt;/h3&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">&quot;workitem-state win-type-ellipsis&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: State&quot;</span><span class="nt">&gt;&lt;/h4&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;h6</span> <span class="na">class=</span><span class="s">&quot;workitem-assignedto win-type-ellipsis&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: AssignedTo&quot;</span><span class="nt">&gt;&lt;/h6&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- Template for individual work item fields list --&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field-template&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.Binding.Template&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field-pair&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field-name win-type-ellipsis&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Name&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;field-value win-type-ellipsis&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Value&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- The content that will be loaded and displayed. --&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;splitpage fragment&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;header</span> <span class="na">aria-label=</span><span class="s">&quot;Header content&quot;</span> <span class="na">role=</span><span class="s">&quot;banner&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;win-backbutton&quot;</span> <span class="na">aria-label=</span><span class="s">&quot;Back&quot;</span> <span class="na">disabled</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;titlearea win-type-ellipsis&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;pagetitle&quot;</span><span class="nt">&gt;</span>Temp title<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/header&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-list-section&quot;</span> <span class="na">aria-label=</span><span class="s">&quot;List column&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-list win-selectionstylefilled&quot;</span>
+</span><span class='line'>             <span class="na">aria-label=</span><span class="s">&quot;List of this Team Project&#39;s Work Items&quot;</span>
+</span><span class='line'>             <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.ListView&quot;</span>
+</span><span class='line'>             <span class="na">data-win-options=</span><span class="s">&quot;{itemTemplate:select(&#39;.workitem-template&#39;), selectionMode:&#39;single&#39;, swipeBehavior:&#39;none&#39;, tapBehavior:&#39;toggleSelect&#39;}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;workitem-detail-section&quot;</span> <span class="na">aria-atomic=</span><span class="s">&quot;true&quot;</span> <span class="na">aria-label=</span><span class="s">&quot;Work Item detail column&quot;</span> <span class="na">aria-live=</span><span class="s">&quot;assertive&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;header&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-id&quot;</span><span class="nt">&gt;&lt;h2</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Id&quot;</span><span class="nt">&gt;&lt;/h2&gt;&lt;/div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-title&quot;</span><span class="nt">&gt;&lt;h2</span> <span class="na">class=</span><span class="s">&quot;win-type-ellipsis&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: WorkItemType&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>: <span class="nt">&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Title&quot;</span><span class="nt">&gt;&lt;/span&gt;&lt;/h2&gt;&lt;/div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;header-left&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">&quot;workitem-subtitle&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: State&quot;</span><span class="nt">&gt;&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Reason&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>)<span class="nt">&lt;/h4&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;h6</span> <span class="na">class=</span><span class="s">&quot;workitem-subtitle&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: AssignedTo&quot;</span><span class="nt">&gt;&lt;/h6&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;header-right&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">&quot;workitem-subtitle&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Area&quot;</span><span class="nt">&gt;&lt;/h4&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;h6</span> <span class="na">class=</span><span class="s">&quot;workitem-subtitle&quot;</span> <span class="na">data-win-bind=</span><span class="s">&quot;textContent: Iteration&quot;</span><span class="nt">&gt;&lt;/h6&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/header&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-description&quot;</span><span class="nt">&gt;&lt;/div&gt;</span> <span class="c">&lt;!-- content is set in code due to need to convert to static HTML --&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-history&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-otherfields&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;workitem-field-list&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.ListView&quot;</span> <span class="na">data-win-options=</span><span class="s">&quot;{selectionMode:&#39;none&#39;, swipeBehavior:&#39;none&#39;, tapBehavior:&#39;none&#39;}&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/article&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;appbar&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.AppBar&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.AppBarCommand&quot;</span> <span class="na">data-win-options=</span><span class="s">&quot;{id:&#39;cmdPrev&#39;, label:&#39;Previous Page&#39;, icon:&#39;previous&#39;, section:&#39;selection&#39;}&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.AppBarCommand&quot;</span> <span class="na">data-win-options=</span><span class="s">&quot;{id:&#39;cmdNext&#39;, label:&#39;Next Page&#39;, icon:&#39;next&#39;, section:&#39;selection&#39;}&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.AppBarCommand&quot;</span> <span class="na">data-win-options=</span><span class="s">&quot;{id:&#39;cmdFilter&#39;, label:&#39;Filter&#39;, icon:&#39;filter&#39;, section:&#39;selection&#39;}&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;&lt;/button&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;filterFlyout&quot;</span> <span class="na">data-win-control=</span><span class="s">&quot;WinJS.UI.Flyout&quot;</span> <span class="na">data-win-options=</span><span class="s">&quot;{anchor:&#39;cmdFilterButton&#39;}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;workItemTypeSelect&quot;</span><span class="nt">&gt;</span>Work Item Type<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;workItemTypeSelect&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;All&quot;</span><span class="nt">&gt;</span>All<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/select&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>The <code>split.html</code> markup also provides the App Bar for the page (defining the page and filter commands) as well as the flyout that is displayed when the filter command is invoked. The flyout simply contains a <code>label</code> and <code>select</code> list that is populated (as seen above) with the work item types available in the current project.</p>
 
