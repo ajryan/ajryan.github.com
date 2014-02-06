@@ -4,7 +4,7 @@
   <title><![CDATA[Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2013-10-12T11:14:19-07:00</updated>
+  <updated>2014-02-05T23:10:06-08:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Modern Apps Live! Looking back, looking forward]]></title>
+    <link href="http://www.aidanjryan.com/blog/2014/02/05/modern-apps-live-orlando-2013/"/>
+    <updated>2014-02-05T15:34:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2014/02/05/modern-apps-live-orlando-2013</id>
+    <content type="html"><![CDATA[<p>I presented at the <a href="http://modernappslive.com">Modern Apps Live!</a> conference in Orlando this past November. The whole show was a smashing success. It was an incredible opportunity to connect with peers and colleages, taking a step back to think about the &#8220;big picture&#8221; of where application development is headed. The next show will be in Las Vegas on March 10-14. I&#8217;ll be presenting on building a Modern HTML5 &#8220;smart client&#8221; application. Use my <a href="http://bit.ly/LSPK38Reg">registration link</a> for a $500 savings!<!--more--></p>
+
+<h2>From backend to user experience</h2>
+
+<p><a href="http://www.magenic.com">Magenic</a> has created a unique conference experience where the sessions build on one another to tell the whole story of building a modern application from start to finish. The common thread that ties the sessions together is the creation of a single application platform (a polling app called &#8220;MyVote&#8221;) delivered on diverse clients: Web, iOS, Android, Windows 8 (WinRT), and Windows Phone. The backend is all Azure - SQL and a Web API Cloud Service. The entire development effort was distributed, using Git on Visual Studio Online.</p>
+
+<p>The Magenic team who delivers the conference talks are the same folks who developed the apps. All of the talks emphasize the architecture/design perspective: choosing the right components and patterns for reliable, predictable, successful dlivery. The conference program begins with sessions focused on solution architecture and the backend, follows with development of the various clients, user experience design, and touches on process and tooling around distributed development. We also do a deep-dive workshop on the last day where we dig into the actual nuts and bolts of implementation.</p>
+
+<h2>My talk: HTML5/JavaScript application development</h2>
+
+<p>My talk is about the development of an HTML5 &#8220;smart client&#8221; app. It is a Single Page App (SPA) developed with AngularJS, TypeScript, and Razor. I describe the benefits of taking an app the web, selection of a JavaScript application framework, architecture of the app components, testing, and cross-cutting concerns. I am really excited about this combination of technologies: AngularJS provides an &#8220;opinionated&#8221; framework that is very discoverable, and the combination of TypeScript and Razor templating allows us to extend the type-safety of .NET out into the client.</p>
+
+<h2>Next time&#8230;</h2>
+
+<p>We&#8217;re bringing the show to Vegas on March 10-14. We&#8217;ve added some features to the apps, and updated them to keep pace with advancements in their various platforms. Hope to see you <a href="http://modernappslive.com">there</a>!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Silicon Valley Code Camp 2013 - Responsive Re-Engineering]]></title>
@@ -3610,48 +3633,6 @@ for converting an XML feed into JSON.</p>
 <p>You can see the plugin in action on my <a href="http://ajryan.github.com">home page</a>.</p>
 
 <p>Check out the <a href="http://ajryan.github.com/JobviteBox">GitHub repo</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Slightly Less Bad Estimates]]></title>
-    <link href="http://www.aidanjryan.com/blog/2012/08/27/slightly-less-bad-estimates/"/>
-    <updated>2012-08-27T14:09:00-07:00</updated>
-    <id>http://www.aidanjryan.com/blog/2012/08/27/slightly-less-bad-estimates</id>
-    <content type="html"><![CDATA[<p>Estimation in software development is notoriously difficult, and very frequently incorrect. As estimates are reported up the chain, they are routinely &#8220;rounded up,&#8221; and are still regularly exceeded. I have even tried to develop standard ratios to apply to each developer&#8217;s estimates that wore sometimes accurate, but still were not always reliable (e.g. Bob usually estimates 50% of reality, Tom usually estimates 110% of reality). There is very often some unexpected factor that causes an estimate to be off.<!--more--></p>
-
-<h2>Effort != schedule</h2>
-
-<p>Another issue with reliability of estimates is that management often does not differentiate between effort estimates and schedule estimates. Consider the following scenario. You have one developer available and she just got started working on a task with a 40 hour estimate. A new task comes in and is assigned a 40 hour estimate. Management sees &#8220;40 hours == 1 week&#8221; and assumes the new task will be finished in a week, not considering the existing workload. A simple approach to dealing with this is to always include an estimated delivery date along with effort estimates. Keeping your task records updated with completed/remaining values and having a good reporting system that can project burndown helps too: just send your manager a link to the report.</p>
-
-<h2>Checklist for slightly less bad estimates</h2>
-
-<p>Here are the factors I try to consider when providing an estimate:</p>
-
-<ul>
-<li>Research</li>
-<li>Proof-of-concept implementation</li>
-<li>Design documentation</li>
-<li>Management overhead</li>
-<li>History of &#8220;surprises&#8221; in the affected component</li>
-<li>Actual implementation</li>
-<li>Unit test development</li>
-<li>Build Engineering</li>
-<li>Test execution
-
-<ul>
-<li>Developer ad-hoc / exploratory</li>
-<li>QA regression</li>
-<li>QA actual testing</li>
-</ul>
-</li>
-<li>Deployment</li>
-</ul>
-
-
-<h2>Two-stage estimation</h2>
-
-<p>When possible, it can be reliable to split the a new user story across two sprints. Before the first sprint, estimate only the effort to research the scope of the change and do proof-of-concept work. The deliverables at the end of the first sprint are design documentation and an estimate of the actual development. This allows you to only estimate against known tasks, rather than try to predict potential surprises.</p>
 ]]></content>
   </entry>
   
