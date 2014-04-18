@@ -56,9 +56,9 @@
     <div class="content section">
     <h2>Speaking</h2>
         <div class='speakblock'>
-          <a href="http://modernappslive.com/Events/Las-Vegas-2014/Sessions/Thursday/LTH35--Building-a-Smart-Client-HTML-5-and-JavaScript-App.aspx" target="_new">Modern Apps Live!</a> - Mar 10-14<br/>Las Vegas, NV<br/>
-          <b>Building a Modern HTML5 JavaScript app</b><br/>
-          <a href='http://bit.ly/LSPK38Reg' target='_new'><img src='images/mal.jpg'/></a>
+          <b>San Francisco Bay Area Azure Developers User Group</b><br/>
+          <a href="http://www.meetup.com/bayazure/events/169902562/" target="_new">April 22 - Look Ma, No VM! Taking Azure Web Sites to the limit.</a><br/>
+          <a href='http://www.meetup.com/bayazure/events/169902562/' target='_new'><img src='http://photos4.meetupstatic.com/photos/event/9/1/0/2/global_198217122.jpeg'/></a>
         </div>
       </div>
 
@@ -66,6 +66,13 @@
       <div class="blog" id="blog">
         <a href="/blog/index.html"><h2>Blog</h2></a>
         <dl>
+        
+          <dt>
+            <em>05 March 2014</em> - <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/">Authenticating ASP.NET Web API with Azure Mobile Services</a>
+          </dt>
+          <dd>
+            <p>Azure Mobile Services provides a really easy way to integrate social login into web, mobile, and desktop applications. At Magenic, we&#8217;re using it in our client apps for the <a href="http://modernappslive.com/Events/Las-Vegas-2014/Home.aspx">Modern Apps Live!</a> conference demo application called <a href="http://myvotelive.com">MyVote</a>. The web application and the native mobile clients share a common Web API backend deployed to a Web Role on Azure Cloud Services. For most of the Web API methods, we only want to allow calls from users who have successfully authenticated with Azure Mobile Services. Let&#8217;s dig into what it takes to develop a Web API authentication handler that verifies claims issued by Azure Mobile Services. <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/" class="readon">Read on →</a>
+          </dd>
         
           <dt>
             <em>05 February 2014</em> - <a href="/blog/2014/02/05/modern-apps-live-orlando-2013/">Modern Apps Live! Looking back, looking forward</a>
@@ -95,13 +102,6 @@
             <p>Here&#8217;s a quick tip for those of you who&#8217;ve jumped into the Visual Studio 2013 Preview: hiding the &#8220;send feedback&#8221; smiley-face button in the upper-right of the window. I find it very distracting, and I know how to find the Connect site if I need to file a bug report. I searched the <code>HKEY_CURRENT_USER</code> Registry hive under <code>Software\Microsoft\VisualStudio\12.0_Config</code> for &#8220;feedback&#8221; and found a key named <code>{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}</code> under <code>MainWindowFrameControls</code>. Its default value was &#8220;Feedback Button,&#8221; which sounded like what I was looking for. After backing up the key to disk, I deleted the key and re-started Visual Studio. No more smiley!</p>
 
 <p>Delete <code>HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0_Config\MainWindowFrameControls\{F66FBC48-9AE4-41DC-B1AF-0D64F0F54A07}</code>. <a href="/blog/2013/07/01/hide-the-send-feedback-smile-in-vs2013/" class="readon">Read on →</a>
-          </dd>
-        
-          <dt>
-            <em>29 May 2013</em> - <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/">Responsive Web Design - Introduction for ASP.NET MVC Developers</a>
-          </dt>
-          <dd>
-            <p>The term &#8220;Responsive Web Design&#8221; was coined in 2010 by Ethan Marcotte in his <a href="http://alistapart.com/article/responsive-web-design">canonical article</a> defining the technique. Recently, I spent some time researching the history and modern state of the art of Response Web Design (RWD). This article presents a survey of my findings, and provides examples of specific techniques. We&#8217;ll focus on Visual Studio / ASP.NET MVC tools and techniques for getting the job done. <a href="/blog/2013/05/29/responsive-design-introduction-for-asp-dot-net-mvc-developers/" class="readon">Read on →</a>
           </dd>
         
         </dl>

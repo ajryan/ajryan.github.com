@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: authentication | Aidan Ryan]]></title>
+  <link href="http://www.aidanjryan.com/blog/categories/authentication/atom.xml" rel="self"/>
+  <link href="http://www.aidanjryan.com/"/>
+  <updated>2014-04-17T18:02:32-07:00</updated>
+  <id>http://www.aidanjryan.com/</id>
+  <author>
+    <name><![CDATA[Aidan Ryan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Authenticating ASP.NET Web API with Azure Mobile Services]]></title>
+    <link href="http://www.aidanjryan.com/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/"/>
+    <updated>2014-03-05T09:56:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services</id>
+    <content type="html"><![CDATA[<p>Azure Mobile Services provides a really easy way to integrate social login into web, mobile, and desktop applications. At Magenic, we're using it in our client apps for the <a href="http://modernappslive.com/Events/Las-Vegas-2014/Home.aspx">Modern Apps Live!</a> conference demo application called <a href="http://myvotelive.com">MyVote</a>. The web application and the native mobile clients share a common Web API backend deployed to a Web Role on Azure Cloud Services. For most of the Web API methods, we only want to allow calls from users who have successfully authenticated with Azure Mobile Services. Let's dig into what it takes to develop a Web API authentication handler that verifies claims issued by Azure Mobile Services.<!--more--></p>
+
+<h2>Scenario</h2>
+
+<p>This authentication method applies to the following scenario:</p>
+
+<ul>
+<li>Azure Mobile Services is set up for Social Authentication. See <a href="http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-get-started-users/">here</a> for instructions.</li>
+<li>Users authenticate on the client (browser) side using the Azure Mobile Services JavaScript SDK. The latest SDK at the time of this writing is version 1.1.3, and can be found <a href="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.3.min.js">here</a>.</li>
+<li>You have ASP.NET Web API services that you want to expose only to users who have authenticated with Azure Mobile Services.</li>
+</ul>
+
+
+<p>Normally we are authenticating users on the same system that issues credentials - think standard ASP.NET membership stuff. In this case, our Web API system needs to trust credentials issued by a third party.</p>
+
+<h2>Method</h2>
+
+<p>Here is a quick refresher on login with Azure Mobile Services:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>ZuMo Authentication  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">zumoUrl</span> <span class="o">=</span> <span class="s2">&quot;https://your-zumo-service.azure-mobile.net&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">zumoKey</span> <span class="o">=</span> <span class="s2">&quot;your-zumo-application-key&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WindowsAzure</span><span class="p">.</span><span class="nx">MobileServiceClient</span><span class="p">(</span><span class="nx">zumoUrl</span><span class="p">,</span> <span class="nx">zumoKey</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// options are facebook, twitter, microsoft, or google.</span>
+</span><span class='line'><span class="c1">// you must set up each provider in the azure management portal.</span>
+</span><span class='line'><span class="nx">client</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s2">&quot;facebook&quot;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;login succeeded&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>When a user successfully logs in with Azure Mobile Services, the <code>client.currentUser</code> field is set. This in turn exposes a <code>mobileServiceAuthenticationToken</code> field, which is a JSON Web Token (JWT). JWT is an <a href="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-07">emerging standard</a> for representing authentication information. It is used by many OAuth implementations, including Azure Mobile Services.</p>
+
+<p>In order to verify that users have truly authenticated with Azure Mobile Services, we will rely on a "<a href="http://en.wikipedia.org/wiki/Shared_secret">shared secret</a>" known only to Azure Mobile Services and to us. The JWT issued to the user is cryptographically signed by Azure Mobile Services using the Master Key unique to our service instance. We have access to this key via the management portal, and we can use it in our Web API code to verify that a JWT was truly issued and signed by our Azure Mobile Services instance.</p>
+
+<p>Here's a quick diagram that sums it up:</p>
+
+<p> <img src="/images/zumo_auth.png" title="Zumo Auth" alt="Zumo Auth"></p>
+
+<p>The standard for a client to present a JWT for authentication to a server is to set the request's Authorization header to "Bearer <JWT>" where <JWT> is the actual Base64-encoded JSON Web Token. MyVote is using AngularJS, so I set up an HTTP interceptor to set the header on every request:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>AngularJS Authorization Header Interceptor  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MyVote</span><span class="p">.</span><span class="nx">App</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;MyVoteApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngRoute&#39;</span><span class="p">,</span> <span class="s1">&#39;ngResource&#39;</span><span class="p">]);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">MyVote</span><span class="p">.</span><span class="nx">App</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;zumoAuthInterceptor&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">request</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">Globals</span><span class="p">.</span><span class="nx">zumoUserKey</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">MyVote</span><span class="p">.</span><span class="nx">Services</span><span class="p">.</span><span class="nx">AuthService</span><span class="p">.</span><span class="nx">zumoUserKey</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">config</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">MyVote</span><span class="p">.</span><span class="nx">App</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="s1">&#39;$routeProvider&#39;</span><span class="p">,</span> <span class="s1">&#39;$httpProvider&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="kd">function</span> <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">,</span> <span class="nx">$httpProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;zumoAuthInterceptor&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// -- snip -- other config stuff here -- //</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>On the server side, authentication is implemented in Web API via a delegating handler. The process begins here:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>JWT Handler  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">protected</span> <span class="k">override</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;</span> <span class="n">SendAsync</span><span class="p">(</span><span class="n">HttpRequestMessage</span> <span class="n">request</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="c1">// browser sends OPTIONS requests to check CORS and will not include Authorization header</span>
+</span><span class='line'><span class="c1">// allow these requests to flow through with the response from the CORS handler</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">!=</span> <span class="n">HttpMethod</span><span class="p">.</span><span class="n">Options</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">token</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">TryRetrieveToken</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="k">out</span> <span class="n">token</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">try</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">jwt</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JsonWebToken</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">string</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="m">0</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">jwt</span><span class="p">.</span><span class="n">Validate</span><span class="p">(</span><span class="n">validateExpiration</span><span class="p">:</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">MyVoteAuthentication</span><span class="p">.</span><span class="n">SetCurrentPrincipal</span><span class="p">(</span><span class="k">new</span> <span class="n">MyVotePrincipal</span><span class="p">(</span><span class="n">jwt</span><span class="p">.</span><span class="n">Claims</span><span class="p">.</span><span class="n">UserId</span><span class="p">));</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">JsonWebTokenException</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="n">SendAsync</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cancellationToken</span><span class="p">);</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In the <code>SendAsync</code> override, we attempt to validate the JWT. If it is valid, we call <code>MyVoteAuthentication.SetCurrentPrincipal</code> which sets <code>HttpContext.Current.User</code>. This allows us to simply add the <code>[Authorize]</code> attribute to Web API controllers or actions where we want to require Azure Mobile authentication. Note the <code>_masterKey</code> field that is included in the <code>JsonWebToken</code> contructor call. This is the Azure Mobile Services Master Key (shared secret) that we trust as the cryptographic signer of valid JWTs.</p>
+
+<p>The relevant bit inside <code>JsonWebToken</code> that validates the signature follows:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>JsonWebToken.ValidateSignature  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">private</span> <span class="k">void</span> <span class="nf">ValidateSignature</span><span class="p">()</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="c1">// Derive signing key, Signing key = SHA256(secret + &quot;JWTSig&quot;)</span>
+</span><span class='line'><span class="kt">byte</span><span class="p">[]</span> <span class="n">bytes</span> <span class="p">=</span> <span class="n">_UTF8Encoder</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="n">_signatureKey</span> <span class="p">+</span> <span class="s">&quot;JWTSig&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="kt">byte</span><span class="p">[]</span> <span class="n">signingKey</span> <span class="p">=</span> <span class="n">_Sha256Provider</span><span class="p">.</span><span class="n">ComputeHash</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// UFT-8 representation of the JWT envelope.claim segment</span>
+</span><span class='line'><span class="kt">byte</span><span class="p">[]</span> <span class="n">input</span> <span class="p">=</span> <span class="n">_UTF8Encoder</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="n">_envelopeTokenSegment</span> <span class="p">+</span> <span class="s">&quot;.&quot;</span> <span class="p">+</span> <span class="n">_claimsTokenSegment</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// calculate an HMAC SHA-256 MAC</span>
+</span><span class='line'><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">hashProvider</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HMACSHA256</span><span class="p">(</span><span class="n">signingKey</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">byte</span><span class="p">[]</span> <span class="n">myHashValue</span> <span class="p">=</span> <span class="n">hashProvider</span><span class="p">.</span><span class="n">ComputeHash</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">base64UrlEncodedHash</span> <span class="p">=</span> <span class="n">Base64UrlEncode</span><span class="p">(</span><span class="n">myHashValue</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">base64UrlEncodedHash</span> <span class="p">!=</span> <span class="n">Signature</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">throw</span> <span class="k">new</span> <span class="nf">JsonWebTokenException</span><span class="p">(</span><span class="s">&quot;Signature does not match.&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>I borrowed liberally from the <a href="https://github.com/liveservices/LiveSDK/blob/master/Samples/Asp.net/AuthenticationTokenSample/JsonWebToken.cs">Windows Live SDK sample</a> for this. There is one gotcha - the JWT spec indicates that a claims "exp" member should be expressed as a double, but Azure Mobile Services uses an integer.</p>
+
+<p>You can find all of the JWT authentication-related code in the MyVote GitHub repository, in the <a href="https://github.com/Magenic/MyVote/tree/master/src/MyVote.AppServer/Auth">MyVote.AppServer.Auth</a> namespace.</p>
+
+<p><strong>WARNING</strong>: Do not expose your Azure Mobile Services Master Key! For example, DON'T put the key in <code>appSettings</code> in your Web.config and then host your code on GitHub. You should rely on the secure configuration facility supplied by your hosting environment. If your Web API is hosted in Azure via Web Sites or Cloud Services, you can securely set <code>appSettings</code> values from within the management portal.</p>
+]]></content>
+  </entry>
+  
+</feed>
