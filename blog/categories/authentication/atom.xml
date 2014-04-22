@@ -4,7 +4,7 @@
   <title><![CDATA[Category: authentication | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/authentication/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2014-04-17T18:02:32-07:00</updated>
+  <updated>2014-04-22T12:44:08-07:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -80,7 +80,7 @@
 
 <p>Here's a quick diagram that sums it up:</p>
 
-<p> <img src="/images/zumo_auth.png" title="Zumo Auth" alt="Zumo Auth"></p>
+<p> <img src="/images/zumo_auth.PNG" title="Zumo Auth" alt="Zumo Auth"></p>
 
 <p>The standard for a client to present a JWT for authentication to a server is to set the request's Authorization header to "Bearer <JWT>" where <JWT> is the actual Base64-encoded JSON Web Token. MyVote is using AngularJS, so I set up an HTTP interceptor to set the header on every request:</p>
 
