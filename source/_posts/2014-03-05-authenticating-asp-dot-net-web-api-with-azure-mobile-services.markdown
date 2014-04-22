@@ -42,7 +42,7 @@ In order to verify that users have truly authenticated with Azure Mobile Service
 
 Here's a quick diagram that sums it up:
 
- {% img /images/zumo_auth.png 'Zumo Auth' 'Zumo Auth' %}
+ {% img /images/zumo_auth.PNG 'Zumo Auth' 'Zumo Auth' %}
 
 The standard for a client to present a JWT for authentication to a server is to set the request's Authorization header to "Bearer <JWT>" where <JWT> is the actual Base64-encoded JSON Web Token. MyVote is using AngularJS, so I set up an HTTP interceptor to set the header on every request:
 
