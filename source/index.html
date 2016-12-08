@@ -14,11 +14,21 @@ layout: landing
   <title>Aidan Ryan</title>
   <meta name="description" content="Aidan Ryan">
   <meta name="author" content="Aidan Ryan">
+  <meta name="application-name" content="Aidan Ryan"/>
   <meta name="DC.language" content="en">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <link rel="stylesheet" href="stylesheets/style.css">
-  <link rel="shortcut icon" href="favicon.ico?v=2">
+  
+  <link rel="shortcut icon" href="favicon.ico?v=3">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+  
   <link href="/atom.xml" rel="alternate" title="Aidan Ryan" type="application/atom+xml">
   <script src="javascripts/modernizr-2.0.js"></script>
   <script type="text/javascript">
@@ -50,63 +60,56 @@ layout: landing
           <b>Hello!</b> I am a developer specializing in .NET, web services, and scientific applications.
           I enjoy recording and performing music, comics, LEGO, and comedy.
         </p>
-        <p>
-          I am a consultant at <a href="http://magenic.com">Magenic</a>. We're hiring <a href="http://magenic.com/Careers.aspx">Software Superheroes!</a>
-        </p>
-       
       </div>
     </div>
-    <div class="content section">
-    <h2>Speaking</h2>
-        <div class='speakblock'>
-          <b>San Francisco Bay Area Azure Developers User Group</b><br/>
-          <a href="http://www.meetup.com/bayazure/events/169902562/" target="_new">April 22 - Look Ma, No VM! Taking Azure Web Sites to the limit.</a><br/>
-          <a href='http://www.meetup.com/bayazure/events/169902562/' target='_new'><img src='http://photos4.meetupstatic.com/photos/event/9/1/0/2/global_198217122.jpeg'/></a>
-        </div>
-      </div>
-
     <div class="content section">
       <div class="blog" id="blog">
         <a href="/blog/index.html"><h2>Blog</h2></a>
         <dl>
-        {% for post in site.posts limit:5 %}
+        
           <dt>
-            <em>{{ post.date | date: "%d %B %Y" }}</em> - <a href="{{ post.url }}">{{ post.title }}</a>
+            <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/">Authenticating ASP.NET Web API with Azure Mobile Services</a>
           </dt>
           <dd>
-            {{ post.content | excerpt }} <a href="{{ post.url }}" class="readon">Read on →</a>
+            <p>Azure Mobile Services provides a really easy way to integrate social login into web, mobile, and desktop applications. At Magenic, we&#8217;re using it in our client apps for the <a href="http://modernappslive.com/Events/Las-Vegas-2014/Home.aspx">Modern Apps Live!</a> conference demo application called <a href="http://myvotelive.com">MyVote</a>. The web application and the native mobile clients share a common Web API backend deployed to a Web Role on Azure Cloud Services. For most of the Web API methods, we only want to allow calls from users who have successfully authenticated with Azure Mobile Services. Let&#8217;s dig into what it takes to develop a Web API authentication handler that verifies claims issued by Azure Mobile Services. <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/" class="readon">Read on →</a>
           </dd>
-        {% endfor %}
+          <dt>
+            <a href="/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering/">Responsive Re-Engineering</a>
+          </dt>
+          <dd>
+            <p>Conference talk from <a href="http://www.siliconvalley-codecamp.com/">Silicon Valley Code Camp</a> on &#8220;Responsive Re-Engineering,&#8221; focused on adapting desktop-only web sites to be mobile friendly. The <a href="https://github.com/ajryan/CodeCamp2013">code samples</a> and <a href="https://www.slideshare.net/AidanRyan2/responsive-reengineering">slides</a> are online. <a href="/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering/" class="readon">Read on →</a>
+          </dd>
+        
+          <dt>
+            <a href="/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0/">TFS Test Steps Editor 2.1.0</a>
+          </dt>
+          <dd>
+            <p>The 2.1.0 release of my <a href="http://teststepseditor.codeplex.com">TFS Test Steps Editor</a> includes the first community contribution to the project! <a href="/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0/" class="readon">Read on →</a>
+          </dd>
         </dl>
 
         <a href="/blog/index.html">Blog Archives</a>
       </div>
-      <div class="section" id="jobvite">
-        <h2>Magenic Jobs</h2>
-        <div id="jobvite-box"></div>
-      </div>
-    </div>
-    
-    <div class="content section">
-      <div class="section">
+
+      <div class="section" id="projects">
         <h2>Projects</h2>
 
         <ul class="projects">
+          <li class="project">
+            <dl>
+              <dt>RptToXml</dt>
+              <dd>
+                Crystal Reports RPT to XML converter. Allows diff between report versions.<br/>
+                <a href="/RptToXml/">Github</a>
+              </dd>
+            </dl>
+          </li>
           <li class="project">
             <dl>
               <dt>TFS Test Steps Editor</dt>
               <dd>
                 Lightweight editor for Team Foundation Server 2010 and 2012 test cases.<br/>
                 <a href="/TFSTestStepsEditor/">Github</a>
-              </dd>
-            </dl>
-          </li>
-          <li class="project">
-            <dl>
-              <dt>CSharpreter Sublime Text plugin</dt>
-              <dd>
-                C# code snippet runner for Sublime Text.<br/>
-                <a href="http://github.com/ajryan/CSharpreter">Github</a>
               </dd>
             </dl>
           </li>
@@ -121,60 +124,26 @@ layout: landing
           </li>
           <li class="project">
             <dl>
-              <dt>WinHaste</dt>
-              <dd>
-                Native Windows commandline client for <a href="http://hastebin.com">hastebin.com</a>.<br/>
-                <a href="http://github.com/ajryan/WinHaste">Github</a>
-              </dd>
-            </dl>
-          </li>
-          <li class="project">
-            <dl>
-              <dt>RptToXml</dt>
-              <dd>
-                Crystal Reports RPT to XML converter. Allows diff between report versions.<br/>
-                <a href="/RptToXml/">Github</a>
-              </dd>
-            </dl>
-          </li>
-          <li class="project">
-            <dl>
-              <dt>Masters of the Universe</dt>
-              <dd>Funk/folk band<br/><a href="http://mastersband.com">Band site</a></dd>
-            </dl>
-          </li>
-          <li class="project">
-            <dl>
-              <dt>Music From Big Pink Tribute: "Size Color"</dt>
-              <dd>A work in progress<br/><a href="http://ajryan.tumblr.com/tagged/music">Tumblr</a></dd>
+              <dt>Music</dt>
+              <dd>Find my music at <br/><a href="https://soundcloud.com/aidan-ryan-1">SoundCloud</a></dd>
             </dl>
           </li>
         </ul>
       </div>
 
-      <div class="section">
-        <h2>GitHub feed</h2>
-        <ul class="projects">
-          <li class="project" id="github">
-            <dl>
-              <dt>My activity on GitHub</dt>
-              <dd>
-                <ul id="github-feed">
-                </ul>
-              </dd>
-            </dl>
-          </li>
-        </ul>
-      </div>
+    </div>
+    
+    <div class="content section">
 
-      <div class="section contact">
+      <div class="section contact" id="contact">
         <h2>Contact</h2>
 
         <div class="vcard">
-          <p><a href="http://github.com/ajryan">Github</a></p>
-          <p><a href="http://www.linkedin.com/in/ajryan">Linkedin</a></p>
-          <p><a href="http://twitter.com/ajryan">Twitter</a></p>
-          <p><a href="https://plus.google.com/117144688359507811736" rel="publisher">Google+</a></p>
+          <p>
+            <a href="http://github.com/ajryan">Github</a>&nbsp;&middot;&nbsp;
+            <a href="http://www.linkedin.com/in/ajryan">Linkedin</a>&nbsp;&middot;&nbsp;
+            <a href="http://twitter.com/ajryan">Twitter</a>
+          </p>
         </div>
       </div>
     </div>
@@ -187,8 +156,7 @@ layout: landing
 
   </div>
 </div>
-<script src="javascripts/jquery-1.7.1.min.js"></script>
-<script src="javascripts/jobvitebox.js"></script>
+<script src="javascripts/jquery-1.7.1.min.js"></script> 
 <script type="text/javascript">
   function log() {
     if (window.console && window.console.log) {
@@ -200,44 +168,7 @@ layout: landing
   
   function htmlencode(value) {
     return $('<div/>').text(value).html();
-  }
-  
-  function getcommitlink(event) {
-    return 'http://github.com/' +
-      htmlencode(event.repo.name) +
-      '/commit/' +
-      event.payload.commits[0].sha;
-  }
-  
-  function githubcallback(json) {
-    log('got jsonp from github api');
-    var html = '';
-    $.each(json.data, function(i, event) {
-      if (i > 12) {
-        return;
-      }
-      if (event.payload.commits) {
-        html += 
-          '<li>' + 
-          htmlencode(event.repo.name) + ': ' +
-          '<a href="' + getcommitlink(event) + '">' +
-          htmlencode(event.payload.commits[0].message) +
-          '</a></li>';
-      }
-    });
-    $('#github-feed').append(html);
-  }
-
-  $.ajax({
-    url: 'https://api.github.com/users/ajryan/events',
-    dataType: 'jsonp',
-    jsonp: 'callback',
-    jsonpCallback: 'githubcallback',
-    error: function(xhr, msg, e) {
-      $('#github').remove();
-      log(xhr, msg, e);
-    }
-  });
+  } 
 
   function lastfmcallback(json) {
     log('got jsonp from lastfm api');
@@ -266,11 +197,7 @@ layout: landing
         log(xhr, msg, e);
     }
   });
-
-  $('#jobvite-box').jobViteBox('qx99Vfwu', function() {
-    var blogHeight = $('#blog').height();
-    $('#jobvite-box').height(blogHeight - 75);
-  });
 </script>
 </body>
 </html>
+
