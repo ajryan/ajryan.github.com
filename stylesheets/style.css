@@ -192,6 +192,9 @@ h1 {
   padding-bottom: 5px;
   margin-bottom: 1em;
 }
+.about div p {
+  font-size: 1.5em;
+}
 .about b {
   font-size: 1.3125em;
   line-height: 1.23809523809523809523;
@@ -290,7 +293,7 @@ ul.projects {
 }
 
 #github, #contact {
-width: 48%;
+width: 100%;
 }
 
 /* Now Playing */
