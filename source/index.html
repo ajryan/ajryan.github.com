@@ -66,28 +66,17 @@ layout: landing
       <div class="blog" id="blog">
         <a href="/blog/index.html"><h2>Blog</h2></a>
         <dl>
-        
+        {% for post in site.posts limit:4 %}
+          {% if post.hidden != true %}
           <dt>
-            <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/">Authenticating ASP.NET Web API with Azure Mobile Services</a>
+            <a href="{{ post.url }}">{{ post.title }}</a>
           </dt>
           <dd>
-            <p>Azure Mobile Services provides a really easy way to integrate social login into web, mobile, and desktop applications. At Magenic, we&#8217;re using it in our client apps for the <a href="http://modernappslive.com/Events/Las-Vegas-2014/Home.aspx">Modern Apps Live!</a> conference demo application called <a href="http://myvotelive.com">MyVote</a>. The web application and the native mobile clients share a common Web API backend deployed to a Web Role on Azure Cloud Services. For most of the Web API methods, we only want to allow calls from users who have successfully authenticated with Azure Mobile Services. Let&#8217;s dig into what it takes to develop a Web API authentication handler that verifies claims issued by Azure Mobile Services. <a href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/" class="readon">Read on →</a>
+            {{ post.content | excerpt }} <a href="{{ post.url }}" class="readon">Read on →</a>
           </dd>
-          <dt>
-            <a href="/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering/">Responsive Re-Engineering</a>
-          </dt>
-          <dd>
-            <p>Conference talk from <a href="http://www.siliconvalley-codecamp.com/">Silicon Valley Code Camp</a> on &#8220;Responsive Re-Engineering,&#8221; focused on adapting desktop-only web sites to be mobile friendly. The <a href="https://github.com/ajryan/CodeCamp2013">code samples</a> and <a href="https://www.slideshare.net/AidanRyan2/responsive-reengineering">slides</a> are online. <a href="/blog/2013/10/12/silicon-valley-code-camp-2013-responsive-re-engineering/" class="readon">Read on →</a>
-          </dd>
-        
-          <dt>
-            <a href="/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0/">TFS Test Steps Editor 2.1.0</a>
-          </dt>
-          <dd>
-            <p>The 2.1.0 release of my <a href="http://teststepseditor.codeplex.com">TFS Test Steps Editor</a> includes the first community contribution to the project! <a href="/blog/2013/09/04/tfs-test-steps-editor-2-dot-1-0/" class="readon">Read on →</a>
-          </dd>
+          {% endif %}
+        {% endfor %}
         </dl>
-
         <a href="/blog/index.html">Blog Archives</a>
       </div>
 

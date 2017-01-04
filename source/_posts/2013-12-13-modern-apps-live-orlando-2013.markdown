@@ -3,6 +3,7 @@ layout: post
 title: "Modern Apps Live! Looking back, looking forward"
 date: 2014-02-05 15:34
 comments: true
+hidden: true
 categories: [speaking, html5, css3, responsive-web-design]
 ---
 
