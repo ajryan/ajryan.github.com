@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2017-01-03T21:06:34-08:00</updated>
+  <updated>2017-01-20T05:47:24-08:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exist-Spoon - AbstractSpoon ToDoList connection for exist.io]]></title>
+    <link href="http://www.aidanjryan.com/blog/2017/01/19/new-post/"/>
+    <updated>2017-01-19T16:41:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2017/01/19/new-post</id>
+    <content type="html"><![CDATA[<p>I use the fantastic <a href="http://abstractspoon.weebly.com/">AbstractSpoon ToDoList</a> for task tracking. I recently discovered the <a href="http://exist.io">exist.io</a> personal metrics app and wanted to track my daily completed tasks.</p>
+
+<p>I created an integration to do just that, and used it as an opportuniy to do a little development in .NET Core. You can find <a href="http://github.com/ajryan/exist-spoon">exist-spoon</a> on my <a href="http://github.com/ajryan">GitHub page</a>.<!--more--></p>
+
+<p>The exist.io API is simple to work with. The only tricky part was implementing the OAuth authenticaiton flow on a console app. OAuth requires you to serve a page where the user's browser will be redirected after completing the authorization. This page accepts the token provided by the parter (exist.io in this case).</p>
+
+<p>There is no <code>HttpListener</code> in .NET Core, so I started from the web application skeleton and stripped everything down as much as possible. As usually happens with async work, I wrote way too many <code>Task&lt;T&gt;</code> and <code>await</code>s before arriving at the final, simpler structure. I punted on the TDL file format and used a simple regex to parse out when a task has <code>DONEDATE</code> equal to today.</p>
+
+<p>The tool isn't too complicated, but it's gotten my juices flowing after a while without working on personal projects. It was cool to get a shoutout from one of exist.io's creators (Hi <a href="https://twitter.com/joshsharp">Josh</a>!) too.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TFS Test Steps Editor 2.1.0]]></title>
@@ -152,19 +169,6 @@
 <h2>Conclusion</h2>
 
 <p>This was a worthwhile event, the pacing and organization were perfectly executed, the food was good, and plenty of Red-Gaters were available to talk between the sessions. I've got lots of inspiration to take back to work and turn into better-quality databases!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sublime TFS plugin]]></title>
-    <link href="http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin/"/>
-    <updated>2012-09-24T09:38:00-07:00</updated>
-    <id>http://www.aidanjryan.com/blog/2012/09/24/sublime-tfs-plugin</id>
-    <content type="html"><![CDATA[<p>Here's a nice plugin for Sublime Text: <a href="https://bitbucket.org/CDuke/sublime-tfs/wiki/Home">Sublime TFS</a>, by Denis Kulikov. It provides TFS integration right in the editor.<!--more--></p>
-
-<p>Sublime TFS will auto-check-out modified files (a must since files in TFS are readonly until checked out), and provides commands for Add, Delete, History, Check in, Check out, Undo, Get latest, and Compare with latest, available when the current file is under version control (except Add, obviously).</p>
-
-<p>I made a small contribution to the project, adding support for the TFS Power Tools "Annotate" feature (commonly known as "blame"). I have one major complaint about the Annotate output from TFPT, though: you can't open a changeset view by clicking a changeset number. I'm considering using the <code>/noprompt</code> option and dumping the Annotate output into a Sublime Text buffer, then providing the ability to open a changeset view from the buffer. Sounds like fun!</p>
 ]]></content>
   </entry>
   

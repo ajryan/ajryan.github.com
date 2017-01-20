@@ -4,7 +4,7 @@
   <title><![CDATA[Category: development | Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/blog/categories/development/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2017-01-03T21:06:34-08:00</updated>
+  <updated>2017-01-20T05:47:24-08:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exist-Spoon - AbstractSpoon ToDoList connection for exist.io]]></title>
+    <link href="http://www.aidanjryan.com/blog/2017/01/19/new-post/"/>
+    <updated>2017-01-19T16:41:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2017/01/19/new-post</id>
+    <content type="html"><![CDATA[<p>I use the fantastic <a href="http://abstractspoon.weebly.com/">AbstractSpoon ToDoList</a> for task tracking. I recently discovered the <a href="http://exist.io">exist.io</a> personal metrics app and wanted to track my daily completed tasks.</p>
+
+<p>I created an integration to do just that, and used it as an opportuniy to do a little development in .NET Core. You can find <a href="http://github.com/ajryan/exist-spoon">exist-spoon</a> on my <a href="http://github.com/ajryan">GitHub page</a>.<!--more--></p>
+
+<p>The exist.io API is simple to work with. The only tricky part was implementing the OAuth authenticaiton flow on a console app. OAuth requires you to serve a page where the user's browser will be redirected after completing the authorization. This page accepts the token provided by the parter (exist.io in this case).</p>
+
+<p>There is no <code>HttpListener</code> in .NET Core, so I started from the web application skeleton and stripped everything down as much as possible. As usually happens with async work, I wrote way too many <code>Task&lt;T&gt;</code> and <code>await</code>s before arriving at the final, simpler structure. I punted on the TDL file format and used a simple regex to parse out when a task has <code>DONEDATE</code> equal to today.</p>
+
+<p>The tool isn't too complicated, but it's gotten my juices flowing after a while without working on personal projects. It was cool to get a shoutout from one of exist.io's creators (Hi <a href="https://twitter.com/joshsharp">Josh</a>!) too.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Authenticating ASP.NET Web API with Azure Mobile Services]]></title>
@@ -1951,19 +1968,6 @@
 <h4>Tip 4: Deploying to and Debugging on Surface</h4>
 
 <p>To auto-deploy and test the app on my Microsoft Surface, directly from Visual Studio 2012, I followed the steps provided in this <a href="http://elybob.wordpress.com/2012/12/19/step-by-step-to-deploying-app-to-surface/">article</a>. My colleague Rocky Lhotka also has a good <a href="http://www.lhotka.net/weblog/TestingAWinRTAppOnASurfaceRT.aspx">article</a> about packaging an app with a PowerShell script to allow distributing an app package for short-term side-loaded testing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Get peer reviews for your website with Criticue]]></title>
-    <link href="http://www.aidanjryan.com/blog/2013/01/07/get-peer-reviews-for-your-website-with-criticue/"/>
-    <updated>2013-01-07T11:27:00-08:00</updated>
-    <id>http://www.aidanjryan.com/blog/2013/01/07/get-peer-reviews-for-your-website-with-criticue</id>
-    <content type="html"><![CDATA[<p>I encountered a very useful new website called <a href="http://criticue.com"><strong>Criticue</strong></a>. It's a way to get quick, unbiased feedback of your website. It is dead simple to get started, just enter your URL - no signup required.<!--more--> After that, provide at least one review of another site, and you'll shortly get a review of your own. I've submitted two sites and have gotten feedback within 12 hours each time. At any point, you can create a username and password and return later to re-read reviews you've received. You can also submit additional reviews of others' sites and get more feedback on your own site.</p>
-
-<p>It's much easier to turn a critical eye on someone else's work. Looking at your own stuff, you'll always have the reasoning that led you to the current state in the back of your mind. You're seeing what you have imagined and envisioned, not only what actually exists. Web design is about communication - with your own stuff, you already know the information that the site attempts to communicate. Reviewing someone else's work is a great way to exercise critical muscles that you can then use on your own material.</p>
-
-<p>So check out <a href="http://criticue.com">Criticue</a> -- it's win-win: get timely, unbiased feedback on your stuff and practice your own critical eye.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Aidan Ryan]]></title>
   <link href="http://www.aidanjryan.com/atom.xml" rel="self"/>
   <link href="http://www.aidanjryan.com/"/>
-  <updated>2017-01-03T21:06:34-08:00</updated>
+  <updated>2017-01-20T05:47:24-08:00</updated>
   <id>http://www.aidanjryan.com/</id>
   <author>
     <name><![CDATA[Aidan Ryan]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exist-Spoon - AbstractSpoon ToDoList connection for exist.io]]></title>
+    <link href="http://www.aidanjryan.com/blog/2017/01/19/new-post/"/>
+    <updated>2017-01-19T16:41:00-08:00</updated>
+    <id>http://www.aidanjryan.com/blog/2017/01/19/new-post</id>
+    <content type="html"><![CDATA[<p>I use the fantastic <a href="http://abstractspoon.weebly.com/">AbstractSpoon ToDoList</a> for task tracking. I recently discovered the <a href="http://exist.io">exist.io</a> personal metrics app and wanted to track my daily completed tasks.</p>
+
+<p>I created an integration to do just that, and used it as an opportuniy to do a little development in .NET Core. You can find <a href="http://github.com/ajryan/exist-spoon">exist-spoon</a> on my <a href="http://github.com/ajryan">GitHub page</a>.<!--more--></p>
+
+<p>The exist.io API is simple to work with. The only tricky part was implementing the OAuth authenticaiton flow on a console app. OAuth requires you to serve a page where the user&#8217;s browser will be redirected after completing the authorization. This page accepts the token provided by the parter (exist.io in this case).</p>
+
+<p>There is no <code>HttpListener</code> in .NET Core, so I started from the web application skeleton and stripped everything down as much as possible. As usually happens with async work, I wrote way too many <code>Task&lt;T&gt;</code> and <code>await</code>s before arriving at the final, simpler structure. I punted on the TDL file format and used a simple regex to parse out when a task has <code>DONEDATE</code> equal to today.</p>
+
+<p>The tool isn&#8217;t too complicated, but it&#8217;s gotten my juices flowing after a while without working on personal projects. It was cool to get a shoutout from one of exist.io&#8217;s creators (Hi <a href="https://twitter.com/joshsharp">Josh</a>!) too.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Authenticating ASP.NET Web API with Azure Mobile Services]]></title>
@@ -3767,60 +3784,6 @@ wbr</code></p>
 <p>Sublime TFS will auto-check-out modified files (a must since files in TFS are readonly until checked out), and provides commands for Add, Delete, History, Check in, Check out, Undo, Get latest, and Compare with latest, available when the current file is under version control (except Add, obviously).</p>
 
 <p>I made a small contribution to the project, adding support for the TFS Power Tools &#8220;Annotate&#8221; feature (commonly known as &#8220;blame&#8221;). I have one major complaint about the Annotate output from TFPT, though: you can&#8217;t open a changeset view by clicking a changeset number. I&#8217;m considering using the <code>/noprompt</code> option and dumping the Annotate output into a Sublime Text buffer, then providing the ability to open a changeset view from the buffer. Sounds like fun!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Better checkin comments]]></title>
-    <link href="http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments/"/>
-    <updated>2012-09-20T09:39:00-07:00</updated>
-    <id>http://www.aidanjryan.com/blog/2012/09/20/better-checkin-comments</id>
-    <content type="html"><![CDATA[<p>Good source control checkin (commit) comments can be a major time-saver. It&#8217;s important to remember that your checkin comments have a large audience and a long lifetime.<!--more--></p>
-
-<p>I rely on email alerts to get a quick overview of the work accomplished by our offshore team overnight. I want to get a feel for the volume of work accomplished and to identify any risky changes that should be reviewed right away. Quality comments make the difference between a glance through subject lines versus opening diffs to understand the nature of the changes.</p>
-
-<p>The other activity greatly affected by comment quality is browsing source control history to locate the origin of a change. When I see a long list of &#8220;updated,&#8221; &#8220;fixed,&#8221; &#8220;changes,&#8221; I know I&#8217;m in for an arduous hunt.</p>
-
-<h2>Terrible comments:</h2>
-
-<ul>
-<li>Updated</li>
-<li>Changed</li>
-<li>Fixed</li>
-<li>Updates</li>
-<li>Checkin</li>
-</ul>
-
-
-<p>Terrible comments don&#8217;t explain anything at all. Obviously you updated, changed, or fixed something. And you <em>really</em> obviously checked in!</p>
-
-<h2>Bad comments:</h2>
-
-<ul>
-<li>Updated MyClass</li>
-<li>Fixed Bug 5598</li>
-<li>Changes to authentication</li>
-</ul>
-
-
-<p>Bad commenters tend to explain where or why they made changes, but not both. The &#8220;how&#8221; is usually completely missing.</p>
-
-<h2>Good comments:</h2>
-
-<ul>
-<li>Bug 5598 - locking to fix race condition on settings initialization in MyClass</li>
-<li>User Story 3355 - implement Save in Widget class</li>
-</ul>
-
-
-<p>Good comments have two to three components:</p>
-
-<ol>
-<li>Why - The reason the change was made, e.g. the Bug or Story number.</li>
-<li>Where - The location of the change, usually a class or module name.</li>
-<li>How - Required for Bug fixes. Explain the way the change solves the Bug.</li>
-</ol>
-
 ]]></content>
   </entry>
   

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: c-sharp - Aidan Ryan</title>
+  <title>Exist-Spoon - AbstractSpoon ToDoList connection for exist.io - Aidan Ryan</title>
   <meta name="author" content="Aidan Ryan">
 
   
-  <meta name="description" content="Category: c-sharp">
+  <meta name="description" content="I use the fantastic AbstractSpoon ToDoList for task tracking. I recently discovered the exist.io personal metrics app and wanted to track my daily &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.aidanjryan.comblog/categories/c-sharp/">
+  <link rel="canonical" href="http://www.aidanjryan.com/blog/2017/01/19/new-post/">
   <link rel="icon" href="/favicon.ico?v=2">
   <link rel="shortcut icon" href="/favicon.ico?v=2">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -79,36 +79,103 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: C-sharp</h1>
+    
+      <h1 class="entry-title">Exist-Spoon - AbstractSpoon ToDoList Connection for exist.io</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-19T16:41:00-08:00" pubdate data-updated="true">Jan 19<span>th</span>, 2017</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I use the fantastic <a href="http://abstractspoon.weebly.com/">AbstractSpoon ToDoList</a> for task tracking. I recently discovered the <a href="http://exist.io">exist.io</a> personal metrics app and wanted to track my daily completed tasks.</p>
 
-  
-  <h2>2012</h2>
+<p>I created an integration to do just that, and used it as an opportuniy to do a little development in .NET Core. You can find <a href="http://github.com/ajryan/exist-spoon">exist-spoon</a> on my <a href="http://github.com/ajryan">GitHub page</a>.<!--more--></p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/26/csharpreter-plugin-for-sublime-text/">CSharpreter plugin for Sublime Text</a></h1>
-<time datetime="2012-08-26T22:20:00-07:00" pubdate><span class='month'>Aug</span> <span class='day'>26</span> <span class='year'>2012</span></time>
+<p>The exist.io API is simple to work with. The only tricky part was implementing the OAuth authenticaiton flow on a console app. OAuth requires you to serve a page where the user&#8217;s browser will be redirected after completing the authorization. This page accepts the token provided by the parter (exist.io in this case).</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-sharp/'>c-sharp</a>, <a class='category' href='/blog/categories/sublime-text/'>sublime-text</a>, <a class='category' href='/blog/categories/tools/'>tools</a></span>
-</footer>
+<p>There is no <code>HttpListener</code> in .NET Core, so I started from the web application skeleton and stripped everything down as much as possible. As usually happens with async work, I wrote way too many <code>Task&lt;T&gt;</code> and <code>await</code>s before arriving at the final, simpler structure. I punted on the TDL file format and used a simple regex to parse out when a task has <code>DONEDATE</code> equal to today.</p>
 
-
-</article>
-
+<p>The tool isn&#8217;t too complicated, but it&#8217;s gotten my juices flowing after a while without working on personal projects. It was cool to get a shoutout from one of exist.io&#8217;s creators (Hi <a href="https://twitter.com/joshsharp">Josh</a>!) too.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Aidan Ryan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-19T16:41:00-08:00" pubdate data-updated="true">Jan 19<span>th</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/tools/'>tools</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.aidanjryan.com/blog/2017/01/19/new-post/" data-via="" data-counturl="http://www.aidanjryan.com/blog/2017/01/19/new-post/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/05/authenticating-asp-dot-net-web-api-with-azure-mobile-services/" title="Previous Post: Authenticating ASP.NET Web API with Azure Mobile Services">&laquo; Authenticating ASP.NET Web API with Azure Mobile Services</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -164,7 +231,10 @@
       var disqus_shortname = 'aidanjryan';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.aidanjryan.com/blog/2017/01/19/new-post/';
+        var disqus_url = 'http://www.aidanjryan.com/blog/2017/01/19/new-post/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
