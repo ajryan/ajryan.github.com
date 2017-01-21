@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Exist-Spoon - AbstractSpoon ToDoList connection for exist.io"
+date: 2017-01-19 16:41
+comments: true
+categories: [development, tools]
+---
+
+I use the fantastic [AbstractSpoon ToDoList](http://abstractspoon.weebly.com/) for task tracking. I recently discovered the [exist.io](http://exist.io) personal metrics app and wanted to track my daily completed tasks.
+
+I created an integration to do just that, and used it as an opportuniy to do a little development in .NET Core. You can find [exist-spoon](http://github.com/ajryan/exist-spoon) on my [GitHub page](http://github.com/ajryan).<!--more-->
+
+The exist.io API is simple to work with. The only tricky part was implementing the OAuth authenticaiton flow on a console app. OAuth requires you to serve a page where the user's browser will be redirected after completing the authorization. This page accepts the token provided by the parter (exist.io in this case).
+
+There is no `HttpListener` in .NET Core, so I started from the web application skeleton and stripped everything down as much as possible. As usually happens with async work, I wrote way too many `Task<T>` and `await`s before arriving at the final, simpler structure. I punted on the TDL file format and used a simple regex to parse out when a task has `DONEDATE` equal to today.
+
+The tool isn't too complicated, but it's gotten my juices flowing after a while without working on personal projects. It was cool to get a shoutout from one of exist.io's creators (Hi [Josh](https://twitter.com/joshsharp)!) too.
