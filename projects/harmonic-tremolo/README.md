@@ -79,8 +79,8 @@ derivation in `notes.md §1`.
 
 ## Sources
 - **Tremolo component values: traced directly from the Fender Twin‑Amp 6G8‑A
-  schematic (K‑FJ), `Fender_twin_6g8a.pdf`** — both the schematic and layout sheets.
-  (Not committed here — Fender's drawing; keep your own copy.)
+  schematic (K‑FJ)** — both the schematic and layout sheets. Source drawing kept in
+  `reference/Fender_twin_6g8a.pdf` (Fender service schematic).
 - Hoffman turret board / chassis specs: hoffmanamps.com.
 - Hammond 269EX datasheet: hammfg.com.
 - Takamisawa/Fujitsu NA12W‑K datasheet.
