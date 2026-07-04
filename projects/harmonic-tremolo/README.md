@@ -12,12 +12,18 @@ chassis + turret board.
 - **Power:** Hammond 269EX, ~258 V B+, SS rectifier, 3 filter nodes, elevated heaters
 
 ## ⚠️ Read first
-Some 6G8‑A component values **could not be confirmed from a schematic image** in
-the session that generated this (archive sites blocked automated fetch). Those are
-flagged **[P]** in `schematic-trace.md` and listed as a punch‑list in
-`notes.md §3`. **Reconcile them against your copy of the 6G8‑A schematic before
-final ordering** (especially SPEED/INTENSITY pots, phase‑shift caps, mixer
-grid resistors, and the LPF cap). Confirmed values: 250 pF HPF cap, 220 k split.
+- **Trem values are traced from the 6G8‑A schematic** (`Fender_twin_6g8a.pdf`), so
+  they are **[C]** confirmed, not guesses. This is the *harmonic‑vibrato section of
+  the full Twin extracted as a standalone effect* — the power amp / phase inverter
+  are not included.
+- **The two specialty pots** — SPEED **3 M‑RA** and INTENSITY **10 M‑RA** — are the
+  stock Fender values and are **not stocked by Mouser/Digikey** (`TBD` in the BOM).
+  Buy repro Fender vibrato pots from an amp‑parts vendor, or substitute 2–3 M / 10 M
+  in a common taper (feel changes, range doesn't). See `notes.md §3`.
+- Stages I **added** for standalone use (input recovery, cathodyne, cathode
+  follower, relay bypass, PSU) are marked **[D]** and are design, not 6G8‑A trace.
+  Note the LFO uses a cathodyne per the brief rather than the stock 2‑triode
+  oscillator — see `notes.md §6`.
 
 ## Files
 
@@ -72,8 +78,9 @@ adds none). Both even ⇒ **identical polarity, no phase flip on switching.** Fu
 derivation in `notes.md §1`.
 
 ## Sources
-- Fender 6G8/6G8‑A harmonic vibrato topology & the confirmed 250 pF / 220 k split:
-  TDPRI "Exploring Fender's Harmonic Tremolo", Ampwares Blonde Twin, Amp Garage.
+- **Tremolo component values: traced directly from the Fender Twin‑Amp 6G8‑A
+  schematic (K‑FJ), `Fender_twin_6g8a.pdf`** — both the schematic and layout sheets.
+  (Not committed here — Fender's drawing; keep your own copy.)
 - Hoffman turret board / chassis specs: hoffmanamps.com.
 - Hammond 269EX datasheet: hammfg.com.
-- Takamisawa NA12W‑K datasheet.
+- Takamisawa/Fujitsu NA12W‑K datasheet.

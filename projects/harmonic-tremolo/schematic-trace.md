@@ -1,163 +1,147 @@
 # Schematic Trace — Standalone Harmonic Tremolo (Fender 6G8‑A based)
 
-This is the stage‑by‑stage circuit the layout, BOM, and `.diy` are built from.
-Every value carries a confidence marker:
+**Values traced directly from the Fender Twin‑Amp 6G8‑A schematic** (K‑FJ,
+`Fender_twin_6g8a.pdf`, both sheets). The 6G8‑A is a full amp; **this project
+extracts only the harmonic‑vibrato section** and repackages it as a standalone
+effect with an added output buffer, relay bypass, and its own power supply.
 
-- **[C]** Confirmed — corroborated by multiple 6G8‑A / harmonic‑vibrato sources.
-- **[P]** Probable — standard harmonic‑vibrato practice, matches the topology, but
-  **not** cross‑checked against a verified 6G8‑A schematic image. **Verify.**
-- **[D]** Design addition — my design for the parts the 6G8‑A does *not* contain
-  (cathode‑follower output, relay bypass, standalone PSU, 12 V rail). Not a 6G8‑A value.
+Confidence markers:
 
-> ⚠️ I could not fetch a clean 6G8‑A schematic image in this session (the usual
-> archives — el34world, ampwares, tdpri — blocked automated fetch with HTTP 403).
-> Values below marked **[P]** come from my knowledge of the circuit plus text
-> corroboration, not from reading the sheet. Treat `notes.md` "Unconfirmed values"
-> as the punch‑list to reconcile against your copy of the 6G8‑A schematic before
-> ordering the last few parts. This is exactly the "flag anything you can't
-> confirm" the brief asked for.
+- **[C]** Confirmed — read off the 6G8‑A schematic.
+- **[P]** Probable — reasonable value, not explicitly legible on the sheet.
+- **[D]** Design addition — parts the 6G8‑A vibrato does **not** contain
+  (input recovery triode, cathodyne, cathode‑follower output, relay bypass,
+  standalone PSU, 12 V rail). Not a 6G8‑A value — my design.
 
----
-
-## Triode allocation (3 × 12AX7 = 6 triodes)
-
-The 6G8‑A five‑triode harmonic vibrato needs exactly 5 triodes; the 6th (the
-"spare half tube" the brief mentions) becomes the cathode‑follower output. I
-grouped triodes by **function per envelope** to keep the LFO out of the audio
-tubes — cleaner than the original, which shares envelopes between LFO and audio:
-
-| Tube | Triode a | Triode b | Rationale |
-|------|----------|----------|-----------|
-| **V1** | Input driver | Cathode‑follower output | both **audio**, one envelope |
-| **V2** | HF mixer/modulator | LF mixer/modulator | both **audio**, one envelope |
-| **V3** | LFO oscillator | Cathodyne phase splitter | both **LFO**, isolated envelope |
-
-Physical order in the chassis (input end → PT end): **V1 → V2 → V3**, so the
-LFO tube (V3) sits farthest from the input jack.
+> **What the tremolo uses in the stock amp:** the harmonic vibrato spans the
+> **first 12AX7** (LFO oscillator, 2 triodes) and a **7025** running at **+330 V**
+> (the two bias‑varied modulator triodes with the RC split bridge between them).
+> The two 7025s on the right of the schematic (PRESENCE, 100k/470k long‑tail,
+> +295 V/+330 V) are the **power‑amp phase inverter/driver — NOT the tremolo** and
+> are not reproduced here.
 
 ---
 
-## Signal path (audio)
+## Triode allocation for the standalone unit (3 × 12AX7 = 6 triodes)
+
+| Tube | Triode a | Triode b | Notes |
+|------|----------|----------|-------|
+| **V1** | Input recovery/driver **[D]** | Cathode‑follower output **[D]** | both audio |
+| **V2** | HF modulator **[C values]** | LF modulator **[C values]** | both audio |
+| **V3** | LFO oscillator **[C values]** | Cathodyne phase splitter **[D]** | both LFO, isolated |
+
+**Topology note (honest):** the stock 6G8‑A makes its LFO from a **2‑triode
+phase‑shift oscillator** and drives the two modulators from that network — it has
+**no dedicated cathodyne.** The brief explicitly asked for a phase‑shift LFO **and**
+a cathodyne, so this build uses a **1‑triode oscillator + 1‑triode cathodyne**
+(V3a/V3b) to generate the two anti‑phase LFO drives. That is a deliberate design
+choice, not the stock wiring — see the caveat in `notes.md §6`. All the *component
+values* below are the stock 6G8‑A values; the *interconnection* of the LFO is the
+brief's cathodyne variant.
+
+---
+
+## Audio path
 
 ```
-IN ─▶ [relay bypass select] ──────────────────────────────┐ (bypass, dry)
-  └▶ V1a driver ─▶ HPF/LPF split ─▶ V2a (HF) ┐             │
-                              └────▶ V2b (LF) ┴─▶ MIX ─▶ [relay select]─▶ V1b follower ─▶ LEVEL ─▶ OUT
-                                    ▲    ▲
-                            bias‑vary from cathodyne (LFO)
+IN ─▶ [relay select] ────────────────────────────────────────────┐ (bypass, dry)
+  └▶ V1a recovery ─▶ HPF/LPF split ─▶ V2a (HF) ┐                   │
+                                 └──▶ V2b (LF) ┴─▶ MIX ─▶ [relay]─▶ V1b follower ─▶ LEVEL ─▶ OUT
+                                       ▲    ▲
+                               anti‑phase bias from cathodyne (LFO)
 ```
 
-### 1. Input driver — V1a
-Recovers level and drives the passive split (which is lossy).
+### 1. Input recovery / driver — V1a **[D]**
+The stock circuit feeds the modulators from the vibrato‑channel preamp (a whole
+7025 + tone stack). A standalone effect doesn't have that, so V1a is a single
+recovery stage to make up the passive‑split loss. **These are my values, not 6G8‑A.**
 
 | Part | Value | Conf | Note |
 |------|-------|------|------|
-| R1 grid stopper | 68 k | [P] | |
-| R2 grid leak | 1 M | [P] | |
-| R3 plate load | 100 k | [P] | to B+3 |
-| R4 cathode | 1.5 k (unbypassed) | [P] | unbypassed = a little local NFB, tames the split drive |
-| C1 output coupling | 0.022 µF | [P] | into split node |
+| R1 grid stopper | 68 k | [P] | (stock vibrato input stoppers are 68 k) |
+| R2 grid leak | 1 M | [D] | |
+| R3 plate load | 100 k | [D] | to B+3 |
+| R4 cathode | 1.5 k | [D] | |
+| C1 output coupling | 0.022 µF | [D] | into split |
 
-*Inversion: 1 (common‑cathode).* 
+*Inversion: 1.*
 
-### 2. HPF / LPF split (passive) — **the defining harmonic‑vibrato node**
-The driver output splits into a **high‑pass** leg to the HF modulator and a
-**low‑pass** leg to the LF modulator. When the two are re‑summed after opposite
-bias modulation, the crossover between them sweeps — the "harmonic" (phase‑y)
-character.
+### 2. HPF / LPF split (passive) — **all confirmed on the 6G8‑A**
+The defining harmonic‑vibrato node: audio splits into a high‑pass leg to the HF
+modulator and a low‑pass leg to the LF modulator.
 
 | Part | Value | Conf | Note |
 |------|-------|------|------|
-| C2 HPF series cap → HF grid | **250 pF** | **[C]** | corroborated across sources |
-| R5 LPF series R (split) | **220 k** | **[C]** | corroborated |
-| C3 LPF cap → LF grid | 0.005 µF | [P] | one source says .005 µF; **some variants show 0.02 µF — verify** |
-| R6 HF grid reference | 220 k | [P] | |
+| C2 HPF cap → HF grid | **250 pF (.00025)** | **[C]** | |
+| R5 LPF split resistor | **220 k** | **[C]** | |
+| C3 LPF cap → LF grid | **0.005 µF (.005)** | **[C]** | now confirmed (earlier this was flagged) |
 
-*Inversion: 0 (passive).* 
+*Inversion: 0.*
 
-### 3. Mixer / modulator triodes — V2a (HF), V2b (LF)
-Each amplifies its band; the LFO varies each grid's bias (bias‑vary tremolo) in
-**anti‑phase**, so as one band ducks the other swells.
+### 3. Modulator triodes — V2a (HF), V2b (LF) — **7025 @ +330 V in stock**
+Each amplifies its band; the LFO varies the two grids' bias in **anti‑phase**.
 
 | Part | Value | Conf | Note |
 |------|-------|------|------|
-| R7 / R8 plate loads | 100 k each | [P] | to B+2; outputs re‑summed at MIX via C4/C5 |
-| R9 shared cathode | 1.5 k | [P] | |
-| R10 / R11 grid LFO‑inject / leak | 3.3 M each | [P] | **high‑Z bias nodes — value strongly affects depth/thump; verify** |
-| C4 / C5 output coupling | 0.022 µF each | [P] | sum at MIX node |
+| R7 / R8 plate loads | **100 k, 5 % matched** | **[C]** | 5 % for balanced modulation; to B+2 |
+| R12 / R13 plate mixing | **470 k each** | **[C]** | sum the two plates into the MIX node |
+| R9 shared cathode | **4.7 k** | **[C]** | with C4 bypass |
+| C4 cathode bypass | **2 µF** | **[C]** | stock "2 / 25" (2 µF/25 V) |
+| R10 / R11 modulator grid R | **1 M each** | **[C]** | LFO reaches the grids via the 10 M INTENSITY pot |
+| — grid DC bias | ~+68 V | [C] | stock shows +68.5 V / +70 V bias points |
 
-*Inversion: 1 (each mixer is common‑cathode; summed → net 1).* 
+*Inversion: 1 (summed).* Stock plate supply is **+330 V**; this build runs ~240 V
+(B+2) per the 250–300 V brief — see headroom note in `notes.md §2`.
 
-### 4. Cathode‑follower output — V1b **[D — my addition, not 6G8‑A]**
-Both the trem path and the dry bypass path are routed **through this one
-follower**, per the brief, so both paths get identical output buffering, level,
-and polarity.
+### 4. Cathode‑follower output — V1b **[D — not in the 6G8‑A]**
+Both trem and dry bypass route through this one follower so both paths get
+identical buffering, level, and polarity.
 
 | Part | Value | Conf | Note |
 |------|-------|------|------|
 | R20 grid leak | 1 M → gnd | [D] | grid at 0 V DC |
-| R21 cathode / output tap | 22 k | [D] | see operating‑point note in `notes.md` |
-| C8 output coupling | 0.1 µF | [D] | to OUTPUT LEVEL pot P3 (1 M) |
+| R21 cathode / output | 22 k | [D] | operating‑point note in `notes.md §2` |
+| C8 output coupling | 0.1 µF | [D] | to OUTPUT LEVEL P3 |
 
-*Inversion: 0 (follower).* 
+*Inversion: 0.*
 
 ---
 
-## LFO path (kept physically away from audio)
+## LFO path (physically isolated from audio)
 
-### 5. LFO oscillator — V3a (3‑stage RC phase‑shift)
-A phase‑shift oscillator: 3 RC sections give the 180° needed for oscillation at
-the low tremolo rate; SPEED (P1) varies the network R to set rate.
+### 5. LFO oscillator — V3a — **first 12AX7 in stock; values confirmed**
+| Part | Value | Conf | Note |
+|------|-------|------|------|
+| R15 plate load | **470 k** | **[C]** | stock plates at +170 V/+175 V |
+| R16 cathode | **4.7 k** | **[C]** | with C5 bypass |
+| C5 cathode bypass | **25 µF** | **[C]** | stock "25 / 25" |
+| C10 / C11 / C12 phase‑shift caps | **.01 / .02 / .03** | **[C]** | graduated network (stock) |
+| R17 / R18 phase‑shift R | **1 M** | **[C]** | |
+| R19 feedback R | **4.7 M** | **[C]** | |
+| series R after speed | 100 k | [C] | |
+| **P1 SPEED** | **3 M reverse‑audio (RA)** | **[C]** | stock "SPEED 3M‑RA" |
+
+### 6. Cathodyne phase splitter — V3b **[D]**
+Produces two equal anti‑phase LFO drives to bias the modulators oppositely.
+INTENSITY sets depth.
 
 | Part | Value | Conf | Note |
 |------|-------|------|------|
-| R15 plate load | 220 k | [P] | to B+3 |
-| R16 cathode | 2.2 k | [P] | |
-| C10 / C11 / C12 phase‑shift caps | 0.01 µF ×3 | [P] | **set tremolo rate range — verify against sheet** |
-| R17 / R18 / R19 phase‑shift R | 1 M ×3 | [P] | with SPEED pot |
-| **P1 SPEED** | **5 M audio** | [P] | brown‑era used a very large speed pot (3 M–5 M class); **verify value/taper** |
-
-### 6. Cathodyne phase splitter — V3b
-Takes the oscillator output and produces two equal, **anti‑phase** LFO drives
-(plate vs cathode) to bias the two mixers oppositely. INTENSITY (P2) sets how
-much LFO reaches the mixer grids = tremolo depth.
-
-| Part | Value | Conf | Note |
-|------|-------|------|------|
-| R12 plate load | 100 k | [P] | anti‑phase A → HF mixer grid |
-| R13 cathode load | 100 k | [P] | anti‑phase B → LF mixer grid (equal loads = balanced) |
-| R14 grid leak | 1 M | [P] | |
-| C9 osc→cathodyne coupling | 0.02 µF | [P] | |
-| **P2 INTENSITY** | **1 M audio** | [P] | in the cathodyne→mixer bias path; **verify value** |
+| R33 plate load | 100 k | [D] | equal to cathode for balance |
+| R34 cathode load | 100 k | [D] | |
+| R14 grid leak | 1 M | [D] | |
+| C9 osc→cathodyne coupling | 0.02 µF | [C] | stock uses .02 here |
+| **P2 INTENSITY** | **10 M reverse‑audio (RA)** | **[C]** | stock "INTENSITY 10M‑RA" — a specialty value, see `notes.md §3` for sourcing |
 
 ---
 
 ## Relay true‑bypass — K1 (Takamisawa NA12W‑K, DPDT, 12 VDC) **[D]**
-
-- **Pole 1** selects the follower‑grid source: **NC = bypass** (dry `IN` via C7),
-  **NO = engaged** (`MIX` via C6). Coil de‑energized = bypass (fail‑safe to dry).
-- **Pole 2** spare — used for the LED/status indication.
-- **Pop suppression:** permanent 1 M bleeds (R20 on the grid, R22 on the bypass
-  node, R31 on the engaged node) hold every coupling‑cap board node at 0 V DC, so
-  the relay never connects a DC‑charged node to the grid → no switch pop. Coupling
-  caps (C6/C7) block any residual DC. D5 = coil flyback diode.
-- **Footswitch:** latching SPST (push‑on/off) over a TRS jack (J3): tip = 12 V to
-  coil, ring = LED return in the footswitch, sleeve = ground.
-
----
+Unchanged from the first pass: coil de‑energized = **bypass (dry)**; pop
+suppression via 1 M bleeds (R20/R22/R31) holding all coupling nodes at 0 V DC;
+D5 coil flyback; latching footswitch over TRS (J3).
 
 ## Power supply **[D]**
-
-- **PT:** Hammond **269EX** — 380 V **CT** @ 71 mA, 6.3 V @ 2.5 A, 43 VA (datasheet
-  confirmed). See `notes.md` for why this is rectified **center‑tapped full‑wave
-  (2× 1N4007)** rather than a 4‑diode bridge.
-- **Rectifier:** D1/D2 (1N4007) full‑wave CT → reservoir C13 (22 µF/450 V).
-- **Three filter nodes:** B+1 (C13) → R23 4.7 k → B+2 (C14) → R24 10 k → B+3 (C15).
-  Estimated voltages in `notes.md`.
-- **Heaters:** 6.3 VAC twisted pair, artificial center tap (R29/R30 = 100 Ω),
-  DC‑elevated to ~+80 V off a B+1 divider (R25 220 k / R26 100 k, C16 bypass).
-- **12 VDC relay rail:** 6.3 VAC → voltage doubler (D3/D4, C17/C18 100 µF) →
-  ~16 VDC → 78L12 (U1) → 12 V. R28 = 220 k safety bleeder across B+1.
-
-See `notes.md` for polarity verification, node‑voltage estimates, and the full
-unconfirmed‑value punch‑list.
+Hammond 269EX (380 VCT @ 71 mA, datasheet confirmed), **center‑tapped full‑wave
+(2× 1N4007)** to land ~258 V — *not* a bridge (see `notes.md §4a`). Three RC filter
+nodes, DC‑elevated heaters, 12 V relay rail doubled/regulated off the 6.3 VAC
+heater. Full detail and node voltages in `notes.md`.

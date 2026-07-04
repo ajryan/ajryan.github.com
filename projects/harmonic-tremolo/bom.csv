@@ -3,25 +3,27 @@ R1,Resistor,68k,1/2W CF,594-5083NW68K000J,IN - V1a_G,V1a grid stopper
 R2,Resistor,1M,1/2W CF,594-5083NW1M0000J,V1a_G - GND_1,V1a grid leak
 R3,Resistor,100k,1/2W CF,594-5083NW100K00J,V1a_P - BPLUS3,V1a plate load (*)
 R4,Resistor,1.5k,1/2W CF,594-5083NW1K5000J,V1a_K - GND_1,V1a cathode (*)
-R5,Resistor,220k,1/2W CF,594-5083NW220K00J,SPLIT - LF_G,LPF series (split) - CONFIRMED
-R6,Resistor,220k,1/2W CF,594-5083NW220K00J,HF_G - GND_2,HF grid reference (*)
-R7,Resistor,100k,1/2W CF,594-5083NW100K00J,HF_P - BPLUS2,V2a (HF) plate load (*)
-R8,Resistor,100k,1/2W CF,594-5083NW100K00J,LF_P - BPLUS2,V2b (LF) plate load (*)
-R9,Resistor,1.5k,1/2W CF,594-5083NW1K5000J,MIX_K - GND_2,mixer shared cathode (*)
-R10,Resistor,3.3M,1/2W CF,594-5083NW3M3000J,BIAS_HF - HF_G,HF grid LFO-inject / leak (*)
-R11,Resistor,3.3M,1/2W CF,594-5083NW3M3000J,BIAS_LF - LF_G,LF grid LFO-inject / leak (*)
-R12,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_P - BPLUS1,cathodyne plate load (*)
-R13,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_K - GND_3,cathodyne cathode load (*)
-R14,Resistor,1M,1/2W CF,594-5083NW1M0000J,CATH_G - GND_3,cathodyne grid leak (*)
-R15,Resistor,220k,1/2W CF,594-5083NW220K00J,LFO_P - BPLUS3,LFO plate load (*)
-R16,Resistor,2.2k,1/2W CF,594-5083NW2K2000J,LFO_K - GND_3,LFO cathode (*)
-R17,Resistor,1M,1/2W CF,594-5083NW1M0000J,LFO_G - PS1,phase-shift R1 (*)
-R18,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS1 - PS2,phase-shift R2 (*)
-R19,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS2 - PS3,phase-shift R3 (*)
+R5,Resistor,220k,1/2W CF,594-5083NW220K00J,SPLIT - LF_G,LPF series (split) [C] confirmed on 6G8-A
+R6,Resistor,220k,1/2W CF,594-5083NW220K00J,HF_G - GND_2,HF grid reference [P]
+R7,Resistor,100k,1/2W 5%,594-5063JD100K0J,HF_P - BPLUS2,HF modulator plate load - 100k 5% matched [C]
+R8,Resistor,100k,1/2W 5%,594-5063JD100K0J,LF_P - BPLUS2,LF modulator plate load - 100k 5% matched [C]
+R9,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,MIX_K - GND_2,modulator shared cathode 4700 [C]
+R10,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_HF - HF_G,HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
+R11,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_LF - LF_G,LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
+R12,Resistor,470k,1/2W CF,594-5083NW470K00J,HF_P - MIX,HF plate mixing resistor 470k [C]
+R13,Resistor,470k,1/2W CF,594-5083NW470K00J,LF_P - MIX,LF plate mixing resistor 470k [C]
+R14,Resistor,1M,1/2W CF,594-5083NW1M0000J,CATH_G - GND_3,cathodyne grid leak [D]
+R15,Resistor,470k,1/2W CF,594-5083NW470K00J,LFO_P - BPLUS3,LFO plate load 470k [C]
+R16,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,LFO_K - GND_3,LFO cathode 4700 [C]
+R17,Resistor,1M,1/2W CF,594-5083NW1M0000J,LFO_G - PS1,phase-shift R1 - 1M [C]
+R18,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS1 - PS2,phase-shift R2 - 1M [C]
+R19,Resistor,4.7M,1/2W CF,594-5083NW4M7000J,PS2 - PS3,phase-shift feedback R - 4.7M [C]
 R20,Resistor,1M,1/2W CF,594-5083NW1M0000J,FOL_G - GND_5,follower grid leak (grid at 0V DC)
 R21,Resistor,22k,1/2W CF,594-5083NW22K000J,FOL_K - GND_PSU,follower cathode load / output tap
 R22,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_BYP - GND_5,bypass-node bleed (pop supp)
 R31,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_ENG - GND_5,engaged-node bleed (pop supp)
+R33,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_P - BPLUS1,cathodyne plate load [D] (equal to cathode for balance)
+R34,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_K - GND_3,cathodyne cathode load [D] (equal to plate for balance)
 R23,Resistor,4.7k,1W  MO,71-CMF60-4.7K-E3,BPLUS1 - BPLUS2,B+1->B+2 dropper
 R24,Resistor,10k,1W  MO,71-CMF60-10K-E3,BPLUS2 - BPLUS3,B+2->B+3 dropper
 R25,Resistor,220k,1/2W CF,594-5083NW220K00J,BPLUS1 - HTR_CT,heater elevation divider top
@@ -32,16 +34,16 @@ R29,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_A - HTR_CT,heater artificial-CT /
 R30,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_B - HTR_CT,heater artificial-CT / elevation tie
 C1,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,DRV_OUT - SPLIT,V1a output coupling
 C2,Capacitor (film/mica),250pF,500V mica,80-DM15FD251JO3,SPLIT - HF_G,HPF to HF mixer - CONFIRMED
-C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to LF mixer (*)
-C4,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,HF_P - MIX,HF mixer output coupling
-C5,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,LF_P - MIX,LF mixer output coupling
+C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to LF modulator - .005 [C] confirmed on 6G8-A
+C4,Capacitor (electrolytic),2uF,25V elec,667-EEU-FR1E2R2,MIX_K - GND_2,modulator shared cathode bypass (4700//2uF) [C]
+C5,Capacitor (electrolytic),25uF,25V elec,667-EEU-FR1E250,LFO_K - GND_3,LFO cathode bypass (4700//25uF) [C]
 C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,mixer -> relay engaged coupling
 C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling
 C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_OUT - RLY_ENG,follower output coupling
 C9,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,LFO_P - CATH_G,LFO->cathodyne coupling (*)
-C10,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,LFO_G - PS1,phase-shift C1 (*)
-C11,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,PS1 - PS2,phase-shift C2 (*)
-C12,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,PS2 - PS3,phase-shift C3 (*)
+C10,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,LFO_G - PS1,phase-shift C1 - .01 [C] (graduated network)
+C11,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,PS1 - PS2,phase-shift C2 - .02 [C] (graduated network)
+C12,Capacitor (film/mica),0.033uF,630V film,80-R82EC3330DK50J,PS2 - PS3,phase-shift C3 - .03 [C] (nearest E-series to stock .03)
 C13,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS1 - GND_PSU,B+1 reservoir
 C14,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS2 - GND_PSU,B+2 filter
 C15,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS3 - GND_PSU,B+3 filter
@@ -58,8 +60,8 @@ D5,Diode,1N4007,1000V 1A,512-1N4007,RLY_COIL+ - RLY_COIL-,relay coil flyback dio
 V1,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V1a input driver, V1b cathode follower"
 V2,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V2a HF mixer, V2b LF mixer"
 V3,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V3a LFO oscillator, V3b cathodyne splitter"
-P1,Potentiometer,5M audio,-,TBD,chassis-mount,SPEED (LFO phase-shift) (*)
-P2,Potentiometer,1M audio,-,588-P1M-A,chassis-mount,INTENSITY (LFO depth to mixers) (*)
+P1,Potentiometer,3M reverse-audio (RA),-,TBD,chassis-mount,SPEED - 6G8-A stock 3M-RA [C] (RA taper; substitute 2M/2.5M linear if 3M-RA unavailable)
+P2,Potentiometer,10M reverse-audio (RA),-,TBD,chassis-mount,INTENSITY - 6G8-A stock 10M-RA [C] (RA taper; 10M is a specialty value - see notes)
 P3,Potentiometer,1M audio,-,588-P1M-A,chassis-mount,OUTPUT LEVEL
 J1,Jack,1/4 mono,-,568-NMJ4HCD2,chassis-mount,INPUT jack
 J2,Jack,1/4 mono,-,568-NMJ4HCD2,chassis-mount,OUTPUT jack

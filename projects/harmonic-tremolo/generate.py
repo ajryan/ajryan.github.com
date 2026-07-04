@@ -134,25 +134,27 @@ comp("R1", "R", "68k",  "1/2W CF", "594-5083NW68K000J", "T1",  "T2",  "V1a grid 
 comp("R2", "R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T2",  "T5",  "V1a grid leak")
 comp("R3", "R", "100k", "1/2W CF", "594-5083NW100K00J", "T4",  "T38", "V1a plate load (*)")
 comp("R4", "R", "1.5k", "1/2W CF", "594-5083NW1K5000J", "T3",  "T5",  "V1a cathode (*)")
-comp("R5", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T7",  "T9",  "LPF series (split) - CONFIRMED")
-comp("R6", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T8",  "T16", "HF grid reference (*)")
-comp("R7", "R", "100k", "1/2W CF", "594-5083NW100K00J", "T12", "T37", "V2a (HF) plate load (*)")
-comp("R8", "R", "100k", "1/2W CF", "594-5083NW100K00J", "T13", "T37", "V2b (LF) plate load (*)")
-comp("R9", "R", "1.5k", "1/2W CF", "594-5083NW1K5000J", "T14", "T16", "mixer shared cathode (*)")
-comp("R10","R", "3.3M", "1/2W CF", "594-5083NW3M3000J", "T17", "T10", "HF grid LFO-inject / leak (*)")
-comp("R11","R", "3.3M", "1/2W CF", "594-5083NW3M3000J", "T18", "T11", "LF grid LFO-inject / leak (*)")
-comp("R12","R", "100k", "1/2W CF", "594-5083NW100K00J", "T19", "T36", "cathodyne plate load (*)")
-comp("R13","R", "100k", "1/2W CF", "594-5083NW100K00J", "T21", "T28", "cathodyne cathode load (*)")
-comp("R14","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T20", "T28", "cathodyne grid leak (*)")
-comp("R15","R", "220k", "1/2W CF", "594-5083NW220K00J", "T22", "T38", "LFO plate load (*)")
-comp("R16","R", "2.2k", "1/2W CF", "594-5083NW2K2000J", "T24", "T28", "LFO cathode (*)")
-comp("R17","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T23", "T25", "phase-shift R1 (*)")
-comp("R18","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T25", "T26", "phase-shift R2 (*)")
-comp("R19","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T26", "T27", "phase-shift R3 (*)")
+comp("R5", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T7",  "T9",  "LPF series (split) [C] confirmed on 6G8-A")
+comp("R6", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T8",  "T16", "HF grid reference [P]")
+comp("R7", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T12", "T37", "HF modulator plate load - 100k 5% matched [C]")
+comp("R8", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T13", "T37", "LF modulator plate load - 100k 5% matched [C]")
+comp("R9", "R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T14", "T16", "modulator shared cathode 4700 [C]")
+comp("R10","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T17", "T10", "HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
+comp("R11","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T18", "T11", "LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
+comp("R12","R", "470k", "1/2W CF", "594-5083NW470K00J", "T12", "T15", "HF plate mixing resistor 470k [C]")
+comp("R13","R", "470k", "1/2W CF", "594-5083NW470K00J", "T13", "T15", "LF plate mixing resistor 470k [C]")
+comp("R14","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T20", "T28", "cathodyne grid leak [D]")
+comp("R15","R", "470k", "1/2W CF", "594-5083NW470K00J", "T22", "T38", "LFO plate load 470k [C]")
+comp("R16","R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T24", "T28", "LFO cathode 4700 [C]")
+comp("R17","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T23", "T25", "phase-shift R1 - 1M [C]")
+comp("R18","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T25", "T26", "phase-shift R2 - 1M [C]")
+comp("R19","R", "4.7M", "1/2W CF", "594-5083NW4M7000J", "T26", "T27", "phase-shift feedback R - 4.7M [C]")
 comp("R20","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T29", "T35", "follower grid leak (grid at 0V DC)")
 comp("R21","R", "22k",  "1/2W CF", "594-5083NW22K000J", "T30", "T42", "follower cathode load / output tap")
 comp("R22","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T34", "T35", "bypass-node bleed (pop supp)")
 comp("R31","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T33", "T35", "engaged-node bleed (pop supp)")
+comp("R33","R", "100k", "1/2W CF", "594-5083NW100K00J", "T19", "T36", "cathodyne plate load [D] (equal to cathode for balance)")
+comp("R34","R", "100k", "1/2W CF", "594-5083NW100K00J", "T21", "T28", "cathodyne cathode load [D] (equal to plate for balance)")
 comp("R23","R", "4.7k", "1W  MO",  "71-CMF60-4.7K-E3",  "T36", "T37", "B+1->B+2 dropper")
 comp("R24","R", "10k",  "1W  MO",  "71-CMF60-10K-E3",   "T37", "T38", "B+2->B+3 dropper")
 comp("R25","R", "220k", "1/2W CF", "594-5083NW220K00J", "T36", "T41", "heater elevation divider top")
@@ -165,16 +167,16 @@ comp("R30","R", "100",  "1/2W CF", "594-5083NW100R00J", "HTR_B", "HTR_CT", "heat
 # ---- Capacitors ----
 comp("C1",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T6",  "T7",  "V1a output coupling")
 comp("C2",  "Cf", "250pF",   "500V mica", "80-DM15FD251JO3",   "T7",  "T8",  "HPF to HF mixer - CONFIRMED")
-comp("C3",  "Cf", "0.005uF", "630V film", "80-R82DC3470DQ50J", "T7",  "T9",  "LPF to LF mixer (*)")
-comp("C4",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T12", "T15", "HF mixer output coupling")
-comp("C5",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T13", "T15", "LF mixer output coupling")
+comp("C3",  "Cf", "0.005uF", "630V film", "80-R82DC3470DQ50J", "T7",  "T9",  "LPF to LF modulator - .005 [C] confirmed on 6G8-A")
+comp("C4",  "Ce", "2uF",     "25V elec",  "667-EEU-FR1E2R2",   "T14", "T16", "modulator shared cathode bypass (4700//2uF) [C]")
+comp("C5",  "Ce", "25uF",    "25V elec",  "667-EEU-FR1E250",   "T24", "T28", "LFO cathode bypass (4700//25uF) [C]")
 comp("C6",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T15", "T33", "mixer -> relay engaged coupling")
 comp("C7",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T1",  "T34", "dry -> relay bypass coupling")
 comp("C8",  "Cf", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T31", "T33", "follower output coupling")
 comp("C9",  "Cf", "0.02uF",  "630V film", "80-R82DC3200DQ50J", "T22", "T20", "LFO->cathodyne coupling (*)")
-comp("C10", "Cf", "0.01uF",  "630V film", "80-R82DC3100DQ50J", "T23", "T25", "phase-shift C1 (*)")
-comp("C11", "Cf", "0.01uF",  "630V film", "80-R82DC3100DQ50J", "T25", "T26", "phase-shift C2 (*)")
-comp("C12", "Cf", "0.01uF",  "630V film", "80-R82DC3100DQ50J", "T26", "T27", "phase-shift C3 (*)")
+comp("C10", "Cf", "0.01uF",  "630V film", "80-R82DC3100DQ50J", "T23", "T25", "phase-shift C1 - .01 [C] (graduated network)")
+comp("C11", "Cf", "0.02uF",  "630V film", "80-R82DC3200DQ50J", "T25", "T26", "phase-shift C2 - .02 [C] (graduated network)")
+comp("C12", "Cf", "0.033uF", "630V film", "80-R82EC3330DK50J", "T26", "T27", "phase-shift C3 - .03 [C] (nearest E-series to stock .03)")
 comp("C13", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T36", "T42", "B+1 reservoir")
 comp("C14", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T37", "T42", "B+2 filter")
 comp("C15", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T38", "T42", "B+3 filter")
@@ -202,10 +204,10 @@ CHASSIS = [
          desc="9-pin noval: V2a HF mixer, V2b LF mixer", x=5.0, y=2.0),
     dict(ref="V3", kind="socket", value="12AX7", mouser="534-8206",
          desc="9-pin noval: V3a LFO oscillator, V3b cathodyne splitter", x=7.5, y=2.0),
-    dict(ref="P1", kind="pot", value="5M audio", mouser="",
-         desc="SPEED (LFO phase-shift) (*)", x=3.0, y=0.9),
-    dict(ref="P2", kind="pot", value="1M audio", mouser="588-P1M-A",
-         desc="INTENSITY (LFO depth to mixers) (*)", x=5.0, y=0.9),
+    dict(ref="P1", kind="pot", value="3M reverse-audio (RA)", mouser="",
+         desc="SPEED - 6G8-A stock 3M-RA [C] (RA taper; substitute 2M/2.5M linear if 3M-RA unavailable)", x=3.0, y=0.9),
+    dict(ref="P2", kind="pot", value="10M reverse-audio (RA)", mouser="",
+         desc="INTENSITY - 6G8-A stock 10M-RA [C] (RA taper; 10M is a specialty value - see notes)", x=5.0, y=0.9),
     dict(ref="P3", kind="pot", value="1M audio", mouser="588-P1M-A",
          desc="OUTPUT LEVEL", x=7.0, y=0.9),
     dict(ref="J1", kind="jack", value="1/4 mono", mouser="568-NMJ4HCD2",

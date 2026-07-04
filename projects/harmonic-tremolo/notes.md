@@ -96,30 +96,38 @@ swing. Left at 0 V/22 k as the simpler default. **[design choice — verify on b
 
 ---
 
-## 3. Values I could NOT confirm from the 6G8‑A schematic
+## 3. Value provenance — traced from the 6G8‑A schematic
 
-Punch‑list to reconcile against your copy of the sheet **before final ordering**.
-Confirmed values (do not need checking): **C2 = 250 pF HPF**, **R5 = 220 k split**,
-five‑triode topology, and the LFO being a 3‑stage phase‑shift oscillator.
+The 6G8‑A schematic (`Fender_twin_6g8a.pdf`) was read directly. Earlier guesses
+that were **wrong** and are now corrected from the sheet:
 
-| Ref | Assumed | Why unsure / what to check |
-|-----|---------|---------------------------|
-| C3 | 0.005 µF LPF cap | one text source; **some 6G8‑A variants show 0.02 µF**. Sets the LF band corner. |
-| R10, R11 | 3.3 M mixer grid inject/leak | value drives depth & "thump"; brown vs BF differed. Could be 2.2 M–10 M. |
-| R7, R8 | 100 k mixer plate loads | typical, not read off sheet |
-| R9 | 1.5 k shared mixer cathode | typical |
-| R3, R4 | 100 k / 1.5 k driver | typical driver values |
-| R12, R13 | 100 k / 100 k cathodyne | standard balanced cathodyne; verify they're equal on your sheet |
-| R15, R16 | 220 k / 2.2 k LFO | typical |
-| C10–C12 | 0.01 µF ×3 phase‑shift | **sets tremolo rate range** — the value most worth confirming for feel |
-| R17–R19 | 1 M ×3 phase‑shift | pairs with SPEED pot |
-| **P1 SPEED** | 5 M audio | brown vs BF used 3 M vs 4 M‑class; confirm value **and** taper |
-| **P2 INTENSITY** | 1 M audio | confirm value and where it taps (cathodyne output vs grid returns) |
-| C9 | 0.02 µF osc→cathodyne | typical |
+| Ref | Earlier guess | **Corrected (from schematic)** |
+|-----|--------------|-------------------------------|
+| **P2 INTENSITY** | 1 M | **10 M reverse‑audio (RA)** |
+| **P1 SPEED** | 5 M | **3 M reverse‑audio (RA)** |
+| R15 LFO plate load | 220 k | **470 k** |
+| R16 LFO cathode | 2.2 k | **4.7 k // 25 µF** |
+| C10/C11/C12 phase‑shift | .01/.01/.01 | **.01 / .02 / .03** (graduated) + **4.7 M** feedback |
+| R7/R8 modulator plates | 100 k | **100 k, 5 % matched** |
+| R10/R11 modulator grid R | 3.3 M | **1 M** |
+| R9 modulator cathode | 1.5 k | **4.7 k // 2 µF** |
+| plate mixing | (cap‑coupled) | **470 k** resistive mixing (R12/R13) |
+| C3 LPF cap | 0.005 µF *(flagged)* | **0.005 µF — confirmed** |
 
-Everything marked **[D]** in `schematic-trace.md` (follower, relay, PSU, 12 V
-rail) is my design, not a 6G8‑A value, so it is not on this list — but it is still
-"verify on bench" engineering, not gospel.
+Confirmed and unchanged: **C2 = 250 pF HPF**, **R5 = 220 k split**.
+
+**Sourcing note — the specialty pots.** SPEED **3 M‑RA** and INTENSITY **10 M‑RA**
+are Fender‑era reverse‑audio values that mainstream distributors (Mouser/Digikey)
+do not stock — hence `TBD` in the BOM. Get them from guitar‑amp parts vendors
+(Mojotone, Amplified Parts, Angela, Hoffman) who carry repro Fender vibrato pots,
+**or** substitute: a **10 M** linear/audio for INTENSITY and **2 M–3 M** linear for
+SPEED work if you can't find the RA taper — the taper only changes control feel,
+not the range. Confirm on the bench.
+
+Still genuinely **[P]** (probable, not legible on the sheet): R6 (HF grid ref).
+Everything marked **[D]** in `schematic-trace.md` is my design (input recovery
+triode, cathodyne, follower, relay, PSU, 12 V rail) — not a 6G8‑A value, so it is
+"verify on bench" engineering rather than a schematic trace.
 
 ---
 
@@ -177,10 +185,32 @@ for a stage unit.
 
 ---
 
-## 5. Known limitations of this deliverable (honest scope)
+## 6. Topology caveat — cathodyne vs stock LFO
 
-1. **Unverified 6G8‑A values** — Section 3. The schematic image could not be
-   fetched here; reconcile before ordering P1/P2/C3/C10‑12/R10‑11.
+The stock 6G8‑A generates the two anti‑phase modulator drives from a **2‑triode
+phase‑shift oscillator** (the first 12AX7), with **no dedicated cathodyne**. The
+brief asked for a phase‑shift LFO **and** a cathodyne, so this build uses a
+**1‑triode oscillator (V3a) + 1‑triode cathodyne (V3b)**. Consequence to verify on
+the bench: a single‑triode phase‑shift oscillator has less loop gain than the stock
+two‑triode design, so with the stock **.01/.02/.03 + 4.7 M + 3 M** network it may
+need a nudge to oscillate reliably (raise the phase‑shift Rs, or reduce the
+graduated caps toward three equal ~.02 µF). Two clean options:
+
+- **Follow the brief (this build):** 1‑triode osc + cathodyne, tune for reliable
+  start‑up.
+- **Follow stock exactly:** use both triodes of V3 as the oscillator and take the
+  two anti‑phase drives from the network directly — drop the cathodyne. Frees no
+  parts but is the proven Fender arrangement.
+
+Either way the modulator, split, and INTENSITY/SPEED values above are the stock
+6G8‑A values.
+
+## 7. Known limitations of this deliverable (honest scope)
+
+1. **Standalone adaptation, not a 1:1 clone.** Trem *values* are traced from the
+   6G8‑A; the input recovery stage, cathodyne, follower, bypass and PSU are added
+   for standalone use (all marked **[D]**). The stock modulators run at **+330 V**;
+   this build runs ~240 V per the 250–300 V brief, trading some headroom (§2).
 2. **Turret‑board layout is first‑pass.** The drill table and net map are complete
    and on the Hoffman 0.25" grid, but components are assigned to turrets by net,
    not yet optimized so every part spans adjacent turrets. `layout.svg` shows the

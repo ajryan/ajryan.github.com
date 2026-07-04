@@ -370,7 +370,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R9</name>
-      <value>1.5k</value>
+      <value>4.7k</value>
       <controlPoints>
         <point x="2.9000" y="2.2750"/>
         <point x="2.9000" y="2.7750"/>
@@ -378,7 +378,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R10</name>
-      <value>3.3M</value>
+      <value>1M</value>
       <controlPoints>
         <point x="3.4000" y="2.2750"/>
         <point x="2.9000" y="1.2750"/>
@@ -386,7 +386,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R11</name>
-      <value>3.3M</value>
+      <value>1M</value>
       <controlPoints>
         <point x="3.4000" y="2.7750"/>
         <point x="2.9000" y="1.7750"/>
@@ -394,18 +394,18 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R12</name>
-      <value>100k</value>
+      <value>470k</value>
       <controlPoints>
-        <point x="4.4000" y="0.7750"/>
-        <point x="7.4000" y="0.7750"/>
+        <point x="3.4000" y="0.7750"/>
+        <point x="3.9000" y="0.7750"/>
       </controlPoints>
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R13</name>
-      <value>100k</value>
+      <value>470k</value>
       <controlPoints>
-        <point x="4.4000" y="1.7750"/>
-        <point x="4.4000" y="2.7750"/>
+        <point x="3.4000" y="1.7750"/>
+        <point x="3.9000" y="0.7750"/>
       </controlPoints>
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
@@ -418,7 +418,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R15</name>
-      <value>220k</value>
+      <value>470k</value>
       <controlPoints>
         <point x="4.9000" y="0.7750"/>
         <point x="7.4000" y="1.7750"/>
@@ -426,7 +426,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R16</name>
-      <value>2.2k</value>
+      <value>4.7k</value>
       <controlPoints>
         <point x="4.9000" y="2.2750"/>
         <point x="4.4000" y="2.7750"/>
@@ -450,7 +450,7 @@
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
       <name>R19</name>
-      <value>1M</value>
+      <value>4.7M</value>
       <controlPoints>
         <point x="5.4000" y="1.7750"/>
         <point x="5.4000" y="2.2750"/>
@@ -486,6 +486,22 @@
       <controlPoints>
         <point x="6.9000" y="0.7750"/>
         <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R33</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="4.4000" y="0.7750"/>
+        <point x="7.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R34</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="4.4000" y="1.7750"/>
+        <point x="4.4000" y="2.7750"/>
       </controlPoints>
     </org.diylc.components.passive.Resistor>
     <org.diylc.components.passive.Resistor>
@@ -552,22 +568,22 @@
         <point x="2.4000" y="1.7750"/>
       </controlPoints>
     </org.diylc.components.passive.AxialFilmCapacitor>
-    <org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.RadialElectrolytic>
       <name>C4</name>
-      <value>0.022uF</value>
+      <value>2uF</value>
       <controlPoints>
-        <point x="3.4000" y="0.7750"/>
-        <point x="3.9000" y="0.7750"/>
+        <point x="2.9000" y="2.2750"/>
+        <point x="2.9000" y="2.7750"/>
       </controlPoints>
-    </org.diylc.components.passive.AxialFilmCapacitor>
-    <org.diylc.components.passive.AxialFilmCapacitor>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
       <name>C5</name>
-      <value>0.022uF</value>
+      <value>25uF</value>
       <controlPoints>
-        <point x="3.4000" y="1.7750"/>
-        <point x="3.9000" y="0.7750"/>
+        <point x="4.9000" y="2.2750"/>
+        <point x="4.4000" y="2.7750"/>
       </controlPoints>
-    </org.diylc.components.passive.AxialFilmCapacitor>
+    </org.diylc.components.passive.RadialElectrolytic>
     <org.diylc.components.passive.AxialFilmCapacitor>
       <name>C6</name>
       <value>0.022uF</value>
@@ -610,7 +626,7 @@
     </org.diylc.components.passive.AxialFilmCapacitor>
     <org.diylc.components.passive.AxialFilmCapacitor>
       <name>C11</name>
-      <value>0.01uF</value>
+      <value>0.02uF</value>
       <controlPoints>
         <point x="5.4000" y="1.2750"/>
         <point x="5.4000" y="1.7750"/>
@@ -618,7 +634,7 @@
     </org.diylc.components.passive.AxialFilmCapacitor>
     <org.diylc.components.passive.AxialFilmCapacitor>
       <name>C12</name>
-      <value>0.01uF</value>
+      <value>0.033uF</value>
       <controlPoints>
         <point x="5.4000" y="1.7750"/>
         <point x="5.4000" y="2.2750"/>
@@ -743,14 +759,14 @@
     </org.diylc.components.tube.TubeSocket>
     <org.diylc.components.electromechanical.PotentiometerPanel>
       <name>P1</name>
-      <value>5M audio</value>
+      <value>3M reverse-audio (RA)</value>
       <controlPoints>
         <point x="3.0000" y="7.3250"/>
       </controlPoints>
     </org.diylc.components.electromechanical.PotentiometerPanel>
     <org.diylc.components.electromechanical.PotentiometerPanel>
       <name>P2</name>
-      <value>1M audio</value>
+      <value>10M reverse-audio (RA)</value>
       <controlPoints>
         <point x="5.0000" y="7.3250"/>
       </controlPoints>
