@@ -246,6 +246,23 @@ CHASSIS = [
          desc="Effect-engaged indicator LED", x=8.0, y=0.5),
 ]
 
+# ----------------------------------------------------------------------------
+# Jumper / bus wires: same-net turrets NOT already joined by a component.
+# type "power" -> red in layout.svg (B+ busses + ground buss);
+# type "signal" -> yellow (dry-bypass tap, driver plate tie).
+# ----------------------------------------------------------------------------
+JUMPERS = [
+    ("W1", "T4",  "T6",  "signal"),   # V1a plate node == coupling-out tie
+    ("W2", "T1",  "T50", "signal"),   # IN -> dry-bypass tap near relay
+    ("W3", "T52", "T36", "power"),    # B+1 bus (local -> reservoir)
+    ("W4", "T10", "T37", "power"),    # B+2 bus
+    ("W5", "T49", "T11", "power"),    # B+3 bus segment
+    ("W6", "T11", "T38", "power"),    # B+3 bus segment
+]
+_GBUSS = ["T5", "T16", "T28", "T56", "T55", "T35", "T32", "T51", "T42", "T54"]
+for _i in range(len(_GBUSS) - 1):     # ground buss along bottom edge
+    JUMPERS.append((f"WG{_i+1}", _GBUSS[_i], _GBUSS[_i+1], "power"))
+
 # ============================================================================
 #  EMITTERS
 # ============================================================================
@@ -375,12 +392,26 @@ def emit_layout_svg():
                  f'text-anchor="middle" fill="{col}">{c["ref"]}</text>')
         e.append(f'<text x="{mx:.1f}" y="{my+6:.1f}" font-family="monospace" font-size="6" '
                  f'text-anchor="middle" fill="#666">{c["value"]}</text>')
+    # jumper / bus wires: red = power (B+ + ground buss), yellow = signal
+    jcol = {"power": "#d00000", "signal": "#e0a800"}
+    for jn, a, b, jt in JUMPERS:
+        if a not in T or b not in T:
+            continue
+        x1, y1, _ = T[a]; x2, y2, _ = T[b]
+        e.append(f'<line x1="{X(x1):.1f}" y1="{Y(y1):.1f}" x2="{X(x2):.1f}" y2="{Y(y2):.1f}" '
+                 f'stroke="{jcol[jt]}" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>')
     for tid, (tx, ty, net) in T.items():
         e.append(f'<circle cx="{X(tx):.1f}" cy="{Y(ty):.1f}" r="3" fill="#b8860b" stroke="#5a4300"/>')
     for mid, mx, my in MOUNT_HOLES:
         e.append(f'<circle cx="{X(mx):.1f}" cy="{Y(my):.1f}" r="5" fill="none" stroke="#999" stroke-width="1.2"/>')
+    # legend for jumper colors
+    ly = Hh - 20
+    e.append(f'<line x1="{X(0.4):.1f}" y1="{ly:.1f}" x2="{X(0.85):.1f}" y2="{ly:.1f}" stroke="#d00000" stroke-width="3.4" stroke-linecap="round"/>')
+    e.append(f'<text x="{X(0.95):.1f}" y="{ly+3:.1f}" font-family="sans-serif" font-size="8" fill="#a00000">power jumper (B+ / ground buss)</text>')
+    e.append(f'<line x1="{X(3.4):.1f}" y1="{ly:.1f}" x2="{X(3.85):.1f}" y2="{ly:.1f}" stroke="#e0a800" stroke-width="3.4" stroke-linecap="round"/>')
+    e.append(f'<text x="{X(3.95):.1f}" y="{ly+3:.1f}" font-family="sans-serif" font-size="8" fill="#b0860a">signal jumper</text>')
     e.append(f'<text x="{X(BOARD_W/2):.1f}" y="{Hh-8:.1f}" font-family="sans-serif" font-size="8" '
-             f'text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - PSU/relay-supply on bottom rail</text>')
+             f'text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - ground buss + B+ buss along bottom</text>')
     e.append('</svg>')
     with open("layout.svg", "w") as f:
         f.write("\n".join(e))
@@ -389,13 +420,16 @@ def emit_diylc():
     """Real DIYLC 6.x (.diy) project. Structure/field-templated verbatim from
     DIYLC's own regression .diy files (a Doug Hoffman turret board + pedal
     projects), so it deserializes in DIYLC 6.1.0. Root is org.diylc.core.Project,
-    fileVersion 3.46. The turret board carries on-board parts (R/C/D/trimmer);
-    chassis parts (sockets/pots/jacks/PT/relay) are annotated as labels below it.
-    DIYLC y-axis is top-down, so board-y is flipped from the drill drawing."""
+    fileVersion 3.46. The turret board carries on-board parts (R/C/D/trimmer) plus
+    bus/ground JUMPERS; chassis parts are REAL DIYLC components you can wire from
+    the board - tube sockets (B9A) above, pots/jacks/relay(DIL-8)/switch/fuse/LED
+    below (PT and IEC are labels). DIYLC y-axis is top-down, so board-y is flipped
+    from the drill drawing and offset below the sockets."""
     SU = 'class="org.diylc.core.measures.SizeUnit"'
     RU = 'class="org.diylc.core.measures.ResistanceUnit"'
     CU = 'class="org.diylc.core.measures.CapacitanceUnit"'
-    def dy(tid): return BOARD_H - T[tid][1]           # flip to DIYLC top-down
+    BY0 = 1.60                                        # board top offset (room for sockets above)
+    def dy(tid): return BY0 + BOARD_H - T[tid][1]     # flip + offset to DIYLC top-down
     def dx(tid): return T[tid][0]
     def col(tag, r, g, b, a=255):
         return (f"<{tag}><red>{r}</red><green>{g}</green><blue>{b}</blue>"
@@ -444,16 +478,16 @@ def emit_diylc():
     w('<title>Harmonic Tremolo (6G8-A) - Turret Board</title>')
     w('<author>generated</author>')
     w('<description>Standalone tube harmonic tremolo - see notes.md / schematic-trace.md</description>')
-    w(f'<width><value>{BOARD_W + 1.0}</value><unit {SU}>in</unit></width>')
-    w(f'<height><value>{BOARD_H + 2.0}</value><unit {SU}>in</unit></height>')
+    w(f'<width><value>{BOARD_W + 1.5}</value><unit {SU}>in</unit></width>')
+    w(f'<height><value>{1.60 + BOARD_H + 1.6}</value><unit {SU}>in</unit></height>')
     w(f'<gridSpacing><value>0.125</value><unit {SU}>in</unit></gridSpacing>')
     w('<components>')
 
     # --- Board ---
     w('<org.diylc.components.boards.BlankBoard>')
     w('<name>Board1</name><alpha>127</alpha><value></value>')
-    w(f'<controlPoints>{jpt(0,0)}{jpt(BOARD_W, BOARD_H)}</controlPoints>')
-    w(f'<firstPoint x="0.0" y="0.0"/><secondPoint x="{BOARD_W:.4f}" y="{BOARD_H:.4f}"/>')
+    w(f'<controlPoints>{jpt(0,BY0)}{jpt(BOARD_W, BY0+BOARD_H)}</controlPoints>')
+    w(f'<firstPoint x="0.0" y="{BY0:.4f}"/><secondPoint x="{BOARD_W:.4f}" y="{BY0+BOARD_H:.4f}"/>')
     w(col("boardColor", 204, 204, 204))
     w(col("borderColor", 173, 164, 125))
     w(col("coordinateColor", 182, 182, 182))
@@ -478,7 +512,7 @@ def emit_diylc():
         w(f'<name>{mid}</name><alpha>127</alpha>')
         w(size("diameter", round(MOUNT_HOLE_D, 4)))
         w(col("color", 160, 160, 160))
-        w(f'<point x="{mx:.4f}" y="{BOARD_H - my:.4f}"/>')
+        w(f'<point x="{mx:.4f}" y="{BY0 + BOARD_H - my:.4f}"/>')
         w('</org.diylc.components.electromechanical.DrillHole>')
 
     # --- On-board components (both endpoints on turrets) ---
@@ -557,12 +591,106 @@ def emit_diylc():
             mx, my = (dx(a) + dx(b)) / 2, (dy(a) + dy(b)) / 2
             _label(w, font, f'{c["ref"]} {c["value"]}', mx, my, 12.0)
 
-    # --- Chassis parts (off-board) as labels in a strip below the board ---
-    _label(w, font, "CHASSIS-MOUNTED (not on board):", 0.2, BOARD_H + 0.35, 12.0)
-    for i, c in enumerate(CHASSIS):
-        lx = 0.2 + (i % 5) * 1.55
-        ly = BOARD_H + 0.65 + (i // 5) * 0.30
-        _label(w, font, f'{c["ref"]} {c["value"]}', lx, ly, 10.0)
+    # --- Jumper / bus wires (same-net turrets) ---
+    jlead = {"power": (255, 0, 0), "signal": (210, 175, 0)}
+    for jn, a, b, jt in JUMPERS:
+        if a not in T or b not in T:
+            continue
+        w('<org.diylc.components.connectivity.Jumper>')
+        w(f'<name>{jn}</name><alpha>127</alpha>')
+        w(f'<points>{jpt(dx(a), dy(a))}{jpt(dx(b), dy(b))}</points>')
+        w(col("bodyColor", 255, 255, 255)); w(col("borderColor", 0, 0, 0))
+        w(col("labelColor", 0, 0, 0)); w(col("leadColor", *jlead[jt]))
+        w('<display>NAME</display><flipStanding>false</flipStanding>')
+        w('</org.diylc.components.connectivity.Jumper>')
+
+    # --- Chassis-mounted parts as real DIYLC components (wire from board) ---
+    # Sockets mount ABOVE the board, pots/jacks BELOW - standard Hoffman convention.
+    yb = BY0 + BOARD_H + 0.60
+    POS = {
+        "V1": (1.15, 0.80), "V2": (2.55, 0.80), "V3": (3.55, 0.80),
+        "J1": (0.55, yb), "P1": (1.70, yb), "P2": (2.70, yb), "P3": (3.70, yb),
+        "J3": (4.70, yb), "J2": (5.45, yb),
+        "LED1": (5.10, BY0 + BOARD_H + 0.25), "K1": (3.95, BY0 + BOARD_H + 0.35),
+        "SW1": (5.95, BY0 + BOARD_H + 0.35), "F1": (6.20, BY0 + BOARD_H + 0.05),
+        "T101": (5.05, 0.60), "IEC1": (6.00, 0.95),
+    }
+    SOCK = [(0, 0), (0.24, -0.335), (0.39, -0.13), (0.39, 0.125), (0.24, 0.33),
+            (0, 0.41), (-0.245, 0.33), (-0.395, 0.125), (-0.395, -0.13), (-0.245, -0.335)]
+    POT = [(0, 0), (-0.2, 0), (-0.4, 0)]
+    JACK = [(0, 0), (-0.2, 0.4), (-0.9, 0.3)]
+    DIP8 = [(0, 0), (0, 0.1), (0, 0.2), (0, 0.3), (0.3, 0), (0.3, 0.1), (0.3, 0.2), (0.3, 0.3)]
+    SW6 = [(0, 0), (0, 0.2), (0, 0.4), (0.2, 0), (0.2, 0.2), (0.2, 0.4)]
+    FUSE = [(0, 0), (0, 0.2)]
+    def cp(cx, cy, offs): return "".join(jpt(cx + ox, cy + oy) for ox, oy in offs)
+    for c in CHASSIS:
+        ref, kind, val = c["ref"], c["kind"], c["value"]
+        cx, cy = POS.get(ref, (0.3, yb + 0.7))
+        if kind == "socket":
+            w('<org.diylc.components.tube.TubeSocket>')
+            w(f'<name>{ref}</name><alpha>127</alpha><base>B9A</base><type></type><angle>180</angle>')
+            w(col("color", 247, 247, 239))
+            w(f'<controlPoints>{cp(cx, cy, SOCK)}</controlPoints>')
+            w('</org.diylc.components.tube.TubeSocket>')
+        elif kind == "pot":
+            rv, ru = res_value(val.split()[0])
+            w('<org.diylc.components.passive.PotentiometerPanel>')
+            w(f'<name>{ref}</name><alpha>127</alpha>')
+            w(f'<controlPoints>{cp(cx, cy, POT)}</controlPoints>')
+            w(f'<resistance><value>{rv}</value><unit {RU}>{ru}</unit></resistance>')
+            w('<orientation>_180</orientation><taper>LOG</taper>')
+            w(f'<bodyDiameter><value>16.0</value><unit {SU}>mm</unit></bodyDiameter>')
+            w(size("spacing", 0.2)); w(size("lugDiameter", 0.15))
+            w(col("bodyColor", 192, 192, 192)); w(col("borderColor", 128, 128, 128))
+            w(col("nutColor", 203, 213, 219)); w(col("waferColor", 205, 133, 0))
+            w('<type>ThroughHole</type><showShaft>false</showShaft>')
+            w('</org.diylc.components.passive.PotentiometerPanel>')
+        elif kind == "jack":
+            typ = "STEREO" if "TRS" in val else "MONO"
+            w('<org.diylc.components.electromechanical.OpenJack1__4>')
+            w(f'<name>{ref}</name><alpha>127</alpha><value></value>')
+            w(f'<controlPoints>{cp(cx, cy, JACK)}</controlPoints>')
+            w(f'<orientation>_90</orientation><type>{typ}</type><showLabels>true</showLabels>')
+            w('</org.diylc.components.electromechanical.OpenJack1__4>')
+        elif kind == "relay":
+            w('<org.diylc.components.semiconductors.DIL__IC>')
+            w(f'<name>{ref}</name><alpha>88</alpha><value></value><orientation>DEFAULT</orientation>')
+            w('<pinCount>_8</pinCount>')
+            w(size("pinSpacing", 0.1)); w(size("rowSpacing", 0.3))
+            w(f'<controlPoints>{cp(cx, cy, DIP8)}</controlPoints>')
+            w('<display>BOTH</display>')
+            w(col("bodyColor", 128, 128, 128)); w(col("borderColor", 89, 89, 89))
+            w(col("labelColor", 0, 0, 0)); w(col("indentColor", 89, 89, 89))
+            w('<displayNumbers>NO</displayNumbers>')
+            w('</org.diylc.components.semiconductors.DIL__IC>')
+        elif kind == "switch":
+            w('<org.diylc.components.electromechanical.MiniToggleSwitch>')
+            w(f'<name>{ref}</name><alpha>127</alpha>')
+            w(f'<controlPoints>{cp(cx, cy, SW6)}</controlPoints>')
+            w('<switchType>DPDT</switchType><orientation>VERTICAL</orientation>')
+            w(size("spacing", 0.2))
+            w(col("bodyColor", 50, 153, 204)); w(col("borderColor", 35, 107, 142))
+            w('</org.diylc.components.electromechanical.MiniToggleSwitch>')
+        elif kind == "fuse":
+            w('<org.diylc.components.electromechanical.FuseHolderPanel>')
+            w(f'<name>{ref}</name><alpha>127</alpha><value></value><orientation>VERTICAL</orientation>')
+            w('<hasFuse>false</hasFuse><display>VALUE</display>')
+            w(f'<controlPoints>{cp(cx, cy, FUSE)}</controlPoints>')
+            w(col("bodyColor", 85, 85, 85)); w(col("borderColor", 59, 59, 59)); w(col("labelColor", 0, 0, 0))
+            w('</org.diylc.components.electromechanical.FuseHolderPanel>')
+        elif kind == "led":
+            w('<org.diylc.components.semiconductors.LED>')
+            w(f'<name>{ref}</name><alpha>127</alpha>')
+            w(f'<length><value>5.0</value><unit {SU}>mm</unit></length>')
+            w(f'<width><value>5.0</value><unit {SU}>mm</unit></width>')
+            w(f'<points>{jpt(cx, cy)}{jpt(cx - 0.2, cy)}</points>')
+            w(col("bodyColor", 93, 252, 10)); w(col("borderColor", 65, 176, 7))
+            w(col("labelColor", 0, 0, 0)); w(col("leadColor", 204, 204, 204))
+            w('<display>NAME</display><flipStanding>false</flipStanding><value></value>')
+            w('</org.diylc.components.semiconductors.LED>')
+        else:                                  # transformer, IEC inlet -> label glyph
+            _label(w, font, f'{ref} {val}', cx, cy, 11.0)
+    _label(w, font, "sockets above / pots+jacks below (chassis-mounted)", 0.2, yb + 0.5, 10.0)
 
     w('</components>')
     w('<groups/>')

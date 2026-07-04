@@ -169,6 +169,21 @@
 <line x1="384.0" y1="127.2" x2="420.0" y2="315.4" stroke="#555" stroke-width="2.4" opacity="0.8"/>
 <text x="402.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#555">VR1</text>
 <text x="402.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M lin</text>
+<line x1="168.0" y1="84.0" x2="204.0" y2="84.0" stroke="#e0a800" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="96.0" y1="84.0" x2="384.0" y2="84.0" stroke="#e0a800" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="276.0" y1="267.4" x2="492.0" y2="173.3" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="312.0" y1="267.4" x2="528.0" y2="173.3" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="168.0" y1="267.4" x2="384.0" y2="267.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="384.0" y1="267.4" x2="564.0" y2="173.3" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="96.0" y1="315.4" x2="240.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="240.0" y1="315.4" x2="312.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="312.0" y1="315.4" x2="348.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="348.0" y1="315.4" x2="384.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="384.0" y1="315.4" x2="420.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="420.0" y1="315.4" x2="456.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="456.0" y1="315.4" x2="492.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="492.0" y1="315.4" x2="564.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+<line x1="564.0" y1="315.4" x2="600.0" y2="315.4" stroke="#d00000" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
 <circle cx="96.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="132.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="132.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
@@ -228,5 +243,9 @@
 <circle cx="633.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
 <circle cx="81.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
 <circle cx="633.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
-<text x="357.6" y="407.2" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - PSU/relay-supply on bottom rail</text>
+<line x1="96.0" y1="395.2" x2="139.2" y2="395.2" stroke="#d00000" stroke-width="3.4" stroke-linecap="round"/>
+<text x="148.8" y="398.2" font-family="sans-serif" font-size="8" fill="#a00000">power jumper (B+ / ground buss)</text>
+<line x1="384.0" y1="395.2" x2="427.2" y2="395.2" stroke="#e0a800" stroke-width="3.4" stroke-linecap="round"/>
+<text x="436.8" y="398.2" font-family="sans-serif" font-size="8" fill="#b0860a">signal jumper</text>
+<text x="357.6" y="407.2" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - ground buss + B+ buss along bottom</text>
 </svg>

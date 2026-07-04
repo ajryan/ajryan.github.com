@@ -1,7 +1,7 @@
 # Hoffman custom turret board - drill coordinate table
-# Extracted from harmonic-tremolo.diy (DIYLC is master for positions)
-# Origin = lower-left corner. Units = inches.,,,,
+"# Origin = lower-left corner of board. Units = inches. Grid = 0.250"""
 # Board size = 6.250 W x 3.125 H,,,,
+"# Turret hole dia = 0.094"" (3/32"")","Mount hole dia = 0.150""",,,
 Hole ID,X (in),Y (in),Dia (in),Net / Purpose
 T1,0.400,2.850,0.094,IN
 T2,0.775,2.850,0.094,V1a_G
