@@ -386,85 +386,195 @@ def emit_layout_svg():
         f.write("\n".join(e))
 
 def emit_diylc():
-    """Best-effort DIYLC v4 (.diy) XML. Open in DIYLC 4.x and verify/adjust.
-    Coordinates in inches; DIYLC point coords may need rescale on import."""
-    PPI = 1.0  # write inches directly; DIYLC grid set to 0.25in below
-    proj = ET.Element("project")
-    fv = ET.SubElement(proj, "fileVersion")
-    for tag, val in (("major", "4"), ("minor", "27"), ("build", "0")):
-        ET.SubElement(fv, tag).text = val
-    ET.SubElement(proj, "title").text = "Harmonic Tremolo Unit (6G8-A based)"
-    ET.SubElement(proj, "author").text = "generated"
-    ET.SubElement(proj, "description").text = "Standalone tube harmonic tremolo - see notes.md"
-    w = ET.SubElement(proj, "width"); w.set("value", "12.0"); w.set("unit", "in")
-    h = ET.SubElement(proj, "height"); h.set("value", "8.0"); h.set("unit", "in")
-    gs = ET.SubElement(proj, "gridSpacing"); gs.set("value", "0.25"); gs.set("unit", "in")
-    ET.SubElement(proj, "dotSpacing").text = "1"
-    comps = ET.SubElement(proj, "components")
+    """Real DIYLC 6.x (.diy) project. Structure/field-templated verbatim from
+    DIYLC's own regression .diy files (a Doug Hoffman turret board + pedal
+    projects), so it deserializes in DIYLC 6.1.0. Root is org.diylc.core.Project,
+    fileVersion 3.46. The turret board carries on-board parts (R/C/D/trimmer);
+    chassis parts (sockets/pots/jacks/PT/relay) are annotated as labels below it.
+    DIYLC y-axis is top-down, so board-y is flipped from the drill drawing."""
+    SU = 'class="org.diylc.core.measures.SizeUnit"'
+    RU = 'class="org.diylc.core.measures.ResistanceUnit"'
+    CU = 'class="org.diylc.core.measures.CapacitanceUnit"'
+    def dy(tid): return BOARD_H - T[tid][1]           # flip to DIYLC top-down
+    def dx(tid): return T[tid][0]
+    def col(tag, r, g, b, a=255):
+        return (f"<{tag}><red>{r}</red><green>{g}</green><blue>{b}</blue>"
+                f"<alpha>{a}</alpha></{tag}>")
+    def size(tag, v):
+        return f'<{tag}><value>{v}</value><unit {SU}>in</unit></{tag}>'
+    def jpt(x, y):
+        return f'<java.awt.Point x="{x:.4f}" y="{y:.4f}"/>'
+    def font(sz=14.0, family="Dialog"):
+        return ("<font><attributes>"
+                "<entry><awt-text-attribute>posture</awt-text-attribute><null/></entry>"
+                f"<entry><awt-text-attribute>family</awt-text-attribute><string>{family}</string></entry>"
+                "<entry><awt-text-attribute>tracking</awt-text-attribute><null/></entry>"
+                "<entry><awt-text-attribute>width</awt-text-attribute><null/></entry>"
+                "<entry><awt-text-attribute>transform</awt-text-attribute><null/></entry>"
+                "<entry><awt-text-attribute>superscript</awt-text-attribute><null/></entry>"
+                f"<entry><awt-text-attribute>size</awt-text-attribute><float>{sz}</float></entry>"
+                "<entry><awt-text-attribute>weight</awt-text-attribute><null/></entry>"
+                "</attributes></font>")
 
-    def pt(parent, x, y):
-        p = ET.SubElement(parent, "point"); p.set("x", f"{x:.4f}"); p.set("y", f"{y:.4f}")
+    def res_value(s):
+        s = s.strip()
+        if s.endswith(("k", "K")): return s[:-1], "K"
+        if s.endswith("M"): return s[:-1], "M"
+        return s, "R"
+    def cap_value(s):
+        s = s.strip()
+        if s.lower().endswith("pf"): return s[:-2], "pF"
+        if s.lower().endswith("uf"): return s[:-2], "uF"
+        if s.lower().endswith("nf"): return s[:-2], "nF"
+        return s, "uF"
+    VOLTS = [16, 25, 63, 100, 160, 250, 300, 350, 400, 500, 630]
+    def cap_voltage(rating):
+        n = "".join(ch for ch in rating.split("V")[0] if ch.isdigit() or ch == ".")
+        try: rv = float(n)
+        except ValueError: rv = 630
+        for v in VOLTS:
+            if v >= rv: return f"_{v}V"
+        return "_630V"
 
-    # Turret board
-    tb = ET.SubElement(comps, "org.diylc.components.boards.TurretBoard")
-    ET.SubElement(tb, "name").text = "Board1"
-    pts = ET.SubElement(tb, "controlPoints")
-    pt(pts, 0.4, 0.4); pt(pts, 0.4 + BOARD_W, 0.4 + BOARD_H)
-    ET.SubElement(tb, "boardWidth").text = f"{BOARD_W}"
-    ET.SubElement(tb, "boardHeight").text = f"{BOARD_H}"
+    out = []
+    def w(s): out.append(s)
+    w('<?xml version="1.0" encoding="UTF-8" ?>')
+    w('<org.diylc.core.Project>')
+    w('<fileVersion><major>3</major><minor>46</minor><build>0</build></fileVersion>')
+    w('<title>Harmonic Tremolo (6G8-A) - Turret Board</title>')
+    w('<author>generated</author>')
+    w('<description>Standalone tube harmonic tremolo - see notes.md / schematic-trace.md</description>')
+    w(f'<width><value>{BOARD_W + 1.0}</value><unit {SU}>in</unit></width>')
+    w(f'<height><value>{BOARD_H + 2.0}</value><unit {SU}>in</unit></height>')
+    w(f'<gridSpacing><value>0.125</value><unit {SU}>in</unit></gridSpacing>')
+    w('<components>')
 
-    # Turret lugs
-    for tid, (tx, ty, net) in T.items():
-        tl = ET.SubElement(comps, "org.diylc.components.connectivity.TurretLug")
-        ET.SubElement(tl, "name").text = tid
-        p = ET.SubElement(tl, "controlPoints"); pt(p, 0.4 + tx, 0.4 + (BOARD_H - ty))
+    # --- Board ---
+    w('<org.diylc.components.boards.BlankBoard>')
+    w('<name>Board1</name><alpha>127</alpha><value></value>')
+    w(f'<controlPoints>{jpt(0,0)}{jpt(BOARD_W, BOARD_H)}</controlPoints>')
+    w(f'<firstPoint x="0.0" y="0.0"/><secondPoint x="{BOARD_W:.4f}" y="{BOARD_H:.4f}"/>')
+    w(col("boardColor", 204, 204, 204))
+    w(col("borderColor", 173, 164, 125))
+    w(col("coordinateColor", 182, 182, 182))
+    w('<drawCoordinates>true</drawCoordinates><type>SQUARE</type>')
+    w('</org.diylc.components.boards.BlankBoard>')
 
-    # Passive/active two-terminal components
-    clsmap = {
-        "R":  "org.diylc.components.passive.Resistor",
-        "Cf": "org.diylc.components.passive.AxialFilmCapacitor",
-        "Ce": "org.diylc.components.passive.RadialElectrolytic",
-        "D":  "org.diylc.components.semiconductors.Diode",
-        "IC": "org.diylc.components.semiconductors.TransistorTO92",
-    }
+    # --- Turrets ---
+    for tid in sorted(T, key=lambda k: int(k[1:])):
+        x, y, net = dx(tid), dy(tid), T[tid][2]
+        w('<org.diylc.components.connectivity.Turret>')
+        w(f'<name>{tid}</name>')
+        w(size("size", 0.16))
+        w(size("holeSize", round(TURRET_HOLE_D, 4)))
+        w(col("color", 224, 192, 76))
+        w(f'<point x="{x:.4f}" y="{y:.4f}"/>')
+        w(f'<value>{tid} {net}</value>')
+        w('</org.diylc.components.connectivity.Turret>')
+
+    # --- On-board components (both endpoints on turrets) ---
     for c in C:
-        if c["a"] not in T or c["b"] not in T:
+        a, b, kind = c["a"], c["b"], c["kind"]
+        if kind == "trim":
+            if a not in T or b not in T or "T48" not in T:
+                continue
+            rv, ru = res_value(c["value"].split()[0])
+            w('<org.diylc.components.passive.TrimmerPotentiometer>')
+            w(f'<name>{c["ref"]}</name><alpha>127</alpha>')
+            w(f'<controlPoints>{jpt(dx(a),dy(a))}{jpt(dx("T48"),dy("T48"))}{jpt(dx(b),dy(b))}</controlPoints>')
+            w(f'<resistance><value>{rv}</value><unit {RU}>{ru}</unit></resistance>')
+            w('<orientation>DEFAULT</orientation><taper>LIN</taper>')
+            w(col("bodyColor", 255, 255, 224)); w(col("borderColor", 142, 142, 56))
+            w('<display>NAME</display><type>FLAT_SMALL</type>')
+            w('</org.diylc.components.passive.TrimmerPotentiometer>')
             continue
-        cls = clsmap.get(c["kind"], "org.diylc.components.passive.Resistor")
-        el = ET.SubElement(comps, cls)
-        ET.SubElement(el, "name").text = c["ref"]
-        ET.SubElement(el, "value").text = c["value"]
-        x1, y1, _ = T[c["a"]]; x2, y2, _ = T[c["b"]]
-        p = ET.SubElement(el, "controlPoints")
-        pt(p, 0.4 + x1, 0.4 + (BOARD_H - y1)); pt(p, 0.4 + x2, 0.4 + (BOARD_H - y2))
+        if a not in T or b not in T:
+            continue                      # off-board (relay coil, heater legs)
+        p1, p2 = jpt(dx(a), dy(a)), jpt(dx(b), dy(b))
+        if kind == "R":
+            rv, ru = res_value(c["value"])
+            w('<org.diylc.components.passive.Resistor>')
+            w(f'<name>{c["ref"]}</name><alpha>88</alpha>')
+            w(size("length", 0.25)); w(size("width", 0.09))
+            w(f'<points>{p1}{p2}</points>')
+            w(col("bodyColor", 130, 207, 253)); w(col("borderColor", 91, 144, 177))
+            w(col("labelColor", 0, 0, 0)); w(col("leadColor", 204, 204, 204))
+            w('<display>BOTH</display><flipStanding>false</flipStanding>')
+            w(f'<value><value>{rv}</value><unit {RU}>{ru}</unit></value>')
+            w('<power>HALF</power><colorCode>NONE</colorCode><shape>Tubular</shape>')
+            w('</org.diylc.components.passive.Resistor>')
+        elif kind in ("Cf", "Ce"):
+            cv, cu = cap_value(c["value"])
+            volt = cap_voltage(c["rating"])
+            is_elec = "elec" in c["rating"].lower()
+            if is_elec:
+                w('<org.diylc.components.passive.RadialElectrolytic>')
+                w(f'<name>{c["ref"]}</name><alpha>88</alpha>')
+                w(size("length", 0.2))
+                w(f'<points>{p1}{p2}</points>')
+                w(col("bodyColor", 107, 109, 206)); w(col("borderColor", 74, 76, 144))
+                w(col("labelColor", 0, 0, 0)); w(col("leadColor", 204, 204, 204))
+                w('<display>BOTH</display><flipStanding>false</flipStanding>')
+                w(size("pinSpacing", 0.1))
+                w(f'<value><value>{cv}</value><unit {CU}>{cu}</unit></value>')
+                w(f'<voltage>{volt}</voltage>')
+                w(col("markerColor", 140, 172, 234)); w(col("tickColor", 255, 255, 255))
+                w('<polarized>true</polarized><folded>false</folded>')
+                w(size("height", 0.4)); w('<invert>false</invert>')
+                w('</org.diylc.components.passive.RadialElectrolytic>')
+            else:
+                w('<org.diylc.components.passive.RadialFilmCapacitor>')
+                w(f'<name>{c["ref"]}</name><alpha>88</alpha>')
+                w(size("length", 0.25)); w(size("width", 0.09))
+                w(f'<points>{p1}{p2}</points>')
+                w(col("bodyColor", 255, 128, 0)); w(col("borderColor", 178, 89, 0))
+                w(col("labelColor", 0, 0, 0)); w(col("leadColor", 204, 204, 204))
+                w('<display>BOTH</display><flipStanding>false</flipStanding>')
+                w(size("pinSpacing", 0.1))
+                w(f'<value><value>{cv}</value><unit {CU}>{cu}</unit></value>')
+                w(f'<voltage>{volt}</voltage>')
+                w('</org.diylc.components.passive.RadialFilmCapacitor>')
+        elif kind == "D":
+            w('<org.diylc.components.semiconductors.DiodePlastic>')
+            w(f'<name>{c["ref"]}</name><alpha>88</alpha>')
+            w(size("length", 0.22)); w(size("width", 0.1))
+            w(f'<points>{p1}{p2}</points>')
+            w(col("bodyColor", 64, 64, 64)); w(col("borderColor", 44, 44, 44))
+            w(col("labelColor", 0, 0, 0)); w(col("leadColor", 204, 204, 204))
+            w('<display>NAME</display><flipStanding>false</flipStanding><value></value>')
+            w(col("markerColor", 221, 221, 221))
+            w('</org.diylc.components.semiconductors.DiodePlastic>')
+        elif kind == "IC":     # 78L12 TO-92 (3-pin) - annotate as label at midpoint
+            mx, my = (dx(a) + dx(b)) / 2, (dy(a) + dy(b)) / 2
+            _label(w, font, f'{c["ref"]} {c["value"]}', mx, my, 12.0)
 
-    # Tube sockets, pots, jacks, transformer (chassis area, offset below board)
-    for c in CHASSIS:
-        kind = c["kind"]; ox = c["x"]; oy = 0.4 + BOARD_H + 1.5 + (8.0 - 0.9 - c["y"]) * 0.0
-        yy = 0.4 + BOARD_H + 1.2 + (3.5 - c["y"])
-        if kind == "socket":
-            el = ET.SubElement(comps, "org.diylc.components.tube.TubeSocket")
-        elif kind == "pot":
-            el = ET.SubElement(comps, "org.diylc.components.electromechanical.PotentiometerPanel")
-        elif kind == "jack":
-            el = ET.SubElement(comps, "org.diylc.components.electromechanical.OpenJack1__4")
-        elif kind == "transformer":
-            el = ET.SubElement(comps, "org.diylc.components.electromechanical.PowerTransformer")
-        elif kind == "relay":
-            el = ET.SubElement(comps, "org.diylc.components.semiconductors.DIL__IC")
-        else:
-            el = ET.SubElement(comps, "org.diylc.components.misc.Label")
-        ET.SubElement(el, "name").text = c["ref"]
-        ET.SubElement(el, "value").text = c["value"]
-        p = ET.SubElement(el, "controlPoints"); pt(p, c["x"], yy)
+    # --- Chassis parts (off-board) as labels in a strip below the board ---
+    _label(w, font, "CHASSIS-MOUNTED (not on board):", 0.2, BOARD_H + 0.35, 12.0)
+    for i, c in enumerate(CHASSIS):
+        lx = 0.2 + (i % 5) * 1.55
+        ly = BOARD_H + 0.65 + (i // 5) * 0.30
+        _label(w, font, f'{c["ref"]} {c["value"]}', lx, ly, 10.0)
 
-    ET.SubElement(proj, "groups")
-    ET.SubElement(proj, "lockedLayers")
-    ET.SubElement(proj, "hiddenLayers")
-    rough = ET.tostring(proj, encoding="unicode")
-    pretty = minidom.parseString(rough).toprettyxml(indent="  ")
+    w('</components>')
+    w('<groups/>')
+    w('<lockedLayers><int>2</int></lockedLayers>')
+    w('<hiddenLayers/>')
+    w(font(14.0, "Lucida Console"))
+    w('</org.diylc.core.Project>')
     with open("harmonic-tremolo.diy", "w") as f:
-        f.write(pretty)
+        f.write("\n".join(out) + "\n")
+
+
+def _label(w, font, text, x, y, sz):
+    w('<org.diylc.components.misc.Label>')
+    w(f'<name>{text}</name>')
+    w(f'<point x="{x:.4f}" y="{y:.4f}"/>')
+    w(f'<text>{text}</text>')
+    w(font(sz))
+    w('<color><red>0</red><green>0</green><blue>0</blue><alpha>255</alpha></color>')
+    w('<center>false</center><horizontalAlignment>LEFT</horizontalAlignment>')
+    w('<verticalAlignment>CENTER</verticalAlignment><orientation>DEFAULT</orientation>')
+    w('</org.diylc.components.misc.Label>')
 
 if __name__ == "__main__":
     import os

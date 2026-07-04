@@ -251,10 +251,13 @@ Either way the modulator, split, and INTENSITY/SPEED values above are the stock
 2. **Turret‑board layout is optimized but bench‑verify.** Placement is banded
    (audio top rows, LFO middle, PSU bottom) with local B+/ground rail turrets so
    every component now spans ≤ ~1.1" of adjacent turrets (no long runs). Still,
-   open `harmonic-tremolo.diy` in DIYLC 4.x and sanity‑check lug spacing and any
+   open `harmonic-tremolo.diy` in DIYLC and sanity‑check lug spacing and any
    0.25"‑pitch turret pairs against your actual turret‑lug diameter before drilling.
-3. **The `.diy` is best‑effort DIYLC v4 XML** written without DIYLC to test it.
-   It is valid XML with correct component classes and inch coordinates, but DIYLC
-   may rescale/relabel on import. The **authoritative** layout artifacts are
-   `turret-drill.csv` + `turret-drill.svg` + this trace, not the `.diy`.
+3. **The `.diy` is a real DIYLC 6 project** (root `org.diylc.core.Project`,
+   fileVersion 3.46). It was **verified to deserialize** by loading it through
+   DIYLC 6.1.0's own XStream (127 components: 1 board, 54 turrets, 31 R, 19 C,
+   4 diodes, 1 trimmer, 17 labels). Component field/structure is templated verbatim
+   from DIYLC's own regression `.diy` files. The turret board carries on‑board parts
+   (R/C/D/trimmer); chassis parts (sockets/pots/jacks/PT/relay) are annotated as
+   labels below the board since they are not board‑mounted.
 4. **Node voltages are estimates**, ±15 V — Section 2.
