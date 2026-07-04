@@ -248,11 +248,14 @@ Either way the modulator, split, and INTENSITY/SPEED values above are the stock
    6G8‑A; the input recovery stage, cathodyne, follower, bypass and PSU are added
    for standalone use (all marked **[D]**). The stock modulators run at **+330 V**;
    this build runs ~240 V per the 250–300 V brief, trading some headroom (§2).
-2. **Turret‑board layout is optimized but bench‑verify.** Placement is banded
-   (audio top rows, LFO middle, PSU bottom) with local B+/ground rail turrets so
-   every component now spans ≤ ~1.1" of adjacent turrets (no long runs). Still,
-   open `harmonic-tremolo.diy` in DIYLC and sanity‑check lug spacing and any
-   0.25"‑pitch turret pairs against your actual turret‑lug diameter before drilling.
+2. **Turret‑board layout is a compact Hoffman‑idiom draft — tidy interactively.**
+   The board is 6.25 × 3.125" (Hoffman scale; cf. 6G15 unit 9.13"), a dense ~0.375"
+   turret matrix with a bottom **ground buss** and a **B+ buss** row, PSU at the PT
+   end, sockets above / pots below. Per real Hoffman boards (Princeton Reverb),
+   grid‑leak/cathode/plate resistors run vertically to the busses (some ~2"). The
+   auto‑placement is electrically correct but not artistically packed — open
+   `harmonic-tremolo.diy` in DIYLC and nudge turrets/parts to taste (that final
+   drag‑around is exactly how these boards are laid out) before drilling.
 3. **The `.diy` is a real DIYLC 6 project** (root `org.diylc.core.Project`,
    fileVersion 3.46). It was **verified to deserialize** by loading it through
    DIYLC 6.1.0's own XStream (127 components: 1 board, 54 turrets, 31 R, 19 C,

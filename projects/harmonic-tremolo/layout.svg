@@ -1,231 +1,232 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="883" height="415" viewBox="0 0 883 415">
+<svg xmlns="http://www.w3.org/2000/svg" width="715" height="415" viewBox="0 0 715 415">
 <rect width="100%" height="100%" fill="#fbfbf7"/>
-<rect x="57.6" y="57.6" width="768.0" height="300.0" fill="#f3ead6" stroke="#333" stroke-width="1.5"/>
-<line x1="105.6" y1="93.6" x2="153.6" y2="93.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="129.6" y="90.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R1</text>
-<text x="129.6" y="99.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">68k</text>
-<line x1="153.6" y1="93.6" x2="105.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="129.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R2</text>
-<text x="129.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="201.6" y1="93.6" x2="201.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="201.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R3</text>
-<text x="201.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="153.6" y1="141.6" x2="105.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="129.6" y="138.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R4</text>
-<text x="129.6" y="147.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1.5k</text>
-<line x1="297.6" y1="93.6" x2="345.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="321.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R5</text>
-<text x="321.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
-<line x1="297.6" y1="141.6" x2="345.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="321.6" y="150.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R6</text>
-<text x="321.6" y="159.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
-<line x1="345.6" y1="93.6" x2="393.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="369.6" y="126.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R7</text>
-<text x="369.6" y="135.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="393.6" y1="93.6" x2="393.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="393.6" y="126.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R8</text>
-<text x="393.6" y="135.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="297.6" y1="165.6" x2="345.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="321.6" y="162.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R9</text>
-<text x="321.6" y="171.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
-<line x1="249.6" y1="141.6" x2="297.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="273.6" y="138.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R10</text>
-<text x="273.6" y="147.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="393.6" y1="141.6" x2="345.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="369.6" y="138.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R11</text>
-<text x="369.6" y="147.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="345.6" y1="93.6" x2="441.6" y2="93.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="393.6" y="90.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R12</text>
-<text x="393.6" y="99.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
-<line x1="393.6" y1="93.6" x2="441.6" y2="93.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="417.6" y="90.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R13</text>
-<text x="417.6" y="99.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
-<line x1="441.6" y1="189.6" x2="441.6" y2="261.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="441.6" y="222.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R14</text>
-<text x="441.6" y="231.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="489.6" y1="189.6" x2="537.6" y2="237.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="513.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R15</text>
-<text x="513.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
-<line x1="489.6" y1="237.6" x2="441.6" y2="261.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="465.6" y="246.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R16</text>
-<text x="465.6" y="255.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
-<line x1="537.6" y1="189.6" x2="585.6" y2="189.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="561.6" y="186.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R17</text>
-<text x="561.6" y="195.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="585.6" y1="189.6" x2="585.6" y2="237.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="585.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R18</text>
-<text x="585.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="585.6" y1="237.6" x2="633.6" y2="189.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="609.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R19</text>
-<text x="609.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7M</text>
-<line x1="585.6" y1="93.6" x2="585.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="585.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R20</text>
-<text x="585.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="633.6" y1="93.6" x2="633.6" y2="141.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="633.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R21</text>
-<text x="633.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22k</text>
-<line x1="489.6" y1="165.6" x2="537.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="513.6" y="162.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R22</text>
-<text x="513.6" y="171.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="489.6" y1="141.6" x2="537.6" y2="165.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="513.6" y="150.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R31</text>
-<text x="513.6" y="159.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
-<line x1="393.6" y1="189.6" x2="441.6" y2="237.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="417.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R33</text>
-<text x="417.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="393.6" y1="237.6" x2="441.6" y2="261.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="417.6" y="246.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R34</text>
-<text x="417.6" y="255.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="681.6" y1="285.6" x2="729.6" y2="285.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="705.6" y="282.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R23</text>
-<text x="705.6" y="291.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
-<line x1="729.6" y1="285.6" x2="777.6" y2="285.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="753.6" y="282.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R24</text>
-<text x="753.6" y="291.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">10k</text>
-<line x1="681.6" y1="285.6" x2="633.6" y2="285.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="657.6" y="282.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R25</text>
-<text x="657.6" y="291.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
-<line x1="633.6" y1="285.6" x2="633.6" y2="321.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="633.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R26</text>
-<text x="633.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
-<line x1="489.6" y1="321.6" x2="537.6" y2="321.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="513.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R27</text>
-<text x="513.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1k</text>
-<line x1="681.6" y1="285.6" x2="777.6" y2="321.6" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
-<text x="729.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R28</text>
-<text x="729.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
-<line x1="249.6" y1="93.6" x2="297.6" y2="93.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="273.6" y="90.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C1</text>
-<text x="273.6" y="99.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
-<line x1="297.6" y1="93.6" x2="297.6" y2="141.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="297.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C2</text>
-<text x="297.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">250pF</text>
-<line x1="297.6" y1="93.6" x2="345.6" y2="141.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="321.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C3</text>
-<text x="321.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.005uF</text>
-<line x1="297.6" y1="165.6" x2="345.6" y2="165.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="321.6" y="162.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C4</text>
-<text x="321.6" y="171.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">2uF</text>
-<line x1="489.6" y1="237.6" x2="441.6" y2="261.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="465.6" y="246.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C5</text>
-<text x="465.6" y="255.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">25uF</text>
-<line x1="441.6" y1="93.6" x2="489.6" y2="141.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="465.6" y="114.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C6</text>
-<text x="465.6" y="123.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
-<line x1="489.6" y1="93.6" x2="489.6" y2="165.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="489.6" y="126.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C7</text>
-<text x="489.6" y="135.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
-<line x1="633.6" y1="93.6" x2="681.6" y2="93.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="657.6" y="90.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C8</text>
-<text x="657.6" y="99.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.1uF</text>
-<line x1="489.6" y1="189.6" x2="441.6" y2="189.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="465.6" y="186.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C9</text>
-<text x="465.6" y="195.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.02uF</text>
-<line x1="537.6" y1="189.6" x2="585.6" y2="189.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="561.6" y="186.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C10</text>
-<text x="561.6" y="195.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.01uF</text>
-<line x1="585.6" y1="189.6" x2="585.6" y2="237.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="585.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C11</text>
-<text x="585.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.02uF</text>
-<line x1="585.6" y1="237.6" x2="633.6" y2="189.6" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
-<text x="609.6" y="210.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C12</text>
-<text x="609.6" y="219.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.033uF</text>
-<line x1="681.6" y1="285.6" x2="777.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="729.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C13</text>
-<text x="729.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
-<line x1="729.6" y1="285.6" x2="777.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="753.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C14</text>
-<text x="753.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
-<line x1="777.6" y1="285.6" x2="777.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="777.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C15</text>
-<text x="777.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
-<line x1="633.6" y1="285.6" x2="633.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="633.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C16</text>
-<text x="633.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.1uF</text>
-<line x1="345.6" y1="321.6" x2="393.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="369.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C17</text>
-<text x="369.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
-<line x1="393.6" y1="321.6" x2="441.6" y2="321.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="417.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C18</text>
-<text x="417.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
-<line x1="489.6" y1="321.6" x2="489.6" y2="285.6" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
-<text x="489.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C19</text>
-<text x="489.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
-<line x1="681.6" y1="321.6" x2="681.6" y2="285.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
-<text x="681.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D1</text>
-<text x="681.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
-<line x1="729.6" y1="321.6" x2="681.6" y2="285.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
-<text x="705.6" y="300.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D2</text>
-<text x="705.6" y="309.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
-<line x1="345.6" y1="321.6" x2="393.6" y2="321.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
-<text x="369.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D3</text>
-<text x="369.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
-<line x1="393.6" y1="321.6" x2="441.6" y2="321.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
-<text x="417.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D4</text>
-<text x="417.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
-<line x1="441.6" y1="321.6" x2="489.6" y2="321.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
-<text x="465.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">U1</text>
-<text x="465.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">78L12</text>
-<line x1="489.6" y1="141.6" x2="537.6" y2="165.6" stroke="#555" stroke-width="2.4" opacity="0.8"/>
-<text x="513.6" y="150.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#555">VR1</text>
-<text x="513.6" y="159.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M lin</text>
-<circle cx="105.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="153.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="153.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="105.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="201.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="201.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="249.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="297.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="297.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="345.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="345.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="165.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="297.6" cy="165.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="345.6" cy="165.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="249.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="441.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="165.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="537.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="537.6" cy="165.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="585.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="585.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="633.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="633.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="681.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="441.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="441.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="441.6" cy="261.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="537.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="537.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="585.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="585.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="633.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="345.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="393.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="441.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="489.6" cy="285.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="537.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="633.6" cy="285.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="633.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="681.6" cy="285.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="681.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="729.6" cy="285.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="729.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="777.6" cy="285.6" r="3" fill="#b8860b" stroke="#5a4300"/>
-<circle cx="777.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
+<rect x="57.6" y="57.6" width="600.0" height="300.0" fill="#f3ead6" stroke="#333" stroke-width="1.5"/>
+<line x1="96.0" y1="84.0" x2="132.0" y2="84.0" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="114.0" y="81.0" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R1</text>
+<text x="114.0" y="90.0" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">68k</text>
+<line x1="132.0" y1="84.0" x2="96.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="114.0" y="196.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R2</text>
+<text x="114.0" y="205.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="168.0" y1="84.0" x2="168.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="168.0" y="172.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R3</text>
+<text x="168.0" y="181.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="132.0" y1="127.2" x2="96.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="114.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R4</text>
+<text x="114.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1.5k</text>
+<line x1="240.0" y1="84.0" x2="276.0" y2="127.2" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="258.0" y="102.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R5</text>
+<text x="258.0" y="111.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
+<line x1="240.0" y1="127.2" x2="240.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="240.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R6</text>
+<text x="240.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
+<line x1="276.0" y1="84.0" x2="312.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="294.0" y="172.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R7</text>
+<text x="294.0" y="181.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="312.0" y1="84.0" x2="312.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="312.0" y="172.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R8</text>
+<text x="312.0" y="181.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="348.0" y1="127.2" x2="348.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="348.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R9</text>
+<text x="348.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
+<line x1="204.0" y1="127.2" x2="240.0" y2="127.2" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="222.0" y="124.2" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R10</text>
+<text x="222.0" y="133.2" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="312.0" y1="127.2" x2="276.0" y2="127.2" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="294.0" y="124.2" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R11</text>
+<text x="294.0" y="133.2" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="276.0" y1="84.0" x2="348.0" y2="84.0" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="312.0" y="81.0" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R12</text>
+<text x="312.0" y="90.0" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
+<line x1="312.0" y1="84.0" x2="348.0" y2="84.0" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="330.0" y="81.0" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R13</text>
+<text x="330.0" y="90.0" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
+<line x1="312.0" y1="173.3" x2="312.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="312.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R14</text>
+<text x="312.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="348.0" y1="173.3" x2="384.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="366.0" y="217.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R15</text>
+<text x="366.0" y="226.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">470k</text>
+<line x1="348.0" y1="219.4" x2="348.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="348.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R16</text>
+<text x="348.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
+<line x1="384.0" y1="173.3" x2="420.0" y2="173.3" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="402.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R17</text>
+<text x="402.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="420.0" y1="173.3" x2="420.0" y2="219.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="420.0" y="193.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R18</text>
+<text x="420.0" y="202.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="420.0" y1="219.4" x2="456.0" y2="173.3" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="438.0" y="193.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R19</text>
+<text x="438.0" y="202.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7M</text>
+<line x1="456.0" y1="84.0" x2="456.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="456.0" y="196.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R20</text>
+<text x="456.0" y="205.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="492.0" y1="84.0" x2="492.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="492.0" y="196.7" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R21</text>
+<text x="492.0" y="205.7" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22k</text>
+<line x1="420.0" y1="127.2" x2="420.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="420.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R22</text>
+<text x="420.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="384.0" y1="127.2" x2="420.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="402.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R31</text>
+<text x="402.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M</text>
+<line x1="276.0" y1="173.3" x2="276.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="276.0" y="217.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R33</text>
+<text x="276.0" y="226.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="276.0" y1="219.4" x2="312.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="294.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R34</text>
+<text x="294.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="492.0" y1="173.3" x2="528.0" y2="173.3" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="510.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R23</text>
+<text x="510.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">4.7k</text>
+<line x1="528.0" y1="173.3" x2="564.0" y2="173.3" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="546.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R24</text>
+<text x="546.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">10k</text>
+<line x1="492.0" y1="173.3" x2="600.0" y2="173.3" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="546.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R25</text>
+<text x="546.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
+<line x1="600.0" y1="173.3" x2="600.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="600.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R26</text>
+<text x="600.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100k</text>
+<line x1="528.0" y1="267.4" x2="564.0" y2="267.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="546.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R27</text>
+<text x="546.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1k</text>
+<line x1="492.0" y1="173.3" x2="564.0" y2="315.4" stroke="#8a5a2b" stroke-width="2.4" opacity="0.8"/>
+<text x="528.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#8a5a2b">R28</text>
+<text x="528.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">220k</text>
+<line x1="204.0" y1="84.0" x2="240.0" y2="84.0" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="222.0" y="81.0" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C1</text>
+<text x="222.0" y="90.0" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
+<line x1="240.0" y1="84.0" x2="240.0" y2="127.2" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="240.0" y="102.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C2</text>
+<text x="240.0" y="111.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">250pF</text>
+<line x1="240.0" y1="84.0" x2="276.0" y2="127.2" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="258.0" y="102.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C3</text>
+<text x="258.0" y="111.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.005uF</text>
+<line x1="348.0" y1="127.2" x2="348.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="348.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C4</text>
+<text x="348.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">2uF</text>
+<line x1="348.0" y1="219.4" x2="348.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="348.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C5</text>
+<text x="348.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">25uF</text>
+<line x1="348.0" y1="84.0" x2="384.0" y2="127.2" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="366.0" y="102.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C6</text>
+<text x="366.0" y="111.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
+<line x1="384.0" y1="84.0" x2="420.0" y2="127.2" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="402.0" y="102.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C7</text>
+<text x="402.0" y="111.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.022uF</text>
+<line x1="492.0" y1="84.0" x2="528.0" y2="84.0" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="510.0" y="81.0" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C8</text>
+<text x="510.0" y="90.0" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.1uF</text>
+<line x1="348.0" y1="173.3" x2="312.0" y2="173.3" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="330.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C9</text>
+<text x="330.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.02uF</text>
+<line x1="384.0" y1="173.3" x2="420.0" y2="173.3" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="402.0" y="170.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C10</text>
+<text x="402.0" y="179.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.01uF</text>
+<line x1="420.0" y1="173.3" x2="420.0" y2="219.4" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="420.0" y="193.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C11</text>
+<text x="420.0" y="202.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.02uF</text>
+<line x1="420.0" y1="219.4" x2="456.0" y2="173.3" stroke="#1f6feb" stroke-width="2.4" opacity="0.8"/>
+<text x="438.0" y="193.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#1f6feb">C12</text>
+<text x="438.0" y="202.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.033uF</text>
+<line x1="492.0" y1="173.3" x2="564.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="528.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C13</text>
+<text x="528.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
+<line x1="528.0" y1="173.3" x2="564.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="546.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C14</text>
+<text x="546.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
+<line x1="564.0" y1="173.3" x2="564.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="564.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C15</text>
+<text x="564.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">22uF</text>
+<line x1="600.0" y1="173.3" x2="600.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="600.0" y="241.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C16</text>
+<text x="600.0" y="250.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">0.1uF</text>
+<line x1="420.0" y1="267.4" x2="456.0" y2="267.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="438.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C17</text>
+<text x="438.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
+<line x1="456.0" y1="267.4" x2="492.0" y2="267.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="474.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C18</text>
+<text x="474.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
+<line x1="528.0" y1="267.4" x2="384.0" y2="315.4" stroke="#0a7" stroke-width="2.4" opacity="0.8"/>
+<text x="456.0" y="288.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#0a7">C19</text>
+<text x="456.0" y="297.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">100uF</text>
+<line x1="528.0" y1="127.2" x2="492.0" y2="173.3" stroke="#333" stroke-width="2.4" opacity="0.8"/>
+<text x="510.0" y="147.2" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D1</text>
+<text x="510.0" y="156.2" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
+<line x1="564.0" y1="127.2" x2="492.0" y2="173.3" stroke="#333" stroke-width="2.4" opacity="0.8"/>
+<text x="528.0" y="147.2" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D2</text>
+<text x="528.0" y="156.2" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
+<line x1="420.0" y1="267.4" x2="456.0" y2="267.4" stroke="#333" stroke-width="2.4" opacity="0.8"/>
+<text x="438.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D3</text>
+<text x="438.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
+<line x1="456.0" y1="267.4" x2="492.0" y2="267.4" stroke="#333" stroke-width="2.4" opacity="0.8"/>
+<text x="474.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">D4</text>
+<text x="474.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1N4007</text>
+<line x1="492.0" y1="267.4" x2="528.0" y2="267.4" stroke="#333" stroke-width="2.4" opacity="0.8"/>
+<text x="510.0" y="264.4" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">U1</text>
+<text x="510.0" y="273.4" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">78L12</text>
+<line x1="384.0" y1="127.2" x2="420.0" y2="315.4" stroke="#555" stroke-width="2.4" opacity="0.8"/>
+<text x="402.0" y="218.3" font-family="monospace" font-size="7" text-anchor="middle" fill="#555">VR1</text>
+<text x="402.0" y="227.3" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M lin</text>
+<circle cx="96.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="132.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="132.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="168.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="204.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="204.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="240.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="240.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="276.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="276.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="312.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="312.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="348.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="348.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="384.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="384.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="456.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="492.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="528.0" cy="84.0" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="276.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="276.0" cy="219.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="312.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="348.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="348.0" cy="219.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="384.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="219.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="456.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="168.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="276.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="312.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="384.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="456.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="492.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="528.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="564.0" cy="267.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="528.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="564.0" cy="127.2" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="492.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="528.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="564.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="600.0" cy="173.3" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="96.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="240.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="312.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="384.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="420.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="456.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="492.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="564.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="600.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="348.0" cy="315.4" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="81.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
-<circle cx="801.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
+<circle cx="633.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
 <circle cx="81.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
-<circle cx="801.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
-<text x="441.6" y="407.2" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - PSU/relay-supply on bottom rail</text>
+<circle cx="633.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
+<text x="357.6" y="407.2" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#888">Populated layout - signal flows L-&gt;R - PSU/relay-supply on bottom rail</text>
 </svg>

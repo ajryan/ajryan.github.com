@@ -8,7 +8,7 @@ Emits, from one component/turret dataset so everything stays consistent:
   - turret-drill.csv     turret hole coordinate table (Hoffman custom-board format)
   - turret-drill.svg     dimensioned drill drawing (printable at 1:1)
   - layout.svg           populated turret-board layout (component placement)
-  - harmonic-tremolo.diy DIYLC v4 project (best-effort; verify in DIYLC 4.x)
+  - harmonic-tremolo.diy DIYLC 6 project (verified to load in DIYLC 6.1.0)
 
 Circuit: standalone tube harmonic tremolo, Fender 6G8-A (five-triode) harmonic
 vibrato + added cathode-follower output + relay true-bypass + SS PSU.
@@ -24,7 +24,7 @@ from xml.dom import minidom
 # ----------------------------------------------------------------------------
 # Board geometry (Hoffman turret-board stock)
 # ----------------------------------------------------------------------------
-BOARD_W = 8.000          # in  (Hoffman boards up to ~9" long)
+BOARD_W = 6.250          # in  (compact; cf. Hoffman 6G15 unit 9.13", PR 11.5")
 BOARD_H = 3.125          # in  (all Hoffman turret boards are 3.125" tall)
 GRID = 0.250             # in  (Hoffman stock hole grid)
 TURRET_HOLE_D = 0.094    # in  (3/32" - Hoffman turret lug hole)
@@ -42,15 +42,12 @@ MOUNT_HOLES = [
 
 # ----------------------------------------------------------------------------
 # Turret definitions:  id -> (x_in, y_in, net_label)
-# Re-optimized placement in three horizontal BANDS so components span adjacent
-# turrets (short leads) and the LFO is physically separated from audio:
-#   AUDIO band  y = 2.75 / 2.25 / 2.00   (signal path, input -> follower -> out)
-#   LFO band    y = 1.75 / 1.25 / 1.00   (oscillator, phase-shift, cathodyne)
-#   PSU band    y = 0.75 / 0.375         (B+ filter chain, rectifier, 12V, gnd)
-# Power rails (B+1/2/3) and ground are intentionally MULTI-turret: local rail
-# turrets sit next to the stage they feed and are bussed to the main filter
-# node by a jumper wire (normal turret-board practice) - this is what keeps the
-# plate-load / cathode resistors short instead of reaching across the board.
+# Dense Hoffman-idiom matrix modeled on real Hoffman turret boards (6G15 Reverb
+# Unit and Princeton Reverb): a compact 6.25 x 3.125" board, ~0.375" turret pitch,
+# ground returns collected on a bottom ground BUSS and B+ distributed along a B+
+# BUSS row, with sockets mounted above and pots/jacks below (chassis). Long
+# vertical resistor runs from a stage down to the busses are normal on these
+# boards (see the Princeton Reverb layout). Signal flows left->right by stage.
 # ----------------------------------------------------------------------------
 T = {}  # id -> (x, y, net)
 def turret(tid, x, y, net):
@@ -59,74 +56,77 @@ def turret(tid, x, y, net):
         assert not (abs(px - x) < 1e-6 and abs(py - y) < 1e-6), f"{tid} overlaps {k} at {x},{y}"
     T[tid] = (round(x, 3), round(y, 3), net)
 
-# === AUDIO band =============================================================
-# Input + V1a driver
-turret("T1",  0.500, 2.750, "IN")          # input jack tip
-turret("T2",  1.000, 2.750, "V1a_G")       # V1a grid (after stopper)
-turret("T3",  1.000, 2.250, "V1a_K")       # V1a cathode
-turret("T5",  0.500, 2.250, "GND_1")       # local ground
-turret("T4",  1.500, 2.750, "V1a_P")       # V1a plate
-turret("T49", 1.500, 2.250, "BPLUS3")      # local B+3 for driver plate (bus to T38)
-turret("T6",  2.000, 2.750, "DRV_OUT")     # driver coupling-out (jumper from T4)
-# HPF / LPF split
-turret("T7",  2.500, 2.750, "SPLIT")       # split node
-turret("T8",  2.500, 2.250, "HF_G")        # HF modulator grid (high-pass)
-turret("T9",  3.000, 2.250, "LF_G")        # LF modulator grid (low-pass)
-# Modulators V2a (HF) / V2b (LF)
-turret("T12", 3.000, 2.750, "HF_P")        # HF modulator plate
-turret("T13", 3.500, 2.750, "LF_P")        # LF modulator plate
-turret("T10", 3.500, 2.000, "BPLUS2")      # local B+2 for modulator plates (bus to T37)
-turret("T14", 2.500, 2.000, "MIX_K")       # shared modulator cathode
-turret("T16", 3.000, 2.000, "GND_2")       # local ground
-turret("T17", 2.000, 2.250, "BIAS_HF")     # anti-phase LFO bias -> HF grid
-turret("T18", 3.500, 2.250, "BIAS_LF")     # anti-phase LFO bias -> LF grid
-turret("T15", 4.000, 2.750, "MIX")         # modulator plates summed
-# Relay ties + engaged trim (relay is chassis-mounted; these are board tie pts)
-turret("T50", 4.500, 2.750, "IN")          # local IN (dry bypass tap; bus to T1)
-turret("T33", 4.500, 2.250, "RLY_ENG")     # engaged signal -> VR1 top
-turret("T34", 4.500, 2.000, "RLY_BYP")     # dry bypass signal
-turret("T48", 5.000, 2.250, "ENG_TRIM_W")  # VR1 wiper -> relay engaged contact
-turret("T35", 5.000, 2.000, "GND_5")       # local ground (bleed return)
-# Cathode-follower output V1b
-turret("T29", 5.500, 2.750, "FOL_G")       # follower grid (relay common returns here)
-turret("T32", 5.500, 2.250, "GND_4")       # local ground
-turret("T30", 6.000, 2.750, "FOL_K")       # follower cathode = output
-turret("T51", 6.000, 2.250, "GND_6")       # local ground
-turret("T31", 6.500, 2.750, "FOL_OUT")     # output coupling -> LEVEL pot
+# Dense Hoffman-idiom matrix (cf. 6G15 unit + Princeton Reverb boards):
+#   6 rows -> r1/r2 top = audio signal, r3/r4 = LFO, bp = B+ bus, gnd = ground buss
+#   Signal flows L->R by stage; sockets mount above, pots/jacks below (chassis).
+#   Ground returns collect on the bottom buss; B+ droppers + local B+ on the bp
+#   row; long vertical resistor runs to the busses are normal on these boards.
+r1, r2, r3, r4, bp, gnd = 2.850, 2.400, 1.920, 1.440, 0.940, 0.440
 
-# === LFO band ===============================================================
-# Cathodyne phase splitter V3b
-turret("T19", 3.500, 1.750, "CATH_P")      # cathodyne plate (anti-phase A)
-turret("T21", 3.500, 1.250, "CATH_K")      # cathodyne cathode (anti-phase B)
-turret("T20", 4.000, 1.750, "CATH_G")      # cathodyne grid (from LFO)
-turret("T52", 4.000, 1.250, "BPLUS1")      # local B+1 for cathodyne plate (bus to T36)
-turret("T28", 4.000, 1.000, "GND_3")       # local ground
-# LFO oscillator V3a + phase-shift network
-turret("T22", 4.500, 1.750, "LFO_P")       # LFO plate
-turret("T24", 4.500, 1.250, "LFO_K")       # LFO cathode
-turret("T23", 5.000, 1.750, "LFO_G")       # LFO grid
-turret("T11", 5.000, 1.250, "BPLUS3")      # local B+3 for LFO plate (bus to T38)
-turret("T25", 5.500, 1.750, "PS1")         # phase-shift node 1
-turret("T26", 5.500, 1.250, "PS2")         # phase-shift node 2
-turret("T27", 6.000, 1.750, "PS3")         # phase-shift node 3 (-> SPEED pot)
+# --- Audio signal, rows r1 (plates/through) / r2 (grids/cathodes/coupling) ---
+turret("T1",  0.400, r1, "IN")             # input jack tip
+turret("T2",  0.775, r1, "V1a_G")          # V1a grid (after stopper)
+turret("T3",  0.775, r2, "V1a_K")          # V1a cathode
+turret("T4",  1.150, r1, "V1a_P")          # V1a plate
+turret("T6",  1.525, r1, "DRV_OUT")        # driver coupling-out (jumper from T4)
+turret("T17", 1.525, r2, "BIAS_HF")        # anti-phase LFO bias -> HF grid
+turret("T7",  1.900, r1, "SPLIT")          # split node
+turret("T8",  1.900, r2, "HF_G")           # HF modulator grid (high-pass)
+turret("T12", 2.275, r1, "HF_P")           # HF modulator plate
+turret("T9",  2.275, r2, "LF_G")           # LF modulator grid (low-pass)
+turret("T13", 2.650, r1, "LF_P")           # LF modulator plate
+turret("T18", 2.650, r2, "BIAS_LF")        # anti-phase LFO bias -> LF grid
+turret("T15", 3.025, r1, "MIX")            # modulator plates summed
+turret("T14", 3.025, r2, "MIX_K")          # shared modulator cathode
+turret("T50", 3.400, r1, "IN")             # local IN (dry bypass tap; bus to T1)
+turret("T33", 3.400, r2, "RLY_ENG")        # engaged signal -> VR1 top
+turret("T48", 3.775, r1, "ENG_TRIM_W")     # VR1 wiper -> relay engaged contact
+turret("T34", 3.775, r2, "RLY_BYP")        # dry bypass signal
+turret("T29", 4.150, r1, "FOL_G")          # follower grid (relay common returns here)
+turret("T30", 4.525, r1, "FOL_K")          # follower cathode = output
+turret("T31", 4.900, r1, "FOL_OUT")        # output coupling -> LEVEL pot
 
-# === PSU band ===============================================================
-# 12V relay supply (heater-derived doubler + regulator) - lower-left of PSU band
-turret("T43", 3.000, 0.375, "AC63")        # 6.3VAC tap in
-turret("T44", 3.500, 0.375, "DBL")         # doubler mid node
-turret("T45", 4.000, 0.375, "V16")         # ~16VDC unregulated
-turret("T46", 4.500, 0.375, "V12")         # 12VDC regulated
-turret("T55", 4.500, 0.750, "GND_7")       # local ground (12V reg)
-turret("T47", 5.000, 0.375, "LED_A")       # LED anode tie
-# B+ filter chain + rectifier + heater elevation - right end (PT end)
-turret("T41", 6.000, 0.750, "HTR_CT")      # heater DC-elevation reference
-turret("T54", 6.000, 0.375, "GND_8")       # local ground (heater elev)
-turret("T36", 6.500, 0.750, "BPLUS1")      # B+1 reservoir (main)
-turret("T39", 6.500, 0.375, "RECT_AC1")    # rectifier AC in 1 (190V)
-turret("T37", 7.000, 0.750, "BPLUS2")      # B+2 (main)
-turret("T40", 7.000, 0.375, "RECT_AC2")    # rectifier AC in 2 (190V)
-turret("T38", 7.500, 0.750, "BPLUS3")      # B+3 (main)
-turret("T42", 7.500, 0.375, "GND_PSU")     # PSU ground / CT return
+# --- LFO, rows r3 (plates/grids) / r4 (cathodes/network) ---
+turret("T19", 2.275, r3, "CATH_P")         # cathodyne plate (anti-phase A)
+turret("T21", 2.275, r4, "CATH_K")         # cathodyne cathode (anti-phase B)
+turret("T20", 2.650, r3, "CATH_G")         # cathodyne grid (from LFO)
+turret("T22", 3.025, r3, "LFO_P")          # LFO plate
+turret("T24", 3.025, r4, "LFO_K")          # LFO cathode
+turret("T23", 3.400, r3, "LFO_G")          # LFO grid
+turret("T25", 3.775, r3, "PS1")            # phase-shift node 1
+turret("T26", 3.775, r4, "PS2")            # phase-shift node 2
+turret("T27", 4.150, r3, "PS3")            # phase-shift node 3 (-> SPEED pot)
+
+# --- B+ bus row (local B+ near each stage + doubler/12V chain) ---
+turret("T49", 1.150, bp, "BPLUS3")         # local B+3 (driver) -> bus
+turret("T52", 2.275, bp, "BPLUS1")         # local B+1 (cathodyne/follower) -> bus
+turret("T10", 2.650, bp, "BPLUS2")         # local B+2 (modulators) -> bus
+turret("T11", 3.400, bp, "BPLUS3")         # local B+3 (LFO) -> bus
+turret("T43", 3.775, bp, "AC63")           # 6.3VAC tap in (12V doubler)
+turret("T44", 4.150, bp, "DBL")            # doubler mid node
+turret("T45", 4.525, bp, "V16")            # ~16VDC unregulated
+turret("T46", 4.900, bp, "V12")            # 12VDC regulated
+turret("T47", 5.275, bp, "LED_A")          # LED anode tie
+
+# --- PSU main filter + rectifier + heater elevation (right / PT end) ---
+turret("T39", 4.900, r2, "RECT_AC1")       # rectifier AC in 1 (190V)
+turret("T40", 5.275, r2, "RECT_AC2")       # rectifier AC in 2 (190V)
+turret("T36", 4.525, r3, "BPLUS1")         # B+1 reservoir (main)
+turret("T37", 4.900, r3, "BPLUS2")         # B+2 (main)
+turret("T38", 5.275, r3, "BPLUS3")         # B+3 (main)
+turret("T41", 5.650, r3, "HTR_CT")         # heater DC-elevation reference
+
+# --- Ground buss (bottom edge; all returns collect here, tied by buss wire) ---
+turret("T5",  0.400, gnd, "GND_1")         # driver ground
+turret("T16", 1.900, gnd, "GND_2")         # modulator ground
+turret("T28", 2.650, gnd, "GND_3")         # LFO ground
+turret("T55", 3.400, gnd, "GND_7")         # 12V reg ground
+turret("T35", 3.775, gnd, "GND_5")         # relay/bleed ground
+turret("T32", 4.150, gnd, "GND_4")         # follower grid ground
+turret("T51", 4.525, gnd, "GND_6")         # follower cathode ground
+turret("T42", 5.275, gnd, "GND_PSU")       # PSU ground / CT return
+turret("T54", 5.650, gnd, "GND_8")         # heater elevation ground
+turret("T56", 3.025, gnd, "GND_9")         # buss drop under modulator + LFO cathodes
 
 # ----------------------------------------------------------------------------
 # Component list. Each: ref, kind, value, rating, mouser, from_turret, to_turret, note
@@ -148,14 +148,14 @@ comp("R5", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T7",  "T9",  "LPF serie
 comp("R6", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T8",  "T16", "HF grid reference [P]")
 comp("R7", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T12", "T10", "HF modulator plate load - 100k 5% matched [C]; to local B+2")
 comp("R8", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T13", "T10", "LF modulator plate load - 100k 5% matched [C]; to local B+2")
-comp("R9", "R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T14", "T16", "modulator shared cathode 4700 [C]")
+comp("R9", "R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T14", "T56", "modulator shared cathode 4700 [C]")
 comp("R10","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T17", "T8",  "HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
 comp("R11","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T18", "T9",  "LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
 comp("R12","R", "470k", "1/2W CF", "594-5083NW470K00J", "T12", "T15", "HF plate mixing resistor 470k [C]")
 comp("R13","R", "470k", "1/2W CF", "594-5083NW470K00J", "T13", "T15", "LF plate mixing resistor 470k [C]")
 comp("R14","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T20", "T28", "cathodyne grid leak [D]")
 comp("R15","R", "470k", "1/2W CF", "594-5083NW470K00J", "T22", "T11", "LFO plate load 470k [C]; to local B+3")
-comp("R16","R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T24", "T28", "LFO cathode 4700 [C]")
+comp("R16","R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T24", "T56", "LFO cathode 4700 [C]")
 comp("R17","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T23", "T25", "phase-shift R1 - 1M [C]")
 comp("R18","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T25", "T26", "phase-shift R2 - 1M [C]")
 comp("R19","R", "4.7M", "1/2W CF", "594-5083NW4M7000J", "T26", "T27", "phase-shift feedback R - 4.7M [C]")
@@ -178,8 +178,8 @@ comp("R30","R", "100",  "1/2W CF", "594-5083NW100R00J", "HTR_B", "HTR_CT", "heat
 comp("C1",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T6",  "T7",  "V1a output coupling")
 comp("C2",  "Cf", "250pF",   "500V mica", "80-DM15FD251JO3",   "T7",  "T8",  "HPF to HF mixer - CONFIRMED")
 comp("C3",  "Cf", "0.005uF", "630V film", "80-R82DC3470DQ50J", "T7",  "T9",  "LPF to LF modulator - .005 [C] confirmed on 6G8-A")
-comp("C4",  "Ce", "2uF",     "25V elec",  "667-EEU-FR1E2R2",   "T14", "T16", "modulator shared cathode bypass (4700//2uF) [C]")
-comp("C5",  "Ce", "25uF",    "25V elec",  "667-EEU-FR1E250",   "T24", "T28", "LFO cathode bypass (4700//25uF) [C]")
+comp("C4",  "Ce", "2uF",     "25V elec",  "667-EEU-FR1E2R2",   "T14", "T56", "modulator shared cathode bypass (4700//2uF) [C]")
+comp("C5",  "Ce", "25uF",    "25V elec",  "667-EEU-FR1E250",   "T24", "T56", "LFO cathode bypass (4700//25uF) [C]")
 comp("C6",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T15", "T33", "modulator MIX -> engaged trim top (DC block)")
 comp("C7",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T50", "T34", "dry -> relay bypass coupling (dry tap near relay)")
 comp("C8",  "Cf", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T30", "T31", "follower cathode -> output coupling")

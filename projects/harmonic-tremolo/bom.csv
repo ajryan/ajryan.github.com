@@ -7,14 +7,14 @@ R5,Resistor,220k,1/2W CF,594-5083NW220K00J,SPLIT - LF_G,LPF series (split) [C] c
 R6,Resistor,220k,1/2W CF,594-5083NW220K00J,HF_G - GND_2,HF grid reference [P]
 R7,Resistor,100k,1/2W 5%,594-5063JD100K0J,HF_P - BPLUS2,HF modulator plate load - 100k 5% matched [C]; to local B+2
 R8,Resistor,100k,1/2W 5%,594-5063JD100K0J,LF_P - BPLUS2,LF modulator plate load - 100k 5% matched [C]; to local B+2
-R9,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,MIX_K - GND_2,modulator shared cathode 4700 [C]
+R9,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,MIX_K - GND_9,modulator shared cathode 4700 [C]
 R10,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_HF - HF_G,HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
 R11,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_LF - LF_G,LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
 R12,Resistor,470k,1/2W CF,594-5083NW470K00J,HF_P - MIX,HF plate mixing resistor 470k [C]
 R13,Resistor,470k,1/2W CF,594-5083NW470K00J,LF_P - MIX,LF plate mixing resistor 470k [C]
 R14,Resistor,1M,1/2W CF,594-5083NW1M0000J,CATH_G - GND_3,cathodyne grid leak [D]
 R15,Resistor,470k,1/2W CF,594-5083NW470K00J,LFO_P - BPLUS3,LFO plate load 470k [C]; to local B+3
-R16,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,LFO_K - GND_3,LFO cathode 4700 [C]
+R16,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,LFO_K - GND_9,LFO cathode 4700 [C]
 R17,Resistor,1M,1/2W CF,594-5083NW1M0000J,LFO_G - PS1,phase-shift R1 - 1M [C]
 R18,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS1 - PS2,phase-shift R2 - 1M [C]
 R19,Resistor,4.7M,1/2W CF,594-5083NW4M7000J,PS2 - PS3,phase-shift feedback R - 4.7M [C]
@@ -35,8 +35,8 @@ R30,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_B - HTR_CT,heater artificial-CT /
 C1,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,DRV_OUT - SPLIT,V1a output coupling
 C2,Capacitor (film/mica),250pF,500V mica,80-DM15FD251JO3,SPLIT - HF_G,HPF to HF mixer - CONFIRMED
 C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to LF modulator - .005 [C] confirmed on 6G8-A
-C4,Capacitor (electrolytic),2uF,25V elec,667-EEU-FR1E2R2,MIX_K - GND_2,modulator shared cathode bypass (4700//2uF) [C]
-C5,Capacitor (electrolytic),25uF,25V elec,667-EEU-FR1E250,LFO_K - GND_3,LFO cathode bypass (4700//25uF) [C]
+C4,Capacitor (electrolytic),2uF,25V elec,667-EEU-FR1E2R2,MIX_K - GND_9,modulator shared cathode bypass (4700//2uF) [C]
+C5,Capacitor (electrolytic),25uF,25V elec,667-EEU-FR1E250,LFO_K - GND_9,LFO cathode bypass (4700//25uF) [C]
 C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,modulator MIX -> engaged trim top (DC block)
 C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling (dry tap near relay)
 C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_K - FOL_OUT,follower cathode -> output coupling
