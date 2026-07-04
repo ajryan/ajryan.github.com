@@ -116,6 +116,7 @@ turret("T44", 6.000, R_PSU, "DBL")         # voltage-doubler mid node
 turret("T45", 6.500, R_PSU, "V16")         # ~16VDC unregulated
 turret("T46", 7.000, R_PSU, "V12")         # 12VDC regulated (relay + LED)
 turret("T47", 7.500, R_PSU, "LED_A")       # LED anode tie (wires to panel LED)
+turret("T48", 6.000, R_3,   "ENG_TRIM_W")  # engaged-leg trim attenuator wiper -> relay
 
 # ----------------------------------------------------------------------------
 # Component list. Each: ref, kind, value, rating, mouser, from_turret, to_turret, note
@@ -170,7 +171,7 @@ comp("C2",  "Cf", "250pF",   "500V mica", "80-DM15FD251JO3",   "T7",  "T8",  "HP
 comp("C3",  "Cf", "0.005uF", "630V film", "80-R82DC3470DQ50J", "T7",  "T9",  "LPF to LF modulator - .005 [C] confirmed on 6G8-A")
 comp("C4",  "Ce", "2uF",     "25V elec",  "667-EEU-FR1E2R2",   "T14", "T16", "modulator shared cathode bypass (4700//2uF) [C]")
 comp("C5",  "Ce", "25uF",    "25V elec",  "667-EEU-FR1E250",   "T24", "T28", "LFO cathode bypass (4700//25uF) [C]")
-comp("C6",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T15", "T33", "mixer -> relay engaged coupling")
+comp("C6",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T15", "T33", "modulator MIX -> engaged trim top (DC block)")
 comp("C7",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T1",  "T34", "dry -> relay bypass coupling")
 comp("C8",  "Cf", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T31", "T33", "follower output coupling")
 comp("C9",  "Cf", "0.02uF",  "630V film", "80-R82DC3200DQ50J", "T22", "T20", "LFO->cathodyne coupling (*)")
@@ -192,6 +193,12 @@ comp("D3", "D", "1N4007", "1000V 1A", "512-1N4007", "T43", "T44", "doubler diode
 comp("D4", "D", "1N4007", "1000V 1A", "512-1N4007", "T44", "T45", "doubler diode 2")
 comp("U1", "IC","78L12",  "TO-92 12V", "511-L78L12ACZ",  "T45", "T46", "12V linear regulator")
 comp("D5", "D", "1N4007", "1000V 1A", "512-1N4007", "RLY_COIL+", "RLY_COIL-", "relay coil flyback diode (at relay)")
+
+# ---- Trimmer: engaged-leg unity-match attenuator (bench set-and-forget) ----
+# 3-terminal cermet trimmer as a divider on the DC-blocked engaged signal.
+# Top=T33 (from C6), wiper=T48 -> relay engaged contact, bottom=T35 (gnd).
+# Set on the bench with INTENSITY at minimum so engaged level = unity bypass level.
+comp("VR1","trim","1M lin","board trimmer","652-3386P-1-105LF","T33","T35","ENGAGED trim atten; wiper=T48 -> relay engaged in. Set at INTENSITY-min to match bypass [D]")
 
 # ----------------------------------------------------------------------------
 # Off-board chassis parts (tube sockets, pots, jacks, transformer, relay, sw)
@@ -239,7 +246,7 @@ def net_of(tid):
 def emit_bom():
     rows = []
     kindname = {"R": "Resistor", "Cf": "Capacitor (film/mica)", "Ce": "Capacitor (electrolytic)",
-                "D": "Diode", "IC": "Regulator", "socket": "Tube socket", "pot": "Potentiometer",
+                "D": "Diode", "IC": "Regulator", "trim": "Trimmer", "socket": "Tube socket", "pot": "Potentiometer",
                 "jack": "Jack", "transformer": "Transformer", "relay": "Relay",
                 "switch": "Switch", "fuse": "Fuse", "inlet": "Mains inlet", "led": "LED"}
     for c in C:

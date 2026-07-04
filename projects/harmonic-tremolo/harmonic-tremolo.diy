@@ -304,6 +304,12 @@
         <point x="7.9000" y="3.1500"/>
       </controlPoints>
     </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T48</name>
+      <controlPoints>
+        <point x="6.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
     <org.diylc.components.passive.Resistor>
       <name>R1</name>
       <value>68k</value>
@@ -736,6 +742,14 @@
         <point x="7.4000" y="3.1500"/>
       </controlPoints>
     </org.diylc.components.semiconductors.TransistorTO92>
+    <org.diylc.components.passive.Resistor>
+      <name>VR1</name>
+      <value>1M lin</value>
+      <controlPoints>
+        <point x="6.9000" y="0.7750"/>
+        <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
     <org.diylc.components.tube.TubeSocket>
       <name>V1</name>
       <value>12AX7</value>

@@ -135,10 +135,21 @@ INTENSITY sets depth.
 
 ---
 
-## Relay true‑bypass — K1 (Takamisawa NA12W‑K, DPDT, 12 VDC) **[D]**
-Unchanged from the first pass: coil de‑energized = **bypass (dry)**; pop
-suppression via 1 M bleeds (R20/R22/R31) holding all coupling nodes at 0 V DC;
-D5 coil flyback; latching footswitch over TRS (J3).
+## Relay true‑bypass + level match — K1 (Takamisawa NA12W‑K, DPDT, 12 VDC) **[D]**
+
+- Coil de‑energized = **bypass (dry)**; pop suppression via 1 M bleeds
+  (R20/R22/R31) holding all coupling nodes at 0 V DC; D5 coil flyback; latching
+  footswitch over TRS (J3).
+- **Engaged‑leg trim attenuator VR1 (1 M cermet trimmer)** — the shared follower
+  is unity gain, so it cannot make the two paths' *levels* match; that has to be
+  set ahead of it. The engaged path carries real gain (V1a driver + modulators),
+  so VR1 sits in the **engaged leg only**, after C6 (DC‑blocked), as a divider:
+  top = C6 out (T33), wiper (T48) → relay engaged contact, bottom = ground.
+  **Bench procedure:** INTENSITY at minimum, adjust VR1 until engaged output level
+  = bypass output level. Bypass leg is untouched (already unity).
+- **Polarity is unaffected** — VR1 is a passive divider (0 inversions), so engaged
+  stays at 2 inversions (even) = in phase with the 0‑inversion bypass. See
+  `notes.md §1` and the level‑matching rationale in `notes.md §1a`.
 
 ## Power supply **[D]**
 Hammond 269EX (380 VCT @ 71 mA, datasheet confirmed), **center‑tapped full‑wave

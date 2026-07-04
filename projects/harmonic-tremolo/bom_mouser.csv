@@ -22,6 +22,7 @@ Mouser Part Number,Quantity 1,Customer Part Number,Description
 594-5083NW68K000J,1,R1,68k V1a grid stopper
 604-WP710A10ID,1,LED1,3mm Effect-engaged indicator LED
 612-MRA106-A,1,SW1,DPST Mains power switch
+652-3386P-1-105LF,1,VR1,1M lin ENGAGED trim atten; wiper=T48 -> relay engaged in. Set at INTENSITY-min to match bypass [D]
 667-EEU-FR1E101,1,C19,100uF 12V reg output cap
 667-EEU-FR1E250,1,C5,25uF LFO cathode bypass (4700//25uF) [C]
 667-EEU-FR1E2R2,1,C4,2uF modulator shared cathode bypass (4700//2uF) [C]

@@ -37,7 +37,7 @@ C2,Capacitor (film/mica),250pF,500V mica,80-DM15FD251JO3,SPLIT - HF_G,HPF to HF 
 C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to LF modulator - .005 [C] confirmed on 6G8-A
 C4,Capacitor (electrolytic),2uF,25V elec,667-EEU-FR1E2R2,MIX_K - GND_2,modulator shared cathode bypass (4700//2uF) [C]
 C5,Capacitor (electrolytic),25uF,25V elec,667-EEU-FR1E250,LFO_K - GND_3,LFO cathode bypass (4700//25uF) [C]
-C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,mixer -> relay engaged coupling
+C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,modulator MIX -> engaged trim top (DC block)
 C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling
 C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_OUT - RLY_ENG,follower output coupling
 C9,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,LFO_P - CATH_G,LFO->cathodyne coupling (*)
@@ -57,6 +57,7 @@ D3,Diode,1N4007,1000V 1A,512-1N4007,AC63 - DBL,doubler diode 1
 D4,Diode,1N4007,1000V 1A,512-1N4007,DBL - V16,doubler diode 2
 U1,Regulator,78L12,TO-92 12V,511-L78L12ACZ,V16 - V12,12V linear regulator
 D5,Diode,1N4007,1000V 1A,512-1N4007,RLY_COIL+ - RLY_COIL-,relay coil flyback diode (at relay)
+VR1,Trimmer,1M lin,board trimmer,652-3386P-1-105LF,RLY_ENG - GND_5,ENGAGED trim atten; wiper=T48 -> relay engaged in. Set at INTENSITY-min to match bypass [D]
 V1,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V1a input driver, V1b cathode follower"
 V2,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V2a HF mixer, V2b LF mixer"
 V3,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V3a LFO oscillator, V3b cathodyne splitter"

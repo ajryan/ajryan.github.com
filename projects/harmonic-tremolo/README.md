@@ -21,9 +21,12 @@ chassis + turret board.
   Buy repro Fender vibrato pots from an amp‑parts vendor, or substitute 2–3 M / 10 M
   in a common taper (feel changes, range doesn't). See `notes.md §3`.
 - Stages I **added** for standalone use (input recovery, cathodyne, cathode
-  follower, relay bypass, PSU) are marked **[D]** and are design, not 6G8‑A trace.
-  Note the LFO uses a cathodyne per the brief rather than the stock 2‑triode
-  oscillator — see `notes.md §6`.
+  follower, relay bypass, PSU, **engaged‑leg trim VR1**) are marked **[D]** and are
+  design, not 6G8‑A trace. Note the LFO uses a cathodyne per the brief rather than
+  the stock 2‑triode oscillator — see `notes.md §6`.
+- **Bench calibration:** with INTENSITY at minimum, set trimmer **VR1** so the
+  engaged output level equals the bypass level (they share the output follower for
+  matched polarity/impedance; VR1 matches level). Rationale in `notes.md §1a`.
 
 ## Files
 

@@ -49,6 +49,43 @@ IN ─▶ V1a driver ─▶ HPF/LPF split ─▶ V2a/V2b mixers ─▶ MIX ─�
 
 ---
 
+## 1a. Level matching bypass vs engaged — why the trim attenuator (VR1)
+
+Polarity and output impedance are matched by routing both paths through the shared
+cathode follower V1b. **Level is not** — and cannot be fixed *by* the follower,
+because a cathode follower (like a cathodyne) is **~unity gain**: it buffers, it
+does not amplify. Whatever level difference exists is set entirely by the stages
+**ahead** of the follower:
+
+- **Bypass leg ahead of follower:** a coupling cap only → **unity**.
+- **Engaged leg ahead of follower:** V1a driver (~×30) → lossy HPF/LPF split →
+  bias‑varied modulators → 470 k mix. Net is **not** unity, and it is
+  **time‑varying** (that is the tremolo).
+
+So the fix is not "gain makeup in bypass" (the follower can't add gain) but
+**trimming the engaged leg down to the bypass's unity** — the inverse framing.
+**VR1** (1 M cermet trimmer) is a divider in the engaged leg only, after C6:
+
+```
+MIX ─▶ C6 ─▶ VR1 top (T33)
+                 │ wiper (T48) ─▶ relay engaged contact ─▶ V1b grid
+                 ▼
+                gnd (T35)
+```
+
+**Calibration reference:** because engaged amplitude is modulated, "equal level"
+needs a defined operating point. Set VR1 with **INTENSITY at minimum** (shallowest
+modulation, steadiest level) so switching bypass↔engaged there is seamless; deeper
+INTENSITY then simply adds tremolo *around* that matched level. VR1 only
+attenuates (engaged runs hotter than unity), which is the needed direction.
+
+If a build ever comes out with the engaged path *quieter* than bypass (unlikely
+with the driver present, but possible with a very lossy split), VR1 can't lift it —
+that would require an actual gain stage (a common‑cathode triode, which inverts and
+would need a second inversion to stay polarity‑even). Not expected here.
+
+---
+
 ## 2. B+ node voltage estimates
 
 **Inputs:** 269EX 190‑0‑190 (380 V CT), CT full‑wave, 22 µF reservoir. Peak of

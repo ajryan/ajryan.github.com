@@ -163,6 +163,9 @@
 <line x1="681.6" y1="321.6" x2="729.6" y2="321.6" stroke="#333" stroke-width="2.4" opacity="0.8"/>
 <text x="705.6" y="318.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#333">U1</text>
 <text x="705.6" y="327.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">78L12</text>
+<line x1="681.6" y1="93.6" x2="681.6" y2="189.6" stroke="#555" stroke-width="2.4" opacity="0.8"/>
+<text x="681.6" y="138.6" font-family="monospace" font-size="7" text-anchor="middle" fill="#555">VR1</text>
+<text x="681.6" y="147.6" font-family="monospace" font-size="6" text-anchor="middle" fill="#666">1M lin</text>
 <circle cx="105.6" cy="93.6" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="105.6" cy="141.6" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="105.6" cy="237.6" r="3" fill="#b8860b" stroke="#5a4300"/>
@@ -210,6 +213,7 @@
 <circle cx="681.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="729.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="777.6" cy="321.6" r="3" fill="#b8860b" stroke="#5a4300"/>
+<circle cx="633.6" cy="189.6" r="3" fill="#b8860b" stroke="#5a4300"/>
 <circle cx="81.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
 <circle cx="801.6" cy="333.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
 <circle cx="81.6" cy="81.6" r="5" fill="none" stroke="#999" stroke-width="1.2"/>
