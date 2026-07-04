@@ -40,12 +40,24 @@ chassis + turret board.
 | `turret-drill.svg` | Dimensioned drill drawing — **print at 1:1 (96 dpi)** as a drill template |
 | `layout.svg` | Populated board layout (component/connectivity view) |
 | `harmonic-tremolo.diy` | DIYLC 6 project — verified to load in DIYLC 6.1.0 (board + 54 turrets + on-board R/C/D/trimmer + chassis-part labels) |
-| `generate.py` | Single source of truth — regenerates every file above |
+| `generate.py` | Source of truth for the FIRST draft — regenerates every file above |
+| `diy_to_drill.py` | Reverse tool — regenerates the drill table/drawing FROM a hand-edited `.diy` |
 
-Regenerate everything after editing the design:
+### Workflow (important if you drag turrets in DIYLC)
+`generate.py` writes the first-draft `.diy` **and** the drill files from one dataset,
+so at that point they agree. **If you then open `harmonic-tremolo.diy` in DIYLC and
+drag turrets around, the `.diy` becomes the master for turret positions — and the
+drill files would go stale.** Re-sync them from the edited `.diy`:
 ```bash
-python3 generate.py
+python3 generate.py        # first draft: dataset -> .diy + drill + BOM
+# ... hand-edit harmonic-tremolo.diy in DIYLC (drag turrets to taste) ...
+python3 diy_to_drill.py    # re-extract drill table/drawing FROM the edited .diy
 ```
+The extractor reads the turret lugs + mounting holes straight out of the `.diy`
+(un-flipping DIYLC's top-down Y) and is verified to round-trip the generator's own
+output byte-for-byte. BOM values come from `generate.py` and are unaffected by
+turret positions. Do **not** re-run `generate.py` after hand-editing — it would
+overwrite your DIYLC placement with the dataset's draft positions.
 
 > **On the Mouser part numbers:** they are **representative, best‑effort**
 > selections (correct series/rating for the value) chosen without a live Mouser

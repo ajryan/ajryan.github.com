@@ -472,6 +472,15 @@ def emit_diylc():
         w(f'<value>{tid} {net}</value>')
         w('</org.diylc.components.connectivity.Turret>')
 
+    # --- Mounting holes as DrillHole components (so they round-trip) ---
+    for mid, mx, my in MOUNT_HOLES:
+        w('<org.diylc.components.electromechanical.DrillHole>')
+        w(f'<name>{mid}</name><alpha>127</alpha>')
+        w(size("diameter", round(MOUNT_HOLE_D, 4)))
+        w(col("color", 160, 160, 160))
+        w(f'<point x="{mx:.4f}" y="{BOARD_H - my:.4f}"/>')
+        w('</org.diylc.components.electromechanical.DrillHole>')
+
     # --- On-board components (both endpoints on turrets) ---
     for c in C:
         a, b, kind = c["a"], c["b"], c["kind"]
