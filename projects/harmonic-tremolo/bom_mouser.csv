@@ -8,10 +8,10 @@ Mouser Part Number,Quantity 1,Customer Part Number,Description
 568-NMJ6HCD2,1,J3,1/4 TRS FOOTSWITCH TRS (relay drive + LED return)
 576-0217.500HXP,1,F1,0.5A slow Mains fuse (5x20mm slo-blo) + holder
 588-P1M-A,1,P3,1M audio OUTPUT LEVEL
-594-5063JD100K0J,2,"R7,R8",100k HF modulator plate load - 100k 5% matched [C]
-594-5083NW100K00J,4,"R3,R33,R34,R26",100k V1a plate load (*)
+594-5063JD100K0J,2,"R7,R8",100k HF modulator plate load - 100k 5% matched [C]; to local B+2
+594-5083NW100K00J,4,"R3,R33,R34,R26",100k V1a driver plate load [D]; to local B+3
 594-5083NW100R00J,2,"R29,R30",100 heater artificial-CT / elevation tie
-594-5083NW1K0000J,1,R27,1k LED series (12V -> LED anode)
+594-5083NW1K0000J,1,R27,1k LED series (12V -> LED anode T47 -> panel LED)
 594-5083NW1K5000J,1,R4,1.5k V1a cathode (*)
 594-5083NW1M0000J,9,"R2,R10,R11,R14,R17,R18,R20,R22,R31",1M V1a grid leak
 594-5083NW220K00J,3,"R5,R6,R25",220k LPF series (split) [C] confirmed on 6G8-A
@@ -38,4 +38,4 @@ Mouser Part Number,Quantity 1,Customer Part Number,Description
 80-R82DC3470DQ50J,1,C3,0.005uF LPF to LF modulator - .005 [C] confirmed on 6G8-A
 80-R82EC3220DQ60J,3,"C1,C6,C7",0.022uF V1a output coupling
 80-R82EC3330DK50J,1,C12,0.033uF phase-shift C3 - .03 [C] (nearest E-series to stock .03)
-80-R82IC3100DQ50J,2,"C8,C16",0.1uF follower output coupling
+80-R82IC3100DQ50J,2,"C8,C16",0.1uF follower cathode -> output coupling

@@ -42,89 +42,98 @@ MOUNT_HOLES = [
 
 # ----------------------------------------------------------------------------
 # Turret definitions:  id -> (x_in, y_in, net_label)
-# Rows (y): 2.750 top, 2.250, 1.750, 1.250, 0.750, 0.375(PSU rail)
-# Laid out left->right by signal flow; PSU + relay supply on bottom rail.
+# Re-optimized placement in three horizontal BANDS so components span adjacent
+# turrets (short leads) and the LFO is physically separated from audio:
+#   AUDIO band  y = 2.75 / 2.25 / 2.00   (signal path, input -> follower -> out)
+#   LFO band    y = 1.75 / 1.25 / 1.00   (oscillator, phase-shift, cathodyne)
+#   PSU band    y = 0.75 / 0.375         (B+ filter chain, rectifier, 12V, gnd)
+# Power rails (B+1/2/3) and ground are intentionally MULTI-turret: local rail
+# turrets sit next to the stage they feed and are bussed to the main filter
+# node by a jumper wire (normal turret-board practice) - this is what keeps the
+# plate-load / cathode resistors short instead of reaching across the board.
 # ----------------------------------------------------------------------------
-R_TOP, R_2, R_3, R_4, R_5, R_PSU = 2.750, 2.250, 1.750, 1.250, 0.750, 0.375
-
 T = {}  # id -> (x, y, net)
 def turret(tid, x, y, net):
     assert tid not in T, f"dup turret {tid}"
+    for k, (px, py, _) in T.items():
+        assert not (abs(px - x) < 1e-6 and abs(py - y) < 1e-6), f"{tid} overlaps {k} at {x},{y}"
     T[tid] = (round(x, 3), round(y, 3), net)
 
-# --- Input / V1a driver stage (left end, nearest input jack) ---
-turret("T1",  0.500, R_TOP, "IN")          # from input jack tip (engaged in) / relay
-turret("T2",  0.500, R_2,   "V1a_G")       # V1a grid node (after grid stopper)
-turret("T3",  0.500, R_4,   "V1a_K")       # V1a cathode
-turret("T4",  1.000, R_TOP, "V1a_P")       # V1a plate
-turret("T5",  1.000, R_4,   "GND_1")       # ground bus (cathode bypass rtn)
-turret("T6",  1.500, R_TOP, "DRV_OUT")     # V1a plate coupling out
+# === AUDIO band =============================================================
+# Input + V1a driver
+turret("T1",  0.500, 2.750, "IN")          # input jack tip
+turret("T2",  1.000, 2.750, "V1a_G")       # V1a grid (after stopper)
+turret("T3",  1.000, 2.250, "V1a_K")       # V1a cathode
+turret("T5",  0.500, 2.250, "GND_1")       # local ground
+turret("T4",  1.500, 2.750, "V1a_P")       # V1a plate
+turret("T49", 1.500, 2.250, "BPLUS3")      # local B+3 for driver plate (bus to T38)
+turret("T6",  2.000, 2.750, "DRV_OUT")     # driver coupling-out (jumper from T4)
+# HPF / LPF split
+turret("T7",  2.500, 2.750, "SPLIT")       # split node
+turret("T8",  2.500, 2.250, "HF_G")        # HF modulator grid (high-pass)
+turret("T9",  3.000, 2.250, "LF_G")        # LF modulator grid (low-pass)
+# Modulators V2a (HF) / V2b (LF)
+turret("T12", 3.000, 2.750, "HF_P")        # HF modulator plate
+turret("T13", 3.500, 2.750, "LF_P")        # LF modulator plate
+turret("T10", 3.500, 2.000, "BPLUS2")      # local B+2 for modulator plates (bus to T37)
+turret("T14", 2.500, 2.000, "MIX_K")       # shared modulator cathode
+turret("T16", 3.000, 2.000, "GND_2")       # local ground
+turret("T17", 2.000, 2.250, "BIAS_HF")     # anti-phase LFO bias -> HF grid
+turret("T18", 3.500, 2.250, "BIAS_LF")     # anti-phase LFO bias -> LF grid
+turret("T15", 4.000, 2.750, "MIX")         # modulator plates summed
+# Relay ties + engaged trim (relay is chassis-mounted; these are board tie pts)
+turret("T50", 4.500, 2.750, "IN")          # local IN (dry bypass tap; bus to T1)
+turret("T33", 4.500, 2.250, "RLY_ENG")     # engaged signal -> VR1 top
+turret("T34", 4.500, 2.000, "RLY_BYP")     # dry bypass signal
+turret("T48", 5.000, 2.250, "ENG_TRIM_W")  # VR1 wiper -> relay engaged contact
+turret("T35", 5.000, 2.000, "GND_5")       # local ground (bleed return)
+# Cathode-follower output V1b
+turret("T29", 5.500, 2.750, "FOL_G")       # follower grid (relay common returns here)
+turret("T32", 5.500, 2.250, "GND_4")       # local ground
+turret("T30", 6.000, 2.750, "FOL_K")       # follower cathode = output
+turret("T51", 6.000, 2.250, "GND_6")       # local ground
+turret("T31", 6.500, 2.750, "FOL_OUT")     # output coupling -> LEVEL pot
 
-# --- HPF / LPF audio split ---
-turret("T7",  2.000, R_TOP, "SPLIT")       # split node
-turret("T8",  2.000, R_2,   "HF_G")        # to HF mixer grid (high-pass)
-turret("T9",  2.000, R_3,   "LF_G")        # to LF mixer grid (low-pass)
+# === LFO band ===============================================================
+# Cathodyne phase splitter V3b
+turret("T19", 3.500, 1.750, "CATH_P")      # cathodyne plate (anti-phase A)
+turret("T21", 3.500, 1.250, "CATH_K")      # cathodyne cathode (anti-phase B)
+turret("T20", 4.000, 1.750, "CATH_G")      # cathodyne grid (from LFO)
+turret("T52", 4.000, 1.250, "BPLUS1")      # local B+1 for cathodyne plate (bus to T36)
+turret("T28", 4.000, 1.000, "GND_3")       # local ground
+# LFO oscillator V3a + phase-shift network
+turret("T22", 4.500, 1.750, "LFO_P")       # LFO plate
+turret("T24", 4.500, 1.250, "LFO_K")       # LFO cathode
+turret("T23", 5.000, 1.750, "LFO_G")       # LFO grid
+turret("T11", 5.000, 1.250, "BPLUS3")      # local B+3 for LFO plate (bus to T38)
+turret("T25", 5.500, 1.750, "PS1")         # phase-shift node 1
+turret("T26", 5.500, 1.250, "PS2")         # phase-shift node 2
+turret("T27", 6.000, 1.750, "PS3")         # phase-shift node 3 (-> SPEED pot)
 
-# --- Mixer / modulator triodes V2a (HF), V2b (LF) ---
-turret("T10", 2.500, R_2,   "HF_G")        # HF mixer grid tie
-turret("T11", 2.500, R_3,   "LF_G")        # LF mixer grid tie
-turret("T12", 3.000, R_TOP, "HF_P")        # V2a plate
-turret("T13", 3.000, R_3,   "LF_P")        # V2b plate
-turret("T14", 2.500, R_4,   "MIX_K")       # shared mixer cathode
-turret("T15", 3.500, R_TOP, "MIX")         # mixer plates combined -> follower
-turret("T16", 2.500, R_5,   "GND_2")       # ground bus
-
-# --- LFO bias injection to mixer grids (from cathodyne, via Intensity) ---
-turret("T17", 3.000, R_4,   "BIAS_HF")     # antiphase bias to HF grid
-turret("T18", 3.000, R_5,   "BIAS_LF")     # antiphase bias to LF grid
-
-# --- Cathodyne phase splitter V3b + LFO oscillator V3a (right-center) ---
-turret("T19", 4.000, R_TOP, "CATH_P")      # cathodyne plate (antiphase A)
-turret("T20", 4.000, R_2,   "CATH_G")      # cathodyne grid (from LFO)
-turret("T21", 4.000, R_3,   "CATH_K")      # cathodyne cathode (antiphase B)
-turret("T22", 4.500, R_TOP, "LFO_P")       # LFO oscillator plate
-turret("T23", 4.500, R_2,   "LFO_G")       # LFO oscillator grid
-turret("T24", 4.500, R_4,   "LFO_K")       # LFO oscillator cathode
-turret("T25", 5.000, R_2,   "PS1")         # phase-shift network node 1
-turret("T26", 5.000, R_3,   "PS2")         # phase-shift network node 2
-turret("T27", 5.000, R_4,   "PS3")         # phase-shift network node 3 (-> Speed pot)
-turret("T28", 4.000, R_5,   "GND_3")       # ground bus
-
-# --- Cathode follower output V1b (right of mixers) ---
-turret("T29", 5.500, R_TOP, "FOL_G")       # follower grid (relay-selected signal)
-turret("T30", 6.000, R_TOP, "FOL_K")       # follower cathode = output
-turret("T31", 6.000, R_2,   "FOL_OUT")     # follower output coupling -> level pot
-turret("T32", 5.500, R_3,   "GND_4")       # ground bus
-
-# --- Relay true-bypass board tie points (relay is chassis/socket mounted) ---
-turret("T33", 6.500, R_TOP, "RLY_ENG")     # relay common: engaged (=MIX)
-turret("T34", 6.500, R_2,   "RLY_BYP")     # relay common: bypass (=IN dry)
-turret("T35", 6.500, R_3,   "GND_5")       # ground bus / pop-suppression bleed return
-
-# --- PSU filter nodes + rectifier (bottom rail, PT end / right) ---
-turret("T36", 7.000, R_TOP, "BPLUS1")      # reservoir node B+1
-turret("T37", 7.000, R_2,   "BPLUS2")      # B+2 (mixer plates)
-turret("T38", 7.000, R_3,   "BPLUS3")      # B+3 (driver + LFO)
-turret("T39", 7.500, R_TOP, "RECT_AC1")    # rectifier AC in 1 (190V)
-turret("T40", 7.500, R_2,   "RECT_AC2")    # rectifier AC in 2 (190V)
-turret("T41", 7.500, R_3,   "HTR_CT")      # heater DC-elevation reference
-turret("T42", 7.000, R_5,   "GND_PSU")     # PSU ground / CT return
-
-# --- 12V relay supply (heater-derived doubler + regulator), bottom rail ---
-turret("T43", 5.500, R_PSU, "AC63")        # 6.3VAC tap in
-turret("T44", 6.000, R_PSU, "DBL")         # voltage-doubler mid node
-turret("T45", 6.500, R_PSU, "V16")         # ~16VDC unregulated
-turret("T46", 7.000, R_PSU, "V12")         # 12VDC regulated (relay + LED)
-turret("T47", 7.500, R_PSU, "LED_A")       # LED anode tie (wires to panel LED)
-turret("T48", 6.000, R_3,   "ENG_TRIM_W")  # engaged-leg trim attenuator wiper -> relay
+# === PSU band ===============================================================
+# 12V relay supply (heater-derived doubler + regulator) - lower-left of PSU band
+turret("T43", 3.000, 0.375, "AC63")        # 6.3VAC tap in
+turret("T44", 3.500, 0.375, "DBL")         # doubler mid node
+turret("T45", 4.000, 0.375, "V16")         # ~16VDC unregulated
+turret("T46", 4.500, 0.375, "V12")         # 12VDC regulated
+turret("T55", 4.500, 0.750, "GND_7")       # local ground (12V reg)
+turret("T47", 5.000, 0.375, "LED_A")       # LED anode tie
+# B+ filter chain + rectifier + heater elevation - right end (PT end)
+turret("T41", 6.000, 0.750, "HTR_CT")      # heater DC-elevation reference
+turret("T54", 6.000, 0.375, "GND_8")       # local ground (heater elev)
+turret("T36", 6.500, 0.750, "BPLUS1")      # B+1 reservoir (main)
+turret("T39", 6.500, 0.375, "RECT_AC1")    # rectifier AC in 1 (190V)
+turret("T37", 7.000, 0.750, "BPLUS2")      # B+2 (main)
+turret("T40", 7.000, 0.375, "RECT_AC2")    # rectifier AC in 2 (190V)
+turret("T38", 7.500, 0.750, "BPLUS3")      # B+3 (main)
+turret("T42", 7.500, 0.375, "GND_PSU")     # PSU ground / CT return
 
 # ----------------------------------------------------------------------------
 # Component list. Each: ref, kind, value, rating, mouser, from_turret, to_turret, note
 # mouser="" means not confirmed / builder-select. kind drives BOM category + DIYLC glyph.
 # ----------------------------------------------------------------------------
-# NOTE ON VALUES: entries flagged (*) in `note` are NOT confirmed against a
-# verified 6G8-A schematic image - see notes.md. They use well-documented
-# harmonic-vibrato values and must be checked against the user's schematic.
+# Confidence markers in notes: [C] confirmed from 6G8-A schematic, [P] probable,
+# [D] design addition (not a 6G8-A value). See schematic-trace.md / notes.md.
 C = []
 def comp(ref, kind, value, rating, mouser, a, b, note=""):
     C.append(dict(ref=ref, kind=kind, value=value, rating=rating,
@@ -133,34 +142,34 @@ def comp(ref, kind, value, rating, mouser, a, b, note=""):
 # ---- Resistors ----
 comp("R1", "R", "68k",  "1/2W CF", "594-5083NW68K000J", "T1",  "T2",  "V1a grid stopper")
 comp("R2", "R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T2",  "T5",  "V1a grid leak")
-comp("R3", "R", "100k", "1/2W CF", "594-5083NW100K00J", "T4",  "T38", "V1a plate load (*)")
+comp("R3", "R", "100k", "1/2W CF", "594-5083NW100K00J", "T4",  "T49", "V1a driver plate load [D]; to local B+3")
 comp("R4", "R", "1.5k", "1/2W CF", "594-5083NW1K5000J", "T3",  "T5",  "V1a cathode (*)")
 comp("R5", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T7",  "T9",  "LPF series (split) [C] confirmed on 6G8-A")
 comp("R6", "R", "220k", "1/2W CF", "594-5083NW220K00J", "T8",  "T16", "HF grid reference [P]")
-comp("R7", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T12", "T37", "HF modulator plate load - 100k 5% matched [C]")
-comp("R8", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T13", "T37", "LF modulator plate load - 100k 5% matched [C]")
+comp("R7", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T12", "T10", "HF modulator plate load - 100k 5% matched [C]; to local B+2")
+comp("R8", "R", "100k", "1/2W 5%", "594-5063JD100K0J",  "T13", "T10", "LF modulator plate load - 100k 5% matched [C]; to local B+2")
 comp("R9", "R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T14", "T16", "modulator shared cathode 4700 [C]")
-comp("R10","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T17", "T10", "HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
-comp("R11","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T18", "T11", "LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
+comp("R10","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T17", "T8",  "HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
+comp("R11","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T18", "T9",  "LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY")
 comp("R12","R", "470k", "1/2W CF", "594-5083NW470K00J", "T12", "T15", "HF plate mixing resistor 470k [C]")
 comp("R13","R", "470k", "1/2W CF", "594-5083NW470K00J", "T13", "T15", "LF plate mixing resistor 470k [C]")
 comp("R14","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T20", "T28", "cathodyne grid leak [D]")
-comp("R15","R", "470k", "1/2W CF", "594-5083NW470K00J", "T22", "T38", "LFO plate load 470k [C]")
+comp("R15","R", "470k", "1/2W CF", "594-5083NW470K00J", "T22", "T11", "LFO plate load 470k [C]; to local B+3")
 comp("R16","R", "4.7k", "1/2W CF", "594-5083NW4K7000J", "T24", "T28", "LFO cathode 4700 [C]")
 comp("R17","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T23", "T25", "phase-shift R1 - 1M [C]")
 comp("R18","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T25", "T26", "phase-shift R2 - 1M [C]")
 comp("R19","R", "4.7M", "1/2W CF", "594-5083NW4M7000J", "T26", "T27", "phase-shift feedback R - 4.7M [C]")
-comp("R20","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T29", "T35", "follower grid leak (grid at 0V DC)")
-comp("R21","R", "22k",  "1/2W CF", "594-5083NW22K000J", "T30", "T42", "follower cathode load / output tap")
+comp("R20","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T29", "T32", "follower grid leak (grid at 0V DC)")
+comp("R21","R", "22k",  "1/2W CF", "594-5083NW22K000J", "T30", "T51", "follower cathode load / output tap")
 comp("R22","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T34", "T35", "bypass-node bleed (pop supp)")
 comp("R31","R", "1M",   "1/2W CF", "594-5083NW1M0000J", "T33", "T35", "engaged-node bleed (pop supp)")
-comp("R33","R", "100k", "1/2W CF", "594-5083NW100K00J", "T19", "T36", "cathodyne plate load [D] (equal to cathode for balance)")
+comp("R33","R", "100k", "1/2W CF", "594-5083NW100K00J", "T19", "T52", "cathodyne plate load [D] (equal to cathode); to local B+1")
 comp("R34","R", "100k", "1/2W CF", "594-5083NW100K00J", "T21", "T28", "cathodyne cathode load [D] (equal to plate for balance)")
 comp("R23","R", "4.7k", "1W  MO",  "71-CMF60-4.7K-E3",  "T36", "T37", "B+1->B+2 dropper")
 comp("R24","R", "10k",  "1W  MO",  "71-CMF60-10K-E3",   "T37", "T38", "B+2->B+3 dropper")
 comp("R25","R", "220k", "1/2W CF", "594-5083NW220K00J", "T36", "T41", "heater elevation divider top")
-comp("R26","R", "100k", "1/2W CF", "594-5083NW100K00J", "T41", "T42", "heater elevation divider bot")
-comp("R27","R", "1k",   "1/2W CF", "594-5083NW1K0000J", "T46", "LED_A", "LED series (12V -> LED anode)")
+comp("R26","R", "100k", "1/2W CF", "594-5083NW100K00J", "T41", "T54", "heater elevation divider bot")
+comp("R27","R", "1k",   "1/2W CF", "594-5083NW1K0000J", "T46", "T47", "LED series (12V -> LED anode T47 -> panel LED)")
 comp("R28","R", "220k", "1W  MO",  "71-CMF60-220K-E3",  "T36", "T42", "safety bleeder across B+1 (drains B+ at power-off)")
 comp("R29","R", "100",  "1/2W CF", "594-5083NW100R00J", "HTR_A", "HTR_CT", "heater artificial-CT / elevation tie")
 comp("R30","R", "100",  "1/2W CF", "594-5083NW100R00J", "HTR_B", "HTR_CT", "heater artificial-CT / elevation tie")
@@ -172,8 +181,8 @@ comp("C3",  "Cf", "0.005uF", "630V film", "80-R82DC3470DQ50J", "T7",  "T9",  "LP
 comp("C4",  "Ce", "2uF",     "25V elec",  "667-EEU-FR1E2R2",   "T14", "T16", "modulator shared cathode bypass (4700//2uF) [C]")
 comp("C5",  "Ce", "25uF",    "25V elec",  "667-EEU-FR1E250",   "T24", "T28", "LFO cathode bypass (4700//25uF) [C]")
 comp("C6",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T15", "T33", "modulator MIX -> engaged trim top (DC block)")
-comp("C7",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T1",  "T34", "dry -> relay bypass coupling")
-comp("C8",  "Cf", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T31", "T33", "follower output coupling")
+comp("C7",  "Cf", "0.022uF", "630V film", "80-R82EC3220DQ60J", "T50", "T34", "dry -> relay bypass coupling (dry tap near relay)")
+comp("C8",  "Cf", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T30", "T31", "follower cathode -> output coupling")
 comp("C9",  "Cf", "0.02uF",  "630V film", "80-R82DC3200DQ50J", "T22", "T20", "LFO->cathodyne coupling (*)")
 comp("C10", "Cf", "0.01uF",  "630V film", "80-R82DC3100DQ50J", "T23", "T25", "phase-shift C1 - .01 [C] (graduated network)")
 comp("C11", "Cf", "0.02uF",  "630V film", "80-R82DC3200DQ50J", "T25", "T26", "phase-shift C2 - .02 [C] (graduated network)")
@@ -181,10 +190,10 @@ comp("C12", "Cf", "0.033uF", "630V film", "80-R82EC3330DK50J", "T26", "T27", "ph
 comp("C13", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T36", "T42", "B+1 reservoir")
 comp("C14", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T37", "T42", "B+2 filter")
 comp("C15", "Ce", "22uF",    "450V elec", "80-PEG124KG422QL",  "T38", "T42", "B+3 filter")
-comp("C16", "Ce", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T41", "T42", "heater elevation bypass")
+comp("C16", "Ce", "0.1uF",   "630V film", "80-R82IC3100DQ50J", "T41", "T54", "heater elevation bypass")
 comp("C17", "Ce", "100uF",   "35V elec",  "667-EEU-FR1V101",   "T43", "T44", "doubler C1")
 comp("C18", "Ce", "100uF",   "35V elec",  "667-EEU-FR1V101",   "T44", "T45", "doubler C2")
-comp("C19", "Ce", "100uF",   "25V elec",  "667-EEU-FR1E101",   "T46", "T42", "12V reg output cap")
+comp("C19", "Ce", "100uF",   "25V elec",  "667-EEU-FR1E101",   "T46", "T55", "12V reg output cap")
 
 # ---- Diodes / rectifier / regulator ----
 comp("D1", "D", "1N4007", "1000V 1A", "512-1N4007", "T39", "T36", "HV rectifier + (CT full-wave)")

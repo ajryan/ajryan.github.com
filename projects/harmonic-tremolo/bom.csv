@@ -1,34 +1,34 @@
 RefDes,Category,Value,Rating,Mouser P/N,Connection,Notes
 R1,Resistor,68k,1/2W CF,594-5083NW68K000J,IN - V1a_G,V1a grid stopper
 R2,Resistor,1M,1/2W CF,594-5083NW1M0000J,V1a_G - GND_1,V1a grid leak
-R3,Resistor,100k,1/2W CF,594-5083NW100K00J,V1a_P - BPLUS3,V1a plate load (*)
+R3,Resistor,100k,1/2W CF,594-5083NW100K00J,V1a_P - BPLUS3,V1a driver plate load [D]; to local B+3
 R4,Resistor,1.5k,1/2W CF,594-5083NW1K5000J,V1a_K - GND_1,V1a cathode (*)
 R5,Resistor,220k,1/2W CF,594-5083NW220K00J,SPLIT - LF_G,LPF series (split) [C] confirmed on 6G8-A
 R6,Resistor,220k,1/2W CF,594-5083NW220K00J,HF_G - GND_2,HF grid reference [P]
-R7,Resistor,100k,1/2W 5%,594-5063JD100K0J,HF_P - BPLUS2,HF modulator plate load - 100k 5% matched [C]
-R8,Resistor,100k,1/2W 5%,594-5063JD100K0J,LF_P - BPLUS2,LF modulator plate load - 100k 5% matched [C]
+R7,Resistor,100k,1/2W 5%,594-5063JD100K0J,HF_P - BPLUS2,HF modulator plate load - 100k 5% matched [C]; to local B+2
+R8,Resistor,100k,1/2W 5%,594-5063JD100K0J,LF_P - BPLUS2,LF modulator plate load - 100k 5% matched [C]; to local B+2
 R9,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,MIX_K - GND_2,modulator shared cathode 4700 [C]
 R10,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_HF - HF_G,HF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
 R11,Resistor,1M,1/2W CF,594-5083NW1M0000J,BIAS_LF - LF_G,LF modulator grid resistor 1M [C]; LFO arrives via 10M INTENSITY
 R12,Resistor,470k,1/2W CF,594-5083NW470K00J,HF_P - MIX,HF plate mixing resistor 470k [C]
 R13,Resistor,470k,1/2W CF,594-5083NW470K00J,LF_P - MIX,LF plate mixing resistor 470k [C]
 R14,Resistor,1M,1/2W CF,594-5083NW1M0000J,CATH_G - GND_3,cathodyne grid leak [D]
-R15,Resistor,470k,1/2W CF,594-5083NW470K00J,LFO_P - BPLUS3,LFO plate load 470k [C]
+R15,Resistor,470k,1/2W CF,594-5083NW470K00J,LFO_P - BPLUS3,LFO plate load 470k [C]; to local B+3
 R16,Resistor,4.7k,1/2W CF,594-5083NW4K7000J,LFO_K - GND_3,LFO cathode 4700 [C]
 R17,Resistor,1M,1/2W CF,594-5083NW1M0000J,LFO_G - PS1,phase-shift R1 - 1M [C]
 R18,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS1 - PS2,phase-shift R2 - 1M [C]
 R19,Resistor,4.7M,1/2W CF,594-5083NW4M7000J,PS2 - PS3,phase-shift feedback R - 4.7M [C]
-R20,Resistor,1M,1/2W CF,594-5083NW1M0000J,FOL_G - GND_5,follower grid leak (grid at 0V DC)
-R21,Resistor,22k,1/2W CF,594-5083NW22K000J,FOL_K - GND_PSU,follower cathode load / output tap
+R20,Resistor,1M,1/2W CF,594-5083NW1M0000J,FOL_G - GND_4,follower grid leak (grid at 0V DC)
+R21,Resistor,22k,1/2W CF,594-5083NW22K000J,FOL_K - GND_6,follower cathode load / output tap
 R22,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_BYP - GND_5,bypass-node bleed (pop supp)
 R31,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_ENG - GND_5,engaged-node bleed (pop supp)
-R33,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_P - BPLUS1,cathodyne plate load [D] (equal to cathode for balance)
+R33,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_P - BPLUS1,cathodyne plate load [D] (equal to cathode); to local B+1
 R34,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_K - GND_3,cathodyne cathode load [D] (equal to plate for balance)
 R23,Resistor,4.7k,1W  MO,71-CMF60-4.7K-E3,BPLUS1 - BPLUS2,B+1->B+2 dropper
 R24,Resistor,10k,1W  MO,71-CMF60-10K-E3,BPLUS2 - BPLUS3,B+2->B+3 dropper
 R25,Resistor,220k,1/2W CF,594-5083NW220K00J,BPLUS1 - HTR_CT,heater elevation divider top
-R26,Resistor,100k,1/2W CF,594-5083NW100K00J,HTR_CT - GND_PSU,heater elevation divider bot
-R27,Resistor,1k,1/2W CF,594-5083NW1K0000J,V12 - LED_A,LED series (12V -> LED anode)
+R26,Resistor,100k,1/2W CF,594-5083NW100K00J,HTR_CT - GND_8,heater elevation divider bot
+R27,Resistor,1k,1/2W CF,594-5083NW1K0000J,V12 - LED_A,LED series (12V -> LED anode T47 -> panel LED)
 R28,Resistor,220k,1W  MO,71-CMF60-220K-E3,BPLUS1 - GND_PSU,safety bleeder across B+1 (drains B+ at power-off)
 R29,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_A - HTR_CT,heater artificial-CT / elevation tie
 R30,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_B - HTR_CT,heater artificial-CT / elevation tie
@@ -38,8 +38,8 @@ C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to
 C4,Capacitor (electrolytic),2uF,25V elec,667-EEU-FR1E2R2,MIX_K - GND_2,modulator shared cathode bypass (4700//2uF) [C]
 C5,Capacitor (electrolytic),25uF,25V elec,667-EEU-FR1E250,LFO_K - GND_3,LFO cathode bypass (4700//25uF) [C]
 C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,modulator MIX -> engaged trim top (DC block)
-C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling
-C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_OUT - RLY_ENG,follower output coupling
+C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling (dry tap near relay)
+C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_K - FOL_OUT,follower cathode -> output coupling
 C9,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,LFO_P - CATH_G,LFO->cathodyne coupling (*)
 C10,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,LFO_G - PS1,phase-shift C1 - .01 [C] (graduated network)
 C11,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,PS1 - PS2,phase-shift C2 - .02 [C] (graduated network)
@@ -47,10 +47,10 @@ C12,Capacitor (film/mica),0.033uF,630V film,80-R82EC3330DK50J,PS2 - PS3,phase-sh
 C13,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS1 - GND_PSU,B+1 reservoir
 C14,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS2 - GND_PSU,B+2 filter
 C15,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS3 - GND_PSU,B+3 filter
-C16,Capacitor (electrolytic),0.1uF,630V film,80-R82IC3100DQ50J,HTR_CT - GND_PSU,heater elevation bypass
+C16,Capacitor (electrolytic),0.1uF,630V film,80-R82IC3100DQ50J,HTR_CT - GND_8,heater elevation bypass
 C17,Capacitor (electrolytic),100uF,35V elec,667-EEU-FR1V101,AC63 - DBL,doubler C1
 C18,Capacitor (electrolytic),100uF,35V elec,667-EEU-FR1V101,DBL - V16,doubler C2
-C19,Capacitor (electrolytic),100uF,25V elec,667-EEU-FR1E101,V12 - GND_PSU,12V reg output cap
+C19,Capacitor (electrolytic),100uF,25V elec,667-EEU-FR1E101,V12 - GND_7,12V reg output cap
 D1,Diode,1N4007,1000V 1A,512-1N4007,RECT_AC1 - BPLUS1,HV rectifier + (CT full-wave)
 D2,Diode,1N4007,1000V 1A,512-1N4007,RECT_AC2 - BPLUS1,HV rectifier - (CT full-wave)
 D3,Diode,1N4007,1000V 1A,512-1N4007,AC63 - DBL,doubler diode 1
