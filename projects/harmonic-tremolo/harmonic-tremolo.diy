@@ -1,0 +1,832 @@
+<?xml version="1.0" ?>
+<project>
+  <fileVersion>
+    <major>4</major>
+    <minor>27</minor>
+    <build>0</build>
+  </fileVersion>
+  <title>Harmonic Tremolo Unit (6G8-A based)</title>
+  <author>generated</author>
+  <description>Standalone tube harmonic tremolo - see notes.md</description>
+  <width value="12.0" unit="in"/>
+  <height value="8.0" unit="in"/>
+  <gridSpacing value="0.25" unit="in"/>
+  <dotSpacing>1</dotSpacing>
+  <components>
+    <org.diylc.components.boards.TurretBoard>
+      <name>Board1</name>
+      <controlPoints>
+        <point x="0.4000" y="0.4000"/>
+        <point x="8.4000" y="3.5250"/>
+      </controlPoints>
+      <boardWidth>8.0</boardWidth>
+      <boardHeight>3.125</boardHeight>
+    </org.diylc.components.boards.TurretBoard>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T1</name>
+      <controlPoints>
+        <point x="0.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T2</name>
+      <controlPoints>
+        <point x="0.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T3</name>
+      <controlPoints>
+        <point x="0.9000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T4</name>
+      <controlPoints>
+        <point x="1.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T5</name>
+      <controlPoints>
+        <point x="1.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T6</name>
+      <controlPoints>
+        <point x="1.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T7</name>
+      <controlPoints>
+        <point x="2.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T8</name>
+      <controlPoints>
+        <point x="2.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T9</name>
+      <controlPoints>
+        <point x="2.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T10</name>
+      <controlPoints>
+        <point x="2.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T11</name>
+      <controlPoints>
+        <point x="2.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T12</name>
+      <controlPoints>
+        <point x="3.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T13</name>
+      <controlPoints>
+        <point x="3.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T14</name>
+      <controlPoints>
+        <point x="2.9000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T15</name>
+      <controlPoints>
+        <point x="3.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T16</name>
+      <controlPoints>
+        <point x="2.9000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T17</name>
+      <controlPoints>
+        <point x="3.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T18</name>
+      <controlPoints>
+        <point x="3.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T19</name>
+      <controlPoints>
+        <point x="4.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T20</name>
+      <controlPoints>
+        <point x="4.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T21</name>
+      <controlPoints>
+        <point x="4.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T22</name>
+      <controlPoints>
+        <point x="4.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T23</name>
+      <controlPoints>
+        <point x="4.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T24</name>
+      <controlPoints>
+        <point x="4.9000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T25</name>
+      <controlPoints>
+        <point x="5.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T26</name>
+      <controlPoints>
+        <point x="5.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T27</name>
+      <controlPoints>
+        <point x="5.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T28</name>
+      <controlPoints>
+        <point x="4.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T29</name>
+      <controlPoints>
+        <point x="5.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T30</name>
+      <controlPoints>
+        <point x="6.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T31</name>
+      <controlPoints>
+        <point x="6.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T32</name>
+      <controlPoints>
+        <point x="5.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T33</name>
+      <controlPoints>
+        <point x="6.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T34</name>
+      <controlPoints>
+        <point x="6.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T35</name>
+      <controlPoints>
+        <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T36</name>
+      <controlPoints>
+        <point x="7.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T37</name>
+      <controlPoints>
+        <point x="7.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T38</name>
+      <controlPoints>
+        <point x="7.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T39</name>
+      <controlPoints>
+        <point x="7.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T40</name>
+      <controlPoints>
+        <point x="7.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T41</name>
+      <controlPoints>
+        <point x="7.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T42</name>
+      <controlPoints>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T43</name>
+      <controlPoints>
+        <point x="5.9000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T44</name>
+      <controlPoints>
+        <point x="6.4000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T45</name>
+      <controlPoints>
+        <point x="6.9000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T46</name>
+      <controlPoints>
+        <point x="7.4000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.connectivity.TurretLug>
+      <name>T47</name>
+      <controlPoints>
+        <point x="7.9000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.connectivity.TurretLug>
+    <org.diylc.components.passive.Resistor>
+      <name>R1</name>
+      <value>68k</value>
+      <controlPoints>
+        <point x="0.9000" y="0.7750"/>
+        <point x="0.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R2</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="0.9000" y="1.2750"/>
+        <point x="1.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R3</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="1.4000" y="0.7750"/>
+        <point x="7.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R4</name>
+      <value>1.5k</value>
+      <controlPoints>
+        <point x="0.9000" y="2.2750"/>
+        <point x="1.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R5</name>
+      <value>220k</value>
+      <controlPoints>
+        <point x="2.4000" y="0.7750"/>
+        <point x="2.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R6</name>
+      <value>220k</value>
+      <controlPoints>
+        <point x="2.4000" y="1.2750"/>
+        <point x="2.9000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R7</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="3.4000" y="0.7750"/>
+        <point x="7.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R8</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="3.4000" y="1.7750"/>
+        <point x="7.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R9</name>
+      <value>1.5k</value>
+      <controlPoints>
+        <point x="2.9000" y="2.2750"/>
+        <point x="2.9000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R10</name>
+      <value>3.3M</value>
+      <controlPoints>
+        <point x="3.4000" y="2.2750"/>
+        <point x="2.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R11</name>
+      <value>3.3M</value>
+      <controlPoints>
+        <point x="3.4000" y="2.7750"/>
+        <point x="2.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R12</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="4.4000" y="0.7750"/>
+        <point x="7.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R13</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="4.4000" y="1.7750"/>
+        <point x="4.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R14</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="4.4000" y="1.2750"/>
+        <point x="4.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R15</name>
+      <value>220k</value>
+      <controlPoints>
+        <point x="4.9000" y="0.7750"/>
+        <point x="7.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R16</name>
+      <value>2.2k</value>
+      <controlPoints>
+        <point x="4.9000" y="2.2750"/>
+        <point x="4.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R17</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="4.9000" y="1.2750"/>
+        <point x="5.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R18</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="5.4000" y="1.2750"/>
+        <point x="5.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R19</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="5.4000" y="1.7750"/>
+        <point x="5.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R20</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="5.9000" y="0.7750"/>
+        <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R21</name>
+      <value>22k</value>
+      <controlPoints>
+        <point x="6.4000" y="0.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R22</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="6.9000" y="1.2750"/>
+        <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R31</name>
+      <value>1M</value>
+      <controlPoints>
+        <point x="6.9000" y="0.7750"/>
+        <point x="6.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R23</name>
+      <value>4.7k</value>
+      <controlPoints>
+        <point x="7.4000" y="0.7750"/>
+        <point x="7.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R24</name>
+      <value>10k</value>
+      <controlPoints>
+        <point x="7.4000" y="1.2750"/>
+        <point x="7.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R25</name>
+      <value>220k</value>
+      <controlPoints>
+        <point x="7.4000" y="0.7750"/>
+        <point x="7.9000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R26</name>
+      <value>100k</value>
+      <controlPoints>
+        <point x="7.9000" y="1.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.Resistor>
+      <name>R28</name>
+      <value>220k</value>
+      <controlPoints>
+        <point x="7.4000" y="0.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.Resistor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C1</name>
+      <value>0.022uF</value>
+      <controlPoints>
+        <point x="1.9000" y="0.7750"/>
+        <point x="2.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C2</name>
+      <value>250pF</value>
+      <controlPoints>
+        <point x="2.4000" y="0.7750"/>
+        <point x="2.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C3</name>
+      <value>0.005uF</value>
+      <controlPoints>
+        <point x="2.4000" y="0.7750"/>
+        <point x="2.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C4</name>
+      <value>0.022uF</value>
+      <controlPoints>
+        <point x="3.4000" y="0.7750"/>
+        <point x="3.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C5</name>
+      <value>0.022uF</value>
+      <controlPoints>
+        <point x="3.4000" y="1.7750"/>
+        <point x="3.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C6</name>
+      <value>0.022uF</value>
+      <controlPoints>
+        <point x="3.9000" y="0.7750"/>
+        <point x="6.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C7</name>
+      <value>0.022uF</value>
+      <controlPoints>
+        <point x="0.9000" y="0.7750"/>
+        <point x="6.9000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C8</name>
+      <value>0.1uF</value>
+      <controlPoints>
+        <point x="6.4000" y="1.2750"/>
+        <point x="6.9000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C9</name>
+      <value>0.02uF</value>
+      <controlPoints>
+        <point x="4.9000" y="0.7750"/>
+        <point x="4.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C10</name>
+      <value>0.01uF</value>
+      <controlPoints>
+        <point x="4.9000" y="1.2750"/>
+        <point x="5.4000" y="1.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C11</name>
+      <value>0.01uF</value>
+      <controlPoints>
+        <point x="5.4000" y="1.2750"/>
+        <point x="5.4000" y="1.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.AxialFilmCapacitor>
+      <name>C12</name>
+      <value>0.01uF</value>
+      <controlPoints>
+        <point x="5.4000" y="1.7750"/>
+        <point x="5.4000" y="2.2750"/>
+      </controlPoints>
+    </org.diylc.components.passive.AxialFilmCapacitor>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C13</name>
+      <value>22uF</value>
+      <controlPoints>
+        <point x="7.4000" y="0.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C14</name>
+      <value>22uF</value>
+      <controlPoints>
+        <point x="7.4000" y="1.2750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C15</name>
+      <value>22uF</value>
+      <controlPoints>
+        <point x="7.4000" y="1.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C16</name>
+      <value>0.1uF</value>
+      <controlPoints>
+        <point x="7.9000" y="1.7750"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C17</name>
+      <value>100uF</value>
+      <controlPoints>
+        <point x="5.9000" y="3.1500"/>
+        <point x="6.4000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C18</name>
+      <value>100uF</value>
+      <controlPoints>
+        <point x="6.4000" y="3.1500"/>
+        <point x="6.9000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.passive.RadialElectrolytic>
+      <name>C19</name>
+      <value>100uF</value>
+      <controlPoints>
+        <point x="7.4000" y="3.1500"/>
+        <point x="7.4000" y="2.7750"/>
+      </controlPoints>
+    </org.diylc.components.passive.RadialElectrolytic>
+    <org.diylc.components.semiconductors.Diode>
+      <name>D1</name>
+      <value>1N4007</value>
+      <controlPoints>
+        <point x="7.9000" y="0.7750"/>
+        <point x="7.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.Diode>
+    <org.diylc.components.semiconductors.Diode>
+      <name>D2</name>
+      <value>1N4007</value>
+      <controlPoints>
+        <point x="7.9000" y="1.2750"/>
+        <point x="7.4000" y="0.7750"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.Diode>
+    <org.diylc.components.semiconductors.Diode>
+      <name>D3</name>
+      <value>1N4007</value>
+      <controlPoints>
+        <point x="5.9000" y="3.1500"/>
+        <point x="6.4000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.Diode>
+    <org.diylc.components.semiconductors.Diode>
+      <name>D4</name>
+      <value>1N4007</value>
+      <controlPoints>
+        <point x="6.4000" y="3.1500"/>
+        <point x="6.9000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.Diode>
+    <org.diylc.components.semiconductors.TransistorTO92>
+      <name>U1</name>
+      <value>78L12</value>
+      <controlPoints>
+        <point x="6.9000" y="3.1500"/>
+        <point x="7.4000" y="3.1500"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.TransistorTO92>
+    <org.diylc.components.tube.TubeSocket>
+      <name>V1</name>
+      <value>12AX7</value>
+      <controlPoints>
+        <point x="2.5000" y="6.2250"/>
+      </controlPoints>
+    </org.diylc.components.tube.TubeSocket>
+    <org.diylc.components.tube.TubeSocket>
+      <name>V2</name>
+      <value>12AX7</value>
+      <controlPoints>
+        <point x="5.0000" y="6.2250"/>
+      </controlPoints>
+    </org.diylc.components.tube.TubeSocket>
+    <org.diylc.components.tube.TubeSocket>
+      <name>V3</name>
+      <value>12AX7</value>
+      <controlPoints>
+        <point x="7.5000" y="6.2250"/>
+      </controlPoints>
+    </org.diylc.components.tube.TubeSocket>
+    <org.diylc.components.electromechanical.PotentiometerPanel>
+      <name>P1</name>
+      <value>5M audio</value>
+      <controlPoints>
+        <point x="3.0000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.PotentiometerPanel>
+    <org.diylc.components.electromechanical.PotentiometerPanel>
+      <name>P2</name>
+      <value>1M audio</value>
+      <controlPoints>
+        <point x="5.0000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.PotentiometerPanel>
+    <org.diylc.components.electromechanical.PotentiometerPanel>
+      <name>P3</name>
+      <value>1M audio</value>
+      <controlPoints>
+        <point x="7.0000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.PotentiometerPanel>
+    <org.diylc.components.electromechanical.OpenJack1__4>
+      <name>J1</name>
+      <value>1/4 mono</value>
+      <controlPoints>
+        <point x="0.6000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.OpenJack1__4>
+    <org.diylc.components.electromechanical.OpenJack1__4>
+      <name>J2</name>
+      <value>1/4 mono</value>
+      <controlPoints>
+        <point x="9.4000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.OpenJack1__4>
+    <org.diylc.components.electromechanical.OpenJack1__4>
+      <name>J3</name>
+      <value>1/4 TRS</value>
+      <controlPoints>
+        <point x="8.5000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.OpenJack1__4>
+    <org.diylc.components.electromechanical.PowerTransformer>
+      <name>T101</name>
+      <value>Hammond 269EX</value>
+      <controlPoints>
+        <point x="10.8000" y="5.2250"/>
+      </controlPoints>
+    </org.diylc.components.electromechanical.PowerTransformer>
+    <org.diylc.components.semiconductors.DIL__IC>
+      <name>K1</name>
+      <value>NA12W-K</value>
+      <controlPoints>
+        <point x="6.5000" y="4.7250"/>
+      </controlPoints>
+    </org.diylc.components.semiconductors.DIL__IC>
+    <org.diylc.components.misc.Label>
+      <name>SW1</name>
+      <value>DPST</value>
+      <controlPoints>
+        <point x="10.8000" y="7.3250"/>
+      </controlPoints>
+    </org.diylc.components.misc.Label>
+    <org.diylc.components.misc.Label>
+      <name>F1</name>
+      <value>0.5A slow</value>
+      <controlPoints>
+        <point x="11.2000" y="6.6250"/>
+      </controlPoints>
+    </org.diylc.components.misc.Label>
+    <org.diylc.components.misc.Label>
+      <name>IEC1</name>
+      <value>IEC C14</value>
+      <controlPoints>
+        <point x="11.4000" y="5.2250"/>
+      </controlPoints>
+    </org.diylc.components.misc.Label>
+    <org.diylc.components.misc.Label>
+      <name>LED1</name>
+      <value>3mm</value>
+      <controlPoints>
+        <point x="8.0000" y="7.7250"/>
+      </controlPoints>
+    </org.diylc.components.misc.Label>
+  </components>
+  <groups/>
+  <lockedLayers/>
+  <hiddenLayers/>
+</project>

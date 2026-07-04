@@ -1,0 +1,72 @@
+RefDes,Category,Value,Rating,Mouser P/N,Connection,Notes
+R1,Resistor,68k,1/2W CF,594-5083NW68K000J,IN - V1a_G,V1a grid stopper
+R2,Resistor,1M,1/2W CF,594-5083NW1M0000J,V1a_G - GND_1,V1a grid leak
+R3,Resistor,100k,1/2W CF,594-5083NW100K00J,V1a_P - BPLUS3,V1a plate load (*)
+R4,Resistor,1.5k,1/2W CF,594-5083NW1K5000J,V1a_K - GND_1,V1a cathode (*)
+R5,Resistor,220k,1/2W CF,594-5083NW220K00J,SPLIT - LF_G,LPF series (split) - CONFIRMED
+R6,Resistor,220k,1/2W CF,594-5083NW220K00J,HF_G - GND_2,HF grid reference (*)
+R7,Resistor,100k,1/2W CF,594-5083NW100K00J,HF_P - BPLUS2,V2a (HF) plate load (*)
+R8,Resistor,100k,1/2W CF,594-5083NW100K00J,LF_P - BPLUS2,V2b (LF) plate load (*)
+R9,Resistor,1.5k,1/2W CF,594-5083NW1K5000J,MIX_K - GND_2,mixer shared cathode (*)
+R10,Resistor,3.3M,1/2W CF,594-5083NW3M3000J,BIAS_HF - HF_G,HF grid LFO-inject / leak (*)
+R11,Resistor,3.3M,1/2W CF,594-5083NW3M3000J,BIAS_LF - LF_G,LF grid LFO-inject / leak (*)
+R12,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_P - BPLUS1,cathodyne plate load (*)
+R13,Resistor,100k,1/2W CF,594-5083NW100K00J,CATH_K - GND_3,cathodyne cathode load (*)
+R14,Resistor,1M,1/2W CF,594-5083NW1M0000J,CATH_G - GND_3,cathodyne grid leak (*)
+R15,Resistor,220k,1/2W CF,594-5083NW220K00J,LFO_P - BPLUS3,LFO plate load (*)
+R16,Resistor,2.2k,1/2W CF,594-5083NW2K2000J,LFO_K - GND_3,LFO cathode (*)
+R17,Resistor,1M,1/2W CF,594-5083NW1M0000J,LFO_G - PS1,phase-shift R1 (*)
+R18,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS1 - PS2,phase-shift R2 (*)
+R19,Resistor,1M,1/2W CF,594-5083NW1M0000J,PS2 - PS3,phase-shift R3 (*)
+R20,Resistor,1M,1/2W CF,594-5083NW1M0000J,FOL_G - GND_5,follower grid leak (grid at 0V DC)
+R21,Resistor,22k,1/2W CF,594-5083NW22K000J,FOL_K - GND_PSU,follower cathode load / output tap
+R22,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_BYP - GND_5,bypass-node bleed (pop supp)
+R31,Resistor,1M,1/2W CF,594-5083NW1M0000J,RLY_ENG - GND_5,engaged-node bleed (pop supp)
+R23,Resistor,4.7k,1W  MO,71-CMF60-4.7K-E3,BPLUS1 - BPLUS2,B+1->B+2 dropper
+R24,Resistor,10k,1W  MO,71-CMF60-10K-E3,BPLUS2 - BPLUS3,B+2->B+3 dropper
+R25,Resistor,220k,1/2W CF,594-5083NW220K00J,BPLUS1 - HTR_CT,heater elevation divider top
+R26,Resistor,100k,1/2W CF,594-5083NW100K00J,HTR_CT - GND_PSU,heater elevation divider bot
+R27,Resistor,1k,1/2W CF,594-5083NW1K0000J,V12 - LED_A,LED series (12V -> LED anode)
+R28,Resistor,220k,1W  MO,71-CMF60-220K-E3,BPLUS1 - GND_PSU,safety bleeder across B+1 (drains B+ at power-off)
+R29,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_A - HTR_CT,heater artificial-CT / elevation tie
+R30,Resistor,100,1/2W CF,594-5083NW100R00J,HTR_B - HTR_CT,heater artificial-CT / elevation tie
+C1,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,DRV_OUT - SPLIT,V1a output coupling
+C2,Capacitor (film/mica),250pF,500V mica,80-DM15FD251JO3,SPLIT - HF_G,HPF to HF mixer - CONFIRMED
+C3,Capacitor (film/mica),0.005uF,630V film,80-R82DC3470DQ50J,SPLIT - LF_G,LPF to LF mixer (*)
+C4,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,HF_P - MIX,HF mixer output coupling
+C5,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,LF_P - MIX,LF mixer output coupling
+C6,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,MIX - RLY_ENG,mixer -> relay engaged coupling
+C7,Capacitor (film/mica),0.022uF,630V film,80-R82EC3220DQ60J,IN - RLY_BYP,dry -> relay bypass coupling
+C8,Capacitor (film/mica),0.1uF,630V film,80-R82IC3100DQ50J,FOL_OUT - RLY_ENG,follower output coupling
+C9,Capacitor (film/mica),0.02uF,630V film,80-R82DC3200DQ50J,LFO_P - CATH_G,LFO->cathodyne coupling (*)
+C10,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,LFO_G - PS1,phase-shift C1 (*)
+C11,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,PS1 - PS2,phase-shift C2 (*)
+C12,Capacitor (film/mica),0.01uF,630V film,80-R82DC3100DQ50J,PS2 - PS3,phase-shift C3 (*)
+C13,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS1 - GND_PSU,B+1 reservoir
+C14,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS2 - GND_PSU,B+2 filter
+C15,Capacitor (electrolytic),22uF,450V elec,80-PEG124KG422QL,BPLUS3 - GND_PSU,B+3 filter
+C16,Capacitor (electrolytic),0.1uF,630V film,80-R82IC3100DQ50J,HTR_CT - GND_PSU,heater elevation bypass
+C17,Capacitor (electrolytic),100uF,35V elec,667-EEU-FR1V101,AC63 - DBL,doubler C1
+C18,Capacitor (electrolytic),100uF,35V elec,667-EEU-FR1V101,DBL - V16,doubler C2
+C19,Capacitor (electrolytic),100uF,25V elec,667-EEU-FR1E101,V12 - GND_PSU,12V reg output cap
+D1,Diode,1N4007,1000V 1A,512-1N4007,RECT_AC1 - BPLUS1,HV rectifier + (CT full-wave)
+D2,Diode,1N4007,1000V 1A,512-1N4007,RECT_AC2 - BPLUS1,HV rectifier - (CT full-wave)
+D3,Diode,1N4007,1000V 1A,512-1N4007,AC63 - DBL,doubler diode 1
+D4,Diode,1N4007,1000V 1A,512-1N4007,DBL - V16,doubler diode 2
+U1,Regulator,78L12,TO-92 12V,511-L78L12ACZ,V16 - V12,12V linear regulator
+D5,Diode,1N4007,1000V 1A,512-1N4007,RLY_COIL+ - RLY_COIL-,relay coil flyback diode (at relay)
+V1,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V1a input driver, V1b cathode follower"
+V2,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V2a HF mixer, V2b LF mixer"
+V3,Tube socket,12AX7,-,534-8206,chassis-mount,"9-pin noval: V3a LFO oscillator, V3b cathodyne splitter"
+P1,Potentiometer,5M audio,-,TBD,chassis-mount,SPEED (LFO phase-shift) (*)
+P2,Potentiometer,1M audio,-,588-P1M-A,chassis-mount,INTENSITY (LFO depth to mixers) (*)
+P3,Potentiometer,1M audio,-,588-P1M-A,chassis-mount,OUTPUT LEVEL
+J1,Jack,1/4 mono,-,568-NMJ4HCD2,chassis-mount,INPUT jack
+J2,Jack,1/4 mono,-,568-NMJ4HCD2,chassis-mount,OUTPUT jack
+J3,Jack,1/4 TRS,-,568-NMJ6HCD2,chassis-mount,FOOTSWITCH TRS (relay drive + LED return)
+T101,Transformer,Hammond 269EX,-,546-269EX,chassis-mount,"PT: 380VCT@71mA, 6.3V@2.5A (CT full-wave rectified)"
+K1,Relay,NA12W-K,-,769-NA12W-K,chassis-mount,"DPDT signal relay, 12VDC true-bypass"
+SW1,Switch,DPST,-,612-MRA106-A,chassis-mount,Mains power switch
+F1,Fuse,0.5A slow,-,576-0217.500HXP,chassis-mount,Mains fuse (5x20mm slo-blo) + holder
+IEC1,Mains inlet,IEC C14,-,161-R30144-E,chassis-mount,IEC mains inlet w/ integral fuse holder
+LED1,LED,3mm,-,604-WP710A10ID,chassis-mount,Effect-engaged indicator LED

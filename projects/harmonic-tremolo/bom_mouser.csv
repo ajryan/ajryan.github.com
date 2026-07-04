@@ -1,0 +1,35 @@
+Mouser Part Number,Quantity 1,Customer Part Number,Description
+161-R30144-E,1,IEC1,IEC C14 IEC mains inlet w/ integral fuse holder
+511-L78L12ACZ,1,U1,78L12 12V linear regulator
+512-1N4007,5,"D1,D2,D3,D4,D5",1N4007 HV rectifier + (CT full-wave)
+534-8206,3,"V1,V2,V3","12AX7 9-pin noval: V1a input driver, V1b cathode follower"
+546-269EX,1,T101,"Hammond 269EX PT: 380VCT@71mA, 6.3V@2.5A (CT full-wave rectified)"
+568-NMJ4HCD2,2,"J1,J2",1/4 mono INPUT jack
+568-NMJ6HCD2,1,J3,1/4 TRS FOOTSWITCH TRS (relay drive + LED return)
+576-0217.500HXP,1,F1,0.5A slow Mains fuse (5x20mm slo-blo) + holder
+588-P1M-A,2,"P2,P3",1M audio INTENSITY (LFO depth to mixers) (*)
+594-5083NW100K00J,6,"R3,R7,R8,R12,R13,R26",100k V1a plate load (*)
+594-5083NW100R00J,2,"R29,R30",100 heater artificial-CT / elevation tie
+594-5083NW1K0000J,1,R27,1k LED series (12V -> LED anode)
+594-5083NW1K5000J,2,"R4,R9",1.5k V1a cathode (*)
+594-5083NW1M0000J,8,"R2,R14,R17,R18,R19,R20,R22,R31",1M V1a grid leak
+594-5083NW220K00J,4,"R5,R6,R15,R25",220k LPF series (split) - CONFIRMED
+594-5083NW22K000J,1,R21,22k follower cathode load / output tap
+594-5083NW2K2000J,1,R16,2.2k LFO cathode (*)
+594-5083NW3M3000J,2,"R10,R11",3.3M HF grid LFO-inject / leak (*)
+594-5083NW68K000J,1,R1,68k V1a grid stopper
+604-WP710A10ID,1,LED1,3mm Effect-engaged indicator LED
+612-MRA106-A,1,SW1,DPST Mains power switch
+667-EEU-FR1E101,1,C19,100uF 12V reg output cap
+667-EEU-FR1V101,2,"C17,C18",100uF doubler C1
+71-CMF60-10K-E3,1,R24,10k B+2->B+3 dropper
+71-CMF60-220K-E3,1,R28,220k safety bleeder across B+1 (drains B+ at power-off)
+71-CMF60-4.7K-E3,1,R23,4.7k B+1->B+2 dropper
+769-NA12W-K,1,K1,"NA12W-K DPDT signal relay, 12VDC true-bypass"
+80-DM15FD251JO3,1,C2,250pF HPF to HF mixer - CONFIRMED
+80-PEG124KG422QL,3,"C13,C14,C15",22uF B+1 reservoir
+80-R82DC3100DQ50J,3,"C10,C11,C12",0.01uF phase-shift C1 (*)
+80-R82DC3200DQ50J,1,C9,0.02uF LFO->cathodyne coupling (*)
+80-R82DC3470DQ50J,1,C3,0.005uF LPF to LF mixer (*)
+80-R82EC3220DQ60J,5,"C1,C4,C5,C6,C7",0.022uF V1a output coupling
+80-R82IC3100DQ50J,2,"C8,C16",0.1uF follower output coupling
