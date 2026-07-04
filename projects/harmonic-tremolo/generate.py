@@ -690,6 +690,75 @@ def emit_diylc():
             w('</org.diylc.components.semiconductors.LED>')
         else:                                  # transformer, IEC inlet -> label glyph
             _label(w, font, f'{ref} {val}', cx, cy, 11.0)
+
+    # --- Lead wires: off-board component pins -> board turrets (HookupWire) ---
+    # 12AX7 (B9A): pin1/2/3 = plate/grid/cathode of triode-1, pin6/7/8 = triode-2,
+    # pins 4/5/9 = heaters. TubeSocket control-point index == pin number.
+    OFF = {"socket": SOCK, "pot": POT, "jack": JACK, "relay": DIP8, "led": [(0, 0), (-0.2, 0)]}
+    kind_of = {c["ref"]: c["kind"] for c in CHASSIS}
+
+    def pinxy(spec):
+        who, idx = spec
+        if who == "T":
+            return dx(idx), dy(idx)
+        cx0, cy0 = POS[who]
+        ox, oy = OFF[kind_of[who]][idx]
+        return cx0 + ox, cy0 + oy
+
+    def hookup(name, a, b, hexcol):
+        (x1, y1), (x2, y2) = pinxy(a), pinxy(b)
+        pts = [(x1, y1), (x1 + (x2 - x1) / 3, y1 + (y2 - y1) / 3),
+               (x1 + 2 * (x2 - x1) / 3, y1 + 2 * (y2 - y1) / 3), (x2, y2)]
+        w('<org.diylc.components.connectivity.HookupWire>')
+        w(f'<name>{name}</name><alpha>127</alpha>')
+        w('<controlPoints2>' + ''.join(f'<point x="{px:.4f}" y="{py:.4f}"/>' for px, py in pts) + '</controlPoints2>')
+        w(f'<color hex="{hexcol}"/>')
+        w('<pointCount>FOUR</pointCount><style>SOLID</style><smooth>true</smooth>')
+        w('<lastUpdatePointIndex>-1</lastUpdatePointIndex><gauge>_22</gauge>')
+        w('<striped>false</striped><stripeColor hex="ffff00"/>')
+        w('</org.diylc.components.connectivity.HookupWire>')
+
+    PL, GR, KA, HT, GN, SG, RL = "cc4400", "1f6feb", "555555", "0a8a0a", "000000", "8a5a2b", "8000c0"
+    #                pin(idx)         turret/pin        color   note
+    WIRES = [
+        # V1  (V1a driver = triode1 -> pins1/2/3 ; V1b follower = triode2 -> pins6/7/8)
+        ("wV1a_p", ("V1", 1), ("T", "T4"),  PL), ("wV1a_g", ("V1", 2), ("T", "T2"),  GR), ("wV1a_k", ("V1", 3), ("T", "T3"),  KA),
+        ("wV1b_p", ("V1", 6), ("T", "T52"), PL), ("wV1b_g", ("V1", 7), ("T", "T29"), GR), ("wV1b_k", ("V1", 8), ("T", "T30"), KA),
+        # V2  (HF modulator = triode1 ; LF modulator = triode2 ; shared cathode T14)
+        ("wV2h_p", ("V2", 1), ("T", "T12"), PL), ("wV2h_g", ("V2", 2), ("T", "T8"),  GR), ("wV2h_k", ("V2", 3), ("T", "T14"), KA),
+        ("wV2l_p", ("V2", 6), ("T", "T13"), PL), ("wV2l_g", ("V2", 7), ("T", "T9"),  GR), ("wV2l_k", ("V2", 8), ("T", "T14"), KA),
+        # V3  (LFO oscillator = triode1 ; cathodyne = triode2)
+        ("wV3o_p", ("V3", 1), ("T", "T22"), PL), ("wV3o_g", ("V3", 2), ("T", "T23"), GR), ("wV3o_k", ("V3", 3), ("T", "T24"), KA),
+        ("wV3c_p", ("V3", 6), ("T", "T19"), PL), ("wV3c_g", ("V3", 7), ("T", "T20"), GR), ("wV3c_k", ("V3", 8), ("T", "T21"), KA),
+        # Heaters: pins 4 & 5 chained V1-V2-V3 (twisted pair -> 6.3VAC winding)
+        ("wH4a", ("V1", 4), ("V2", 4), HT), ("wH4b", ("V2", 4), ("V3", 4), HT),
+        ("wH5a", ("V1", 5), ("V2", 5), HT), ("wH5b", ("V2", 5), ("V3", 5), HT),
+        # Jacks
+        ("wJ1t", ("J1", 0), ("T", "T1"),  SG), ("wJ1s", ("J1", 1), ("T", "T5"),  GN),
+        ("wJ2s", ("J2", 1), ("T", "T51"), GN),
+        # OUTPUT LEVEL pot P3: lug1=in(FOL_OUT), wiper=out(->J2 tip), lug3=gnd
+        ("wP3a", ("P3", 0), ("T", "T31"), SG), ("wP3w", ("P3", 1), ("J2", 0), SG), ("wP3g", ("P3", 2), ("T", "T51"), GN),
+        # SPEED pot P1 [verify mechanization]: variable R in the phase-shift network
+        ("wP1a", ("P1", 0), ("T", "T27"), SG), ("wP1w", ("P1", 1), ("T", "T23"), SG),
+        # INTENSITY pot P2 [verify]: LFO depth into the cathodyne
+        ("wP2a", ("P2", 0), ("T", "T22"), SG), ("wP2w", ("P2", 1), ("T", "T20"), SG), ("wP2g", ("P2", 2), ("T", "T28"), GN),
+        # LED
+        ("wLEDa", ("LED1", 0), ("T", "T47"), PL), ("wLEDk", ("LED1", 1), ("T", "T51"), GN),
+        # Relay K1 (DIL-8) [VERIFY against NA12W-K datasheet pinout]:
+        ("wK1cA", ("K1", 0), ("T", "T46"), RL),  # coil+ <- 12V
+        ("wK1cm", ("K1", 1), ("T", "T29"), SG),  # pole-1 common -> follower grid
+        ("wK1nc", ("K1", 2), ("T", "T34"), SG),  # pole-1 NC -> bypass (dry)
+        ("wK1no", ("K1", 3), ("T", "T48"), SG),  # pole-1 NO -> engaged (trim wiper)
+        ("wK1cB", ("K1", 7), ("T", "T55"), GN),  # coil- -> gnd (through footswitch)
+        # Footswitch TRS J3: tip = switched 12V to coil, sleeve = gnd
+        ("wJ3t", ("J3", 0), ("T", "T46"), RL), ("wJ3s", ("J3", 1), ("T", "T5"), GN),
+    ]
+    for nm, a, b, hx in WIRES:
+        try:
+            hookup(nm, a, b, hx)
+        except (KeyError, IndexError):
+            pass   # skip if a referenced part/turret isn't present
+
     _label(w, font, "sockets above / pots+jacks below (chassis-mounted)", 0.2, yb + 0.5, 10.0)
 
     w('</components>')

@@ -39,7 +39,7 @@ chassis + turret board.
 | `turret-drill.csv` | Turret hole coordinate table (Hoffman custom‑board format, inch grid) |
 | `turret-drill.svg` | Dimensioned drill drawing — **print at 1:1 (96 dpi)** as a drill template |
 | `layout.svg` | Populated board layout (component/connectivity view) |
-| `harmonic-tremolo.diy` | DIYLC 6 project — verified to load in DIYLC 6.1.0. Board + 55 turrets + mounting holes + on-board R/C/D/trimmer, **bus/ground jumpers**, and **off-board parts as real components** (3 tube sockets above; pots/jacks/relay/switch/fuse/LED below). Wire it up in DIYLC. |
+| `harmonic-tremolo.diy` | DIYLC 6 project — verified to load in DIYLC 6.1.0 (189 components). Board + 55 turrets + mounting holes + on-board R/C/D/trimmer, **bus/ground jumpers**, **off-board parts as real components** (3 tube sockets above; pots/jacks/relay/switch/fuse/LED below), **and lead wires** from every socket pin / pot lug / jack / relay to its turret (12AX7 B9A pinout). |
 | `generate.py` | Source of truth for the FIRST draft — regenerates every file above |
 | `diy_to_drill.py` | Reverse tool — regenerates the drill table/drawing FROM a hand-edited `.diy` |
 

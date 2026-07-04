@@ -264,3 +264,13 @@ Either way the modulator, split, and INTENSITY/SPEED values above are the stock
    (R/C/D/trimmer); chassis parts (sockets/pots/jacks/PT/relay) are annotated as
    labels below the board since they are not board‑mounted.
 4. **Node voltages are estimates**, ±15 V — Section 2.
+5. **Two off-board wire runs to verify** (drawn in the `.diy`, easy to re-route):
+   - **Relay K1 pin mapping** is drawn on a DIL-8 outline with a sensible
+     coil/pole-1 assignment, but **confirm against the NA12W-K datasheet** pinout
+     (coil pins and which pins are pole-1 common/NC/NO) before soldering.
+   - **SPEED / INTENSITY pot mechanization**: leads go to the right functional
+     nodes (phase-shift network / cathodyne), but the exact lug order + whether
+     each is wired as a variable resistor vs. a divider should be checked against
+     the 6G8-A schematic (these are the 3 M-RA / 10 M-RA pots already flagged in §3).
+   Tube-socket, jack, and OUTPUT LEVEL wiring follow the standard 12AX7 pinout and
+   are unambiguous.
